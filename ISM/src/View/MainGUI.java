@@ -207,7 +207,7 @@ public class MainGUI extends javax.swing.JFrame {
             fundnePersoner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fundnePersoner_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(personer_ScrollPane)
+                .addComponent(personer_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
