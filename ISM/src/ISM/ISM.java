@@ -1,6 +1,8 @@
 
 package ISM;
 
+import Control.PersonHandler;
+import Control.PersonKatalog;
 import View.MainGUI;
 import View.OpretPersonGUI;
 
@@ -10,11 +12,17 @@ import View.OpretPersonGUI;
  */
 public class ISM {
     
+    private PersonKatalog personKatalog;
+    private PersonHandler personHandler;
+    
     private MainGUI mainGUI;
     private OpretPersonGUI opretPersonGUI;
     
     public ISM() {
-        opretPersonGUI = new OpretPersonGUI(mainGUI, true);
+        personKatalog = new PersonKatalog();
+        personHandler = new PersonHandler(personKatalog);
+        
+        opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler);
         mainGUI = new MainGUI(opretPersonGUI);
     }
     

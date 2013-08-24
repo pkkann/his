@@ -4,6 +4,7 @@
  */
 package View;
 
+import Control.PersonHandler;
 import java.awt.Color;
 
 /**
@@ -12,12 +13,12 @@ import java.awt.Color;
  */
 public class OpretPersonGUI extends javax.swing.JDialog {
 
-    /**
-     * Creates new form OpretPersonGUI
-     */
-    public OpretPersonGUI(java.awt.Frame parent, boolean modal) {
+    private PersonHandler personHandler;
+    
+    public OpretPersonGUI(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
         super(parent, modal);
         initComponents();
+        this.personHandler = personHandler;
         setLocationRelativeTo(null);
     }
     
@@ -32,14 +33,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         
         
         setLocationRelativeTo(null);
-    }
-    
-    private void checkButton() {
-        if(hone_CheckBox.getModel().isSelected() && !navn_TextField.getText().equalsIgnoreCase("navn") && !adresse_TextField.getText().equalsIgnoreCase("adresse") && !fodselsdag_TextField.getText().equalsIgnoreCase("fødselsdags dato")) {
-            opret_Button.setEnabled(true);
-        } else {
-            opret_Button.setEnabled(false);
-        }
     }
 
     /**
@@ -155,7 +148,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         );
 
         opret_Button.setText("Opret");
-        opret_Button.setEnabled(false);
 
         annuller_Button.setText("Annuller");
         annuller_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -348,27 +340,27 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_navn_TextFieldKeyTyped
 
     private void navn_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_navn_TextFieldKeyReleased
-        checkButton();
+        
     }//GEN-LAST:event_navn_TextFieldKeyReleased
 
     private void adresse_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adresse_TextFieldKeyReleased
-        checkButton();
+        
     }//GEN-LAST:event_adresse_TextFieldKeyReleased
 
     private void fodselsdag_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fodselsdag_TextFieldKeyReleased
-        checkButton();
+        
     }//GEN-LAST:event_fodselsdag_TextFieldKeyReleased
 
     private void hone_CheckBoxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hone_CheckBoxKeyReleased
-        checkButton();
+        
     }//GEN-LAST:event_hone_CheckBoxKeyReleased
 
     private void hone_CheckBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_hone_CheckBoxPropertyChange
-        checkButton();
+        
     }//GEN-LAST:event_hone_CheckBoxPropertyChange
 
     private void hone_CheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hone_CheckBoxStateChanged
-        checkButton();
+        
     }//GEN-LAST:event_hone_CheckBoxStateChanged
 //
 //    /**

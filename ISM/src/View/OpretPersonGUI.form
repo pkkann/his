@@ -187,7 +187,6 @@
             <Component class="javax.swing.JButton" name="opret_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Opret"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="annuller_Button">

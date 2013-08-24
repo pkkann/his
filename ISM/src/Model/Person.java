@@ -8,8 +8,10 @@ import java.util.ArrayList;
  * @author patrick
  */
 public class Person {
-    
+
     private String navn;
+    private String adresse;
+    private String fodselsdag;
     private boolean indskrevet;
     private Image billed;
     private boolean hone;
@@ -17,7 +19,7 @@ public class Person {
     private ArrayList<String> geaster;
     private HoneUser honeUser;
 
-    public Person(String navn, Image billed) {
+    public Person(String navn, String adresse, String fodselsdag, Image billed) {
         this.navn = navn;
         this.billed = billed;
     }
@@ -28,6 +30,22 @@ public class Person {
 
     public void setNavn(String navn) {
         this.navn = navn;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getFodselsdag() {
+        return fodselsdag;
+    }
+
+    public void setFodselsdag(String fodselsdag) {
+        this.fodselsdag = fodselsdag;
     }
 
     public boolean isIndskrevet() {
@@ -68,5 +86,13 @@ public class Person {
 
     public void setGeaster(ArrayList<String> geaster) {
         this.geaster = geaster;
+    }
+
+    public HoneUser getHoneUser() {
+        return honeUser;
+    }
+
+    public void setHoneUser(HoneUser honeUser) {
+        this.honeUser = honeUser;
     }
 }
