@@ -10,11 +10,13 @@ package View;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainGUI
-     */
-    public MainGUI() {
+    private OpretPersonGUI opretPersonGUI;
+    
+    public MainGUI(OpretPersonGUI opretPersonGUI) {
         initComponents();
+        this.opretPersonGUI = opretPersonGUI;
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -55,7 +57,6 @@ public class MainGUI extends javax.swing.JFrame {
         nulstil_MenuItem = new javax.swing.JMenuItem();
         administrer_Menu = new javax.swing.JMenu();
         opretPerson_MenuItem = new javax.swing.JMenuItem();
-        redigerPerson_MenuItem = new javax.swing.JMenuItem();
         sep1_Seperator = new javax.swing.JPopupMenu.Separator();
         indstillinger_MenuItem = new javax.swing.JMenuItem();
 
@@ -76,12 +77,13 @@ public class MainGUI extends javax.swing.JFrame {
         Gæster_Label.setText("Gæster:");
 
         billed_Pane.setBackground(new java.awt.Color(204, 204, 204));
+        billed_Pane.setPreferredSize(new java.awt.Dimension(150, 170));
 
         javax.swing.GroupLayout billed_PaneLayout = new javax.swing.GroupLayout(billed_Pane);
         billed_Pane.setLayout(billed_PaneLayout);
         billed_PaneLayout.setHorizontalGroup(
             billed_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         billed_PaneLayout.setVerticalGroup(
             billed_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +178,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(billed_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(indskrivn_Button)
@@ -207,7 +209,7 @@ public class MainGUI extends javax.swing.JFrame {
             fundnePersoner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fundnePersoner_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(personer_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(personer_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -274,11 +276,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         opretPerson_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         opretPerson_MenuItem.setText("Opret person");
+        opretPerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opretPerson_MenuItemActionPerformed(evt);
+            }
+        });
         administrer_Menu.add(opretPerson_MenuItem);
-
-        redigerPerson_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        redigerPerson_MenuItem.setText("Rediger person");
-        administrer_Menu.add(redigerPerson_MenuItem);
         administrer_Menu.add(sep1_Seperator);
 
         indstillinger_MenuItem.setText("Indstillinger");
@@ -306,40 +309,44 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainGUI().setVisible(true);
-            }
-        });
-    }
+    private void opretPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opretPerson_MenuItemActionPerformed
+        opretPersonGUI.setVisible(true);
+    }//GEN-LAST:event_opretPerson_MenuItemActionPerformed
+//
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MainGUI().setVisible(true);
+//            }
+//        });
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Gæster_Label;
     private javax.swing.JMenu administrer_Menu;
@@ -368,7 +375,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JList personer_List;
     private javax.swing.JScrollPane personer_ScrollPane;
     private javax.swing.JButton redigerIndskrivning_Button;
-    private javax.swing.JMenuItem redigerPerson_MenuItem;
     private javax.swing.JPopupMenu.Separator sep1_Seperator;
     private javax.swing.JButton søg_Button;
     private javax.swing.JTextField søgeFelt_TextField;

@@ -8,13 +8,14 @@ import java.util.ArrayList;
  * @author patrick
  */
 public class Person {
-
+    
     private String navn;
     private boolean indskrevet;
     private Image billed;
     private boolean hone;
     private boolean reserve;
     private ArrayList<String> geaster;
+    private HoneUser honeUser;
 
     public Person(String navn, Image billed) {
         this.navn = navn;
