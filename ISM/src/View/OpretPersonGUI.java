@@ -57,7 +57,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         billed_Pane = new javax.swing.JPanel();
         text1_Label = new javax.swing.JLabel();
         text2_Label = new javax.swing.JLabel();
-        upload_Button = new javax.swing.JButton();
+        vealgBilled_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Opret person");
@@ -216,7 +216,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
         text2_Label.setText("ellers kan det blive forstrukket");
 
-        upload_Button.setText("Upload billed");
+        vealgBilled_Button.setText("Vælg billed");
 
         javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
         picture_Pane.setLayout(picture_PaneLayout);
@@ -229,7 +229,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(text1_Label)
                     .addComponent(text2_Label)
-                    .addComponent(upload_Button))
+                    .addComponent(vealgBilled_Button))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
         picture_PaneLayout.setVerticalGroup(
@@ -242,7 +242,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(text2_Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(upload_Button))
+                        .addComponent(vealgBilled_Button))
                     .addComponent(billed_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -418,6 +418,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private javax.swing.JLabel text1_Label;
     private javax.swing.JLabel text2_Label;
     private javax.swing.JPanel tool_Pane;
-    private javax.swing.JButton upload_Button;
+    private javax.swing.JButton vealgBilled_Button;
     // End of variables declaration//GEN-END:variables
 }

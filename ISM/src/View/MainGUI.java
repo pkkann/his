@@ -47,6 +47,7 @@ public class MainGUI extends javax.swing.JFrame {
         redigerIndskrivning_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
         fundnePersoner_Pane = new javax.swing.JPanel();
         personer_ScrollPane = new javax.swing.JScrollPane();
         personer_List = new javax.swing.JList();
@@ -117,6 +118,8 @@ public class MainGUI extends javax.swing.JFrame {
         jList1.setEnabled(false);
         jScrollPane1.setViewportView(jList1);
 
+        jLabel1.setText("Udløber: 26-09-2013");
+
         javax.swing.GroupLayout valgtePerson_PaneLayout = new javax.swing.GroupLayout(valgtePerson_Pane);
         valgtePerson_Pane.setLayout(valgtePerson_PaneLayout);
         valgtePerson_PaneLayout.setHorizontalGroup(
@@ -138,17 +141,19 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(indTidspunktFelt_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(valgtePerson_PaneLayout.createSequentialGroup()
                         .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(valgtePerson_PaneLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(billed_Label)
-                                    .addComponent(billed_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(Gæster_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(valgtePerson_PaneLayout.createSequentialGroup()
-                                .addComponent(indskrivn_Button)
+                                .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(valgtePerson_PaneLayout.createSequentialGroup()
+                                        .addComponent(indskrivn_Button)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(redigerIndskrivning_Button)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(redigerIndskrivning_Button)))
+                                .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(billed_Label)
+                                    .addComponent(billed_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -182,7 +187,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(valgtePerson_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(indskrivn_Button)
-                    .addComponent(redigerIndskrivning_Button))
+                    .addComponent(redigerIndskrivning_Button)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -246,7 +252,7 @@ public class MainGUI extends javax.swing.JFrame {
         bund_Pane.setBackground(new java.awt.Color(102, 102, 102));
 
         dato_Label.setForeground(new java.awt.Color(255, 255, 255));
-        dato_Label.setText("Dato: 22-08-2013");
+        dato_Label.setText("Dato: 22-08-2013 | Gæster: 11");
 
         javax.swing.GroupLayout bund_PaneLayout = new javax.swing.GroupLayout(bund_Pane);
         bund_Pane.setLayout(bund_PaneLayout);
@@ -364,6 +370,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel indskrivningFelt_Label;
     private javax.swing.JLabel indskrivning_Label;
     private javax.swing.JMenuItem indstillinger_MenuItem;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_Pane;

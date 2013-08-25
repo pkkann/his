@@ -221,7 +221,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="text1_Label" min="-2" max="-2" attributes="0"/>
                           <Component id="text2_Label" min="-2" max="-2" attributes="0"/>
-                          <Component id="upload_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="vealgBilled_Button" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="201" max="32767" attributes="0"/>
                   </Group>
@@ -237,7 +237,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="text2_Label" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="104" max="32767" attributes="0"/>
-                              <Component id="upload_Button" min="-2" max="-2" attributes="0"/>
+                              <Component id="vealgBilled_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="billed_Pane" max="32767" attributes="0"/>
                       </Group>
@@ -283,9 +283,9 @@
                 <Property name="text" type="java.lang.String" value="ellers kan det blive forstrukket"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="upload_Button">
+            <Component class="javax.swing.JButton" name="vealgBilled_Button">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Upload billed"/>
+                <Property name="text" type="java.lang.String" value="V&#xe6;lg billed"/>
               </Properties>
             </Component>
           </SubComponents>
