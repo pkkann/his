@@ -34,6 +34,14 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         
         setLocationRelativeTo(null);
     }
+    
+    private boolean isFieldsFilledOut() {
+        if(navn_TextField.getText().equalsIgnoreCase("navn") || adresse_TextField.getText().equalsIgnoreCase("adresse") || fodselsdag_TextField.getText().equalsIgnoreCase("fødselsdags dato") || !hone_CheckBox.getModel().isSelected()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +61,8 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         opret_Button = new javax.swing.JButton();
         annuller_Button = new javax.swing.JButton();
         hone_CheckBox = new javax.swing.JCheckBox();
+        udlobsdato_FormattedTextField = new javax.swing.JFormattedTextField();
+        udlobsdato_Label = new javax.swing.JLabel();
         picture_Pane = new javax.swing.JPanel();
         billed_Pane = new javax.swing.JPanel();
         text1_Label = new javax.swing.JLabel();
@@ -61,7 +71,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Opret person");
-        setMaximumSize(new java.awt.Dimension(601, 380));
         setMinimumSize(new java.awt.Dimension(601, 380));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -148,6 +157,11 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         );
 
         opret_Button.setText("Opret");
+        opret_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opret_ButtonActionPerformed(evt);
+            }
+        });
 
         annuller_Button.setText("Annuller");
         annuller_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +187,10 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             }
         });
 
+        udlobsdato_FormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        udlobsdato_Label.setText("Udløbsdato");
+
         javax.swing.GroupLayout tool_PaneLayout = new javax.swing.GroupLayout(tool_Pane);
         tool_Pane.setLayout(tool_PaneLayout);
         tool_PaneLayout.setHorizontalGroup(
@@ -180,6 +198,10 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(hone_CheckBox)
+                .addGap(18, 18, 18)
+                .addComponent(udlobsdato_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(udlobsdato_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(annuller_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,7 +215,9 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 .addGroup(tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(opret_Button)
                     .addComponent(annuller_Button)
-                    .addComponent(hone_CheckBox))
+                    .addComponent(hone_CheckBox)
+                    .addComponent(udlobsdato_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(udlobsdato_Label))
                 .addContainerGap())
         );
 
@@ -362,6 +386,16 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private void hone_CheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hone_CheckBoxStateChanged
         
     }//GEN-LAST:event_hone_CheckBoxStateChanged
+
+    private void opret_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opret_ButtonActionPerformed
+        if(isFieldsFilledOut()) {
+            System.out.println("True");
+        } else {
+            System.out.println("false");
+        }
+        
+        udlobsdato_FormattedTextField.getText();
+    }//GEN-LAST:event_opret_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -418,6 +452,8 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private javax.swing.JLabel text1_Label;
     private javax.swing.JLabel text2_Label;
     private javax.swing.JPanel tool_Pane;
+    private javax.swing.JFormattedTextField udlobsdato_FormattedTextField;
+    private javax.swing.JLabel udlobsdato_Label;
     private javax.swing.JButton vealgBilled_Button;
     // End of variables declaration//GEN-END:variables
 }
