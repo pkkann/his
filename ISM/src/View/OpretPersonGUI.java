@@ -5,38 +5,57 @@
 package View;
 
 import Control.PersonHandler;
-import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 
 /**
  *
  * @author pkann
  */
+class MyCustomFilter extends javax.swing.filechooser.FileFilter {
+
+    @Override
+    public boolean accept(File file) {
+        return file.isDirectory() || file.getAbsolutePath().endsWith(".jpeg")  || file.getAbsolutePath().endsWith(".jpg") || file.getAbsolutePath().endsWith(".png");
+    }
+
+    @Override
+    public String getDescription() {
+        return "Picture (.jpeg / .jpg / .png)";
+    }
+}
+
 public class OpretPersonGUI extends javax.swing.JDialog {
 
     private PersonHandler personHandler;
-    
+    private File billedPath;
+    private Image billed;
+
     public OpretPersonGUI(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
         super(parent, modal);
         initComponents();
         this.personHandler = personHandler;
         setLocationRelativeTo(null);
     }
-    
+
     private void reset() {
-        navn_TextField.setText("Navn");
-        navn_TextField.setForeground(Color.gray);
-        adresse_TextField.setText("Adresse");
-        adresse_TextField.setForeground(Color.gray);
-        fodselsdag_TextField.setText("Fødselsdags dato");
-        fodselsdag_TextField.setForeground(Color.gray);
-        hone_CheckBox.getModel().setSelected(false);
-        
-        
+        navn_TextField.setText("");
+        adresse_TextField.setText("");
+        fodselsdag_FormattedTextField.setValue(new java.util.Date());
+        udlobsdato_FormattedTextField.setValue(new java.util.Date());
+        billedPath = null;
+        billed = null;
+        picturePane_Pane.setPicture(billed);
         setLocationRelativeTo(null);
     }
-    
+
     private boolean isFieldsFilledOut() {
-        if(navn_TextField.getText().equalsIgnoreCase("navn") || adresse_TextField.getText().equalsIgnoreCase("adresse") || fodselsdag_TextField.getText().equalsIgnoreCase("fødselsdags dato") || !hone_CheckBox.getModel().isSelected()) {
+        if (navn_TextField.getText().isEmpty() || adresse_TextField.getText().isEmpty() || fodselsdag_FormattedTextField.getValue().equals(new java.util.Date()) || billedPath == null) {
             return false;
         } else {
             return true;
@@ -52,11 +71,15 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
         main_Pane = new javax.swing.JPanel();
         info_Pane = new javax.swing.JPanel();
         navn_TextField = new javax.swing.JTextField();
         adresse_TextField = new javax.swing.JTextField();
-        fodselsdag_TextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        fodselsdag_FormattedTextField = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
         tool_Pane = new javax.swing.JPanel();
         opret_Button = new javax.swing.JButton();
         annuller_Button = new javax.swing.JButton();
@@ -64,10 +87,13 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         udlobsdato_FormattedTextField = new javax.swing.JFormattedTextField();
         udlobsdato_Label = new javax.swing.JLabel();
         picture_Pane = new javax.swing.JPanel();
-        billed_Pane = new javax.swing.JPanel();
         text1_Label = new javax.swing.JLabel();
         text2_Label = new javax.swing.JLabel();
         vealgBilled_Button = new javax.swing.JButton();
+        picturePane_Pane = new View.PicturePane();
+
+        fileChooser_FileChooser.setDialogTitle("Vælg billed");
+        fileChooser_FileChooser.setFileFilter(new MyCustomFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Opret person");
@@ -81,8 +107,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
         main_Pane.setBackground(javax.swing.UIManager.getDefaults().getColor("TabbedPane.foreground"));
 
-        navn_TextField.setForeground(java.awt.Color.gray);
-        navn_TextField.setText("Navn");
+        navn_TextField.setForeground(java.awt.Color.black);
         navn_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 navn_TextFieldFocusGained(evt);
@@ -100,8 +125,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             }
         });
 
-        adresse_TextField.setForeground(java.awt.Color.gray);
-        adresse_TextField.setText("Adresse");
+        adresse_TextField.setForeground(java.awt.Color.black);
         adresse_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 adresse_TextFieldFocusGained(evt);
@@ -116,43 +140,47 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             }
         });
 
-        fodselsdag_TextField.setForeground(java.awt.Color.gray);
-        fodselsdag_TextField.setText("Fødselsdags dato");
-        fodselsdag_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fodselsdag_TextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fodselsdag_TextFieldFocusLost(evt);
-            }
-        });
-        fodselsdag_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fodselsdag_TextFieldKeyReleased(evt);
-            }
-        });
+        jLabel1.setText("Navn:");
+
+        jLabel2.setText("Adresse:");
+
+        fodselsdag_FormattedTextField.setValue(new java.util.Date());
+        fodselsdag_FormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        jLabel4.setText("Fødselsdag:");
 
         javax.swing.GroupLayout info_PaneLayout = new javax.swing.GroupLayout(info_Pane);
         info_Pane.setLayout(info_PaneLayout);
         info_PaneLayout.setHorizontalGroup(
             info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(info_PaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, info_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(adresse_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                     .addComponent(navn_TextField)
-                    .addComponent(adresse_TextField)
-                    .addComponent(fodselsdag_TextField))
+                    .addComponent(fodselsdag_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         info_PaneLayout.setVerticalGroup(
             info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(info_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(navn_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(navn_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adresse_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adresse_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fodselsdag_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fodselsdag_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,9 +215,10 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             }
         });
 
+        udlobsdato_FormattedTextField.setValue(new java.util.Date());
         udlobsdato_FormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
-        udlobsdato_Label.setText("Udløbsdato");
+        udlobsdato_Label.setText("Udløbsdato:");
 
         javax.swing.GroupLayout tool_PaneLayout = new javax.swing.GroupLayout(tool_Pane);
         tool_Pane.setLayout(tool_PaneLayout);
@@ -198,11 +227,11 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(hone_CheckBox)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(udlobsdato_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(udlobsdato_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(annuller_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opret_Button)
@@ -221,26 +250,29 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        billed_Pane.setBackground(new java.awt.Color(204, 204, 204));
-        billed_Pane.setMinimumSize(new java.awt.Dimension(150, 170));
-        billed_Pane.setPreferredSize(new java.awt.Dimension(150, 170));
-
-        javax.swing.GroupLayout billed_PaneLayout = new javax.swing.GroupLayout(billed_Pane);
-        billed_Pane.setLayout(billed_PaneLayout);
-        billed_PaneLayout.setHorizontalGroup(
-            billed_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        billed_PaneLayout.setVerticalGroup(
-            billed_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         text1_Label.setText("Billedet skal være 150 x 170");
 
         text2_Label.setText("ellers kan det blive forstrukket");
 
         vealgBilled_Button.setText("Vælg billed");
+        vealgBilled_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vealgBilled_ButtonActionPerformed(evt);
+            }
+        });
+
+        picturePane_Pane.setBackground(java.awt.Color.lightGray);
+
+        javax.swing.GroupLayout picturePane_PaneLayout = new javax.swing.GroupLayout(picturePane_Pane);
+        picturePane_Pane.setLayout(picturePane_PaneLayout);
+        picturePane_PaneLayout.setHorizontalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PaneLayout.setVerticalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
         picture_Pane.setLayout(picture_PaneLayout);
@@ -248,7 +280,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(picture_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billed_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(text1_Label)
@@ -262,12 +294,14 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(picture_PaneLayout.createSequentialGroup()
+                        .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(picture_PaneLayout.createSequentialGroup()
                         .addComponent(text1_Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(text2_Label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(vealgBilled_Button))
-                    .addComponent(billed_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(vealgBilled_Button)))
                 .addContainerGap())
         );
 
@@ -314,46 +348,16 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void navn_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_navn_TextFieldFocusGained
-        if(navn_TextField.getText().equalsIgnoreCase("navn")) {
-            navn_TextField.setText("");
-            navn_TextField.setForeground(Color.black);
-        }
     }//GEN-LAST:event_navn_TextFieldFocusGained
 
     private void navn_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_navn_TextFieldFocusLost
-        if(navn_TextField.getText().isEmpty()) {
-            navn_TextField.setText("Navn");
-            navn_TextField.setForeground(Color.gray);
-        }
     }//GEN-LAST:event_navn_TextFieldFocusLost
 
     private void adresse_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adresse_TextFieldFocusGained
-        if(adresse_TextField.getText().equalsIgnoreCase("adresse")) {
-            adresse_TextField.setText("");
-            adresse_TextField.setForeground(Color.black);
-        }
     }//GEN-LAST:event_adresse_TextFieldFocusGained
 
     private void adresse_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adresse_TextFieldFocusLost
-        if(adresse_TextField.getText().isEmpty()) {
-            adresse_TextField.setText("Adresse");
-            adresse_TextField.setForeground(Color.gray);
-        }
     }//GEN-LAST:event_adresse_TextFieldFocusLost
-
-    private void fodselsdag_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fodselsdag_TextFieldFocusGained
-        if(fodselsdag_TextField.getText().equalsIgnoreCase("fødselsdags dato")) {
-            fodselsdag_TextField.setText("");
-            fodselsdag_TextField.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_fodselsdag_TextFieldFocusGained
-
-    private void fodselsdag_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fodselsdag_TextFieldFocusLost
-        if(fodselsdag_TextField.getText().isEmpty()) {
-            fodselsdag_TextField.setText("Fødselsdags dato");
-            fodselsdag_TextField.setForeground(Color.gray);
-        }
-    }//GEN-LAST:event_fodselsdag_TextFieldFocusLost
 
     private void annuller_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annuller_ButtonActionPerformed
         dispose();
@@ -364,38 +368,43 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_navn_TextFieldKeyTyped
 
     private void navn_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_navn_TextFieldKeyReleased
-        
     }//GEN-LAST:event_navn_TextFieldKeyReleased
 
     private void adresse_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adresse_TextFieldKeyReleased
-        
     }//GEN-LAST:event_adresse_TextFieldKeyReleased
 
-    private void fodselsdag_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fodselsdag_TextFieldKeyReleased
-        
-    }//GEN-LAST:event_fodselsdag_TextFieldKeyReleased
-
     private void hone_CheckBoxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hone_CheckBoxKeyReleased
-        
     }//GEN-LAST:event_hone_CheckBoxKeyReleased
 
     private void hone_CheckBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_hone_CheckBoxPropertyChange
-        
     }//GEN-LAST:event_hone_CheckBoxPropertyChange
 
     private void hone_CheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hone_CheckBoxStateChanged
-        
     }//GEN-LAST:event_hone_CheckBoxStateChanged
 
     private void opret_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opret_ButtonActionPerformed
-        if(isFieldsFilledOut()) {
+        if (isFieldsFilledOut()) {
             System.out.println("True");
         } else {
             System.out.println("false");
         }
         
-        udlobsdato_FormattedTextField.getText();
     }//GEN-LAST:event_opret_ButtonActionPerformed
+
+    private void vealgBilled_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vealgBilled_ButtonActionPerformed
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            billedPath = fileChooser_FileChooser.getSelectedFile();
+            try {
+                billed = ImageIO.read(billedPath);
+                picturePane_Pane.setPicture(billed);
+            } catch (IOException ex) {
+                Logger.getLogger(OpretPersonGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_vealgBilled_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -441,13 +450,17 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresse_TextField;
     private javax.swing.JButton annuller_Button;
-    private javax.swing.JPanel billed_Pane;
-    private javax.swing.JTextField fodselsdag_TextField;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
+    private javax.swing.JFormattedTextField fodselsdag_FormattedTextField;
     private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JPanel info_Pane;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField navn_TextField;
     private javax.swing.JButton opret_Button;
+    private View.PicturePane picturePane_Pane;
     private javax.swing.JPanel picture_Pane;
     private javax.swing.JLabel text1_Label;
     private javax.swing.JLabel text2_Label;
