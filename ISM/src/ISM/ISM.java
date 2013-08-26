@@ -4,6 +4,7 @@ import Control.PersonHandler;
 import Control.PersonKatalog;
 import View.MainGUI;
 import View.OpretPersonGUI;
+import java.io.File;
 
 /**
  *
@@ -18,12 +19,18 @@ public class ISM {
 
     public ISM() {
         setLookAndFeel();
+        createFolders();
         
         personKatalog = new PersonKatalog();
         personHandler = new PersonHandler(personKatalog);
 
         opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler);
         mainGUI = new MainGUI(opretPersonGUI);
+    }
+    
+    private void createFolders() {
+        File dir = new File("pictures");
+        dir.mkdir();
     }
 
     public void setLookAndFeel() {

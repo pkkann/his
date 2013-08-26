@@ -39,8 +39,10 @@ public class FileTool {
             
             return true;
         } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
             return false;
         } catch(IOException ex) {
+            ex.printStackTrace();
             return false;
         }
     }

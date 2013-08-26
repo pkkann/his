@@ -388,7 +388,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             String udlobsdato = udlobsdato_TextField.getText();
             boolean hone = hone_CheckBox.getModel().isSelected();
             
-            personHandler.opretPerson(navn, adresse, fodselsdag, udlobsdato, billed, hone);
+            personHandler.opretPerson(navn, adresse, fodselsdag, udlobsdato, billedPath, hone);
         } else {
             JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt, og der skal være valgt et billed","Fejl",JOptionPane.ERROR_MESSAGE);
         }
