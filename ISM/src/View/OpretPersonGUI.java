@@ -388,7 +388,11 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             String udlobsdato = udlobsdato_TextField.getText();
             boolean hone = hone_CheckBox.getModel().isSelected();
             
-            personHandler.opretPerson(navn, adresse, fodselsdag, udlobsdato, billedPath, hone);
+            if(personHandler.opretPerson(navn, adresse, fodselsdag, udlobsdato, billedPath, hone)) {
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Der opstod en fejl da billedet skulle copieres","Fejl",JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt, og der skal være valgt et billed","Fejl",JOptionPane.ERROR_MESSAGE);
         }

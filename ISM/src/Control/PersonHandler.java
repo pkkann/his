@@ -2,6 +2,7 @@
 package Control;
 
 import File.FileTool;
+import Model.Person;
 import java.io.File;
 
 /**
@@ -16,8 +17,15 @@ public class PersonHandler {
         this.personKatalog = personKatalog;
     }
     
-    public void opretPerson(String navn, String adresse, String fodselsdag, String udlobsdato, File billed, boolean hone) {
-        boolean t = FileTool.copyFile(billed, new File("pictures" + "//test.jpg"));
-        System.out.println(t);
+    public boolean opretPerson(String navn, String adresse, String fodselsdag, String udlobsdato, File billed, boolean hone) {
+        if(FileTool.copyFile(billed, new File(ISM.ISM.picDir + "//" + billed.getName()))) {
+            Person p = new Person(navn, adresse, fodselsdag, new File(ISM.ISM.picDir + "//" + billed.getName()));
+            personKatalog.addPerson(p);
+            return true;
+        } else {
+            return false;
+        }
+        
+        
     }
 }

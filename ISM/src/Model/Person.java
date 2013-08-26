@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -13,15 +14,15 @@ public class Person {
     private String adresse;
     private String fodselsdag;
     private boolean indskrevet;
-    private Image billed;
+    private File imagePath;
     private boolean hone;
     private boolean reserve;
     private ArrayList<String> geaster;
     private HoneUser honeUser;
 
-    public Person(String navn, String adresse, String fodselsdag, Image billed) {
+    public Person(String navn, String adresse, String fodselsdag, File imagePath) {
         this.navn = navn;
-        this.billed = billed;
+        this.imagePath = imagePath;
     }
 
     public String getNavn() {
@@ -56,12 +57,12 @@ public class Person {
         this.indskrevet = indskrevet;
     }
 
-    public Image getBilled() {
-        return billed;
+    public File getImagePath() {
+        return imagePath;
     }
 
-    public void setBilled(Image billed) {
-        this.billed = billed;
+    public void setImagePath(File imagePath) {
+        this.imagePath = imagePath;
     }
 
     public boolean isHone() {

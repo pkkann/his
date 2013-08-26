@@ -16,6 +16,7 @@ public class ISM {
     private PersonHandler personHandler;
     private MainGUI mainGUI;
     private OpretPersonGUI opretPersonGUI;
+    public static final String picDir = "pictures";
 
     public ISM() {
         setLookAndFeel();
@@ -29,7 +30,7 @@ public class ISM {
     }
     
     private void createFolders() {
-        File dir = new File("pictures");
+        File dir = new File(picDir);
         dir.mkdir();
     }
 
