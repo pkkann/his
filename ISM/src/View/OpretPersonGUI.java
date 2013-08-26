@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,8 +47,8 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private void reset() {
         navn_TextField.setText("");
         adresse_TextField.setText("");
-        fodselsdag_FormattedTextField.setValue(new java.util.Date());
-        udlobsdato_FormattedTextField.setValue(new java.util.Date());
+        fodselsdag_TextField.setText("26/08/2013");
+        udlobsdato_TextField.setText("26/08/2013");
         billedPath = null;
         billed = null;
         picturePane_Pane.setPicture(billed);
@@ -55,7 +56,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     }
 
     private boolean isFieldsFilledOut() {
-        if (navn_TextField.getText().isEmpty() || adresse_TextField.getText().isEmpty() || fodselsdag_FormattedTextField.getValue().equals(new java.util.Date()) || billedPath == null) {
+        if (navn_TextField.getText().isEmpty() || adresse_TextField.getText().isEmpty() || fodselsdag_TextField.getText().equals("26/08/2013") || billedPath == null) {
             return false;
         } else {
             return true;
@@ -78,14 +79,14 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         adresse_TextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        fodselsdag_FormattedTextField = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
+        fodselsdag_TextField = new javax.swing.JTextField();
         tool_Pane = new javax.swing.JPanel();
         opret_Button = new javax.swing.JButton();
         annuller_Button = new javax.swing.JButton();
         hone_CheckBox = new javax.swing.JCheckBox();
-        udlobsdato_FormattedTextField = new javax.swing.JFormattedTextField();
         udlobsdato_Label = new javax.swing.JLabel();
+        udlobsdato_TextField = new javax.swing.JTextField();
         picture_Pane = new javax.swing.JPanel();
         text1_Label = new javax.swing.JLabel();
         text2_Label = new javax.swing.JLabel();
@@ -144,10 +145,9 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
         jLabel2.setText("Adresse:");
 
-        fodselsdag_FormattedTextField.setValue(new java.util.Date());
-        fodselsdag_FormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-
         jLabel4.setText("Fødselsdag:");
+
+        fodselsdag_TextField.setText("26/08/2013");
 
         javax.swing.GroupLayout info_PaneLayout = new javax.swing.GroupLayout(info_Pane);
         info_Pane.setLayout(info_PaneLayout);
@@ -158,12 +158,13 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adresse_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                    .addComponent(navn_TextField)
-                    .addComponent(fodselsdag_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(adresse_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                        .addComponent(navn_TextField))
+                    .addComponent(fodselsdag_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         info_PaneLayout.setVerticalGroup(
@@ -179,9 +180,9 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(info_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fodselsdag_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(fodselsdag_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         opret_Button.setText("Opret");
@@ -215,10 +216,9 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             }
         });
 
-        udlobsdato_FormattedTextField.setValue(new java.util.Date());
-        udlobsdato_FormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-
         udlobsdato_Label.setText("Udløbsdato:");
+
+        udlobsdato_TextField.setText("26/08/2013");
 
         javax.swing.GroupLayout tool_PaneLayout = new javax.swing.GroupLayout(tool_Pane);
         tool_Pane.setLayout(tool_PaneLayout);
@@ -227,10 +227,10 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(hone_CheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(udlobsdato_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(udlobsdato_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(udlobsdato_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(annuller_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,8 +245,8 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                     .addComponent(opret_Button)
                     .addComponent(annuller_Button)
                     .addComponent(hone_CheckBox)
-                    .addComponent(udlobsdato_FormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(udlobsdato_Label))
+                    .addComponent(udlobsdato_Label)
+                    .addComponent(udlobsdato_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -260,8 +260,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 vealgBilled_ButtonActionPerformed(evt);
             }
         });
-
-        picturePane_Pane.setBackground(java.awt.Color.lightGray);
 
         javax.swing.GroupLayout picturePane_PaneLayout = new javax.swing.GroupLayout(picturePane_Pane);
         picturePane_Pane.setLayout(picturePane_PaneLayout);
@@ -384,9 +382,15 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
     private void opret_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opret_ButtonActionPerformed
         if (isFieldsFilledOut()) {
-            System.out.println("True");
+            String navn = navn_TextField.getText();
+            String adresse = adresse_TextField.getText();
+            String fodselsdag = fodselsdag_TextField.getText();
+            String udlobsdato = udlobsdato_TextField.getText();
+            boolean hone = hone_CheckBox.getModel().isSelected();
+            
+            personHandler.opretPerson(navn, adresse, fodselsdag, udlobsdato, billed, hone);
         } else {
-            System.out.println("false");
+            JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt, og der skal være valgt et billed","Fejl",JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_opret_ButtonActionPerformed
@@ -451,7 +455,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private javax.swing.JTextField adresse_TextField;
     private javax.swing.JButton annuller_Button;
     private javax.swing.JFileChooser fileChooser_FileChooser;
-    private javax.swing.JFormattedTextField fodselsdag_FormattedTextField;
+    private javax.swing.JTextField fodselsdag_TextField;
     private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JPanel info_Pane;
     private javax.swing.JLabel jLabel1;
@@ -465,8 +469,8 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private javax.swing.JLabel text1_Label;
     private javax.swing.JLabel text2_Label;
     private javax.swing.JPanel tool_Pane;
-    private javax.swing.JFormattedTextField udlobsdato_FormattedTextField;
     private javax.swing.JLabel udlobsdato_Label;
+    private javax.swing.JTextField udlobsdato_TextField;
     private javax.swing.JButton vealgBilled_Button;
     // End of variables declaration//GEN-END:variables
 }

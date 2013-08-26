@@ -97,13 +97,15 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" max="32767" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" pref="91" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="adresse_TextField" pref="450" max="32767" attributes="0"/>
-                          <Component id="navn_TextField" max="32767" attributes="0"/>
-                          <Component id="fodselsdag_FormattedTextField" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="adresse_TextField" pref="450" max="32767" attributes="0"/>
+                              <Component id="navn_TextField" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="fodselsdag_TextField" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -124,10 +126,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="fodselsdag_FormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fodselsdag_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -168,19 +170,14 @@
                 <Property name="text" type="java.lang.String" value="Adresse:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="fodselsdag_FormattedTextField">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="fodselsdag_FormattedTextField.setValue(new java.util.Date());"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="F&#xf8;dselsdag:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="fodselsdag_TextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="26/08/2013"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -193,10 +190,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="hone_CheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="126" max="32767" attributes="0"/>
                       <Component id="udlobsdato_Label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="udlobsdato_FormattedTextField" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="udlobsdato_TextField" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="annuller_Button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -213,8 +210,8 @@
                           <Component id="opret_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="annuller_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="hone_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="udlobsdato_FormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="udlobsdato_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="udlobsdato_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -248,19 +245,14 @@
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="hone_CheckBoxKeyReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="udlobsdato_FormattedTextField">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="udlobsdato_FormattedTextField.setValue(new java.util.Date());"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="udlobsdato_Label">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Udl&#xf8;bsdato:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="udlobsdato_TextField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="26/08/2013"/>
               </Properties>
             </Component>
           </SubComponents>

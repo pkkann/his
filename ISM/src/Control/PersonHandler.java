@@ -16,8 +16,7 @@ public class PersonHandler {
         this.personKatalog = personKatalog;
     }
     
-    public void opretPerson(String navn, String adresse, String fodselsdag, Image billed, boolean hone) {
-        Person p = new Person(navn, adresse, fodselsdag, billed);
-        this.personKatalog.addPerson(p);
+    public void opretPerson(String navn, String adresse, String fodselsdag, String udlobsdato, Image billed, boolean hone) {
+        System.out.println("BAAAAAAAAAH");
     }
 }
