@@ -13,6 +13,7 @@ public class Person {
     private String navn;
     private String adresse;
     private String fodselsdag;
+    private String udlobsdato;
     private boolean indskrevet;
     private File imagePath;
     private boolean hone;
@@ -20,9 +21,13 @@ public class Person {
     private ArrayList<String> geaster;
     private HoneUser honeUser;
 
-    public Person(String navn, String adresse, String fodselsdag, File imagePath) {
+    public Person(String navn, String adresse, String fodselsdag, String udlobsdato, File imagePath, boolean hone) {
         this.navn = navn;
+        this.udlobsdato = udlobsdato;
+        this.adresse = adresse;
+        this.fodselsdag = fodselsdag;
         this.imagePath = imagePath;
+        this.hone = hone;
     }
 
     public String getNavn() {
@@ -96,4 +101,14 @@ public class Person {
     public void setHoneUser(HoneUser honeUser) {
         this.honeUser = honeUser;
     }
+
+    public String getUdlobsdato() {
+        return udlobsdato;
+    }
+
+    public void setUdlobsdato(String udlobsdato) {
+        this.udlobsdato = udlobsdato;
+    }
+    
+    
 }

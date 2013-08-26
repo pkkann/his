@@ -2,6 +2,7 @@ package ISM;
 
 import Control.PersonHandler;
 import Control.PersonKatalog;
+import DB.PersonDAO;
 import View.MainGUI;
 import View.OpretPersonGUI;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.File;
  */
 public class ISM {
 
+    private PersonDAO personDAO;
     private PersonKatalog personKatalog;
     private PersonHandler personHandler;
     private MainGUI mainGUI;
@@ -22,8 +24,10 @@ public class ISM {
         setLookAndFeel();
         createFolders();
         
+        personDAO = new PersonDAO();
+        
         personKatalog = new PersonKatalog();
-        personHandler = new PersonHandler(personKatalog);
+        personHandler = new PersonHandler(personKatalog, personDAO);
 
         opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler);
         mainGUI = new MainGUI(opretPersonGUI);

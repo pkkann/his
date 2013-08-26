@@ -56,7 +56,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     }
 
     private boolean isFieldsFilledOut() {
-        if (navn_TextField.getText().isEmpty() || adresse_TextField.getText().isEmpty() || fodselsdag_TextField.getText().equals("26/08/2013") || billedPath == null) {
+        if (navn_TextField.getText().isEmpty() || adresse_TextField.getText().isEmpty() || billedPath == null) {
             return false;
         } else {
             return true;
