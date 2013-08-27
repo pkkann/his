@@ -3,7 +3,9 @@ package ISM;
 import Control.PersonHandler;
 import Control.PersonKatalog;
 import DB.PersonDAO;
+import View.LoginGUI;
 import View.MainGUI;
+import View.OpretHoneGUI;
 import View.OpretPersonGUI;
 import java.io.File;
 
@@ -14,10 +16,16 @@ import java.io.File;
 public class ISM {
 
     private PersonDAO personDAO;
+    
     private PersonKatalog personKatalog;
+    
     private PersonHandler personHandler;
+    
+    private LoginGUI loginGUI;
+    private OpretHoneGUI opretHoneGUI;
     private MainGUI mainGUI;
     private OpretPersonGUI opretPersonGUI;
+    
     public static final String picDir = "pictures";
 
     public ISM() {
@@ -27,10 +35,14 @@ public class ISM {
         personDAO = new PersonDAO();
         
         personKatalog = new PersonKatalog();
-        personHandler = new PersonHandler(personKatalog, personDAO);
-
+        
+        opretHoneGUI = new OpretHoneGUI(mainGUI, true);
+        personHandler = new PersonHandler(personKatalog, personDAO, opretHoneGUI);
+        
+        
+        loginGUI = new LoginGUI(mainGUI, true);
         opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler);
-        mainGUI = new MainGUI(opretPersonGUI);
+        mainGUI = new MainGUI(loginGUI, opretPersonGUI, personHandler);
     }
     
     private void createFolders() {

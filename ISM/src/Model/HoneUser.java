@@ -13,11 +13,13 @@ public class HoneUser {
     private String username;
     private String password;
     private boolean admin;
+    private boolean reserve;
 
-    public HoneUser(String username, String password, boolean admin) {
+    public HoneUser(String username, String password, boolean admin, boolean reserve) {
         this.username = username;
         this.password = password;
         this.admin = admin;
+        this.reserve = reserve;
     }
 
     public String getUsername() {
@@ -42,6 +44,14 @@ public class HoneUser {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isReserve() {
+        return reserve;
+    }
+
+    public void setReserve(boolean reserve) {
+        this.reserve = reserve;
     }
     
     

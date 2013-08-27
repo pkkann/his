@@ -52,6 +52,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         billedPath = null;
         billed = null;
         picturePane_Pane.setPicture(billed);
+        hone_CheckBox.getModel().setSelected(false);
         setLocationRelativeTo(null);
     }
 

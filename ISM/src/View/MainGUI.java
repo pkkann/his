@@ -4,6 +4,12 @@
  */
 package View;
 
+import Control.PersonHandler;
+import Model.Person;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author patrick
@@ -11,12 +17,31 @@ package View;
 public class MainGUI extends javax.swing.JFrame {
 
     private OpretPersonGUI opretPersonGUI;
+    private PersonHandler personHandler;
+    private LoginGUI loginGUI;
     
-    public MainGUI(OpretPersonGUI opretPersonGUI) {
+    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, PersonHandler personHandler) {
         initComponents();
+        this.loginGUI = loginGUI;
         this.opretPersonGUI = opretPersonGUI;
+        this.personHandler = personHandler;
+        updateBottomInfoPane(new java.util.Date(), 1);
         setLocationRelativeTo(null);
         setVisible(true);
+        loginGUI.setVisible(true);
+    }
+    
+    public void updateChoosenPersonPane(Person p) {
+        
+    }
+    
+    public void updateResultPersonPane(ArrayList<Person> personer) {
+        
+    }
+    
+    public void updateBottomInfoPane(Date d, int geasts) {
+        theDate_Label.setText(String.valueOf(Calendar.getInstance().get(Calendar.DATE) + "-" + Calendar.getInstance().get(Calendar.MONTH) + "-" + Calendar.getInstance().get(Calendar.YEAR)));
+        theGeaster_Label.setText(String.valueOf(geasts));
     }
 
     /**
@@ -53,9 +78,16 @@ public class MainGUI extends javax.swing.JFrame {
         personer_List = new javax.swing.JList();
         bund_Pane = new javax.swing.JPanel();
         dato_Label = new javax.swing.JLabel();
+        theDate_Label = new javax.swing.JLabel();
+        splitter1_Label = new javax.swing.JLabel();
+        geaster_Label = new javax.swing.JLabel();
+        theGeaster_Label = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         filer_Menu = new javax.swing.JMenu();
         nulstil_MenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        logAf_MenuItem = new javax.swing.JMenuItem();
         administrer_Menu = new javax.swing.JMenu();
         opretPerson_MenuItem = new javax.swing.JMenuItem();
         sep1_Seperator = new javax.swing.JPopupMenu.Separator();
@@ -252,7 +284,22 @@ public class MainGUI extends javax.swing.JFrame {
         bund_Pane.setBackground(new java.awt.Color(102, 102, 102));
 
         dato_Label.setForeground(new java.awt.Color(255, 255, 255));
-        dato_Label.setText("Dato: 22-08-2013 | Gæster: 11");
+        dato_Label.setText("Dato:");
+
+        theDate_Label.setForeground(java.awt.Color.white);
+        theDate_Label.setText("THEDATE");
+
+        splitter1_Label.setForeground(java.awt.Color.white);
+        splitter1_Label.setText("|");
+
+        geaster_Label.setForeground(java.awt.Color.white);
+        geaster_Label.setText("Gæster:");
+
+        theGeaster_Label.setForeground(java.awt.Color.white);
+        theGeaster_Label.setText("THEGÆSTER");
+
+        jLabel2.setForeground(java.awt.Color.white);
+        jLabel2.setText("Patrick Kann");
 
         javax.swing.GroupLayout bund_PaneLayout = new javax.swing.GroupLayout(bund_Pane);
         bund_Pane.setLayout(bund_PaneLayout);
@@ -261,13 +308,29 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(bund_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dato_Label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(theDate_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(splitter1_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(geaster_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(theGeaster_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
         bund_PaneLayout.setVerticalGroup(
             bund_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bund_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dato_Label)
+                .addGroup(bund_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dato_Label)
+                    .addComponent(theDate_Label)
+                    .addComponent(splitter1_Label)
+                    .addComponent(geaster_Label)
+                    .addComponent(theGeaster_Label)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -275,6 +338,10 @@ public class MainGUI extends javax.swing.JFrame {
 
         nulstil_MenuItem.setText("Daglig nulstilling");
         filer_Menu.add(nulstil_MenuItem);
+        filer_Menu.add(jSeparator1);
+
+        logAf_MenuItem.setText("Log af");
+        filer_Menu.add(logAf_MenuItem);
 
         menuBar_MenuBar.add(filer_Menu);
 
@@ -362,6 +429,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel dato_Label;
     private javax.swing.JMenu filer_Menu;
     private javax.swing.JPanel fundnePersoner_Pane;
+    private javax.swing.JLabel geaster_Label;
     private javax.swing.JLabel høneFelt_Label;
     private javax.swing.JLabel høne_Label;
     private javax.swing.JLabel indTidspunktFelt_Label;
@@ -371,8 +439,11 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel indskrivning_Label;
     private javax.swing.JMenuItem indstillinger_MenuItem;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem logAf_MenuItem;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
     private javax.swing.JLabel navnFelt_Label;
@@ -383,8 +454,11 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane personer_ScrollPane;
     private javax.swing.JButton redigerIndskrivning_Button;
     private javax.swing.JPopupMenu.Separator sep1_Seperator;
+    private javax.swing.JLabel splitter1_Label;
     private javax.swing.JButton søg_Button;
     private javax.swing.JTextField søgeFelt_TextField;
+    private javax.swing.JLabel theDate_Label;
+    private javax.swing.JLabel theGeaster_Label;
     private javax.swing.JPanel valgtePerson_Pane;
     // End of variables declaration//GEN-END:variables
 }
