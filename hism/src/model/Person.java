@@ -20,13 +20,45 @@ public class Person {
     private boolean admin;
     private boolean reserve;
     private boolean quarantine;
-
+    
+    /**
+     * Opret person object
+     * @param name
+     * @param address
+     * @param birthdayDate
+     * @param expirationDate
+     * @param picturePath 
+     */
     public Person(String name, String address, String birthdayDate, String expirationDate, File picturePath) {
         this.name = name;
         this.address = address;
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.picturePath = picturePath;
+    }
+    
+    /**
+     * Opret person object som høne
+     * @param name
+     * @param address
+     * @param birthdayDate
+     * @param expirationDate
+     * @param picturePath
+     * @param username
+     * @param password
+     * @param admin
+     * @param reserve 
+     */
+    public Person(String name, String address, String birthdayDate, String expirationDate, File picturePath, String username, String password, boolean admin, boolean reserve) {
+        this.name = name;
+        this.address = address;
+        this.birthdayDate = birthdayDate;
+        this.expirationDate = expirationDate;
+        this.picturePath = picturePath;
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+        this.reserve = reserve;
     }
 
     public int getId() {

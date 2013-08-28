@@ -23,5 +23,9 @@ public class PersonKatalog {
     public void removePerson(Person p) {
         personer.remove(p);
     }
+    
+    public ArrayList<Person> getPersoner() {
+        return personer;
+    }
 
 }
