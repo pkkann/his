@@ -1,5 +1,6 @@
 package control;
 
+import file.FileTool;
 import java.io.File;
 import model.Person;
 
@@ -16,13 +17,22 @@ public class PersonHandler {
     }
 
     public void createPerson(String name, String address, String birthdayDate, String expirationDate, File picturePath) {
-        Person p = new Person(name, address, birthdayDate, expirationDate, picturePath);
+        File picPath = null;
+        if (picturePath != null) {
+            picPath = new File(FileTool.picDir + "//" + picturePath.getName());
+            FileTool.copyFile(picturePath, picPath);
+        }
+        Person p = new Person(name, address, birthdayDate, expirationDate, picPath);
         personKatalog.addPerson(p);
     }
-    
+
     public void createHone(String name, String address, String birthdayDate, String expirationDate, File picturePath, String username, String password, boolean admin, boolean reserve) {
-        Person p = new Person(name, address, birthdayDate, expirationDate, picturePath, username, password, admin, reserve);
+        File picPath = null;
+        if (picturePath != null) {
+            picPath = new File(FileTool.picDir + "//" + picturePath.getName());
+            FileTool.copyFile(picturePath, picPath);
+        }
+        Person p = new Person(name, address, birthdayDate, expirationDate, picPath, username, password, admin, reserve);
         personKatalog.addPerson(p);
-        System.out.println("Høne tilføjet");
     }
 }

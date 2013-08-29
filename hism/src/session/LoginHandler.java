@@ -21,6 +21,10 @@ public class LoginHandler {
         return loggedIn;
     }
     
+    public boolean isAdmin() {
+        return loggedIn.isAdmin();
+    }
+    
     public boolean login(String username, String password) {
         ArrayList<Person> personer = personKatalog.getPersoner();
         

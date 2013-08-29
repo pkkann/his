@@ -18,6 +18,7 @@ public class FileTool {
 
     private static FileInputStream in;
     private static FileOutputStream out;
+    public static final String picDir = "pictures";
     
     private FileTool() {}
 
@@ -45,5 +46,10 @@ public class FileTool {
             ex.printStackTrace();
             return false;
         }
+    }
+    
+    public static void createFolders() {
+        File dir = new File(picDir);
+        dir.mkdir();
     }
 }

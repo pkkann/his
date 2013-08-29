@@ -33,6 +33,9 @@ public class LookAndFeelDeterminer {
             case "WINDOWS 8":
                 lookAndFeel = "Windows";
                 break;
+            case "WINDOWS 7":
+                lookAndFeel = "Windows";
+                break;
             default:
                 lookAndFeel = "Nimbus";
                 break;

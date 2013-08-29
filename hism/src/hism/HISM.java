@@ -3,6 +3,7 @@ package hism;
 import control.LookAndFeelDeterminer;
 import control.PersonHandler;
 import control.PersonKatalog;
+import file.FileTool;
 import java.io.File;
 import javax.swing.JFrame;
 import model.Person;
@@ -29,6 +30,8 @@ public class HISM {
         LAFDeterminer = new LookAndFeelDeterminer();
         setLookAndFeel();
         
+        FileTool.createFolders();
+        
         
         // Create person things
         personKatalog = new PersonKatalog();
@@ -38,7 +41,7 @@ public class HISM {
         loginHandler = new LoginHandler(personKatalog);
         loginGUI = new LoginGUI(mainGUI, true, loginHandler);
         
-        opretPersonGUI = new OpretPersonGUI(mainGUI, true);
+        opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler, loginHandler);
         
         // Create test data
         testData();
@@ -48,8 +51,8 @@ public class HISM {
     }
 
     public void testData() {
-        personHandler.createHone("Patrick Kann", "8-56", "21-04-89", "21-08-2013", new File("test"), "pkkann", "rollercoaster", false, false);
-        personHandler.createHone("Mallica", "8-56", "21-04-89", "21-08-2013", new File("test"), "mm", "rollercoaster", false, false);
+        personHandler.createHone("Patrick Kann", "8-56", "21-04-89", "21-08-2013", new File("//home//pkann//Pictures//images.jpg"), "pkkann", "rollercoaster", true, false);
+        personHandler.createHone("Test", "8-56", "21-04-89", "21-08-2013", new File("//home//pkann//Pictures//images.jpg"), "test", "test", false, false);
     }
 
     private void setLookAndFeel() {
