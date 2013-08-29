@@ -10,11 +10,13 @@ import session.LoginHandler;
 public class MainGUI extends javax.swing.JFrame {
 
     private LoginGUI loginGUI;
+    private OpretPersonGUI opretPersonGUI;
     private LoginHandler loginHandler;
 
-    public MainGUI(LoginGUI loginGUI, LoginHandler loginHandler) {
+    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler) {
         initComponents();
         this.loginGUI = loginGUI;
+        this.opretPersonGUI = opretPersonGUI;
         this.loginHandler = loginHandler;
         setLocationRelativeTo(null);
         updateDate();
@@ -61,6 +63,7 @@ public class MainGUI extends javax.swing.JFrame {
         logOff_MenuItem = new javax.swing.JMenuItem();
         close_MenuItem = new javax.swing.JMenuItem();
         administrer_Menu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(871, 527));
@@ -101,7 +104,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 460, Short.MAX_VALUE)
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -229,6 +232,15 @@ public class MainGUI extends javax.swing.JFrame {
         menuBar_MenuBar.add(file_Menu);
 
         administrer_Menu.setText("Administrer");
+
+        jMenuItem1.setText("Opret person");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        administrer_Menu.add(jMenuItem1);
+
         menuBar_MenuBar.add(administrer_Menu);
 
         setJMenuBar(menuBar_MenuBar);
@@ -259,6 +271,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void close_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_MenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_close_MenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        opretPersonGUI.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -302,6 +318,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem logOff_MenuItem;
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;

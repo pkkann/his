@@ -19,6 +19,7 @@ public class HISM {
     private PersonKatalog personKatalog;
     private MainGUI mainGUI;
     private LoginGUI loginGUI;
+    private OpretPersonGUI opretPersonGUI;
     private LoginHandler loginHandler;
     private PersonHandler personHandler;
 
@@ -37,11 +38,13 @@ public class HISM {
         loginHandler = new LoginHandler(personKatalog);
         loginGUI = new LoginGUI(mainGUI, true, loginHandler);
         
+        opretPersonGUI = new OpretPersonGUI(mainGUI, true);
+        
         // Create test data
         testData();
 
         // Create main things
-        mainGUI = new MainGUI(loginGUI, loginHandler);
+        mainGUI = new MainGUI(loginGUI, opretPersonGUI, loginHandler);
     }
 
     public void testData() {
