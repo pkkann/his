@@ -3,6 +3,7 @@ package hism;
 import control.LookAndFeelDeterminer;
 import control.PersonHandler;
 import control.PersonKatalog;
+import java.io.File;
 import javax.swing.JFrame;
 import model.Person;
 import session.LoginHandler;
@@ -15,33 +16,37 @@ import view.*;
 public class HISM {
 
     private LookAndFeelDeterminer LAFDeterminer;
-    
     private PersonKatalog personKatalog;
-    
     private MainGUI mainGUI;
     private LoginGUI loginGUI;
-    
     private LoginHandler loginHandler;
-    private PersonHandler personhandler;
+    private PersonHandler personHandler;
 
     public HISM() {
 
+        // Set look and feel
         LAFDeterminer = new LookAndFeelDeterminer();
         setLookAndFeel();
         
+        
+        // Create person things
         personKatalog = new PersonKatalog();
+        personHandler = new PersonHandler(personKatalog);
         
-        personhandler = new PersonHandler(personKatalog);
+        // Create login things
         loginHandler = new LoginHandler(personKatalog);
+        loginGUI = new LoginGUI(mainGUI, true, loginHandler);
         
-        mainGUI = new MainGUI();
-        loginGUI = new LoginGUI(mainGUI, true);
-        
-        mainGUI.setVisible(true);
-        
-        while(loginHandler.getLoggedIn() == null) {
-            loginGUI.setVisible(true);
-        }
+        // Create test data
+        testData();
+
+        // Create main things
+        mainGUI = new MainGUI(loginGUI, loginHandler);
+    }
+
+    public void testData() {
+        personHandler.createHone("Patrick Kann", "8-56", "21-04-89", "21-08-2013", new File("test"), "pkkann", "rollercoaster", false, false);
+        personHandler.createHone("Mallica", "8-56", "21-04-89", "21-08-2013", new File("test"), "mm", "rollercoaster", false, false);
     }
 
     private void setLookAndFeel() {
@@ -67,7 +72,7 @@ public class HISM {
         }
         //</editor-fold>
     }
-    
+
     public static void main(String[] args) {
         HISM hism = new HISM();
     }

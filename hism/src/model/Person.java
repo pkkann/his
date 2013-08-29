@@ -59,6 +59,7 @@ public class Person {
         this.password = password;
         this.admin = admin;
         this.reserve = reserve;
+        this.hone = true;
     }
 
     public int getId() {

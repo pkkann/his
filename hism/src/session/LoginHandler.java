@@ -11,7 +11,7 @@ import model.Person;
 public class LoginHandler {
 
     private PersonKatalog personKatalog;
-    private Person loggedIn;
+    private Person loggedIn = null;
 
     public LoginHandler(PersonKatalog personKatalog) {
         this.personKatalog = personKatalog;
@@ -26,8 +26,11 @@ public class LoginHandler {
         
         for(Person p : personer) {
             if(p.isHone()) {
+                System.out.println("Høne fundet");
                 if(p.getUsername().equals(username)) {
+                    System.out.println("Username matcher");
                     if(p.getPassword().equals(password)) {
+                        System.out.println("Password matcher");
                         loggedIn = p;
                         return true;
                     }

@@ -1,18 +1,28 @@
 
 package view;
 
+import session.LoginHandler;
+
 /**
  *
  * @author pkann
  */
 public class LoginGUI extends javax.swing.JDialog {
+    
+    private LoginHandler loginHandler;
 
-    public LoginGUI(java.awt.Frame parent, boolean modal) {
+    public LoginGUI(java.awt.Frame parent, boolean modal, LoginHandler loginHandler) {
         super(parent, modal);
+        this.loginHandler = loginHandler;
         initComponents();
         setLocationRelativeTo(null);
     }
 
+    private void reset() {
+        email_TextField.setText("");
+        password_TextField.setText("");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,6 +42,11 @@ public class LoginGUI extends javax.swing.JDialog {
         setTitle("HISM Login");
         setMinimumSize(new java.awt.Dimension(691, 321));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         main_Pane.setBackground(java.awt.Color.darkGray);
 
@@ -89,6 +104,11 @@ public class LoginGUI extends javax.swing.JDialog {
         password_TextField.setText("Kode");
 
         login_Button.setText("Login");
+        login_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_ButtonActionPerformed(evt);
+            }
+        });
 
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +184,15 @@ public class LoginGUI extends javax.swing.JDialog {
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_close_ButtonActionPerformed
+
+    private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
+        loginHandler.login(email_TextField.getText(), password_TextField.getText());
+        dispose();
+    }//GEN-LAST:event_login_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        reset();
+    }//GEN-LAST:event_formWindowClosed
 //
 //    /**
 //     * @param args the command line arguments

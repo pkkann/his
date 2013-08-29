@@ -23,5 +23,6 @@ public class PersonHandler {
     public void createHone(String name, String address, String birthdayDate, String expirationDate, File picturePath, String username, String password, boolean admin, boolean reserve) {
         Person p = new Person(name, address, birthdayDate, expirationDate, picturePath, username, password, admin, reserve);
         personKatalog.addPerson(p);
+        System.out.println("Høne tilføjet");
     }
 }

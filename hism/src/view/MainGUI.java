@@ -1,8 +1,7 @@
-
 package view;
 
 import java.util.Calendar;
-import java.util.Date;
+import session.LoginHandler;
 
 /**
  *
@@ -10,12 +9,30 @@ import java.util.Date;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    public MainGUI() {
+    private LoginGUI loginGUI;
+    private LoginHandler loginHandler;
+
+    public MainGUI(LoginGUI loginGUI, LoginHandler loginHandler) {
         initComponents();
+        this.loginGUI = loginGUI;
+        this.loginHandler = loginHandler;
         setLocationRelativeTo(null);
         updateDate();
+        login();
     }
-    
+
+    public void login() {
+        if(loginHandler.getLoggedIn() == null) {
+            setVisible(false);
+            loginGUI.setVisible(true);
+            login();
+        } else {
+            setVisible(true);
+            loginGUI.setVisible(false);
+            user_Label.setText(loginHandler.getLoggedIn().getName());
+        }
+    }
+
     private void updateDate() {
         theDate_Label.setText(String.valueOf(Calendar.getInstance().get(Calendar.DATE) + "/" + Calendar.getInstance().get(Calendar.MONTH) + "/" + Calendar.getInstance().get(Calendar.YEAR)));
     }
@@ -41,6 +58,7 @@ public class MainGUI extends javax.swing.JFrame {
         user_Label = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         file_Menu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         administrer_Menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,7 +100,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -190,6 +208,15 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         file_Menu.setText("File");
+
+        jMenuItem1.setText("Log ud");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        file_Menu.add(jMenuItem1);
+
         menuBar_MenuBar.add(file_Menu);
 
         administrer_Menu.setText("Administrer");
@@ -214,6 +241,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        loginHandler.logout();
+        login();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -249,7 +281,6 @@ public class MainGUI extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu administrer_Menu;
     private javax.swing.JPanel bottom_Pane;
@@ -257,6 +288,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
@@ -270,5 +302,4 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel theGuests_Label;
     private javax.swing.JLabel user_Label;
     // End of variables declaration//GEN-END:variables
-
 }
