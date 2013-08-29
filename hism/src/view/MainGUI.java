@@ -58,7 +58,8 @@ public class MainGUI extends javax.swing.JFrame {
         user_Label = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         file_Menu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        logOff_MenuItem = new javax.swing.JMenuItem();
+        close_MenuItem = new javax.swing.JMenuItem();
         administrer_Menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,7 +101,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -209,13 +210,21 @@ public class MainGUI extends javax.swing.JFrame {
 
         file_Menu.setText("File");
 
-        jMenuItem1.setText("Log ud");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        logOff_MenuItem.setText("Log ud");
+        logOff_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                logOff_MenuItemActionPerformed(evt);
             }
         });
-        file_Menu.add(jMenuItem1);
+        file_Menu.add(logOff_MenuItem);
+
+        close_MenuItem.setText("Luk");
+        close_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_MenuItemActionPerformed(evt);
+            }
+        });
+        file_Menu.add(close_MenuItem);
 
         menuBar_MenuBar.add(file_Menu);
 
@@ -242,10 +251,14 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void logOff_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOff_MenuItemActionPerformed
         loginHandler.logout();
         login();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_logOff_MenuItemActionPerformed
+
+    private void close_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_MenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_close_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -284,11 +297,12 @@ public class MainGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu administrer_Menu;
     private javax.swing.JPanel bottom_Pane;
+    private javax.swing.JMenuItem close_MenuItem;
     private javax.swing.JLabel dato_Label;
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem logOff_MenuItem;
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;

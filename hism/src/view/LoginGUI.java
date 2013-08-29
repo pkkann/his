@@ -1,4 +1,3 @@
-
 package view;
 
 import session.LoginHandler;
@@ -8,7 +7,7 @@ import session.LoginHandler;
  * @author pkann
  */
 public class LoginGUI extends javax.swing.JDialog {
-    
+
     private LoginHandler loginHandler;
 
     public LoginGUI(java.awt.Frame parent, boolean modal, LoginHandler loginHandler) {
@@ -22,7 +21,7 @@ public class LoginGUI extends javax.swing.JDialog {
         email_TextField.setText("");
         password_TextField.setText("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,10 +36,14 @@ public class LoginGUI extends javax.swing.JDialog {
         password_TextField = new javax.swing.JTextField();
         login_Button = new javax.swing.JButton();
         close_Button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("HISM Login");
+        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(691, 321));
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -97,11 +100,25 @@ public class LoginGUI extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        email_TextField.setForeground(java.awt.Color.gray);
-        email_TextField.setText("E-mail");
+        email_TextField.setForeground(java.awt.Color.black);
+        email_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                email_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                email_TextFieldFocusLost(evt);
+            }
+        });
 
-        password_TextField.setForeground(java.awt.Color.gray);
-        password_TextField.setText("Kode");
+        password_TextField.setForeground(java.awt.Color.black);
+        password_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                password_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                password_TextFieldFocusLost(evt);
+            }
+        });
 
         login_Button.setText("Login");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +134,10 @@ public class LoginGUI extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("E-mail:");
+
+        jLabel2.setText("Kode:");
+
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
         bottom_Pane.setLayout(bottom_PaneLayout);
         bottom_PaneLayout.setHorizontalGroup(
@@ -124,21 +145,31 @@ public class LoginGUI extends javax.swing.JDialog {
             .addGroup(bottom_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(email_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
-                    .addComponent(password_TextField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(bottom_PaneLayout.createSequentialGroup()
-                        .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(close_Button)))
+                        .addComponent(close_Button))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createSequentialGroup()
+                        .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(email_TextField)
+                            .addComponent(password_TextField))))
                 .addContainerGap())
         );
         bottom_PaneLayout.setVerticalGroup(
             bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottom_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(email_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(email_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login_Button)
@@ -192,7 +223,26 @@ public class LoginGUI extends javax.swing.JDialog {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         reset();
+        if (loginHandler.getLoggedIn() == null) {
+            setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
+
+    private void email_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_TextFieldFocusGained
+        
+    }//GEN-LAST:event_email_TextFieldFocusGained
+
+    private void email_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_TextFieldFocusLost
+        
+    }//GEN-LAST:event_email_TextFieldFocusLost
+
+    private void password_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_TextFieldFocusGained
+        
+    }//GEN-LAST:event_password_TextFieldFocusGained
+
+    private void password_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_TextFieldFocusLost
+        
+    }//GEN-LAST:event_password_TextFieldFocusLost
 //
 //    /**
 //     * @param args the command line arguments
@@ -235,11 +285,12 @@ public class LoginGUI extends javax.swing.JDialog {
 //            }
 //        });
 //    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JButton close_Button;
     private javax.swing.JTextField email_TextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton login_Button;
     private view.LogoPane logo_Pane;
     private javax.swing.JPanel main_Pane;
@@ -248,5 +299,4 @@ public class LoginGUI extends javax.swing.JDialog {
     private javax.swing.JLabel title_Label;
     private javax.swing.JPanel top_Pane;
     // End of variables declaration//GEN-END:variables
-
 }
