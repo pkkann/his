@@ -49,6 +49,8 @@ public class MainGUI extends javax.swing.JFrame {
         search_Button = new javax.swing.JButton();
         details_Pane = new javax.swing.JPanel();
         result_Pane = new javax.swing.JPanel();
+        result_ScrollPane = new javax.swing.JScrollPane();
+        result_List = new javax.swing.JList();
         bottom_Pane = new javax.swing.JPanel();
         dato_Label = new javax.swing.JLabel();
         theDate_Label = new javax.swing.JLabel();
@@ -104,20 +106,34 @@ public class MainGUI extends javax.swing.JFrame {
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
+
+        result_List.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_ScrollPane.setViewportView(result_List);
 
         javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
         result_Pane.setLayout(result_PaneLayout);
         result_PaneLayout.setHorizontalGroup(
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 203, Short.MAX_VALUE)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addContainerGap())
         );
         result_PaneLayout.setVerticalGroup(
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
@@ -324,7 +340,9 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
+    private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;
+    private javax.swing.JScrollPane result_ScrollPane;
     private javax.swing.JButton search_Button;
     private javax.swing.JPanel search_Pane;
     private javax.swing.JTextField search_TextField;
