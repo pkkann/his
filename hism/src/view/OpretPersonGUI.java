@@ -14,12 +14,11 @@ import session.LoginHandler;
  *
  * @author pkann
  */
-
 class MyCustomFilter extends javax.swing.filechooser.FileFilter {
 
     @Override
     public boolean accept(File file) {
-        return file.isDirectory() || file.getAbsolutePath().endsWith(".jpeg")  || file.getAbsolutePath().endsWith(".jpg") || file.getAbsolutePath().endsWith(".png");
+        return file.isDirectory() || file.getAbsolutePath().endsWith(".jpeg") || file.getAbsolutePath().endsWith(".jpg") || file.getAbsolutePath().endsWith(".png");
     }
 
     @Override
@@ -32,7 +31,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
 
     private PersonHandler personHandler;
     private LoginHandler loginHandler;
-    
     private File billedPath;
     private Image billed;
 
@@ -397,7 +395,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         String birthday = birthday_TextField.getText();
         boolean oneOne = oneOne_CheckBox.getModel().isSelected();
         String expireDate = expireDate_TextField.getText();
-        
+
         if (hone_CheckBox.getModel().isSelected()) {
             String username = email_TextField.getText();
             String password = password_TextField.getText();
@@ -405,8 +403,12 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             boolean reserve = reserve_CheckBox.getModel().isSelected();
 
             if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
-                personHandler.createHone(name, address, birthday, expireDate, billedPath, username, password, admin, reserve);
-                dispose();
+
+                if (personHandler.createHone(name, address, birthday, expireDate, billedPath, username, password, admin, reserve) == 1) {
+                    System.out.println("Brugernavnet er allerede i brug");
+                } else {
+                    dispose();
+                }
             } else {
                 System.out.println("Udfyld alle felter");
             }
@@ -418,20 +420,20 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 System.out.println("Udfyld alle felter");
             }
         }
-        
+
     }//GEN-LAST:event_opret_ButtonActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(loginHandler.isAdmin()) {
+        if (loginHandler.isAdmin()) {
             hone_CheckBox.setEnabled(true);
             notAdmin_Label.setVisible(false);
-            
+
             oneOne_CheckBox.setEnabled(true);
             notAdmin2_Label.setVisible(false);
         } else {
             hone_CheckBox.setEnabled(false);
             notAdmin_Label.setVisible(true);
-            
+
             oneOne_CheckBox.setEnabled(false);
             notAdmin2_Label.setVisible(true);
         }

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Calendar;
+import javax.swing.ButtonGroup;
 import session.LoginHandler;
 
 /**
@@ -12,9 +13,11 @@ public class MainGUI extends javax.swing.JFrame {
     private LoginGUI loginGUI;
     private OpretPersonGUI opretPersonGUI;
     private LoginHandler loginHandler;
+    private ButtonGroup category_1;
 
     public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler) {
         initComponents();
+        setupButtonGroup();
         this.loginGUI = loginGUI;
         this.opretPersonGUI = opretPersonGUI;
         this.loginHandler = loginHandler;
@@ -34,6 +37,13 @@ public class MainGUI extends javax.swing.JFrame {
             user_Label.setText(loginHandler.getLoggedIn().getName());
         }
     }
+    
+    private void setupButtonGroup() {
+        category_1 = new ButtonGroup();
+        category_1.add(birthday_RadioButton);
+        category_1.add(name_RadioButton);
+        birthday_RadioButton.getModel().setSelected(true);
+    }
 
     private void updateDate() {
         theDate_Label.setText(String.valueOf(Calendar.getInstance().get(Calendar.DATE) + "/" + Calendar.getInstance().get(Calendar.MONTH) + "/" + Calendar.getInstance().get(Calendar.YEAR)));
@@ -47,6 +57,10 @@ public class MainGUI extends javax.swing.JFrame {
         search_Pane = new javax.swing.JPanel();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
+        birthday_RadioButton = new javax.swing.JRadioButton();
+        name_RadioButton = new javax.swing.JRadioButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
         details_Pane = new javax.swing.JPanel();
         result_Pane = new javax.swing.JPanel();
         result_ScrollPane = new javax.swing.JScrollPane();
@@ -75,13 +89,30 @@ public class MainGUI extends javax.swing.JFrame {
 
         search_Button.setText("Søg");
 
+        birthday_RadioButton.setText("Fødselsdag");
+
+        name_RadioButton.setText("Navn");
+
+        jCheckBox1.setText("Reserve");
+
+        jCheckBox2.setText("Høne");
+
         javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
         search_Pane.setLayout(search_PaneLayout);
         search_PaneLayout.setHorizontalGroup(
             search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(search_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(search_TextField)
+                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(search_PaneLayout.createSequentialGroup()
+                        .addComponent(birthday_RadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(name_RadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox1))
+                    .addComponent(search_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_Button)
                 .addContainerGap())
@@ -93,6 +124,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search_Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthday_RadioButton)
+                    .addComponent(name_RadioButton)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -106,7 +143,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -132,7 +169,7 @@ public class MainGUI extends javax.swing.JFrame {
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(result_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(result_ScrollPane)
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -154,8 +191,8 @@ public class MainGUI extends javax.swing.JFrame {
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(search_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(search_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(result_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -329,17 +366,21 @@ public class MainGUI extends javax.swing.JFrame {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu administrer_Menu;
+    private javax.swing.JRadioButton birthday_RadioButton;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenuItem close_MenuItem;
     private javax.swing.JLabel dato_Label;
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem logOff_MenuItem;
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
+    private javax.swing.JRadioButton name_RadioButton;
     private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;
     private javax.swing.JScrollPane result_ScrollPane;
