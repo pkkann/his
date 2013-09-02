@@ -27,5 +27,9 @@ public class PersonKatalog {
     public ArrayList<Person> getPersoner() {
         return personer;
     }
+    
+    public Person getPerson(int index) {
+        return personer.get(index);
+    }
 
 }

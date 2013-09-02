@@ -47,7 +47,7 @@ public class HISM {
         testData();
 
         // Create main things
-        mainGUI = new MainGUI(loginGUI, opretPersonGUI, loginHandler);
+        mainGUI = new MainGUI(loginGUI, opretPersonGUI, loginHandler, personHandler);
     }
 
     public void testData() {

@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import session.LoginHandler;
 
 /**
@@ -405,19 +406,21 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
 
                 if (personHandler.createHone(name, address, birthday, expireDate, billedPath, username, password, admin, reserve) == 1) {
-                    System.out.println("Brugernavnet er allerede i brug");
+                    JOptionPane.showMessageDialog(this, "Brugernavnet er allerede i brug", "Brugernavn", JOptionPane.WARNING_MESSAGE);
                 } else {
+                    JOptionPane.showMessageDialog(this,"Hønen blev oprettet");
                     dispose();
                 }
             } else {
-                System.out.println("Udfyld alle felter");
+                JOptionPane.showMessageDialog(this, "Udfyld alle felter, og vælg et billed", "Udfyld", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty()) {
                 personHandler.createPerson(name, address, birthday, expireDate, billedPath);
+                JOptionPane.showMessageDialog(this,"Personen blev oprettet");
                 dispose();
             } else {
-                System.out.println("Udfyld alle felter");
+                JOptionPane.showMessageDialog(this, "Udfyld alle felter, og vælg et billed", "Udfyld", JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -449,8 +452,6 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             } catch (IOException ex) {
                 Logger.getLogger(OpretPersonGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_choose_ButtonActionPerformed
 //

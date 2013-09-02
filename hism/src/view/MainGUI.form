@@ -151,7 +151,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="search_TextField" pref="794" max="32767" attributes="0"/>
+                          <Component id="search_TextField" pref="804" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="search_Button" min="-2" max="-2" attributes="0"/>
@@ -186,6 +186,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="S&#xf8;g"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="birthday_RadioButton">
               <Properties>
@@ -223,15 +226,247 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="645" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="picture_Label" max="32767" attributes="0"/>
+                          <Component id="expiration_Label" pref="90" max="32767" attributes="0"/>
+                          <Component id="oneOne_Label" max="32767" attributes="0"/>
+                          <Component id="admin_label" max="32767" attributes="0"/>
+                          <Component id="reserve_Label" max="32767" attributes="0"/>
+                          <Component id="hone_Label" max="32767" attributes="0"/>
+                          <Component id="birthday_Label" alignment="0" max="32767" attributes="0"/>
+                          <Component id="address_Label" alignment="0" max="32767" attributes="0"/>
+                          <Component id="name_Label" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="name_TextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="address_TextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="birthday_TextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="hone_CheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="reserve_CheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="admin_CheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="oneOne_CheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="expiration_TextField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="picturePane_Pane" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="219" max="32767" attributes="0"/>
+                              <Component id="status_Pane" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="name_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="name_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="address_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="address_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="birthday_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="birthday_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="hone_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hone_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="reserve_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="reserve_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="admin_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="admin_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="oneOne_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="oneOne_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="expiration_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="expiration_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="picture_Label" min="-2" max="-2" attributes="0"/>
+                          <Component id="picturePane_Pane" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                              <Component id="status_Pane" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="name_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Navn:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="address_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adresse:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="birthday_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="F&#xf8;dselsdag:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="name_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="address_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="birthday_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="hone_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="H&#xf8;ne:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="hone_CheckBox">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="reserve_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reserve:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="reserve_CheckBox">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="admin_label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Admin:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="admin_CheckBox">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="oneOne_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1-1:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="oneOne_CheckBox">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="expiration_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Udl&#xf8;bsdato:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="expiration_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="picture_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Billed:"/>
+              </Properties>
+            </Component>
+            <Container class="view.PicturePane" name="picturePane_Pane">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="javax.swing.JPanel" name="status_Pane">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Status"/>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="statusPicPane_Pane" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="statusPicPane_Pane" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="view.StatusPicPane" name="statusPicPane_Pane">
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="result_Pane">
           <Properties>
@@ -258,7 +493,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="result_ScrollPane" pref="433" max="32767" attributes="0"/>
+                      <Component id="result_ScrollPane" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -275,16 +510,13 @@
                 <Component class="javax.swing.JList" name="result_List">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="result_ListValueChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

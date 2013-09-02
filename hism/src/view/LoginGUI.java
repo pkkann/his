@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.JOptionPane;
 import session.LoginHandler;
 
 /**
@@ -33,11 +34,11 @@ public class LoginGUI extends javax.swing.JDialog {
         secondTitle_Label = new javax.swing.JLabel();
         bottom_Pane = new javax.swing.JPanel();
         email_TextField = new javax.swing.JTextField();
-        password_TextField = new javax.swing.JTextField();
         login_Button = new javax.swing.JButton();
         close_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        password_TextField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("HISM Login");
@@ -109,16 +110,6 @@ public class LoginGUI extends javax.swing.JDialog {
             }
         });
 
-        password_TextField.setForeground(java.awt.Color.black);
-        password_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                password_TextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                password_TextFieldFocusLost(evt);
-            }
-        });
-
         login_Button.setText("Login");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,8 +158,8 @@ public class LoginGUI extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(login_Button)
@@ -216,8 +207,12 @@ public class LoginGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        loginHandler.login(email_TextField.getText(), password_TextField.getText());
-        dispose();
+        boolean f = loginHandler.login(email_TextField.getText(), password_TextField.getText());
+        if (!f) {
+            JOptionPane.showMessageDialog(this, "Brugernavn eller adgangskode forkert", "Advarsel", JOptionPane.WARNING_MESSAGE);
+        } else {
+            dispose();
+        }
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -228,20 +223,10 @@ public class LoginGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void email_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_TextFieldFocusGained
-        
     }//GEN-LAST:event_email_TextFieldFocusGained
 
     private void email_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_TextFieldFocusLost
-        
     }//GEN-LAST:event_email_TextFieldFocusLost
-
-    private void password_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_TextFieldFocusGained
-        
-    }//GEN-LAST:event_password_TextFieldFocusGained
-
-    private void password_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_TextFieldFocusLost
-        
-    }//GEN-LAST:event_password_TextFieldFocusLost
 //
 //    /**
 //     * @param args the command line arguments
@@ -293,7 +278,7 @@ public class LoginGUI extends javax.swing.JDialog {
     private javax.swing.JButton login_Button;
     private view.LogoPane logo_Pane;
     private javax.swing.JPanel main_Pane;
-    private javax.swing.JTextField password_TextField;
+    private javax.swing.JPasswordField password_TextField;
     private javax.swing.JLabel secondTitle_Label;
     private javax.swing.JLabel title_Label;
     private javax.swing.JPanel top_Pane;

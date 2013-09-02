@@ -56,5 +56,13 @@ public class PersonHandler {
         return null;
     }
     
+    public ArrayList<Person> getPersoner() {
+        return personKatalog.getPersoner();
+    }
+    
+    public Person getPerson(int index) {
+        return personKatalog.getPerson(index);
+    }
+    
     
 }

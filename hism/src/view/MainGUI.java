@@ -1,7 +1,16 @@
 package view;
 
+import control.PersonHandler;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import model.Person;
 import session.LoginHandler;
 
 /**
@@ -14,20 +23,22 @@ public class MainGUI extends javax.swing.JFrame {
     private OpretPersonGUI opretPersonGUI;
     private LoginHandler loginHandler;
     private ButtonGroup category_1;
+    private PersonHandler personHandler;
 
-    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler) {
+    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler, PersonHandler personHandler) {
         initComponents();
         setupButtonGroup();
         this.loginGUI = loginGUI;
         this.opretPersonGUI = opretPersonGUI;
         this.loginHandler = loginHandler;
+        this.personHandler = personHandler;
         setLocationRelativeTo(null);
         updateDate();
         login();
     }
 
     public void login() {
-        if(loginHandler.getLoggedIn() == null) {
+        if (loginHandler.getLoggedIn() == null) {
             setVisible(false);
             loginGUI.setVisible(true);
             login();
@@ -37,12 +48,57 @@ public class MainGUI extends javax.swing.JFrame {
             user_Label.setText(loginHandler.getLoggedIn().getName());
         }
     }
-    
+
+    private void setPerson(Person p) {
+        name_TextField.setText(p.getName());
+        address_TextField.setText(p.getAddress());
+        birthday_TextField.setText(p.getBirthdayDate());
+        hone_CheckBox.setSelected(p.isHone());
+        reserve_CheckBox.setSelected(p.isReserve());
+        admin_CheckBox.setSelected(p.isAdmin());
+        oneOne_CheckBox.setSelected(false);
+        expiration_TextField.setText(p.getExpirationDate());
+        try {
+            picturePane_Pane.setPicture(ImageIO.read(p.getPicturePath()));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (p.isQuarantine()) {
+            statusPicPane_Pane.setStatus(1);
+            statusPicPane_Pane.setToolTipText("OK");
+        } else {
+            statusPicPane_Pane.setStatus(0);
+            statusPicPane_Pane.setToolTipText("Karantæne");
+        }
+    }
+
+    private void clearPerson() {
+        name_TextField.setText("");
+        address_TextField.setText("");
+        birthday_TextField.setText("");
+        hone_CheckBox.setSelected(false);
+        reserve_CheckBox.setSelected(false);
+        admin_CheckBox.setSelected(false);
+        oneOne_CheckBox.setSelected(false);
+        expiration_TextField.setText("");
+        picturePane_Pane.setPicture(null);
+        statusPicPane_Pane.setStatus(2);
+        statusPicPane_Pane.setToolTipText("");
+    }
+
     private void setupButtonGroup() {
         category_1 = new ButtonGroup();
         category_1.add(birthday_RadioButton);
         category_1.add(name_RadioButton);
         birthday_RadioButton.getModel().setSelected(true);
+    }
+
+    private void clearResult() {
+        try {
+            DefaultListModel dlm = new DefaultListModel();
+            result_List.setModel(dlm);
+        } catch (IndexOutOfBoundsException ex) {
+        }
     }
 
     private void updateDate() {
@@ -62,6 +118,26 @@ public class MainGUI extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         details_Pane = new javax.swing.JPanel();
+        name_Label = new javax.swing.JLabel();
+        address_Label = new javax.swing.JLabel();
+        birthday_Label = new javax.swing.JLabel();
+        name_TextField = new javax.swing.JTextField();
+        address_TextField = new javax.swing.JTextField();
+        birthday_TextField = new javax.swing.JTextField();
+        hone_Label = new javax.swing.JLabel();
+        hone_CheckBox = new javax.swing.JCheckBox();
+        reserve_Label = new javax.swing.JLabel();
+        reserve_CheckBox = new javax.swing.JCheckBox();
+        admin_label = new javax.swing.JLabel();
+        admin_CheckBox = new javax.swing.JCheckBox();
+        oneOne_Label = new javax.swing.JLabel();
+        oneOne_CheckBox = new javax.swing.JCheckBox();
+        expiration_Label = new javax.swing.JLabel();
+        expiration_TextField = new javax.swing.JTextField();
+        picture_Label = new javax.swing.JLabel();
+        picturePane_Pane = new view.PicturePane();
+        status_Pane = new javax.swing.JPanel();
+        statusPicPane_Pane = new view.StatusPicPane();
         result_Pane = new javax.swing.JPanel();
         result_ScrollPane = new javax.swing.JScrollPane();
         result_List = new javax.swing.JList();
@@ -88,6 +164,11 @@ public class MainGUI extends javax.swing.JFrame {
         search_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Søg", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
 
         search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         birthday_RadioButton.setText("Fødselsdag");
 
@@ -112,7 +193,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jCheckBox2)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox1))
-                    .addComponent(search_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE))
+                    .addComponent(search_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_Button)
                 .addContainerGap())
@@ -135,25 +216,168 @@ public class MainGUI extends javax.swing.JFrame {
 
         details_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Oplysninger", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
 
+        name_Label.setText("Navn:");
+
+        address_Label.setText("Adresse:");
+
+        birthday_Label.setText("Fødselsdag:");
+
+        name_TextField.setEditable(false);
+        name_TextField.setEnabled(false);
+
+        address_TextField.setEditable(false);
+        address_TextField.setEnabled(false);
+
+        birthday_TextField.setEditable(false);
+        birthday_TextField.setEnabled(false);
+
+        hone_Label.setText("Høne:");
+
+        hone_CheckBox.setEnabled(false);
+
+        reserve_Label.setText("Reserve:");
+
+        reserve_CheckBox.setEnabled(false);
+
+        admin_label.setText("Admin:");
+
+        admin_CheckBox.setEnabled(false);
+
+        oneOne_Label.setText("1-1:");
+
+        oneOne_CheckBox.setEnabled(false);
+
+        expiration_Label.setText("Udløbsdato:");
+
+        expiration_TextField.setEditable(false);
+        expiration_TextField.setEnabled(false);
+
+        picture_Label.setText("Billed:");
+
+        javax.swing.GroupLayout picturePane_PaneLayout = new javax.swing.GroupLayout(picturePane_Pane);
+        picturePane_Pane.setLayout(picturePane_PaneLayout);
+        picturePane_PaneLayout.setHorizontalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PaneLayout.setVerticalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        status_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+
+        javax.swing.GroupLayout statusPicPane_PaneLayout = new javax.swing.GroupLayout(statusPicPane_Pane);
+        statusPicPane_Pane.setLayout(statusPicPane_PaneLayout);
+        statusPicPane_PaneLayout.setHorizontalGroup(
+            statusPicPane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        statusPicPane_PaneLayout.setVerticalGroup(
+            statusPicPane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout status_PaneLayout = new javax.swing.GroupLayout(status_Pane);
+        status_Pane.setLayout(status_PaneLayout);
+        status_PaneLayout.setHorizontalGroup(
+            status_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, status_PaneLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(statusPicPane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        status_PaneLayout.setVerticalGroup(
+            status_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(status_PaneLayout.createSequentialGroup()
+                .addComponent(statusPicPane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
         details_PaneLayout.setHorizontalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+            .addGroup(details_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(picture_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expiration_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(oneOne_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(admin_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reserve_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hone_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(birthday_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(address_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(name_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(name_TextField)
+                    .addComponent(address_TextField)
+                    .addComponent(birthday_TextField)
+                    .addComponent(hone_CheckBox)
+                    .addComponent(reserve_CheckBox)
+                    .addComponent(admin_CheckBox)
+                    .addComponent(oneOne_CheckBox)
+                    .addComponent(expiration_TextField)
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(details_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name_Label)
+                    .addComponent(name_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(address_Label)
+                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthday_Label)
+                    .addComponent(birthday_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hone_Label)
+                    .addComponent(hone_CheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reserve_Label)
+                    .addComponent(reserve_CheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(admin_label)
+                    .addComponent(admin_CheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(oneOne_Label)
+                    .addComponent(oneOne_CheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(expiration_Label)
+                    .addComponent(expiration_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(picture_Label)
+                    .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
 
-        result_List.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_List.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                result_ListValueChanged(evt);
+            }
+        });
         result_ScrollPane.setViewportView(result_List);
 
         javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
@@ -169,7 +393,7 @@ public class MainGUI extends javax.swing.JFrame {
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(result_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addComponent(result_ScrollPane)
                 .addContainerGap())
         );
 
@@ -328,7 +552,26 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         opretPersonGUI.setVisible(true);
+        clearResult();
+        clearPerson();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        ArrayList<Person> personer = personHandler.getPersoner();
+        DefaultListModel listModel = new DefaultListModel();
+
+        for (Person p : personer) {
+            listModel.addElement(p.getName());
+        }
+
+        result_List.setModel(listModel);
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
+        int selection = result_List.getSelectedIndex();
+        Person p = personHandler.getPerson(selection);
+        setPerson(p);
+    }//GEN-LAST:event_result_ListValueChanged
 //
 //    /**
 //     * @param args the command line arguments
@@ -365,14 +608,24 @@ public class MainGUI extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel address_Label;
+    private javax.swing.JTextField address_TextField;
+    private javax.swing.JCheckBox admin_CheckBox;
+    private javax.swing.JLabel admin_label;
     private javax.swing.JMenu administrer_Menu;
+    private javax.swing.JLabel birthday_Label;
     private javax.swing.JRadioButton birthday_RadioButton;
+    private javax.swing.JTextField birthday_TextField;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenuItem close_MenuItem;
     private javax.swing.JLabel dato_Label;
     private javax.swing.JPanel details_Pane;
+    private javax.swing.JLabel expiration_Label;
+    private javax.swing.JTextField expiration_TextField;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
+    private javax.swing.JCheckBox hone_CheckBox;
+    private javax.swing.JLabel hone_Label;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -380,7 +633,15 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
+    private javax.swing.JLabel name_Label;
     private javax.swing.JRadioButton name_RadioButton;
+    private javax.swing.JTextField name_TextField;
+    private javax.swing.JCheckBox oneOne_CheckBox;
+    private javax.swing.JLabel oneOne_Label;
+    private view.PicturePane picturePane_Pane;
+    private javax.swing.JLabel picture_Label;
+    private javax.swing.JCheckBox reserve_CheckBox;
+    private javax.swing.JLabel reserve_Label;
     private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;
     private javax.swing.JScrollPane result_ScrollPane;
@@ -389,6 +650,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel splitter1_Label;
     private javax.swing.JLabel splitter2_Label;
+    private view.StatusPicPane statusPicPane_Pane;
+    private javax.swing.JPanel status_Pane;
     private javax.swing.JLabel theDate_Label;
     private javax.swing.JLabel theGuests_Label;
     private javax.swing.JLabel user_Label;
