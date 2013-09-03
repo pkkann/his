@@ -135,10 +135,10 @@ public class MainGUI extends javax.swing.JFrame {
         expiration_TextField = new javax.swing.JTextField();
         picture_Label = new javax.swing.JLabel();
         status_Pane = new javax.swing.JPanel();
-        statusPicPane_Pane = new view.StatusPicPane();
+        statusPicPane_Pane = new view.image.StatusPicPane();
         enroll_Button = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        picturePane_Pane = new view.PicturePane();
+        picturePane_Pane = new view.image.PicturePane();
         jButton1 = new javax.swing.JButton();
         result_Pane = new javax.swing.JPanel();
         result_ScrollPane = new javax.swing.JScrollPane();
@@ -679,7 +679,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField name_TextField;
     private javax.swing.JCheckBox oneOne_CheckBox;
     private javax.swing.JLabel oneOne_Label;
-    private view.PicturePane picturePane_Pane;
+    private view.image.PicturePane picturePane_Pane;
     private javax.swing.JLabel picture_Label;
     private javax.swing.JCheckBox reserve_CheckBox;
     private javax.swing.JLabel reserve_Label;
@@ -691,7 +691,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel splitter1_Label;
     private javax.swing.JLabel splitter2_Label;
-    private view.StatusPicPane statusPicPane_Pane;
+    private view.image.StatusPicPane statusPicPane_Pane;
     private javax.swing.JPanel status_Pane;
     private javax.swing.JLabel theDate_Label;
     private javax.swing.JLabel theGuests_Label;

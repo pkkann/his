@@ -188,7 +188,7 @@
                 <Property name="text" type="java.lang.String" value="Billed:"/>
               </Properties>
             </Component>
-            <Container class="view.PicturePane" name="picturePane_Pane">
+            <Container class="view.image.PicturePane" name="picturePane_Pane">
 
               <Layout>
                 <DimensionLayout dim="0">

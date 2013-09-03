@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.image;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,22 +15,29 @@ import javax.imageio.ImageIO;
  *
  * @author pkann
  */
-public class LogoPane extends javax.swing.JPanel {
+public class PicturePane_256 extends javax.swing.JPanel {
 
-    private Image img;
-    
-    public LogoPane() {
+    private Image image;
+
+    public PicturePane_256() {
         initComponents();
-        try {
-            img = ImageIO.read(getClass().getResourceAsStream("logo.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(LogoPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
-    
+
     @Override
     public void paint(Graphics g) {
-        g.drawImage(img, 0, 0, null);
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
+        if (image != null) {
+            g.drawImage(image, 0, 0, null);
+        }
+    }
+
+    public void setPicture(Image img) {
+        if (img != null) {
+            image = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        } else {
+            image = null;
+        }
+        repaint();
     }
 
     /**
@@ -43,15 +49,20 @@ public class LogoPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(java.awt.Color.lightGray);
+        setMaximumSize(new java.awt.Dimension(150, 150));
+        setMinimumSize(new java.awt.Dimension(150, 150));
+        setPreferredSize(new java.awt.Dimension(150, 150));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

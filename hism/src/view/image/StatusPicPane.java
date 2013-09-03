@@ -1,4 +1,4 @@
-package view;
+package view.image;
 
 import java.awt.Image;
 import java.io.IOException;

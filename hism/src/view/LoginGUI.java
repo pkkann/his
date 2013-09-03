@@ -29,7 +29,7 @@ public class LoginGUI extends javax.swing.JDialog {
 
         main_Pane = new javax.swing.JPanel();
         top_Pane = new javax.swing.JPanel();
-        logo_Pane = new view.LogoPane();
+        logo_Pane = new view.image.LogoPane();
         title_Label = new javax.swing.JLabel();
         secondTitle_Label = new javax.swing.JLabel();
         bottom_Pane = new javax.swing.JPanel();
@@ -276,7 +276,7 @@ public class LoginGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton login_Button;
-    private view.LogoPane logo_Pane;
+    private view.image.LogoPane logo_Pane;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JPasswordField password_TextField;
     private javax.swing.JLabel secondTitle_Label;

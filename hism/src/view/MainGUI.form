@@ -450,7 +450,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="view.StatusPicPane" name="statusPicPane_Pane">
+                <Container class="view.image.StatusPicPane" name="statusPicPane_Pane">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -502,7 +502,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="view.PicturePane" name="picturePane_Pane">
+                <Container class="view.image.PicturePane" name="picturePane_Pane">
 
                   <Layout>
                     <DimensionLayout dim="0">

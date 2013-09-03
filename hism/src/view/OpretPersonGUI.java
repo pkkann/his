@@ -79,7 +79,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
         address_TextField = new javax.swing.JTextField();
         birthday_TextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        picturePane_Pane = new view.PicturePane();
+        picturePane_Pane = new view.image.PicturePane();
         choose_Button = new javax.swing.JButton();
         oneOne_CheckBox = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
@@ -526,7 +526,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
     private javax.swing.JButton opret_Button;
     private javax.swing.JTextField password_TextField;
     private javax.swing.JPanel person_Pane;
-    private view.PicturePane picturePane_Pane;
+    private view.image.PicturePane picturePane_Pane;
     private javax.swing.JCheckBox reserve_CheckBox;
     private javax.swing.JPanel tool_Pane;
     // End of variables declaration//GEN-END:variables

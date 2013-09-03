@@ -116,7 +116,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="view.LogoPane" name="logo_Pane">
+            <Container class="view.image.LogoPane" name="logo_Pane">
 
               <Layout>
                 <DimensionLayout dim="0">
