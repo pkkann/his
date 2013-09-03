@@ -403,7 +403,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
             boolean admin = admin_CheckBox.getModel().isSelected();
             boolean reserve = reserve_CheckBox.getModel().isSelected();
 
-            if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
+            if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty() && !expireDate.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
 
                 if (personHandler.createHone(name, address, birthday, expireDate, billedPath, username, password, admin, reserve) == 1) {
                     JOptionPane.showMessageDialog(this, "Brugernavnet er allerede i brug", "Brugernavn", JOptionPane.WARNING_MESSAGE);
@@ -415,7 +415,7 @@ public class OpretPersonGUI extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Udfyld alle felter, og vælg et billed", "Udfyld", JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty()) {
+            if (!name.isEmpty() && !address.isEmpty() && !birthday.isEmpty() && !expireDate.isEmpty()) {
                 personHandler.createPerson(name, address, birthday, expireDate, billedPath);
                 JOptionPane.showMessageDialog(this,"Personen blev oprettet");
                 dispose();

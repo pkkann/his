@@ -6,6 +6,7 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,15 +26,9 @@ public class PicturePane extends javax.swing.JPanel {
 
     @Override
     public void paint(Graphics g) {
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
         if (image != null) {
             g.drawImage(image, 0, 0, null);
-        } else {
-            try {
-                image = ImageIO.read(this.getClass().getResourceAsStream("image.png"));
-                g.drawImage(image, 0, 0, null);
-            } catch (IOException ex) {
-                Logger.getLogger(PicturePane.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 

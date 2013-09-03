@@ -1,7 +1,6 @@
 package view;
 
 import control.PersonHandler;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -135,9 +134,12 @@ public class MainGUI extends javax.swing.JFrame {
         expiration_Label = new javax.swing.JLabel();
         expiration_TextField = new javax.swing.JTextField();
         picture_Label = new javax.swing.JLabel();
-        picturePane_Pane = new view.PicturePane();
         status_Pane = new javax.swing.JPanel();
         statusPicPane_Pane = new view.StatusPicPane();
+        enroll_Button = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        picturePane_Pane = new view.PicturePane();
+        jButton1 = new javax.swing.JButton();
         result_Pane = new javax.swing.JPanel();
         result_ScrollPane = new javax.swing.JScrollPane();
         result_List = new javax.swing.JList();
@@ -254,17 +256,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         picture_Label.setText("Billed:");
 
-        javax.swing.GroupLayout picturePane_PaneLayout = new javax.swing.GroupLayout(picturePane_Pane);
-        picturePane_Pane.setLayout(picturePane_PaneLayout);
-        picturePane_PaneLayout.setHorizontalGroup(
-            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        picturePane_PaneLayout.setVerticalGroup(
-            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-        );
-
         status_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
 
         javax.swing.GroupLayout statusPicPane_PaneLayout = new javax.swing.GroupLayout(statusPicPane_Pane);
@@ -293,6 +284,40 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        enroll_Button.setText("Indskriv");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout picturePane_PaneLayout = new javax.swing.GroupLayout(picturePane_Pane);
+        picturePane_Pane.setLayout(picturePane_PaneLayout);
+        picturePane_PaneLayout.setHorizontalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PaneLayout.setVerticalGroup(
+            picturePane_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("Karantæne");
+
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
         details_PaneLayout.setHorizontalGroup(
@@ -311,7 +336,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(name_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(name_TextField)
+                    .addComponent(name_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                     .addComponent(address_TextField)
                     .addComponent(birthday_TextField)
                     .addComponent(hone_CheckBox)
@@ -319,10 +344,15 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(admin_CheckBox)
                     .addComponent(oneOne_CheckBox)
                     .addComponent(expiration_TextField)
-                    .addGroup(details_PaneLayout.createSequentialGroup()
-                        .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                        .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_PaneLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(status_Pane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_PaneLayout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enroll_Button)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         details_PaneLayout.setVerticalGroup(
@@ -362,12 +392,18 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(expiration_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(picture_Label)
-                    .addComponent(picturePane_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(details_PaneLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(picture_Label)
+                            .addGroup(details_PaneLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(enroll_Button)
+                            .addComponent(jButton1)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -543,6 +579,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void logOff_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOff_MenuItemActionPerformed
         loginHandler.logout();
+        clearPerson();
+        clearResult();
         login();
     }//GEN-LAST:event_logOff_MenuItemActionPerformed
 
@@ -620,15 +658,18 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem close_MenuItem;
     private javax.swing.JLabel dato_Label;
     private javax.swing.JPanel details_Pane;
+    private javax.swing.JButton enroll_Button;
     private javax.swing.JLabel expiration_Label;
     private javax.swing.JTextField expiration_TextField;
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel guests_Label;
     private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JLabel hone_Label;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logOff_MenuItem;
     private javax.swing.JLabel loggedIn_Label;
     private javax.swing.JPanel main_Pane;

@@ -25,16 +25,9 @@ public class PicturePane_256 extends javax.swing.JPanel {
 
     @Override
     public void paint(Graphics g) {
-        g.clearRect(0, 0, 150, 150);
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
         if (image != null) {
             g.drawImage(image, 0, 0, null);
-        } else {
-            try {
-                image = ImageIO.read(this.getClass().getResourceAsStream("image.png"));
-                g.drawImage(image, 0, 0, null);
-            } catch (IOException ex) {
-                Logger.getLogger(PicturePane_256.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
