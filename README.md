@@ -17,3 +17,5 @@ Høne indskrivnings system (HISM)
 - Send besked til admin
 - Alt skal gemmes i database
 - Alt skal gemmes i objekter - OK
+- Indskriv person
+- Rediger indskrivning af person
