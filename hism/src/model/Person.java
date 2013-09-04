@@ -20,6 +20,7 @@ public class Person {
     private boolean admin;
     private boolean reserve;
     private boolean quarantine;
+    private String quarantineToDate;
     
     /**
      * Opret person object
@@ -157,4 +158,14 @@ public class Person {
     public void setReserve(boolean reserve) {
         this.reserve = reserve;
     }
+
+    public String getQuarantineToDate() {
+        return quarantineToDate;
+    }
+
+    public void setQuarantineToDate(String quarantineToDate) {
+        this.quarantineToDate = quarantineToDate;
+    }
+    
+    
 }

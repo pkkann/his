@@ -21,6 +21,7 @@ public class HISM {
     private MainGUI mainGUI;
     private LoginGUI loginGUI;
     private OpretPersonGUI opretPersonGUI;
+    private QuarantineGUI quarantineGUI;
     private LoginHandler loginHandler;
     private PersonHandler personHandler;
 
@@ -41,13 +42,17 @@ public class HISM {
         loginHandler = new LoginHandler(personKatalog);
         loginGUI = new LoginGUI(mainGUI, true, loginHandler);
         
+        // Create opret things
         opretPersonGUI = new OpretPersonGUI(mainGUI, true, personHandler, loginHandler);
+        
+        // Create quarantine things
+        quarantineGUI = new QuarantineGUI(mainGUI, true);
         
         // Create test data
         testData();
 
         // Create main things
-        mainGUI = new MainGUI(loginGUI, opretPersonGUI, loginHandler, personHandler);
+        mainGUI = new MainGUI(loginGUI, opretPersonGUI, loginHandler, personHandler, quarantineGUI);
     }
 
     public void testData() {

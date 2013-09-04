@@ -20,15 +20,18 @@ public class MainGUI extends javax.swing.JFrame {
 
     private LoginGUI loginGUI;
     private OpretPersonGUI opretPersonGUI;
+    private QuarantineGUI quarantineGUI;
     private LoginHandler loginHandler;
     private ButtonGroup category_1;
     private PersonHandler personHandler;
+    private Person p;
 
-    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler, PersonHandler personHandler) {
+    public MainGUI(LoginGUI loginGUI, OpretPersonGUI opretPersonGUI, LoginHandler loginHandler, PersonHandler personHandler, QuarantineGUI quarantineGUI) {
         initComponents();
         setupButtonGroup();
         this.loginGUI = loginGUI;
         this.opretPersonGUI = opretPersonGUI;
+        this.quarantineGUI = quarantineGUI;
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
         setLocationRelativeTo(null);
@@ -49,6 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     private void setPerson(Person p) {
+        this.p = p;
         name_TextField.setText(p.getName());
         address_TextField.setText(p.getAddress());
         birthday_TextField.setText(p.getBirthdayDate());
@@ -64,10 +68,10 @@ public class MainGUI extends javax.swing.JFrame {
         }
         if (p.isQuarantine()) {
             statusPicPane_Pane.setStatus(1);
-            statusPicPane_Pane.setToolTipText("OK");
+            statusPicPane_Pane.setToolTipText("Karantæne");
         } else {
             statusPicPane_Pane.setStatus(0);
-            statusPicPane_Pane.setToolTipText("Karantæne");
+            statusPicPane_Pane.setToolTipText("OK");
         }
     }
 
@@ -317,6 +321,11 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         jButton1.setText("Karantæne");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
@@ -403,7 +412,7 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(enroll_Button)
                             .addComponent(jButton1)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.gray));
@@ -610,6 +619,12 @@ public class MainGUI extends javax.swing.JFrame {
         Person p = personHandler.getPerson(selection);
         setPerson(p);
     }//GEN-LAST:event_result_ListValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        quarantineGUI.setPerson(p);
+        quarantineGUI.setVisible(true);
+        setPerson(p);
+    }//GEN-LAST:event_jButton1ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
