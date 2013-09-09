@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.Person;
 import session.LoginHandler;
 
@@ -604,14 +606,23 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        ArrayList<Person> personer = personHandler.getPersoner();
-        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Person> personer = null;
 
-        for (Person p : personer) {
-            listModel.addElement(p.getName());
+        if (!search_TextField.getText().isEmpty()) {
+            if (birthday_RadioButton.isSelected()) {
+                personer = personHandler.searchBirthday(search_TextField.getText(), hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
+            } else if (name_RadioButton.isSelected()) {
+                personer = personHandler.searchName(search_TextField.getText(), hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
+            }
+        } else {
+            personer = personHandler.searchAll(hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
         }
-
-        result_List.setModel(listModel);
+        
+        DefaultListModel dlm = new DefaultListModel();
+        for(Person p : personer) {
+            dlm.addElement(p.getName());
+        }
+        result_List.setModel(dlm);
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
