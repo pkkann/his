@@ -4,17 +4,22 @@
  */
 package view;
 
+import login.LoginHandler;
+
 /**
  *
  * @author patrick
  */
 public class MainGUI extends javax.swing.JFrame {
-
-    private LoginDIA loginDIA;
     
-    public MainGUI(LoginDIA loginDIA) {
+    private LoginHandler loginHandler;
+    
+    public MainGUI(LoginHandler loginHandler) {
         initComponents();
-        this.loginDIA = loginDIA;
+        this.loginHandler = loginHandler;
+        
+        loginHandler.requestLoginView();
+        setVisible(true);
     }
 
     /**
@@ -53,6 +58,7 @@ public class MainGUI extends javax.swing.JFrame {
         deleteUser_MenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultat"));
 
@@ -164,6 +170,11 @@ public class MainGUI extends javax.swing.JFrame {
         file_Menu.add(jSeparator1);
 
         changeUser_MenuItem.setText("Ændre bruger");
+        changeUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeUser_MenuItemActionPerformed(evt);
+            }
+        });
         file_Menu.add(changeUser_MenuItem);
 
         menuBar_MenuBar.add(file_Menu);
@@ -216,7 +227,12 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void changeUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUser_MenuItemActionPerformed
+        loginHandler.requestLoginView();
+    }//GEN-LAST:event_changeUser_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
