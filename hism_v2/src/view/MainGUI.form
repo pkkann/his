@@ -23,7 +23,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="changeUser_MenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xc6;ndre bruger"/>
+                <Property name="text" type="java.lang.String" value="Login som anden bruger"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeUser_MenuItemActionPerformed"/>
@@ -221,6 +221,10 @@
                   <Component id="enrolledInfo_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="enrolled_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="administratorInfo_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="administrator_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -236,6 +240,8 @@
                       <Component id="user_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="enrolledInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="enrolled_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="administratorInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="administrator_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -289,6 +295,22 @@
               <Color blue="0" green="cc" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ENROLLED"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="administratorInfo_Label">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Administrator:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="administrator_Label">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="cc" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
         </Component>
       </SubComponents>

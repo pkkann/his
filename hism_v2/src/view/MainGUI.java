@@ -17,9 +17,29 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI(LoginHandler loginHandler) {
         initComponents();
         this.loginHandler = loginHandler;
-        
-        loginHandler.requestLoginView();
-        setVisible(true);
+    }
+    
+    public void setUser() {
+        user_Label.setText(loginHandler.getLoggedInUser().getFirstname() + " " + loginHandler.getLoggedInUser().getLastname());
+        if(loginHandler.getLoggedInUser().isAdministrator()) {
+            editPerson_MenuItem.setEnabled(true);
+            deletePerson_MenuItem.setEnabled(true);
+            
+            createUser_MenuItem.setEnabled(true);
+            editUser_MenuItem.setEnabled(true);
+            deleteUser_MenuItem.setEnabled(true);
+            
+            administrator_Label.setText("Ja");
+        } else {
+            editPerson_MenuItem.setEnabled(false);
+            deletePerson_MenuItem.setEnabled(false);
+            
+            createUser_MenuItem.setEnabled(false);
+            editUser_MenuItem.setEnabled(false);
+            deleteUser_MenuItem.setEnabled(false);
+            
+            administrator_Label.setText("Nej");
+        }
     }
 
     /**
@@ -41,6 +61,8 @@ public class MainGUI extends javax.swing.JFrame {
         user_Label = new javax.swing.JLabel();
         enrolledInfo_Label = new javax.swing.JLabel();
         enrolled_Label = new javax.swing.JLabel();
+        administratorInfo_Label = new javax.swing.JLabel();
+        administrator_Label = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         file_Menu = new javax.swing.JMenu();
         repport_MenuItem = new javax.swing.JMenuItem();
@@ -127,6 +149,12 @@ public class MainGUI extends javax.swing.JFrame {
         enrolled_Label.setForeground(new java.awt.Color(102, 204, 0));
         enrolled_Label.setText("ENROLLED");
 
+        administratorInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        administratorInfo_Label.setText("Administrator:");
+
+        administrator_Label.setForeground(new java.awt.Color(102, 204, 0));
+        administrator_Label.setText("ADMIN");
+
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
         bottom_Pane.setLayout(bottom_PaneLayout);
         bottom_PaneLayout.setHorizontalGroup(
@@ -144,6 +172,10 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(enrolledInfo_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
+                .addGap(18, 18, 18)
+                .addComponent(administratorInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(administrator_Label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bottom_PaneLayout.setVerticalGroup(
@@ -156,7 +188,9 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(userInfo_Label)
                     .addComponent(user_Label)
                     .addComponent(enrolledInfo_Label)
-                    .addComponent(enrolled_Label))
+                    .addComponent(enrolled_Label)
+                    .addComponent(administratorInfo_Label)
+                    .addComponent(administrator_Label))
                 .addContainerGap())
         );
 
@@ -169,7 +203,7 @@ public class MainGUI extends javax.swing.JFrame {
         file_Menu.add(reset_MenuItem);
         file_Menu.add(jSeparator1);
 
-        changeUser_MenuItem.setText("Ændre bruger");
+        changeUser_MenuItem.setText("Login som anden bruger");
         changeUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeUser_MenuItemActionPerformed(evt);
@@ -270,6 +304,8 @@ public class MainGUI extends javax.swing.JFrame {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu administration_Menu;
+    private javax.swing.JLabel administratorInfo_Label;
+    private javax.swing.JLabel administrator_Label;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenuItem changeUser_MenuItem;
     private javax.swing.JMenuItem createPerson_MenuItem;

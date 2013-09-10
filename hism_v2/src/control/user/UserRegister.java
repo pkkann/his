@@ -18,6 +18,17 @@ public class UserRegister {
     public UserRegister() {
         users = new ArrayList<>();
     }
+    
+    public User checkUser(String email, String password) {
+        for(User u : users) {
+            if(u.getEmail().equals(email)) {
+                if(u.getPassword().equals(password)) {
+                    return u;
+                }
+            }
+        }
+        return null;
+    }
 
     public int size() {
         return users.size();
@@ -54,4 +65,14 @@ public class UserRegister {
     public boolean remove(Object o) {
         return users.remove(o);
     }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+    
+    
 }

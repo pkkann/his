@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import login.LoginHandler;
 
 /**
@@ -84,6 +85,11 @@ public class LoginDIA extends javax.swing.JDialog {
         });
 
         login_Button.setText("Login");
+        login_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout login_PaneLayout = new javax.swing.GroupLayout(login_Pane);
         login_Pane.setLayout(login_PaneLayout);
@@ -168,6 +174,19 @@ public class LoginDIA extends javax.swing.JDialog {
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_close_ButtonActionPerformed
+
+    private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
+        
+        if(!email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
+            if(loginHandler.checkUser(email_TextField.getText(), password_TextField.getText())) {
+                setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this,"Email eller kode er forkert","Fejl",JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,"Alle felter skal udfyldes","Fejl",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_login_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

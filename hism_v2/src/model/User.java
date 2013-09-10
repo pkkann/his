@@ -12,13 +12,19 @@ public class User {
     private int id;
     private String email;
     private String password;
+    private String firstname;
+    private String middlename;
+    private String lastname;
     private String creationDate;
     private boolean administrator;
     private boolean reserve;
 
-    public User(String email, String password, String creationDate, boolean administrator, boolean reserve) {
+    public User(String email, String password, String firstname, String middlename, String lastname, String creationDate, boolean administrator, boolean reserve) {
         this.email = email;
         this.password = password;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
         this.creationDate = creationDate;
         this.administrator = administrator;
         this.reserve = reserve;
@@ -70,6 +76,30 @@ public class User {
 
     public void setReserve(boolean reserve) {
         this.reserve = reserve;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
     
