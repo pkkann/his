@@ -247,7 +247,7 @@
                               <Component id="enroll_Button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="kick_Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="237" max="32767" attributes="0"/>
                               <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -486,14 +486,18 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="user_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="enrolledInfo_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="enrolled_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="administratorInfo_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="administrator_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="466" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="reserveInfo_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="reserve_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="enrolledInfo_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="enrolled_Label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -510,6 +514,8 @@
                       <Component id="enrolled_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="administratorInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="administrator_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reserveInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reserve_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -579,6 +585,22 @@
               <Color blue="0" green="cc" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ADMIN"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reserveInfo_Label">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reserve:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reserve_Label">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="cc" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="RESERVE"/>
           </Properties>
         </Component>
       </SubComponents>

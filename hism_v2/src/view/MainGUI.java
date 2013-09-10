@@ -47,6 +47,12 @@ public class MainGUI extends javax.swing.JFrame {
             
             administrator_Label.setText("Nej");
         }
+        
+        if(loginHandler.getLoggedInUser().isReserve()) {
+            reserve_Label.setText("Ja");
+        } else {
+            reserve_Label.setText("Nej");
+        }
     }
 
     /**
@@ -93,6 +99,8 @@ public class MainGUI extends javax.swing.JFrame {
         enrolled_Label = new javax.swing.JLabel();
         administratorInfo_Label = new javax.swing.JLabel();
         administrator_Label = new javax.swing.JLabel();
+        reserveInfo_Label = new javax.swing.JLabel();
+        reserve_Label = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         file_Menu = new javax.swing.JMenu();
         repport_MenuItem = new javax.swing.JMenuItem();
@@ -205,7 +213,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(kick_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                         .addComponent(requestQuarantine_Button))
                     .addGroup(details_PaneLayout.createSequentialGroup()
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -335,6 +343,12 @@ public class MainGUI extends javax.swing.JFrame {
         administrator_Label.setForeground(new java.awt.Color(102, 204, 0));
         administrator_Label.setText("ADMIN");
 
+        reserveInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        reserveInfo_Label.setText("Reserve:");
+
+        reserve_Label.setForeground(new java.awt.Color(102, 204, 0));
+        reserve_Label.setText("RESERVE");
+
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
         bottom_Pane.setLayout(bottom_PaneLayout);
         bottom_PaneLayout.setHorizontalGroup(
@@ -349,14 +363,18 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(user_Label)
                 .addGap(18, 18, 18)
-                .addComponent(enrolledInfo_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enrolled_Label)
-                .addGap(18, 18, 18)
                 .addComponent(administratorInfo_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(administrator_Label)
-                .addContainerGap(466, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(reserveInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reserve_Label)
+                .addGap(18, 18, 18)
+                .addComponent(enrolledInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enrolled_Label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bottom_PaneLayout.setVerticalGroup(
             bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +388,9 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(enrolledInfo_Label)
                     .addComponent(enrolled_Label)
                     .addComponent(administratorInfo_Label)
-                    .addComponent(administrator_Label))
+                    .addComponent(administrator_Label)
+                    .addComponent(reserveInfo_Label)
+                    .addComponent(reserve_Label))
                 .addContainerGap())
         );
 
@@ -551,6 +571,8 @@ public class MainGUI extends javax.swing.JFrame {
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JMenuItem repport_MenuItem;
     private javax.swing.JButton requestQuarantine_Button;
+    private javax.swing.JLabel reserveInfo_Label;
+    private javax.swing.JLabel reserve_Label;
     private javax.swing.JMenuItem reset_MenuItem;
     private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;

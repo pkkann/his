@@ -54,6 +54,7 @@ public class HISM {
     }
     
     private void firstStart() {
+        testData();
         if(userHandler.usersIsEmpty()) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
             User u = new User("test@test.dk", "test", "test", "test", "test", "test", true, false);
@@ -63,6 +64,10 @@ public class HISM {
             createUserDIA.setVisible(true);
             userRegister.remove(u);
         }
+    }
+    
+    private void testData() {
+        userHandler.createUser("test", "test", "test", "test", "test", "test", true, false);
     }
 
 }

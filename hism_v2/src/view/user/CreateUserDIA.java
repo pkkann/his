@@ -16,18 +16,20 @@ import javax.swing.JOptionPane;
 public class CreateUserDIA extends javax.swing.JDialog {
 
     private UserHandler userHandler;
+    private boolean createAdmin = false;
 
     public CreateUserDIA(java.awt.Frame parent, boolean modal, UserHandler userHandler) {
         super(parent, modal);
         initComponents();
         this.userHandler = userHandler;
     }
-    
+
     public void setCreateAdmin() {
         admin_CheckBox.setSelected(true);
         admin_CheckBox.setEnabled(false);
         reserve_CheckBox.setEnabled(false);
-        cancel_Button.setEnabled(false);
+        cancel_Button.setText("Luk");
+        createAdmin = true;
     }
 
     private void clean() {
@@ -41,7 +43,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
         admin_CheckBox.setSelected(false);
         admin_CheckBox.setEnabled(true);
         reserve_CheckBox.setEnabled(true);
-        cancel_Button.setEnabled(true);
+        cancel_Button.setText("Annuller");
+        createAdmin = false;
     }
 
     /**
@@ -274,7 +277,11 @@ public class CreateUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_create_ButtonActionPerformed
 
     private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
-        dispose();
+        if (createAdmin) {
+            System.exit(0);
+        } else {
+            dispose();
+        }
     }//GEN-LAST:event_cancel_ButtonActionPerformed
 //
 //    /**
