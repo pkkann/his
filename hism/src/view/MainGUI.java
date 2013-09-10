@@ -9,8 +9,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import model.Person;
 import session.LoginHandler;
 
@@ -120,8 +118,8 @@ public class MainGUI extends javax.swing.JFrame {
         search_Button = new javax.swing.JButton();
         birthday_RadioButton = new javax.swing.JRadioButton();
         name_RadioButton = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        searchReserve_CheckBox = new javax.swing.JCheckBox();
+        searchHone_CheckBox = new javax.swing.JCheckBox();
         details_Pane = new javax.swing.JPanel();
         name_Label = new javax.swing.JLabel();
         address_Label = new javax.swing.JLabel();
@@ -182,9 +180,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         name_RadioButton.setText("Navn");
 
-        jCheckBox1.setText("Reserve");
+        searchReserve_CheckBox.setText("Reserve");
 
-        jCheckBox2.setText("Høne");
+        searchHone_CheckBox.setText("Høne");
 
         javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
         search_Pane.setLayout(search_PaneLayout);
@@ -198,9 +196,9 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(name_RadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2)
+                        .addComponent(searchHone_CheckBox)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1))
+                        .addComponent(searchReserve_CheckBox))
                     .addComponent(search_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_Button)
@@ -217,8 +215,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(birthday_RadioButton)
                     .addComponent(name_RadioButton)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
+                    .addComponent(searchReserve_CheckBox)
+                    .addComponent(searchHone_CheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -606,13 +604,19 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        clearResult();
         ArrayList<Person> personer = null;
 
+        System.out.println("Birthday: " + birthday_RadioButton.isSelected());
+        System.out.println("Name: " + name_RadioButton.isSelected());
+        System.out.println("Hone: " + searchHone_CheckBox.isSelected());
+        System.out.println("Reserve: " + searchReserve_CheckBox.isSelected());
+        
         if (!search_TextField.getText().isEmpty()) {
             if (birthday_RadioButton.isSelected()) {
-                personer = personHandler.searchBirthday(search_TextField.getText(), hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
+                personer = personHandler.searchBirthday(search_TextField.getText(), searchHone_CheckBox.isSelected(), searchReserve_CheckBox.isSelected());
             } else if (name_RadioButton.isSelected()) {
-                personer = personHandler.searchName(search_TextField.getText(), hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
+                personer = personHandler.searchName(search_TextField.getText(), searchHone_CheckBox.isSelected(), searchReserve_CheckBox.isSelected());
             }
         } else {
             personer = personHandler.searchAll(hone_CheckBox.isSelected(), reserve_CheckBox.isSelected());
@@ -620,7 +624,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         DefaultListModel dlm = new DefaultListModel();
         for(Person p : personer) {
-            dlm.addElement(p.getName());
+            dlm.addElement(p.getId() + ":" + p.getName());
         }
         result_List.setModel(dlm);
     }//GEN-LAST:event_search_ButtonActionPerformed
@@ -692,8 +696,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JLabel hone_Label;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logOff_MenuItem;
@@ -712,6 +714,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;
     private javax.swing.JScrollPane result_ScrollPane;
+    private javax.swing.JCheckBox searchHone_CheckBox;
+    private javax.swing.JCheckBox searchReserve_CheckBox;
     private javax.swing.JButton search_Button;
     private javax.swing.JPanel search_Pane;
     private javax.swing.JTextField search_TextField;

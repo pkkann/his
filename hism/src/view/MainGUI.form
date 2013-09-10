@@ -147,9 +147,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="name_RadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                              <Component id="searchHone_CheckBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="searchReserve_CheckBox" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="search_TextField" pref="804" max="32767" attributes="0"/>
                       </Group>
@@ -171,8 +171,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="birthday_RadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="name_RadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchReserve_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchHone_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -200,12 +200,12 @@
                 <Property name="text" type="java.lang.String" value="Navn"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="searchReserve_CheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reserve"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+            <Component class="javax.swing.JCheckBox" name="searchHone_CheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="H&#xf8;ne"/>
               </Properties>
