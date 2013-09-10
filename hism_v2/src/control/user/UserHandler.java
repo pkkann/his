@@ -10,4 +10,10 @@ package control.user;
  */
 public class UserHandler {
     
+    private UserRegister userRegister;
+    
+    public UserHandler() {
+        userRegister = new UserRegister();
+    }
+    
 }

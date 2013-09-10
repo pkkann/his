@@ -10,11 +10,11 @@ package view;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainGUI
-     */
-    public MainGUI() {
+    private LoginDIA loginDIA;
+    
+    public MainGUI(LoginDIA loginDIA) {
         initComponents();
+        this.loginDIA = loginDIA;
     }
 
     /**
@@ -26,56 +26,257 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        main_Pane = new javax.swing.JPanel();
+        result_Pane = new javax.swing.JPanel();
+        details_Pane = new javax.swing.JPanel();
+        bottom_Pane = new javax.swing.JPanel();
+        dateInfo_Label = new javax.swing.JLabel();
+        date_Label = new javax.swing.JLabel();
+        userInfo_Label = new javax.swing.JLabel();
+        user_Label = new javax.swing.JLabel();
+        enrolledInfo_Label = new javax.swing.JLabel();
+        enrolled_Label = new javax.swing.JLabel();
+        menuBar_MenuBar = new javax.swing.JMenuBar();
+        file_Menu = new javax.swing.JMenu();
+        repport_MenuItem = new javax.swing.JMenuItem();
+        reset_MenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        changeUser_MenuItem = new javax.swing.JMenuItem();
+        administration_Menu = new javax.swing.JMenu();
+        persons_Menu = new javax.swing.JMenu();
+        createPerson_MenuItem = new javax.swing.JMenuItem();
+        editPerson_MenuItem = new javax.swing.JMenuItem();
+        deletePerson_MenuItem = new javax.swing.JMenuItem();
+        users_Menu = new javax.swing.JMenu();
+        createUser_MenuItem = new javax.swing.JMenuItem();
+        editUser_MenuItem = new javax.swing.JMenuItem();
+        deleteUser_MenuItem = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultat"));
+
+        javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
+        result_Pane.setLayout(result_PaneLayout);
+        result_PaneLayout.setHorizontalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 296, Short.MAX_VALUE)
+        );
+        result_PaneLayout.setVerticalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 518, Short.MAX_VALUE)
+        );
+
+        details_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Detaljer"));
+
+        javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
+        details_Pane.setLayout(details_PaneLayout);
+        details_PaneLayout.setHorizontalGroup(
+            details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+        details_PaneLayout.setVerticalGroup(
+            details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(result_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(result_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        bottom_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        dateInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        dateInfo_Label.setText("Dato:");
+
+        date_Label.setForeground(new java.awt.Color(102, 204, 0));
+        date_Label.setText("DATE");
+
+        userInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        userInfo_Label.setText("Bruger:");
+
+        user_Label.setForeground(new java.awt.Color(102, 204, 0));
+        user_Label.setText("USER");
+
+        enrolledInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        enrolledInfo_Label.setText("Indskrevet:");
+
+        enrolled_Label.setForeground(new java.awt.Color(102, 204, 0));
+        enrolled_Label.setText("ENROLLED");
+
+        javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
+        bottom_Pane.setLayout(bottom_PaneLayout);
+        bottom_PaneLayout.setHorizontalGroup(
+            bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bottom_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dateInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(date_Label)
+                .addGap(18, 18, 18)
+                .addComponent(userInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(user_Label)
+                .addGap(18, 18, 18)
+                .addComponent(enrolledInfo_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enrolled_Label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        bottom_PaneLayout.setVerticalGroup(
+            bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateInfo_Label)
+                    .addComponent(date_Label)
+                    .addComponent(userInfo_Label)
+                    .addComponent(user_Label)
+                    .addComponent(enrolledInfo_Label)
+                    .addComponent(enrolled_Label))
+                .addContainerGap())
+        );
+
+        file_Menu.setText("Filer");
+
+        repport_MenuItem.setText("Print rapport");
+        file_Menu.add(repport_MenuItem);
+
+        reset_MenuItem.setText("Daglig nulstilling");
+        file_Menu.add(reset_MenuItem);
+        file_Menu.add(jSeparator1);
+
+        changeUser_MenuItem.setText("Ændre bruger");
+        file_Menu.add(changeUser_MenuItem);
+
+        menuBar_MenuBar.add(file_Menu);
+
+        administration_Menu.setText("Administration");
+
+        persons_Menu.setText("Personer");
+
+        createPerson_MenuItem.setText("Opret person");
+        persons_Menu.add(createPerson_MenuItem);
+
+        editPerson_MenuItem.setText("Rediger person");
+        persons_Menu.add(editPerson_MenuItem);
+
+        deletePerson_MenuItem.setText("Slet person");
+        persons_Menu.add(deletePerson_MenuItem);
+
+        administration_Menu.add(persons_Menu);
+
+        users_Menu.setText("Brugere");
+
+        createUser_MenuItem.setText("Opret bruger");
+        users_Menu.add(createUser_MenuItem);
+
+        editUser_MenuItem.setText("Rediger bruger");
+        users_Menu.add(editUser_MenuItem);
+
+        deleteUser_MenuItem.setText("Slet bruger");
+        users_Menu.add(deleteUser_MenuItem);
+
+        administration_Menu.add(users_Menu);
+
+        menuBar_MenuBar.add(administration_Menu);
+
+        setJMenuBar(menuBar_MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bottom_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bottom_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainGUI().setVisible(true);
-            }
-        });
-    }
+//
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MainGUI().setVisible(true);
+//            }
+//        });
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu administration_Menu;
+    private javax.swing.JPanel bottom_Pane;
+    private javax.swing.JMenuItem changeUser_MenuItem;
+    private javax.swing.JMenuItem createPerson_MenuItem;
+    private javax.swing.JMenuItem createUser_MenuItem;
+    private javax.swing.JLabel dateInfo_Label;
+    private javax.swing.JLabel date_Label;
+    private javax.swing.JMenuItem deletePerson_MenuItem;
+    private javax.swing.JMenuItem deleteUser_MenuItem;
+    private javax.swing.JPanel details_Pane;
+    private javax.swing.JMenuItem editPerson_MenuItem;
+    private javax.swing.JMenuItem editUser_MenuItem;
+    private javax.swing.JLabel enrolledInfo_Label;
+    private javax.swing.JLabel enrolled_Label;
+    private javax.swing.JMenu file_Menu;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPanel main_Pane;
+    private javax.swing.JMenuBar menuBar_MenuBar;
+    private javax.swing.JMenu persons_Menu;
+    private javax.swing.JMenuItem repport_MenuItem;
+    private javax.swing.JMenuItem reset_MenuItem;
+    private javax.swing.JPanel result_Pane;
+    private javax.swing.JLabel userInfo_Label;
+    private javax.swing.JLabel user_Label;
+    private javax.swing.JMenu users_Menu;
     // End of variables declaration//GEN-END:variables
 }
