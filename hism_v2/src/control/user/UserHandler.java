@@ -18,6 +18,10 @@ public class UserHandler {
         userRegister = new UserRegister();
     }
     
+    public boolean usersIsEmpty() {
+        return userRegister.isEmpty();
+    }
+    
     public void createUser(String email, String password, String firstname, String middlename, String lastname, String creationDate, boolean administrator, boolean reserve) {
         User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
         userRegister.add(u);

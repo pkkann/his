@@ -22,6 +22,13 @@ public class CreateUserDIA extends javax.swing.JDialog {
         initComponents();
         this.userHandler = userHandler;
     }
+    
+    public void setCreateAdmin() {
+        admin_CheckBox.setSelected(true);
+        admin_CheckBox.setEnabled(false);
+        reserve_CheckBox.setEnabled(false);
+        cancel_Button.setEnabled(false);
+    }
 
     private void clean() {
         firstname_TextField.setText("");
@@ -32,6 +39,9 @@ public class CreateUserDIA extends javax.swing.JDialog {
         passwordAgain_TextField.setText("");
         reserve_CheckBox.setSelected(false);
         admin_CheckBox.setSelected(false);
+        admin_CheckBox.setEnabled(true);
+        reserve_CheckBox.setEnabled(true);
+        cancel_Button.setEnabled(true);
     }
 
     /**
@@ -153,6 +163,11 @@ public class CreateUserDIA extends javax.swing.JDialog {
         });
 
         cancel_Button.setText("Annuller");
+        cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_ButtonActionPerformed(evt);
+            }
+        });
 
         admin_CheckBox.setText("Admin");
 
@@ -230,29 +245,37 @@ public class CreateUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
-        if (userHandler.isEmailFree(email_TextField.getText())) {
-            if (password_TextField.getText().equals(passwordAgain_TextField.getText())) {
-                String firstname = firstname_TextField.getText();
-                String middlename = middlename_TextField.getText();
-                String lastname = lastname_TextField.getText();
-                String email = email_TextField.getText();
-                String password = password_TextField.getText();
-                boolean admin = admin_CheckBox.isSelected();
-                boolean reserve = reserve_CheckBox.isSelected();
-                Date d = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String creationDate = sdf.format(d);
-                
-                userHandler.createUser(email, password, firstname, middlename, lastname, creationDate, admin, reserve);
-                JOptionPane.showMessageDialog(this, "Brugeren blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
+        if (!firstname_TextField.getText().isEmpty() && !lastname_TextField.getText().isEmpty() && !email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty() && !passwordAgain_TextField.getText().isEmpty()) {
+            if (userHandler.isEmailFree(email_TextField.getText())) {
+                if (password_TextField.getText().equals(passwordAgain_TextField.getText())) {
+                    String firstname = firstname_TextField.getText();
+                    String middlename = middlename_TextField.getText();
+                    String lastname = lastname_TextField.getText();
+                    String email = email_TextField.getText();
+                    String password = password_TextField.getText();
+                    boolean admin = admin_CheckBox.isSelected();
+                    boolean reserve = reserve_CheckBox.isSelected();
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String creationDate = sdf.format(d);
+
+                    userHandler.createUser(email, password, firstname, middlename, lastname, creationDate, admin, reserve);
+                    JOptionPane.showMessageDialog(this, "Brugeren blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Koderne er ikke de samme", "Fejl", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Koderne er ikke de samme", "Fejl", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Den angivne email er allerede i brug", "Fejl", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Den angivne email er allerede i brug", "Fejl", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt", "Fejl", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_create_ButtonActionPerformed
+
+    private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancel_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

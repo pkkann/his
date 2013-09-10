@@ -30,7 +30,7 @@ public class LoginHandler {
     public void requestLoginView() {
         loginDIA.setVisible(true);
     }
-    
+
     public User getLoggedInUser() {
         return loggedInUser;
     }

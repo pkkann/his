@@ -231,6 +231,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Annuller"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancel_ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="admin_CheckBox">
               <Properties>

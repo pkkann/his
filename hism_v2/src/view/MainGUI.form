@@ -45,6 +45,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Opret person"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createPerson_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="editPerson_MenuItem">
                   <Properties>
@@ -54,6 +57,13 @@
                 <MenuItem class="javax.swing.JMenuItem" name="deletePerson_MenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Slet person"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="oneTimeEnroll_MenuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="En gangs indskrivning"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -181,15 +191,42 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="296" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="result_ScrollPane" pref="272" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="486" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="result_ScrollPane" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="result_ScrollPane">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="result_List">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                    <Property name="selectionMode" type="int" value="0"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="details_Pane">
           <Properties>
@@ -203,15 +240,222 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="583" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="enroll_Button" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="kick_Button" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="middlenameInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="firstnameInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lastnameInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="birthdayInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="expirationDateInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="oneOneInfo_Label" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="firstname_TextField" max="32767" attributes="0"/>
+                                  <Component id="middlename_TextField" max="32767" attributes="0"/>
+                                  <Component id="lastname_TextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="birthday_TextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="expirationDate_TextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="oneOne_TextField" max="32767" attributes="0"/>
+                                  <Component id="jTextField1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="picturePane_PicturePane" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="statusPicPane_StatusPicPane" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="picturePane_PicturePane" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="statusPicPane_StatusPicPane" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="firstnameInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="firstname_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="middlenameInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="middlename_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lastnameInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lastname_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="birthdayInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="birthday_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="expirationDateInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="expirationDate_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="oneOne_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="oneOneInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="enroll_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="requestQuarantine_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="kick_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="view.image.PicturePane" name="picturePane_PicturePane">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="view.image.StatusPicPane" name="statusPicPane_StatusPicPane">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Component class="javax.swing.JLabel" name="firstnameInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fornavn:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="middlenameInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mellemnavn:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lastnameInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Efternavn:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="birthdayInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="F&#xf8;dselsdag:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="expirationDateInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Udl&#xf8;bsdato:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="firstname_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="middlename_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="lastname_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="birthday_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="expirationDate_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="oneOneInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1-1:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="oneOne_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="enroll_Button">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Indskriv"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="requestQuarantine_Button">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Anmod om karant&#xe6;ne"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="kick_Button">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Smid ud"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adresse:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="search_TextField">
         </Component>
@@ -249,7 +493,7 @@
                   <Component id="administratorInfo_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="administrator_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="466" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

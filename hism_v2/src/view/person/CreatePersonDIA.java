@@ -4,18 +4,68 @@
  */
 package view.person;
 
+import control.person.PersonHandler;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import login.LoginHandler;
+
 /**
  *
  * @author patrick
  */
+class MyCustomFilter extends javax.swing.filechooser.FileFilter {
+
+    @Override
+    public boolean accept(File file) {
+        return file.isDirectory() || file.getAbsolutePath().endsWith(".jpeg") || file.getAbsolutePath().endsWith(".jpg") || file.getAbsolutePath().endsWith(".png");
+    }
+
+    @Override
+    public String getDescription() {
+        return "Picture (.jpeg / .jpg / .png)";
+    }
+}
+
 public class CreatePersonDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CreatePersonDIA
-     */
-    public CreatePersonDIA(java.awt.Frame parent, boolean modal) {
+    private File picturePath;
+    private Image picture;
+    private PersonHandler personHandler;
+    private LoginHandler loginHandler;
+
+    public CreatePersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler, LoginHandler loginHandler) {
         super(parent, modal);
         initComponents();
+        this.personHandler = personHandler;
+        this.loginHandler = loginHandler;
+    }
+    
+    public void setUser() {
+        if(loginHandler.getLoggedInUser().isAdministrator()) {
+            oneOne_CheckBox.setEnabled(true);
+        } else {
+            oneOne_CheckBox.setEnabled(false);
+        }
+    }
+
+    private void clean() {
+        firstname_TextField.setText("");
+        middlename_TextField.setText("");
+        lastname_TextField.setText("");
+        birthday_TextField.setText("");
+        expirationDate_TextField.setText("");
+        address_TextField.setText("");
+        oneOne_CheckBox.setSelected(false);
+        picturePath = null;
+        picturePane_PicturePane.setPicture(null);
     }
 
     /**
@@ -27,22 +77,263 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
+        main_Pane = new javax.swing.JPanel();
+        pane1_Pane = new javax.swing.JPanel();
+        firstnameInfo_Label = new javax.swing.JLabel();
+        middlenameInfo_Label = new javax.swing.JLabel();
+        lastnameInfo_Label = new javax.swing.JLabel();
+        birthdayInfo_Label = new javax.swing.JLabel();
+        expirationDateInfo_Label = new javax.swing.JLabel();
+        addressInfo_Label = new javax.swing.JLabel();
+        firstname_TextField = new javax.swing.JTextField();
+        middlename_TextField = new javax.swing.JTextField();
+        lastname_TextField = new javax.swing.JTextField();
+        birthday_TextField = new javax.swing.JTextField();
+        expirationDate_TextField = new javax.swing.JTextField();
+        address_TextField = new javax.swing.JTextField();
+        pane2_Pane = new javax.swing.JPanel();
+        picturePane_PicturePane = new view.image.PicturePane();
+        choose_Button = new javax.swing.JButton();
+        pane3_Pane = new javax.swing.JPanel();
+        oneOne_CheckBox = new javax.swing.JCheckBox();
+        create_Button = new javax.swing.JButton();
+        cancel_Button = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        firstnameInfo_Label.setText("Fornavn:");
+
+        middlenameInfo_Label.setText("Mellemnavn:");
+
+        lastnameInfo_Label.setText("Efternavn:");
+
+        birthdayInfo_Label.setText("Fødselsdag:");
+
+        expirationDateInfo_Label.setText("Udløbsdato:");
+
+        addressInfo_Label.setText("Adresse:");
+
+        javax.swing.GroupLayout pane1_PaneLayout = new javax.swing.GroupLayout(pane1_Pane);
+        pane1_Pane.setLayout(pane1_PaneLayout);
+        pane1_PaneLayout.setHorizontalGroup(
+            pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane1_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expirationDateInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(firstname_TextField)
+                    .addComponent(middlename_TextField)
+                    .addComponent(lastname_TextField)
+                    .addComponent(birthday_TextField)
+                    .addComponent(expirationDate_TextField)
+                    .addComponent(address_TextField))
+                .addContainerGap())
+        );
+        pane1_PaneLayout.setVerticalGroup(
+            pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane1_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstnameInfo_Label)
+                    .addComponent(firstname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middlenameInfo_Label)
+                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastnameInfo_Label)
+                    .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdayInfo_Label)
+                    .addComponent(birthday_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(expirationDateInfo_Label)
+                    .addComponent(expirationDate_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addressInfo_Label)
+                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
+        picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
+        picturePane_PicturePaneLayout.setHorizontalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PicturePaneLayout.setVerticalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        choose_Button.setText("Vælg");
+        choose_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choose_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pane2_PaneLayout = new javax.swing.GroupLayout(pane2_Pane);
+        pane2_Pane.setLayout(pane2_PaneLayout);
+        pane2_PaneLayout.setHorizontalGroup(
+            pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane2_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(choose_Button)
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+        pane2_PaneLayout.setVerticalGroup(
+            pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane2_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choose_Button)
+                    .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        oneOne_CheckBox.setText("1-1");
+
+        create_Button.setText("Opret");
+        create_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_ButtonActionPerformed(evt);
+            }
+        });
+
+        cancel_Button.setText("Annuller");
+        cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pane3_PaneLayout = new javax.swing.GroupLayout(pane3_Pane);
+        pane3_Pane.setLayout(pane3_PaneLayout);
+        pane3_PaneLayout.setHorizontalGroup(
+            pane3_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane3_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(oneOne_CheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancel_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(create_Button)
+                .addContainerGap())
+        );
+        pane3_PaneLayout.setVerticalGroup(
+            pane3_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pane3_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pane3_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(oneOne_CheckBox)
+                    .addComponent(create_Button)
+                    .addComponent(cancel_Button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pane1_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pane2_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pane3_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pane1_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pane2_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pane3_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancel_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
+        if (!firstname_TextField.getText().isEmpty() && !lastname_TextField.getText().isEmpty() && !birthday_TextField.getText().isEmpty() && !expirationDate_TextField.getText().isEmpty() && !address_TextField.getText().isEmpty() && picturePath != null) {
+            String firstname = firstname_TextField.getText();
+            String middlename = middlename_TextField.getText();
+            String lastname = lastname_TextField.getText();
+            String birthday = birthday_TextField.getText();
+            String expirationDate = expirationDate_TextField.getText();
+            String address = address_TextField.getText();
+            boolean oneOne = oneOne_CheckBox.isSelected();
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String creationDate = sdf.format(d);
+            
+            personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
+            JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt, og der skal vælges et billed", "Fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_create_ButtonActionPerformed
+
+    private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            picturePath = fileChooser_FileChooser.getSelectedFile();
+            try {
+                picture = ImageIO.read(picturePath);
+                picturePane_PicturePane.setPicture(picture);
+            } catch (IOException ex) {
+            }
+        }
+    }//GEN-LAST:event_choose_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -86,5 +377,27 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addressInfo_Label;
+    private javax.swing.JTextField address_TextField;
+    private javax.swing.JLabel birthdayInfo_Label;
+    private javax.swing.JTextField birthday_TextField;
+    private javax.swing.JButton cancel_Button;
+    private javax.swing.JButton choose_Button;
+    private javax.swing.JButton create_Button;
+    private javax.swing.JLabel expirationDateInfo_Label;
+    private javax.swing.JTextField expirationDate_TextField;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
+    private javax.swing.JLabel firstnameInfo_Label;
+    private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel lastnameInfo_Label;
+    private javax.swing.JTextField lastname_TextField;
+    private javax.swing.JPanel main_Pane;
+    private javax.swing.JLabel middlenameInfo_Label;
+    private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JCheckBox oneOne_CheckBox;
+    private javax.swing.JPanel pane1_Pane;
+    private javax.swing.JPanel pane2_Pane;
+    private javax.swing.JPanel pane3_Pane;
+    private view.image.PicturePane picturePane_PicturePane;
     // End of variables declaration//GEN-END:variables
 }

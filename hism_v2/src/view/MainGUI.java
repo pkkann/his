@@ -5,6 +5,7 @@
 package view;
 
 import login.LoginHandler;
+import view.person.CreatePersonDIA;
 import view.user.CreateUserDIA;
 
 /**
@@ -16,10 +17,13 @@ public class MainGUI extends javax.swing.JFrame {
     private LoginHandler loginHandler;
     private CreateUserDIA createUserDIA;
     
-    public MainGUI(LoginHandler loginHandler, CreateUserDIA createUserDIA) {
+    private CreatePersonDIA createPersonDIA;
+    
+    public MainGUI(LoginHandler loginHandler, CreateUserDIA createUserDIA, CreatePersonDIA createPersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.createUserDIA = createUserDIA;
+        this.createPersonDIA = createPersonDIA;
     }
     
     public void setUser() {
@@ -56,7 +60,28 @@ public class MainGUI extends javax.swing.JFrame {
 
         main_Pane = new javax.swing.JPanel();
         result_Pane = new javax.swing.JPanel();
+        result_ScrollPane = new javax.swing.JScrollPane();
+        result_List = new javax.swing.JList();
         details_Pane = new javax.swing.JPanel();
+        picturePane_PicturePane = new view.image.PicturePane();
+        statusPicPane_StatusPicPane = new view.image.StatusPicPane();
+        firstnameInfo_Label = new javax.swing.JLabel();
+        middlenameInfo_Label = new javax.swing.JLabel();
+        lastnameInfo_Label = new javax.swing.JLabel();
+        birthdayInfo_Label = new javax.swing.JLabel();
+        expirationDateInfo_Label = new javax.swing.JLabel();
+        firstname_TextField = new javax.swing.JTextField();
+        middlename_TextField = new javax.swing.JTextField();
+        lastname_TextField = new javax.swing.JTextField();
+        birthday_TextField = new javax.swing.JTextField();
+        expirationDate_TextField = new javax.swing.JTextField();
+        oneOneInfo_Label = new javax.swing.JLabel();
+        oneOne_TextField = new javax.swing.JTextField();
+        enroll_Button = new javax.swing.JButton();
+        requestQuarantine_Button = new javax.swing.JButton();
+        kick_Button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
@@ -79,6 +104,8 @@ public class MainGUI extends javax.swing.JFrame {
         createPerson_MenuItem = new javax.swing.JMenuItem();
         editPerson_MenuItem = new javax.swing.JMenuItem();
         deletePerson_MenuItem = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        oneTimeEnroll_MenuItem = new javax.swing.JMenuItem();
         users_Menu = new javax.swing.JMenu();
         createUser_MenuItem = new javax.swing.JMenuItem();
         editUser_MenuItem = new javax.swing.JMenuItem();
@@ -89,28 +116,164 @@ public class MainGUI extends javax.swing.JFrame {
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultat"));
 
+        result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_ScrollPane.setViewportView(result_List);
+
         javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
         result_Pane.setLayout(result_PaneLayout);
         result_PaneLayout.setHorizontalGroup(
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addContainerGap())
         );
         result_PaneLayout.setVerticalGroup(
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane)
+                .addContainerGap())
         );
 
         details_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Detaljer"));
+
+        javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
+        picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
+        picturePane_PicturePaneLayout.setHorizontalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PicturePaneLayout.setVerticalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout statusPicPane_StatusPicPaneLayout = new javax.swing.GroupLayout(statusPicPane_StatusPicPane);
+        statusPicPane_StatusPicPane.setLayout(statusPicPane_StatusPicPaneLayout);
+        statusPicPane_StatusPicPaneLayout.setHorizontalGroup(
+            statusPicPane_StatusPicPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        statusPicPane_StatusPicPaneLayout.setVerticalGroup(
+            statusPicPane_StatusPicPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        firstnameInfo_Label.setText("Fornavn:");
+
+        middlenameInfo_Label.setText("Mellemnavn:");
+
+        lastnameInfo_Label.setText("Efternavn:");
+
+        birthdayInfo_Label.setText("Fødselsdag:");
+
+        expirationDateInfo_Label.setText("Udløbsdato:");
+
+        firstname_TextField.setEditable(false);
+
+        middlename_TextField.setEditable(false);
+
+        lastname_TextField.setEditable(false);
+
+        birthday_TextField.setEditable(false);
+
+        expirationDate_TextField.setEditable(false);
+
+        oneOneInfo_Label.setText("1-1:");
+
+        oneOne_TextField.setEditable(false);
+
+        enroll_Button.setText("Indskriv");
+
+        requestQuarantine_Button.setText("Anmod om karantæne");
+
+        kick_Button.setText("Smid ud");
+
+        jLabel1.setText("Adresse:");
+
+        jTextField1.setEditable(false);
 
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
         details_PaneLayout.setHorizontalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
+            .addGroup(details_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addComponent(enroll_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kick_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(requestQuarantine_Button))
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(expirationDateInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(oneOneInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(firstname_TextField)
+                            .addComponent(middlename_TextField)
+                            .addComponent(lastname_TextField)
+                            .addComponent(birthday_TextField)
+                            .addComponent(expirationDate_TextField)
+                            .addComponent(oneOne_TextField)
+                            .addComponent(jTextField1))
+                        .addGap(18, 18, 18)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(details_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(firstnameInfo_Label)
+                            .addComponent(firstname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(middlenameInfo_Label)
+                            .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lastnameInfo_Label)
+                            .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(birthdayInfo_Label)
+                            .addComponent(birthday_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(expirationDateInfo_Label)
+                            .addComponent(expirationDate_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(oneOne_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(oneOneInfo_Label))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enroll_Button)
+                    .addComponent(requestQuarantine_Button)
+                    .addComponent(kick_Button))
+                .addContainerGap())
         );
 
         search_Button.setText("Søg");
@@ -193,7 +356,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(administratorInfo_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(administrator_Label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(466, Short.MAX_VALUE))
         );
         bottom_PaneLayout.setVerticalGroup(
             bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +398,11 @@ public class MainGUI extends javax.swing.JFrame {
         persons_Menu.setText("Personer");
 
         createPerson_MenuItem.setText("Opret person");
+        createPerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createPerson_MenuItemActionPerformed(evt);
+            }
+        });
         persons_Menu.add(createPerson_MenuItem);
 
         editPerson_MenuItem.setText("Rediger person");
@@ -242,6 +410,10 @@ public class MainGUI extends javax.swing.JFrame {
 
         deletePerson_MenuItem.setText("Slet person");
         persons_Menu.add(deletePerson_MenuItem);
+        persons_Menu.add(jSeparator2);
+
+        oneTimeEnroll_MenuItem.setText("En gangs indskrivning");
+        persons_Menu.add(oneTimeEnroll_MenuItem);
 
         administration_Menu.add(persons_Menu);
 
@@ -296,6 +468,11 @@ public class MainGUI extends javax.swing.JFrame {
     private void createUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUser_MenuItemActionPerformed
         createUserDIA.setVisible(true);
     }//GEN-LAST:event_createUser_MenuItemActionPerformed
+
+    private void createPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPerson_MenuItemActionPerformed
+        createPersonDIA.setUser();
+        createPersonDIA.setVisible(true);
+    }//GEN-LAST:event_createPerson_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -335,6 +512,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu administration_Menu;
     private javax.swing.JLabel administratorInfo_Label;
     private javax.swing.JLabel administrator_Label;
+    private javax.swing.JLabel birthdayInfo_Label;
+    private javax.swing.JTextField birthday_TextField;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenuItem changeUser_MenuItem;
     private javax.swing.JMenuItem createPerson_MenuItem;
@@ -346,18 +525,39 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenuItem editPerson_MenuItem;
     private javax.swing.JMenuItem editUser_MenuItem;
+    private javax.swing.JButton enroll_Button;
     private javax.swing.JLabel enrolledInfo_Label;
     private javax.swing.JLabel enrolled_Label;
+    private javax.swing.JLabel expirationDateInfo_Label;
+    private javax.swing.JTextField expirationDate_TextField;
     private javax.swing.JMenu file_Menu;
+    private javax.swing.JLabel firstnameInfo_Label;
+    private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton kick_Button;
+    private javax.swing.JLabel lastnameInfo_Label;
+    private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
+    private javax.swing.JLabel middlenameInfo_Label;
+    private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JLabel oneOneInfo_Label;
+    private javax.swing.JTextField oneOne_TextField;
+    private javax.swing.JMenuItem oneTimeEnroll_MenuItem;
     private javax.swing.JMenu persons_Menu;
+    private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JMenuItem repport_MenuItem;
+    private javax.swing.JButton requestQuarantine_Button;
     private javax.swing.JMenuItem reset_MenuItem;
+    private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;
+    private javax.swing.JScrollPane result_ScrollPane;
     private javax.swing.JButton search_Button;
     private javax.swing.JTextField search_TextField;
+    private view.image.StatusPicPane statusPicPane_StatusPicPane;
     private javax.swing.JLabel userInfo_Label;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu users_Menu;
