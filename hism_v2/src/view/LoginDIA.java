@@ -14,11 +14,16 @@ import login.LoginHandler;
 public class LoginDIA extends javax.swing.JDialog {
 
     private LoginHandler loginHandler;
-    
+
     public LoginDIA(java.awt.Frame parent, boolean modal, LoginHandler loginHandler) {
         super(parent, modal);
         initComponents();
         this.loginHandler = loginHandler;
+    }
+
+    private void clean() {
+        email_TextField.setText("");
+        password_TextField.setText("");
     }
 
     /**
@@ -44,6 +49,11 @@ public class LoginDIA extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -176,17 +186,20 @@ public class LoginDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        
-        if(!email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
-            if(loginHandler.checkUser(email_TextField.getText(), password_TextField.getText())) {
-                setVisible(false);
+        if (!email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
+            if (loginHandler.checkUser(email_TextField.getText(), password_TextField.getText())) {
+                dispose();
             } else {
-                JOptionPane.showMessageDialog(this,"Email eller kode er forkert","Fejl",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Email eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this,"Alle felter skal udfyldes","Fejl",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_login_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
 //
 //    /**
 //     * @param args the command line arguments

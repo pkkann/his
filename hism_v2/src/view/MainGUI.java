@@ -5,6 +5,7 @@
 package view;
 
 import login.LoginHandler;
+import view.user.CreateUserDIA;
 
 /**
  *
@@ -13,10 +14,12 @@ import login.LoginHandler;
 public class MainGUI extends javax.swing.JFrame {
     
     private LoginHandler loginHandler;
+    private CreateUserDIA createUserDIA;
     
-    public MainGUI(LoginHandler loginHandler) {
+    public MainGUI(LoginHandler loginHandler, CreateUserDIA createUserDIA) {
         initComponents();
         this.loginHandler = loginHandler;
+        this.createUserDIA = createUserDIA;
     }
     
     public void setUser() {
@@ -54,6 +57,8 @@ public class MainGUI extends javax.swing.JFrame {
         main_Pane = new javax.swing.JPanel();
         result_Pane = new javax.swing.JPanel();
         details_Pane = new javax.swing.JPanel();
+        search_TextField = new javax.swing.JTextField();
+        search_Button = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
         dateInfo_Label = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -92,7 +97,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         result_PaneLayout.setVerticalGroup(
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 486, Short.MAX_VALUE)
         );
 
         details_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Detaljer"));
@@ -101,28 +106,40 @@ public class MainGUI extends javax.swing.JFrame {
         details_Pane.setLayout(details_PaneLayout);
         details_PaneLayout.setHorizontalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 583, Short.MAX_VALUE)
         );
         details_PaneLayout.setVerticalGroup(
             details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        search_Button.setText("Søg");
+
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
         main_PaneLayout.setHorizontalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+            .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(result_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(main_PaneLayout.createSequentialGroup()
+                        .addComponent(search_TextField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(search_Button))
+                    .addGroup(main_PaneLayout.createSequentialGroup()
+                        .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(result_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         main_PaneLayout.setVerticalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_PaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(result_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(details_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -231,6 +248,11 @@ public class MainGUI extends javax.swing.JFrame {
         users_Menu.setText("Brugere");
 
         createUser_MenuItem.setText("Opret bruger");
+        createUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUser_MenuItemActionPerformed(evt);
+            }
+        });
         users_Menu.add(createUser_MenuItem);
 
         editUser_MenuItem.setText("Rediger bruger");
@@ -265,8 +287,15 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void changeUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUser_MenuItemActionPerformed
+        setVisible(false);
         loginHandler.requestLoginView();
+        setUser();
+        setVisible(true);
     }//GEN-LAST:event_changeUser_MenuItemActionPerformed
+
+    private void createUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUser_MenuItemActionPerformed
+        createUserDIA.setVisible(true);
+    }//GEN-LAST:event_createUser_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -327,6 +356,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem repport_MenuItem;
     private javax.swing.JMenuItem reset_MenuItem;
     private javax.swing.JPanel result_Pane;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel userInfo_Label;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu users_Menu;

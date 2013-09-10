@@ -4,18 +4,34 @@
  */
 package view.user;
 
+import control.user.UserHandler;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author patrick
  */
 public class CreateUserDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CreateUserDIA
-     */
-    public CreateUserDIA(java.awt.Frame parent, boolean modal) {
+    private UserHandler userHandler;
+
+    public CreateUserDIA(java.awt.Frame parent, boolean modal, UserHandler userHandler) {
         super(parent, modal);
         initComponents();
+        this.userHandler = userHandler;
+    }
+
+    private void clean() {
+        firstname_TextField.setText("");
+        middlename_TextField.setText("");
+        lastname_TextField.setText("");
+        email_TextField.setText("");
+        password_TextField.setText("");
+        passwordAgain_TextField.setText("");
+        reserve_CheckBox.setSelected(false);
+        admin_CheckBox.setSelected(false);
     }
 
     /**
@@ -27,21 +43,216 @@ public class CreateUserDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        main_Pane = new javax.swing.JPanel();
+        create_Pane = new javax.swing.JPanel();
+        firstnameInfo_Label = new javax.swing.JLabel();
+        middlenameInfo_Label = new javax.swing.JLabel();
+        lastnameInfo_Label = new javax.swing.JLabel();
+        emailInfo_Label = new javax.swing.JLabel();
+        passwordInfo_Label = new javax.swing.JLabel();
+        passwordAgainInfo_Label = new javax.swing.JLabel();
+        firstname_TextField = new javax.swing.JTextField();
+        middlename_TextField = new javax.swing.JTextField();
+        lastname_TextField = new javax.swing.JTextField();
+        email_TextField = new javax.swing.JTextField();
+        password_TextField = new javax.swing.JTextField();
+        passwordAgain_TextField = new javax.swing.JTextField();
+        tool_Pane = new javax.swing.JPanel();
+        create_Button = new javax.swing.JButton();
+        cancel_Button = new javax.swing.JButton();
+        admin_CheckBox = new javax.swing.JCheckBox();
+        reserve_CheckBox = new javax.swing.JCheckBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        firstnameInfo_Label.setText("Fornavn:");
+
+        middlenameInfo_Label.setText("Mellemnavn:");
+
+        lastnameInfo_Label.setText("Efternavn:");
+
+        emailInfo_Label.setText("E-mail:");
+
+        passwordInfo_Label.setText("Kode:");
+
+        passwordAgainInfo_Label.setText("Kode igen:");
+
+        passwordAgain_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordAgain_TextFieldActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout create_PaneLayout = new javax.swing.GroupLayout(create_Pane);
+        create_Pane.setLayout(create_PaneLayout);
+        create_PaneLayout.setHorizontalGroup(
+            create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(create_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordAgainInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(firstname_TextField)
+                    .addComponent(middlename_TextField)
+                    .addComponent(lastname_TextField)
+                    .addComponent(email_TextField)
+                    .addComponent(password_TextField)
+                    .addComponent(passwordAgain_TextField))
+                .addContainerGap())
+        );
+        create_PaneLayout.setVerticalGroup(
+            create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(create_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstnameInfo_Label)
+                    .addComponent(firstname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middlenameInfo_Label)
+                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastnameInfo_Label)
+                    .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailInfo_Label)
+                    .addComponent(email_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordInfo_Label)
+                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(create_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordAgainInfo_Label)
+                    .addComponent(passwordAgain_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        create_Button.setText("Opret");
+        create_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_ButtonActionPerformed(evt);
+            }
+        });
+
+        cancel_Button.setText("Annuller");
+
+        admin_CheckBox.setText("Admin");
+
+        reserve_CheckBox.setText("Reserve");
+
+        javax.swing.GroupLayout tool_PaneLayout = new javax.swing.GroupLayout(tool_Pane);
+        tool_Pane.setLayout(tool_PaneLayout);
+        tool_PaneLayout.setHorizontalGroup(
+            tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(reserve_CheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(admin_CheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancel_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(create_Button)
+                .addContainerGap())
+        );
+        tool_PaneLayout.setVerticalGroup(
+            tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tool_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(create_Button)
+                    .addComponent(cancel_Button)
+                    .addComponent(admin_CheckBox)
+                    .addComponent(reserve_CheckBox))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(create_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tool_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(create_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tool_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void passwordAgain_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordAgain_TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordAgain_TextFieldActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
+        if (userHandler.isEmailFree(email_TextField.getText())) {
+            if (password_TextField.getText().equals(passwordAgain_TextField.getText())) {
+                String firstname = firstname_TextField.getText();
+                String middlename = middlename_TextField.getText();
+                String lastname = lastname_TextField.getText();
+                String email = email_TextField.getText();
+                String password = password_TextField.getText();
+                boolean admin = admin_CheckBox.isSelected();
+                boolean reserve = reserve_CheckBox.isSelected();
+                Date d = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String creationDate = sdf.format(d);
+                
+                userHandler.createUser(email, password, firstname, middlename, lastname, creationDate, admin, reserve);
+                JOptionPane.showMessageDialog(this, "Brugeren blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Koderne er ikke de samme", "Fejl", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Den angivne email er allerede i brug", "Fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_create_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -85,5 +296,24 @@ public class CreateUserDIA extends javax.swing.JDialog {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox admin_CheckBox;
+    private javax.swing.JButton cancel_Button;
+    private javax.swing.JButton create_Button;
+    private javax.swing.JPanel create_Pane;
+    private javax.swing.JLabel emailInfo_Label;
+    private javax.swing.JTextField email_TextField;
+    private javax.swing.JLabel firstnameInfo_Label;
+    private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel lastnameInfo_Label;
+    private javax.swing.JTextField lastname_TextField;
+    private javax.swing.JPanel main_Pane;
+    private javax.swing.JLabel middlenameInfo_Label;
+    private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JLabel passwordAgainInfo_Label;
+    private javax.swing.JTextField passwordAgain_TextField;
+    private javax.swing.JLabel passwordInfo_Label;
+    private javax.swing.JTextField password_TextField;
+    private javax.swing.JCheckBox reserve_CheckBox;
+    private javax.swing.JPanel tool_Pane;
     // End of variables declaration//GEN-END:variables
 }

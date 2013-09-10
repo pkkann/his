@@ -28,4 +28,8 @@ public class UserHandler {
         return userRegister.checkUser(email, password);
     }
     
+    public boolean isEmailFree(String email) {
+        return userRegister.isEmailFree(email);
+    }
+    
 }

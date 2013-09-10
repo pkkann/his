@@ -19,6 +19,15 @@ public class UserRegister {
         users = new ArrayList<>();
     }
     
+    public boolean isEmailFree(String email) {
+        for(User u : users) {
+            if(u.getEmail().equalsIgnoreCase(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public User checkUser(String email, String password) {
         for(User u : users) {
             if(u.getEmail().equals(email)) {
