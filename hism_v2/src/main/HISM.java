@@ -8,6 +8,7 @@ import control.person.PersonHandler;
 import control.person.PersonRegister;
 import control.user.UserHandler;
 import control.user.UserRegister;
+import date.DateChangeDetecter;
 import javax.swing.JOptionPane;
 import login.LoginHandler;
 import model.User;
@@ -20,6 +21,8 @@ import view.user.CreateUserDIA;
  * @author patrick
  */
 public class HISM {
+    
+    private DateChangeDetecter dch;
 
     private UserRegister userRegister;
     private UserHandler userHandler;
@@ -38,6 +41,8 @@ public class HISM {
         userRegister = new UserRegister();
         userHandler = new UserHandler();
         
+        dch = new DateChangeDetecter(personHandler);
+        
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
@@ -45,7 +50,9 @@ public class HISM {
     }
 
     public static void main(String[] args) {
+        
         HISM hism = new HISM();
+        hism.dch.start();
         hism.firstStart();
         hism.loginHandler.requestLoginView();
         mainGUI.setUser();
@@ -53,7 +60,7 @@ public class HISM {
     }
     
     private void firstStart() {
-        testData();
+        //testData();
         if(userHandler.usersIsEmpty()) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
             User u = new User("test@test.dk", "test", "test", "test", "test", "test", true, false);

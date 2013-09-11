@@ -26,6 +26,10 @@ public class PersonHandler {
         p.setId(personRegister.indexOf(p));
     }
     
+    public void checkExpirationDates(String date, String month, String year) {
+        
+    }
+    
     public ArrayList<Person> search(String s) {
         ArrayList<Person> result = new ArrayList<>();
         
