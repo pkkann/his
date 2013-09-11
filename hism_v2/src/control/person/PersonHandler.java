@@ -75,4 +75,12 @@ public class PersonHandler {
         }
         return result;
     }
+    
+    public ArrayList<Person> getPersons() {
+        return personRegister.getPersons();
+    }
+    
+    public void setPersons(ArrayList<Person> persons) {
+        personRegister.setPersons(persons);
+    }
 }
