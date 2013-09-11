@@ -4,6 +4,7 @@
  */
 package control.user;
 
+import date.ADate;
 import model.User;
 
 /**
@@ -22,7 +23,7 @@ public class UserHandler {
         return userRegister.isEmpty();
     }
     
-    public void createUser(String email, String password, String firstname, String middlename, String lastname, String creationDate, boolean administrator, boolean reserve) {
+    public void createUser(String email, String password, String firstname, String middlename, String lastname, ADate creationDate, boolean administrator, boolean reserve) {
         User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
         userRegister.add(u);
         u.setId(userRegister.indexOf(u));

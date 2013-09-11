@@ -4,6 +4,8 @@
  */
 package model;
 
+import date.ADate;
+
 /**
  *
  * @author patrick
@@ -15,11 +17,11 @@ public class User {
     private String firstname;
     private String middlename;
     private String lastname;
-    private String creationDate;
+    private ADate creationDate;
     private boolean administrator;
     private boolean reserve;
 
-    public User(String email, String password, String firstname, String middlename, String lastname, String creationDate, boolean administrator, boolean reserve) {
+    public User(String email, String password, String firstname, String middlename, String lastname, ADate creationDate, boolean administrator, boolean reserve) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -54,11 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public String getCreationDate() {
+    public ADate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(ADate creationDate) {
         this.creationDate = creationDate;
     }
 

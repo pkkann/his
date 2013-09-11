@@ -7,6 +7,7 @@ package view;
 import control.person.PersonHandler;
 import date.ADate;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import login.LoginHandler;
 import model.Person;
 import view.person.CreatePersonDIA;
@@ -17,12 +18,12 @@ import view.user.CreateUserDIA;
  * @author patrick
  */
 public class MainGUI extends javax.swing.JFrame {
-    
+
     private LoginHandler loginHandler;
     private PersonHandler personHandler;
     private CreateUserDIA createUserDIA;
     private CreatePersonDIA createPersonDIA;
-    
+
     public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, CreatePersonDIA createPersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
@@ -30,34 +31,42 @@ public class MainGUI extends javax.swing.JFrame {
         this.createUserDIA = createUserDIA;
         this.createPersonDIA = createPersonDIA;
     }
-    
+
     public void setDate(ADate date) {
-        date_Label.setText(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
+        date_Label.setText(date.getDay() + "/" + (date.getMonth() + 1) + "/" + date.getYear());
     }
-    
+
+    private void clearResult() {
+        try {
+            DefaultListModel dlm = new DefaultListModel();
+            result_List.setModel(dlm);
+        } catch (NullPointerException ex) {
+        }
+    }
+
     public void setUser() {
         user_Label.setText(loginHandler.getLoggedInUser().getFirstname() + " " + loginHandler.getLoggedInUser().getLastname());
-        if(loginHandler.getLoggedInUser().isAdministrator()) {
+        if (loginHandler.getLoggedInUser().isAdministrator()) {
             editPerson_MenuItem.setEnabled(true);
             deletePerson_MenuItem.setEnabled(true);
-            
+
             createUser_MenuItem.setEnabled(true);
             editUser_MenuItem.setEnabled(true);
             deleteUser_MenuItem.setEnabled(true);
-            
+
             administrator_Label.setText("Ja");
         } else {
             editPerson_MenuItem.setEnabled(false);
             deletePerson_MenuItem.setEnabled(false);
-            
+
             createUser_MenuItem.setEnabled(false);
             editUser_MenuItem.setEnabled(false);
             deleteUser_MenuItem.setEnabled(false);
-            
+
             administrator_Label.setText("Nej");
         }
-        
-        if(loginHandler.getLoggedInUser().isReserve()) {
+
+        if (loginHandler.getLoggedInUser().isReserve()) {
             reserve_Label.setText("Ja");
         } else {
             reserve_Label.setText("Nej");
@@ -134,6 +143,11 @@ public class MainGUI extends javax.swing.JFrame {
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultat"));
 
         result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_List.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                result_ListValueChanged(evt);
+            }
+        });
         result_ScrollPane.setViewportView(result_List);
 
         javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
@@ -509,11 +523,32 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createPerson_MenuItemActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        clearResult();
         ArrayList<Person> persons = personHandler.search(search_TextField.getText());
-        for(Person p : persons) {
-            System.out.println(p.getFirstname() + " " + p.getLastname());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
         }
+
+        result_List.setModel(dlm);
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
+        if (!evt.getValueIsAdjusting()) {
+            String selectionText = (String) result_List.getSelectedValue();
+            String ids = "";
+            for (int i = 0; i <= selectionText.length(); i++) {
+                if (selectionText.substring(i, i + 1).equals(":")) {
+                    break;
+                }
+                String s = selectionText.substring(i, i + 1);
+                ids = ids + s;
+            }
+            int id = Integer.valueOf(ids);
+            System.out.println(id);
+        }
+    }//GEN-LAST:event_result_ListValueChanged
 //
 //    /**
 //     * @param args the command line arguments

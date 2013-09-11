@@ -9,11 +9,7 @@ import date.ADate;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -42,6 +38,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private Image picture;
     private PersonHandler personHandler;
     private LoginHandler loginHandler;
+    private CharSequence cs = "ABCD";
 
     public CreatePersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler, LoginHandler loginHandler) {
         super(parent, modal);
@@ -49,9 +46,9 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         this.personHandler = personHandler;
         this.loginHandler = loginHandler;
     }
-    
+
     public void setUser() {
-        if(loginHandler.getLoggedInUser().isAdministrator()) {
+        if (loginHandler.getLoggedInUser().isAdministrator()) {
             oneOne_CheckBox.setEnabled(true);
         } else {
             oneOne_CheckBox.setEnabled(false);
@@ -63,7 +60,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         middlename_TextField.setText("");
         lastname_TextField.setText("");
         birthday_day_TextField.setText("");
+        birthday_month_TextField.setText("");
+        birthday_yeah_TextField.setText("");
         expirationDate_day_TextField.setText("");
+        expirationDate_month_TextField.setText("");
+        expirationDate_year_TextField.setText("");
         address_TextField.setText("");
         oneOne_CheckBox.setSelected(false);
         picturePath = null;
@@ -100,6 +101,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         expirationDate_month_TextField = new javax.swing.JTextField();
         expirationDate_year_TextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         pane2_Pane = new javax.swing.JPanel();
         picturePane_PicturePane = new view.image.PicturePane();
         choose_Button = new javax.swing.JButton();
@@ -135,6 +137,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         jLabel2.setText("dd/mm/yyyy");
 
+        jLabel3.setText("Block - Husnummer");
+
         javax.swing.GroupLayout pane1_PaneLayout = new javax.swing.GroupLayout(pane1_Pane);
         pane1_Pane.setLayout(pane1_PaneLayout);
         pane1_PaneLayout.setHorizontalGroup(
@@ -153,23 +157,26 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                     .addComponent(firstname_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                     .addComponent(middlename_TextField)
                     .addComponent(lastname_TextField)
-                    .addComponent(address_TextField)
                     .addGroup(pane1_PaneLayout.createSequentialGroup()
                         .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(expirationDate_day_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(birthday_day_TextField, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(birthday_month_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(expirationDate_month_TextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(birthday_yeah_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                            .addComponent(expirationDate_year_TextField))
+                            .addComponent(address_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pane1_PaneLayout.createSequentialGroup()
+                                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(expirationDate_day_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                    .addComponent(birthday_day_TextField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(birthday_month_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                    .addComponent(expirationDate_month_TextField))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(birthday_yeah_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                                    .addComponent(expirationDate_year_TextField))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -205,7 +212,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pane1_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressInfo_Label)
-                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -337,19 +345,40 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
     private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
         if (!firstname_TextField.getText().isEmpty() && !lastname_TextField.getText().isEmpty() && !birthday_day_TextField.getText().isEmpty() && !expirationDate_day_TextField.getText().isEmpty() && !address_TextField.getText().isEmpty() && picturePath != null) {
-            String firstname = firstname_TextField.getText();
-            String middlename = middlename_TextField.getText();
-            String lastname = lastname_TextField.getText();
-            ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
-            ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
-            String address = address_TextField.getText();
-            boolean oneOne = oneOne_CheckBox.isSelected();
-            Calendar c = Calendar.getInstance();
-            ADate creationDate = new ADate(c.get(Calendar.DATE), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
-            
-            personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
-            JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+            if (birthday_day_TextField.getText().length() == 2 && birthday_month_TextField.getText().length() == 2 && birthday_yeah_TextField.getText().length() == 4) {
+                if (expirationDate_day_TextField.getText().length() == 2 && expirationDate_month_TextField.getText().length() == 2 && expirationDate_year_TextField.getText().length() == 4) {
+                    if (Integer.valueOf(birthday_month_TextField.getText()) <= 12) {
+                        if (Integer.valueOf(expirationDate_month_TextField.getText()) <= 12) {
+                            try {
+                                String firstname = firstname_TextField.getText();
+                                String middlename = middlename_TextField.getText();
+                                String lastname = lastname_TextField.getText();
+                                ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
+                                ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
+                                String address = address_TextField.getText();
+                                boolean oneOne = oneOne_CheckBox.isSelected();
+                                Calendar c = Calendar.getInstance();
+                                ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH)+1), c.get(Calendar.YEAR));
+
+                                personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
+                                JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+                                dispose();
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt, og der skal vælges et billed", "Fejl", JOptionPane.ERROR_MESSAGE);
         }
@@ -427,6 +456,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lastnameInfo_Label;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;

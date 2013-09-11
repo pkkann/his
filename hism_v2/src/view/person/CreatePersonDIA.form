@@ -98,26 +98,31 @@
                           <Component id="firstname_TextField" pref="311" max="32767" attributes="0"/>
                           <Component id="middlename_TextField" max="32767" attributes="0"/>
                           <Component id="lastname_TextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="address_TextField" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="expirationDate_day_TextField" alignment="0" pref="30" max="32767" attributes="0"/>
-                                  <Component id="birthday_day_TextField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="birthday_month_TextField" pref="30" max="32767" attributes="0"/>
-                                  <Component id="expirationDate_month_TextField" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="birthday_yeah_TextField" pref="40" max="32767" attributes="0"/>
-                                  <Component id="expirationDate_year_TextField" max="32767" attributes="0"/>
+                                  <Component id="address_TextField" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="expirationDate_day_TextField" alignment="0" pref="30" max="32767" attributes="0"/>
+                                          <Component id="birthday_day_TextField" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="birthday_month_TextField" pref="30" max="32767" attributes="0"/>
+                                          <Component id="expirationDate_month_TextField" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="birthday_yeah_TextField" pref="40" max="32767" attributes="0"/>
+                                          <Component id="expirationDate_year_TextField" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -164,6 +169,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="addressInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="address_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -229,6 +235,11 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dd/mm/yyyy"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Block - Husnummer"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -48,6 +48,10 @@ public class FileTool {
         }
     }
     
+    public static String getDefaultFolder() {
+        return picDir;
+    }
+    
     public static void createFolders() {
         File dir = new File(picDir);
         dir.mkdir();

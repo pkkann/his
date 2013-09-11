@@ -6,9 +6,14 @@ package main;
 
 import control.person.PersonHandler;
 import control.person.PersonRegister;
+import control.picture.PictureHandler;
+import control.picture.PictureRegister;
 import control.user.UserHandler;
 import control.user.UserRegister;
+import date.ADate;
 import date.DateChangeDetecter;
+import file.FileTool;
+import java.io.File;
 import javax.swing.JOptionPane;
 import login.LoginHandler;
 import model.User;
@@ -33,10 +38,15 @@ public class HISM {
     private CreatePersonDIA createPersonDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
+    private PictureRegister pictureRegister;
+    private PictureHandler pictureHandler;
 
     public HISM() {
+        setLookAndFeel();
+        pictureRegister = new PictureRegister();
+        pictureHandler = new PictureHandler(pictureRegister);
         personRegister = new PersonRegister();
-        personHandler = new PersonHandler(personRegister);
+        personHandler = new PersonHandler(personRegister, pictureHandler);
         
         userRegister = new UserRegister();
         userHandler = new UserHandler();
@@ -49,8 +59,8 @@ public class HISM {
     }
 
     public static void main(String[] args) {
-        
         HISM hism = new HISM();
+        FileTool.createFolders();
         hism.dch.start();
         hism.firstStart();
         hism.loginHandler.requestLoginView();
@@ -58,11 +68,35 @@ public class HISM {
         mainGUI.setVisible(true);
     }
     
+    private void setLookAndFeel() {
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CreatePersonDIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CreatePersonDIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CreatePersonDIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CreatePersonDIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+    }
+    
     private void firstStart() {
         testData();
         if(userHandler.usersIsEmpty()) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
-            User u = new User("test@test.dk", "test", "test", "test", "test", "test", true, false);
+            User u = new User("test@test.dk", "test", "test", "test", "test", new ADate(01, 01, 2013), true, false);
             userRegister.add(u);
             loginHandler.checkUser("test@test.dk", "test");
             createUserDIA.setCreateAdmin();
@@ -72,7 +106,8 @@ public class HISM {
     }
     
     private void testData() {
-        userHandler.createUser("test", "test", "test", "test", "test", "test", true, false);
+        userHandler.createUser("test@test.dk", "test", "test", "test", "test", new ADate(01, 01, 2013), true, false);
+        personHandler.createPerson("Patrick", "", "Kann", "8-56", new ADate(21, 04, 1989), new ADate(11, 9, 2013), new File(""), new ADate(11, 9, 2013));
     }
 
 }

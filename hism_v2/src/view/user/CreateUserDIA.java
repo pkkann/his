@@ -5,7 +5,9 @@
 package view.user;
 
 import control.user.UserHandler;
+import date.ADate;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -258,9 +260,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
                     String password = password_TextField.getText();
                     boolean admin = admin_CheckBox.isSelected();
                     boolean reserve = reserve_CheckBox.isSelected();
-                    Date d = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    String creationDate = sdf.format(d);
+                    Calendar c = Calendar.getInstance();
+                    ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH)+1), c.get(Calendar.YEAR));
 
                     userHandler.createUser(email, password, firstname, middlename, lastname, creationDate, admin, reserve);
                     JOptionPane.showMessageDialog(this, "Brugeren blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);

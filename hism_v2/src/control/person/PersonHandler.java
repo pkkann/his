@@ -4,11 +4,12 @@
  */
 package control.person;
 
+import control.picture.PictureHandler;
 import date.ADate;
+import file.FileTool;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import model.Person;
 
 /**
@@ -18,15 +19,22 @@ import model.Person;
 public class PersonHandler {
 
     private PersonRegister personRegister;
+    private PictureHandler pictureHandler;
 
-    public PersonHandler(PersonRegister personRegister) {
+    public PersonHandler(PersonRegister personRegister, PictureHandler pictureHandler) {
         this.personRegister = personRegister;
+        this.pictureHandler = pictureHandler;
     }
 
     public void createPerson(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);
         personRegister.add(p);
         p.setId(personRegister.indexOf(p));
+        File newPicturePath = new File(FileTool.getDefaultFolder()+"\\"+"personPicture"+pictureHandler.getpictureID()+".jpg");
+        FileTool.copyFile(picturePath, newPicturePath);
+        p.setPicturePath(newPicturePath);
+        pictureHandler.insertPicture(newPicturePath);
+        System.out.println(p.getCreationDate().getMonth());
     }
 
     public void checkExpirationDates(ADate date) {
