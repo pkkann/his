@@ -5,6 +5,7 @@
 package view;
 
 import control.person.PersonHandler;
+import date.ADate;
 import java.util.ArrayList;
 import login.LoginHandler;
 import model.Person;
@@ -28,6 +29,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.personHandler = personHandler;
         this.createUserDIA = createUserDIA;
         this.createPersonDIA = createPersonDIA;
+    }
+    
+    public void setDate(ADate date) {
+        date_Label.setText(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
     }
     
     public void setUser() {

@@ -95,12 +95,32 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="firstname_TextField" max="32767" attributes="0"/>
+                          <Component id="firstname_TextField" pref="311" max="32767" attributes="0"/>
                           <Component id="middlename_TextField" max="32767" attributes="0"/>
                           <Component id="lastname_TextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="birthday_TextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="expirationDate_TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="address_TextField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="expirationDate_day_TextField" alignment="0" pref="30" max="32767" attributes="0"/>
+                                  <Component id="birthday_day_TextField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="birthday_month_TextField" pref="30" max="32767" attributes="0"/>
+                                  <Component id="expirationDate_month_TextField" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="birthday_yeah_TextField" pref="40" max="32767" attributes="0"/>
+                                  <Component id="expirationDate_year_TextField" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -127,12 +147,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="birthdayInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="birthday_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="birthday_day_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="birthday_month_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="birthday_yeah_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="expirationDateInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="expirationDate_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="expirationDate_day_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="expirationDate_month_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="expirationDate_year_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -181,11 +207,29 @@
             </Component>
             <Component class="javax.swing.JTextField" name="lastname_TextField">
             </Component>
-            <Component class="javax.swing.JTextField" name="birthday_TextField">
+            <Component class="javax.swing.JTextField" name="birthday_day_TextField">
             </Component>
-            <Component class="javax.swing.JTextField" name="expirationDate_TextField">
+            <Component class="javax.swing.JTextField" name="expirationDate_day_TextField">
             </Component>
             <Component class="javax.swing.JTextField" name="address_TextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="birthday_month_TextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="birthday_yeah_TextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="dd/mm/yyyy"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="expirationDate_month_TextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="expirationDate_year_TextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="dd/mm/yyyy"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

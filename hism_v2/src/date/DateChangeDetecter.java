@@ -6,56 +6,63 @@ package date;
 
 import control.person.PersonHandler;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.MainGUI;
 
 /**
  *
  * @author patrick
  */
-public class DateChangeDetecter implements Runnable{
+public class DateChangeDetecter implements Runnable {
 
     private Thread th;
     private Calendar c;
     private PersonHandler personHandler;
-    
-    public DateChangeDetecter(PersonHandler personHandler) {
+    private ADate currentDate;
+    private MainGUI mainGUI;
+
+    public DateChangeDetecter(PersonHandler personHandler, MainGUI mainGUI) {
         this.personHandler = personHandler;
-        
+        this.mainGUI = mainGUI;
     }
-    
+
     public void start() {
         th = new Thread(this);
         th.start();
     }
-    
+
     public void stop() {
         th = null;
     }
-    
+
     @Override
     public void run() {
         c = Calendar.getInstance();
         int date = c.get(Calendar.DATE);
-        if(Thread.currentThread() == th) {
-            while(true) {
+        currentDate = new ADate(c.get(Calendar.DATE), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+        mainGUI.setDate(currentDate);
+        
+        if (Thread.currentThread() == th) {
+            while (true) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(DateChangeDetecter.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 c = Calendar.getInstance();
-                if(c.get(Calendar.DATE) == date) {
-                    System.out.println("NO change");
-                    System.out.println(date);
-                } else {
+                if (c.get(Calendar.DATE) != date) {
                     date = c.get(Calendar.DATE);
-                    System.out.println("CHANGE");
-                    System.out.println(date);
+                    currentDate.setDay(c.get(Calendar.DATE));
+                    currentDate.setMonth(c.get(Calendar.MONTH));
+                    currentDate.setYear(c.get(Calendar.YEAR));
+                    mainGUI.setDate(currentDate);
+                    personHandler.checkExpirationDates(currentDate);
                 }
-                
+
             }
         }
     }
-    
 }

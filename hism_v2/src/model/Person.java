@@ -4,6 +4,7 @@
  */
 package model;
 
+import date.ADate;
 import java.io.File;
 
 /**
@@ -17,15 +18,16 @@ public class Person {
     private String middlename;
     private String lastname;
     private String address;
-    private String birthdayDate;
-    private String expirationDate;
+    private ADate birthdayDate;
+    private ADate expirationDate;
+    private boolean expired;
     private File picturePath;
     private boolean quarantine;
     private String quarantineExpirationDate;
     private boolean oneOne;
-    private String creationDate;
+    private ADate creationDate;
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, File picturePath, String creationDate) {
+    public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
@@ -36,6 +38,7 @@ public class Person {
         this.creationDate = creationDate;
         quarantine = false;
         oneOne = false;
+        expired = false;
     }
 
     public int getId() {
@@ -78,19 +81,19 @@ public class Person {
         this.address = address;
     }
 
-    public String getBirthdayDate() {
+    public ADate getBirthdayDate() {
         return birthdayDate;
     }
 
-    public void setBirthdayDate(String birthdayDate) {
+    public void setBirthdayDate(ADate birthdayDate) {
         this.birthdayDate = birthdayDate;
     }
 
-    public String getExpirationDate() {
+    public ADate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate(ADate expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -102,11 +105,11 @@ public class Person {
         this.picturePath = picturePath;
     }
 
-    public String getCreationDate() {
+    public ADate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(ADate creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -133,4 +136,14 @@ public class Person {
     public void setOneOne(boolean oneOne) {
         this.oneOne = oneOne;
     }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+    
+    
 }

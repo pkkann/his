@@ -41,12 +41,11 @@ public class HISM {
         userRegister = new UserRegister();
         userHandler = new UserHandler();
         
-        dch = new DateChangeDetecter(personHandler);
-        
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
         mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, createPersonDIA);
+        dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 
     public static void main(String[] args) {
@@ -60,7 +59,7 @@ public class HISM {
     }
     
     private void firstStart() {
-        //testData();
+        testData();
         if(userHandler.usersIsEmpty()) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
             User u = new User("test@test.dk", "test", "test", "test", "test", "test", true, false);
