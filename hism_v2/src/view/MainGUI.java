@@ -4,7 +4,10 @@
  */
 package view;
 
+import control.person.PersonHandler;
+import java.util.ArrayList;
 import login.LoginHandler;
+import model.Person;
 import view.person.CreatePersonDIA;
 import view.user.CreateUserDIA;
 
@@ -15,13 +18,14 @@ import view.user.CreateUserDIA;
 public class MainGUI extends javax.swing.JFrame {
     
     private LoginHandler loginHandler;
+    private PersonHandler personHandler;
     private CreateUserDIA createUserDIA;
-    
     private CreatePersonDIA createPersonDIA;
     
-    public MainGUI(LoginHandler loginHandler, CreateUserDIA createUserDIA, CreatePersonDIA createPersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, CreatePersonDIA createPersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
+        this.personHandler = personHandler;
         this.createUserDIA = createUserDIA;
         this.createPersonDIA = createPersonDIA;
     }
@@ -285,6 +289,11 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
@@ -493,6 +502,13 @@ public class MainGUI extends javax.swing.JFrame {
         createPersonDIA.setUser();
         createPersonDIA.setVisible(true);
     }//GEN-LAST:event_createPerson_MenuItemActionPerformed
+
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        for(Person p : persons) {
+            System.out.println(p.getFirstname() + " " + p.getLastname());
+        }
+    }//GEN-LAST:event_search_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

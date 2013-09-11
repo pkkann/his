@@ -54,4 +54,14 @@ public class PersonRegister {
     public boolean remove(Object o) {
         return persons.remove(o);
     }
+
+    public ArrayList<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(ArrayList<Person> persons) {
+        this.persons = persons;
+    }
+    
+    
 }

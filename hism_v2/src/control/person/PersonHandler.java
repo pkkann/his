@@ -5,6 +5,7 @@
 package control.person;
 
 import java.io.File;
+import java.util.ArrayList;
 import model.Person;
 
 /**
@@ -23,5 +24,18 @@ public class PersonHandler {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);
         personRegister.add(p);
         p.setId(personRegister.indexOf(p));
+    }
+    
+    public ArrayList<Person> search(String s) {
+        ArrayList<Person> result = new ArrayList<>();
+        
+        for(Person p : personRegister.getPersons()) {
+            if(p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getLastname()).equalsIgnoreCase(s)) {
+                result.add(p);
+            } else if(p.getBirthdayDate().equals(s)) {
+                result.add(p);
+            }
+        }
+        return result;
     }
 }

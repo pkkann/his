@@ -463,6 +463,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="S&#xf8;g"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_ButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

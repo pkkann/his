@@ -8,7 +8,6 @@ import control.person.PersonHandler;
 import control.person.PersonRegister;
 import control.user.UserHandler;
 import control.user.UserRegister;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import login.LoginHandler;
 import model.User;
@@ -42,7 +41,7 @@ public class HISM {
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, createUserDIA, createPersonDIA);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, createPersonDIA);
     }
 
     public static void main(String[] args) {
