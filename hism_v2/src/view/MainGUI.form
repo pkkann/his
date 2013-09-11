@@ -249,8 +249,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="enroll_Button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="renew_Button" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="kick_Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="237" max="32767" attributes="0"/>
+                              <EmptySpace pref="165" max="32767" attributes="0"/>
                               <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -261,7 +263,7 @@
                                   <Component id="birthdayInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="expirationDateInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="oneOneInfo_Label" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <Component id="addressInfo_Label" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -271,7 +273,7 @@
                                   <Component id="birthday_TextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="expirationDate_TextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="oneOne_TextField" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" max="32767" attributes="0"/>
+                                  <Component id="address_TextField" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -293,6 +295,7 @@
                               <Component id="picturePane_PicturePane" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="statusPicPane_StatusPicPane" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -326,16 +329,17 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addressInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="address_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="enroll_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="requestQuarantine_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="kick_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="renew_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -448,14 +452,19 @@
                 <Property name="text" type="java.lang.String" value="Smid ud"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="addressInfo_Label">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adresse:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="address_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="renew_Button">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Forny"/>
               </Properties>
             </Component>
           </SubComponents>

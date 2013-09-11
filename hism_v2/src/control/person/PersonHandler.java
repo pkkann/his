@@ -25,6 +25,15 @@ public class PersonHandler {
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
     }
+    
+    public Person getPerson(int id) {
+        for(Person p : personRegister.getPersons()) {
+            if(p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
 
     public void createPerson(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);

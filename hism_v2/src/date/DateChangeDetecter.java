@@ -43,6 +43,7 @@ public class DateChangeDetecter implements Runnable {
         int date = c.get(Calendar.DATE);
         currentDate = new ADate(c.get(Calendar.DATE), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
         mainGUI.setDate(currentDate);
+        personHandler.checkExpirationDates(currentDate);
         
         if (Thread.currentThread() == th) {
             while (true) {
