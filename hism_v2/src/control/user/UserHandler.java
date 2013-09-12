@@ -41,6 +41,16 @@ public class UserHandler {
         return userRegister.isEmpty();
     }
     
+    public int countAdmins() {
+        int count = 0;
+        for(User u : userRegister.getUsers()) {
+            if(u.isAdministrator()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
     public void createUser(String email, String password, String firstname, String middlename, String lastname, ADate creationDate, boolean administrator, boolean reserve) {
         User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
         userRegister.add(u);
@@ -58,6 +68,23 @@ public class UserHandler {
     
     public boolean isEmailFree(String email) {
         return userRegister.isEmailFree(email);
+    }
+    
+    public ArrayList<User> getAllUsers() {
+        return userRegister.getUsers();
+    }
+    
+    public User getUser(int id) {
+        for(User u : userRegister.getUsers()) {
+            if(u.getId() == id) {
+                return u;
+            }
+        }
+        return null;
+    }
+    
+    public boolean removeUser(User u) {
+        return userRegister.remove(u);
     }
     
 }

@@ -22,6 +22,7 @@ import model.User;
 import view.*;
 import view.person.CreatePersonDIA;
 import view.user.CreateUserDIA;
+import view.user.RemoveUserDIA;
 
 /**
  *
@@ -37,6 +38,7 @@ public class HISM {
     private static MainGUI mainGUI;
     private static LoginDIA loginDIA;
     private CreateUserDIA createUserDIA;
+    private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
@@ -62,7 +64,8 @@ public class HISM {
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, createPersonDIA);
+        removeUserDIA = new RemoveUserDIA(mainGUI, true, userHandler);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, removeUserDIA, createPersonDIA);
         dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 
@@ -104,7 +107,7 @@ public class HISM {
     
     private void firstStart() {
         //testData();
-        if(userHandler.usersIsEmpty()) {
+        if(userHandler.countAdmins() == 0) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
             createUserDIA.setCreateAdmin();
             createUserDIA.setVisible(true);

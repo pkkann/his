@@ -75,6 +75,16 @@ public class UserDAO {
             users.add(id, u);
         }
         
+        rs.close();
+        s.close();
         return users;
+    }
+    
+    public void deleteUser(User u) throws SQLException {
+        Statement s = conn.createStatement();
+        
+        s.execute("DELETE FROM user WHERE id = '"+u.getId()+"'");
+        
+        s.close();
     }
 }

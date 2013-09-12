@@ -42,9 +42,9 @@ public class LoginDIA extends javax.swing.JDialog {
         emailInfo_Label = new javax.swing.JLabel();
         passwordInfo_Label = new javax.swing.JLabel();
         email_TextField = new javax.swing.JTextField();
-        password_TextField = new javax.swing.JTextField();
         close_Button = new javax.swing.JButton();
         login_Button = new javax.swing.JButton();
+        password_TextField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -117,10 +117,13 @@ public class LoginDIA extends javax.swing.JDialog {
                         .addGroup(login_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(passwordInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(emailInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(17, 17, 17)
                         .addGroup(login_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(email_TextField)
-                            .addComponent(password_TextField))))
+                            .addGroup(login_PaneLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(email_TextField))
+                            .addGroup(login_PaneLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(password_TextField)))))
                 .addContainerGap())
         );
         login_PaneLayout.setVerticalGroup(
@@ -250,7 +253,7 @@ public class LoginDIA extends javax.swing.JDialog {
     private javax.swing.JPanel login_Pane;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JLabel passwordInfo_Label;
-    private javax.swing.JTextField password_TextField;
+    private javax.swing.JPasswordField password_TextField;
     private javax.swing.JLabel title_Label;
     private javax.swing.JPanel title_Pane;
     // End of variables declaration//GEN-END:variables

@@ -31,13 +31,13 @@ public class PersonHandler {
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
     }
-    
+
     public void populatePersonsFromDB() {
         try {
             ArrayList<Person> persons = personDAO.getAllPersons();
-            if(!persons.isEmpty()) {
+            if (!persons.isEmpty()) {
                 personRegister.setPersons(persons);
-                for(Person p : persons) {
+                for (Person p : persons) {
                     pictureHandler.insertPicture(p.getPicturePath());
                 }
             }
@@ -45,10 +45,10 @@ public class PersonHandler {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Person getPerson(int id) {
-        for(Person p : personRegister.getPersons()) {
-            if(p.getId() == id) {
+        for (Person p : personRegister.getPersons()) {
+            if (p.getId() == id) {
                 return p;
             }
         }
@@ -59,7 +59,7 @@ public class PersonHandler {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);
         personRegister.add(p);
         p.setId(personRegister.indexOf(p));
-        File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture"+pictureHandler.getpictureID()+".jpg");
+        File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture" + pictureHandler.getpictureID() + ".jpg");
         FileTool.copyFile(picturePath, newPicturePath);
         p.setPicturePath(newPicturePath);
         pictureHandler.insertPicture(newPicturePath);
@@ -79,7 +79,7 @@ public class PersonHandler {
         for (Person p : persons) {
             Calendar personC = Calendar.getInstance();
             personC.set(p.getExpirationDate().getYear(), p.getExpirationDate().getMonth() - 1, p.getExpirationDate().getDay());
-            
+
             if (currentC.after(personC)) {
                 p.setExpired(true);
             }
@@ -87,22 +87,26 @@ public class PersonHandler {
     }
 
     public ArrayList<Person> search(String s) {
-        ArrayList<Person> result = new ArrayList<>();
+        if (!s.isEmpty()) {
+            ArrayList<Person> result = new ArrayList<>();
 
-        for (Person p : personRegister.getPersons()) {
-            if (p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getLastname()).equalsIgnoreCase(s)) {
-                result.add(p);
-            } else if (p.getBirthdayDate().equals(s)) {
-                result.add(p);
+            for (Person p : personRegister.getPersons()) {
+                if (p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getLastname()).equalsIgnoreCase(s)) {
+                    result.add(p);
+                } else if (p.getBirthdayDate().equals(s)) {
+                    result.add(p);
+                }
             }
+            return result;
+        } else {
+            return personRegister.getPersons();
         }
-        return result;
     }
-    
+
     public ArrayList<Person> getPersons() {
         return personRegister.getPersons();
     }
-    
+
     public void setPersons(ArrayList<Person> persons) {
         personRegister.setPersons(persons);
     }

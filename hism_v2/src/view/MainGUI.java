@@ -19,6 +19,7 @@ import login.LoginHandler;
 import model.Person;
 import view.person.CreatePersonDIA;
 import view.user.CreateUserDIA;
+import view.user.RemoveUserDIA;
 
 /**
  *
@@ -29,14 +30,16 @@ public class MainGUI extends javax.swing.JFrame {
     private LoginHandler loginHandler;
     private PersonHandler personHandler;
     private CreateUserDIA createUserDIA;
+    private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
     private Person selectedPerson;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, CreatePersonDIA createPersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
         this.createUserDIA = createUserDIA;
+        this.removeUserDIA = removeUserDIA;
         this.createPersonDIA = createPersonDIA;
     }
 
@@ -335,8 +338,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(details_PaneLayout.createSequentialGroup()
                         .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))
+                        .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(details_PaneLayout.createSequentialGroup()
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(firstnameInfo_Label)
@@ -364,8 +366,8 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressInfo_Label)
-                            .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enroll_Button)
                     .addComponent(requestQuarantine_Button)
@@ -546,6 +548,11 @@ public class MainGUI extends javax.swing.JFrame {
         users_Menu.add(editUser_MenuItem);
 
         deleteUser_MenuItem.setText("Slet bruger");
+        deleteUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUser_MenuItemActionPerformed(evt);
+            }
+        });
         users_Menu.add(deleteUser_MenuItem);
 
         administration_Menu.add(users_Menu);
@@ -620,6 +627,10 @@ public class MainGUI extends javax.swing.JFrame {
             setPerson(personHandler.getPerson(id));
         }
     }//GEN-LAST:event_result_ListValueChanged
+
+    private void deleteUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUser_MenuItemActionPerformed
+        removeUserDIA.setVisible(true);
+    }//GEN-LAST:event_deleteUser_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
