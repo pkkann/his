@@ -15,11 +15,10 @@ Høne indskrivnings system (HISM)
 - Alt skal gemmes i objekter - OK
 - Indskriv person
 - Rediger indskrivning af person
-- 
 
 
 Note 12-09-2013 kl 17:40
-========================
+-------------------------
 Nå man forsøger at slette en bruger som har et objekt efter sig i arraylisten, laver den index
 out of bound exception med kommentaren 2 > 1.
 Dette burde kunne løses ved ikke at indsætte objekterne på index i forhold til deres ID ved
