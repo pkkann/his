@@ -41,23 +41,23 @@ public class MainGUI extends javax.swing.JFrame {
     public void setDate(ADate date) {
         date_Label.setText(date.getDay() + "/" + (date.getMonth() + 1) + "/" + date.getYear());
     }
-    
+
     private void setPerson(Person p) {
-        if(p != null) {
+        if (p != null) {
             selectedPerson = p;
             firstname_TextField.setText(p.getFirstname());
             middlename_TextField.setText(p.getMiddlename());
             lastname_TextField.setText(p.getLastname());
             birthday_TextField.setText(p.getBirthdayDate().toString());
             expirationDate_TextField.setText(p.getExpirationDate().toString());
-            if(p.isExpired()) {
+            if (p.isExpired()) {
                 expirationDate_TextField.setForeground(Color.white);
                 expirationDate_TextField.setBackground(Color.red);
             } else {
                 expirationDate_TextField.setForeground(Color.black);
-                expirationDate_TextField.setBackground(new Color(240,240,240));
+                expirationDate_TextField.setBackground(new Color(240, 240, 240));
             }
-            if(p.isOneOne()) {
+            if (p.isOneOne()) {
                 oneOne_TextField.setText("Ja");
             } else {
                 oneOne_TextField.setText("Nej");
@@ -68,19 +68,17 @@ public class MainGUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(!p.isExpired()) {
-                statusPicPane_StatusPicPane.setStatus(0);
-            } else {
-                statusPicPane_StatusPicPane.setStatus(3);
-            }
-            if(!p.isQuarantine()) {
-                statusPicPane_StatusPicPane.setStatus(0);
-            } else {
+            if (p.isQuarantine()) {
                 statusPicPane_StatusPicPane.setStatus(1);
+            } else if (p.isExpired()) {
+                statusPicPane_StatusPicPane.setStatus(3);
+            } else {
+                statusPicPane_StatusPicPane.setStatus(0);
             }
+
         }
     }
-    
+
     private void clearPerson() {
         selectedPerson = null;
         firstname_TextField.setText("");
@@ -89,7 +87,7 @@ public class MainGUI extends javax.swing.JFrame {
         birthday_TextField.setText("");
         expirationDate_TextField.setText("");
         expirationDate_TextField.setForeground(Color.black);
-        expirationDate_TextField.setBackground(new Color(240,240,240));
+        expirationDate_TextField.setBackground(new Color(240, 240, 240));
         oneOne_TextField.setText("");
         address_TextField.setText("");
         picturePane_PicturePane.setPicture(null);

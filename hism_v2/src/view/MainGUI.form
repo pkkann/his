@@ -295,7 +295,6 @@
                               <Component id="picturePane_PicturePane" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="statusPicPane_StatusPicPane" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -332,9 +331,9 @@
                                   <Component id="addressInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="address_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="enroll_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="requestQuarantine_Button" alignment="3" min="-2" max="-2" attributes="0"/>

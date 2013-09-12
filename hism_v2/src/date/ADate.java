@@ -19,6 +19,12 @@ public class ADate {
         this.month = month;
         this.year = year;
     }
+    
+    public ADate(String date) {
+        this.day = Integer.valueOf(date.substring(0, 1));
+        this.month = Integer.valueOf(date.substring(2, 3));
+        this.year = Integer.valueOf(date.substring(4, 7));
+    }
 
     public int getDay() {
         return day;
@@ -45,6 +51,12 @@ public class ADate {
     }
     
     public String toString() {
-        return day + "/" + month + "/" + year;
+        
+        if(String.valueOf(month).length() != 2) {
+            return day +  "0" + month +  year;
+        } else {
+            return "" + day + month + year;
+        }
+        
     }
 }

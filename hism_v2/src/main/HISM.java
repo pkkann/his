@@ -12,6 +12,8 @@ import control.user.UserHandler;
 import control.user.UserRegister;
 import date.ADate;
 import date.DateChangeDetecter;
+import db.person.PersonDAO;
+import db.user.UserDAO;
 import file.FileTool;
 import java.io.File;
 import javax.swing.JOptionPane;
@@ -40,16 +42,22 @@ public class HISM {
     private PersonHandler personHandler;
     private PictureRegister pictureRegister;
     private PictureHandler pictureHandler;
+    
+    private UserDAO userDAO;
+    private PersonDAO personDAO;
 
     public HISM() {
         setLookAndFeel();
+        
         pictureRegister = new PictureRegister();
         pictureHandler = new PictureHandler(pictureRegister);
         personRegister = new PersonRegister();
-        personHandler = new PersonHandler(personRegister, pictureHandler);
+        personDAO = new PersonDAO();
+        personHandler = new PersonHandler(personRegister, pictureHandler, personDAO);
         
+        userDAO = new UserDAO();
         userRegister = new UserRegister();
-        userHandler = new UserHandler();
+        userHandler = new UserHandler(userRegister, userDAO);
         
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
@@ -61,6 +69,8 @@ public class HISM {
     public static void main(String[] args) {
         HISM hism = new HISM();
         FileTool.createFolders();
+        hism.userHandler.populateUsersFromDB();
+        hism.personHandler.populatePersonsFromDB();
         hism.dch.start();
         hism.firstStart();
         hism.loginHandler.requestLoginView();
@@ -93,15 +103,11 @@ public class HISM {
     }
     
     private void firstStart() {
-        testData();
+        //testData();
         if(userHandler.usersIsEmpty()) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
-            User u = new User("test@test.dk", "test", "test", "test", "test", new ADate(01, 01, 2013), true, false);
-            userRegister.add(u);
-            loginHandler.checkUser("test@test.dk", "test");
             createUserDIA.setCreateAdmin();
             createUserDIA.setVisible(true);
-            userRegister.remove(u);
         }
     }
     

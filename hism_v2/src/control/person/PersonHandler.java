@@ -6,10 +6,14 @@ package control.person;
 
 import control.picture.PictureHandler;
 import date.ADate;
+import db.person.PersonDAO;
 import file.FileTool;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Person;
 
 /**
@@ -20,10 +24,25 @@ public class PersonHandler {
 
     private PersonRegister personRegister;
     private PictureHandler pictureHandler;
+    private PersonDAO personDAO;
 
-    public PersonHandler(PersonRegister personRegister, PictureHandler pictureHandler) {
+    public PersonHandler(PersonRegister personRegister, PictureHandler pictureHandler, PersonDAO personDAO) {
+        this.personDAO = personDAO;
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
+    }
+    
+    public void populatePersonsFromDB() {
+        try {
+            ArrayList<Person> persons = personDAO.getAllPersons();
+            if(!persons.isEmpty()) {
+                personRegister.setPersons(persons);
+            } else {
+                System.out.println("empty");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Person getPerson(int id) {
@@ -43,7 +62,11 @@ public class PersonHandler {
         FileTool.copyFile(picturePath, newPicturePath);
         p.setPicturePath(newPicturePath);
         pictureHandler.insertPicture(newPicturePath);
-        System.out.println(p.getCreationDate().getMonth());
+        try {
+            personDAO.insertPerson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void checkExpirationDates(ADate date) {

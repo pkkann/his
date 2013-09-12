@@ -5,6 +5,11 @@
 package control.user;
 
 import date.ADate;
+import db.user.UserDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 
 /**
@@ -14,9 +19,22 @@ import model.User;
 public class UserHandler {
     
     private UserRegister userRegister;
+    private UserDAO userDAO;
     
-    public UserHandler() {
-        userRegister = new UserRegister();
+    public UserHandler(UserRegister userRegister, UserDAO userDAO) {
+        this.userRegister = userRegister;
+        this.userDAO = userDAO;
+    }
+    
+    public void populateUsersFromDB() {
+        try {
+            ArrayList<User> users = userDAO.getAllUsers();
+            if(!users.isEmpty()) {
+                userRegister.setUsers(users);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public boolean usersIsEmpty() {
@@ -27,6 +45,11 @@ public class UserHandler {
         User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
         userRegister.add(u);
         u.setId(userRegister.indexOf(u));
+        try {
+            userDAO.insertUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public User checkUser(String email, String password) {

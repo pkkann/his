@@ -23,7 +23,7 @@ public class Person {
     private boolean expired;
     private File picturePath;
     private boolean quarantine;
-    private String quarantineExpirationDate;
+    private ADate quarantineExpirationDate;
     private boolean oneOne;
     private ADate creationDate;
 
@@ -121,11 +121,11 @@ public class Person {
         this.quarantine = quarantine;
     }
 
-    public String getQuarantineExpirationDate() {
+    public ADate getQuarantineExpirationDate() {
         return quarantineExpirationDate;
     }
 
-    public void setQuarantineExpirationDate(String quarantineExpirationDate) {
+    public void setQuarantineExpirationDate(ADate quarantineExpirationDate) {
         this.quarantineExpirationDate = quarantineExpirationDate;
     }
 
