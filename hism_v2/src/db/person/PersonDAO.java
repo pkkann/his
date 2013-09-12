@@ -6,6 +6,7 @@ package db.person;
 
 import date.ADate;
 import db.DBTool;
+import file.FileTool;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,7 +37,8 @@ public class PersonDAO {
         String address = p.getAddress();
         String birthday = p.getBirthdayDate().toString();
         String expirationDate = p.getExpirationDate().toString();
-        String picturePath = p.getPicturePath().getAbsolutePath();
+        File picturePathF = p.getPicturePath();
+        String picturePath = FileTool.getDefaultFolder() + "/" + picturePathF.getName();
         int quarantine = 0;
         String quarantineExpirationDate = "";
         if (p.getQuarantineExpirationDate() != null) {
@@ -66,7 +68,6 @@ public class PersonDAO {
         
         ResultSet rs = s.executeQuery("SELECT * FROM person");
         while(rs.next()) {
-            System.out.println("turn");
             int id = rs.getInt("id");
             String firstname = rs.getString("firstname");
             String middlename = rs.getString("middlename");

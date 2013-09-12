@@ -6,7 +6,9 @@ package view;
 
 import control.person.PersonHandler;
 import date.ADate;
+import file.FileTool;
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -48,8 +50,8 @@ public class MainGUI extends javax.swing.JFrame {
             firstname_TextField.setText(p.getFirstname());
             middlename_TextField.setText(p.getMiddlename());
             lastname_TextField.setText(p.getLastname());
-            birthday_TextField.setText(p.getBirthdayDate().toString());
-            expirationDate_TextField.setText(p.getExpirationDate().toString());
+            birthday_TextField.setText(ADate.formatADate(p.getBirthdayDate(), "/"));
+            expirationDate_TextField.setText(ADate.formatADate(p.getExpirationDate(), "/"));
             if (p.isExpired()) {
                 expirationDate_TextField.setForeground(Color.white);
                 expirationDate_TextField.setBackground(Color.red);
@@ -573,6 +575,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void changeUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUser_MenuItemActionPerformed
         setVisible(false);
+        clearPerson();
+        clearResult();
         loginHandler.requestLoginView();
         setUser();
         setVisible(true);

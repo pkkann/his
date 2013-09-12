@@ -37,8 +37,9 @@ public class PersonHandler {
             ArrayList<Person> persons = personDAO.getAllPersons();
             if(!persons.isEmpty()) {
                 personRegister.setPersons(persons);
-            } else {
-                System.out.println("empty");
+                for(Person p : persons) {
+                    pictureHandler.insertPicture(p.getPicturePath());
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +59,7 @@ public class PersonHandler {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);
         personRegister.add(p);
         p.setId(personRegister.indexOf(p));
-        File newPicturePath = new File(FileTool.getDefaultFolder()+"\\"+"personPicture"+pictureHandler.getpictureID()+".jpg");
+        File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture"+pictureHandler.getpictureID()+".jpg");
         FileTool.copyFile(picturePath, newPicturePath);
         p.setPicturePath(newPicturePath);
         pictureHandler.insertPicture(newPicturePath);
@@ -81,7 +82,6 @@ public class PersonHandler {
             
             if (currentC.after(personC)) {
                 p.setExpired(true);
-                System.out.println(p.getFirstname() + " er udløbet");
             }
         }
     }

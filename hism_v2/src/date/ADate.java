@@ -21,9 +21,18 @@ public class ADate {
     }
     
     public ADate(String date) {
-        this.day = Integer.valueOf(date.substring(0, 1));
-        this.month = Integer.valueOf(date.substring(2, 3));
-        this.year = Integer.valueOf(date.substring(4, 7));
+        this.day = Integer.valueOf(date.substring(0, 2));
+        this.month = Integer.valueOf(date.substring(2, 4));
+        this.year = Integer.valueOf(date.substring(4, 8));
+    }
+    
+    public static String formatADate(ADate d, String seperator) {
+        if(String.valueOf(d.getMonth()).length() != 2) {
+            return d.getDay() + seperator + "0" + d.getMonth() + seperator + d.getYear();
+        } else {
+            return d.getDay() + seperator + d.getMonth() + seperator + d.getYear();
+        }
+        
     }
 
     public int getDay() {
