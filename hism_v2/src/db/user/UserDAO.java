@@ -48,7 +48,8 @@ public class UserDAO {
                 + "VALUES('" + email + "', '" + password + "', '" + firstname + "', '" + middlename + "', '" + lastname + "', '" + creationDate + "', '" + administrator + "', '" + reserve + "')");
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
-        return rs.getInt(1);
+        int idback = rs.getInt(1);
+        return idback;
     }
     
     public ArrayList<User> getAllUsers() throws SQLException {
@@ -79,8 +80,6 @@ public class UserDAO {
             users.add(u);
         }
         
-        rs.close();
-        s.close();
         return users;
     }
     
@@ -88,7 +87,6 @@ public class UserDAO {
         Statement s = conn.createStatement();
         
         s.execute("DELETE FROM user WHERE id = '"+u.getId()+"'");
-        
-        s.close();
+
     }
 }

@@ -83,6 +83,12 @@ public class PersonHandler {
 
             if (currentC.after(personC)) {
                 p.setExpired(true);
+                try {
+                    personDAO.savePerson_Expired(p);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         }
     }

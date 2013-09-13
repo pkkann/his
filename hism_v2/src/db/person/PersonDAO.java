@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Person;
 
 /**
@@ -57,11 +59,26 @@ public class PersonDAO {
             expired = 1;
         }
 
-        s.execute("INSERT INTO person (id, firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, expired) "
-                + "VALUES('" + id + "', '" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+expired+"')");
+        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, expired) "
+                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+expired+"')");
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
-        return rs.getInt(1);
+        int idback = rs.getInt(1);
+        return idback;
+    }
+    
+    public void savePerson_Expired(Person p) throws SQLException {
+        Statement s = conn.createStatement();
+        int id = p.getId();
+        
+        int expired = 0;
+        if(p.isExpired()) {
+            expired = 1;
+        } else {
+            expired = 0;
+        }
+        
+        s.executeUpdate("UPDATE person SET expired = "+expired+" WHERE id = "+id+"");
     }
     
     public ArrayList<Person> getAllPersons() throws SQLException {
