@@ -54,12 +54,13 @@ public class UserHandler {
     public void createUser(String email, String password, String firstname, String middlename, String lastname, ADate creationDate, boolean administrator, boolean reserve) {
         User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
         userRegister.add(u);
-        u.setId(userRegister.indexOf(u));
+        int id = 0;
         try {
-            userDAO.insertUser(u);
+            id = userDAO.insertUser(u);
         } catch (SQLException ex) {
             Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        u.setId(id);
     }
     
     public User checkUser(String email, String password) {
@@ -83,8 +84,13 @@ public class UserHandler {
         return null;
     }
     
-    public boolean removeUser(User u) {
-        return userRegister.remove(u);
+    public void removeUser(User u) {
+        userRegister.remove(u);
+        try {
+            userDAO.deleteUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

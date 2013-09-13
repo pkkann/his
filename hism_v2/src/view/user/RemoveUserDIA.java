@@ -30,7 +30,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         ArrayList<User> users = userHandler.getAllUsers();
         DefaultListModel dlm = new DefaultListModel();
         for (User u : users) {
-            dlm.add(u.getId(), u.getId() + ":" + u.getFirstname() + " " + u.getLastname());
+            dlm.addElement(u.getId() + ":" + u.getFirstname() + " " + u.getLastname());
         }
         list_List.setModel(dlm);
     }
@@ -379,6 +379,8 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         } else {
             int n = JOptionPane.showConfirmDialog(this, "Er du sikker på du vil slette " + selectedUser.getFirstname() + "?", "Slet?", JOptionPane.YES_NO_OPTION);
             if (n == 0) {
+                System.out.println(selectedUser.getId());
+                System.out.println(userHandler.getAllUsers().indexOf(selectedUser));
                 userHandler.removeUser(selectedUser);
                 cleanUser();
             }

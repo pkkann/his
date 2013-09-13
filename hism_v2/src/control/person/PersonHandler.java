@@ -58,16 +58,17 @@ public class PersonHandler {
     public void createPerson(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate);
         personRegister.add(p);
-        p.setId(personRegister.indexOf(p));
         File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture" + pictureHandler.getpictureID() + ".jpg");
         FileTool.copyFile(picturePath, newPicturePath);
         p.setPicturePath(newPicturePath);
         pictureHandler.insertPicture(newPicturePath);
+        int id = 0;
         try {
-            personDAO.insertPerson(p);
+            id = personDAO.insertPerson(p);
         } catch (SQLException ex) {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        p.setId(id);
     }
 
     public void checkExpirationDates(ADate date) {

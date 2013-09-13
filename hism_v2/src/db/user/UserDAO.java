@@ -25,7 +25,7 @@ public class UserDAO {
         conn = DBTool.getInstance();
     }
 
-    public void insertUser(User u) throws SQLException {
+    public int insertUser(User u) throws SQLException {
         Statement s = conn.createStatement();
         int id = u.getId();
         String email = u.getEmail();
@@ -44,9 +44,11 @@ public class UserDAO {
             reserve = 1;
         }
 
-        s.execute("INSERT INTO user (id, email, password, firstname, middlename, lastname, creationdate, administrator, reserve) "
-                + "VALUES('" + id + "', '" + email + "', '" + password + "', '" + firstname + "', '" + middlename + "', '" + lastname + "', '" + creationDate + "', '" + administrator + "', '" + reserve + "')");
-        s.close();
+        s.execute("INSERT INTO user (email, password, firstname, middlename, lastname, creationdate, administrator, reserve) "
+                + "VALUES('" + email + "', '" + password + "', '" + firstname + "', '" + middlename + "', '" + lastname + "', '" + creationDate + "', '" + administrator + "', '" + reserve + "')");
+        ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+        rs.next();
+        return rs.getInt(1);
     }
     
     public ArrayList<User> getAllUsers() throws SQLException {
@@ -72,7 +74,9 @@ public class UserDAO {
             }
             User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
             u.setId(id);
-            users.add(id, u);
+            System.out.println("index:" + users.size());
+            System.out.println("ID: " + u.getId());
+            users.add(u);
         }
         
         rs.close();

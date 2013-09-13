@@ -27,7 +27,7 @@ public class PersonDAO {
         conn = DBTool.getInstance();
     }
 
-    public void insertPerson(Person p) throws SQLException {
+    public int insertPerson(Person p) throws SQLException {
         Statement s = conn.createStatement();
 
         int id = p.getId();
@@ -59,7 +59,9 @@ public class PersonDAO {
 
         s.execute("INSERT INTO person (id, firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, expired) "
                 + "VALUES('" + id + "', '" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+expired+"')");
-        s.close();
+        ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+        rs.next();
+        return rs.getInt(1);
     }
     
     public ArrayList<Person> getAllPersons() throws SQLException {
@@ -99,7 +101,7 @@ public class PersonDAO {
             p.setQuarantine(quarantine);
             p.setExpired(expired);
             p.setQuarantineExpirationDate(quarantineExpirationDate);
-            persons.add(id,p);
+            persons.add(p);
             
         }
         return persons;

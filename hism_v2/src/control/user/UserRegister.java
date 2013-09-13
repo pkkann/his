@@ -71,8 +71,8 @@ public class UserRegister {
         return users.remove(index);
     }
 
-    public boolean remove(Object o) {
-        return users.remove(o);
+    public boolean remove(User u) {
+        return users.remove(u);
     }
 
     public ArrayList<User> getUsers() {
