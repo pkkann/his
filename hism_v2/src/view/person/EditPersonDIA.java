@@ -4,20 +4,59 @@
  */
 package view.person;
 
+import control.person.PersonHandler;
+import javax.swing.DefaultListModel;
+import model.Person;
+
 /**
  *
  * @author patrick
  */
 public class EditPersonDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form EditPersonDIA
-     */
-    public EditPersonDIA(java.awt.Frame parent, boolean modal) {
+    private Person selectedPerson;
+    private PersonHandler personHandler;
+    
+    public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
         super(parent, modal);
         initComponents();
+        this.personHandler = personHandler;
     }
-
+    
+    private void setPerson(Person p) {
+        
+    }
+    
+    private void cleanResult() {
+        search_TextField.setText("");
+        try {
+            DefaultListModel dlm = new DefaultListModel();
+            result_List.setModel(dlm);
+        } catch (NumberFormatException ex) {}
+    }
+    
+    private void cleanPerson() {
+        firstname_TextField.setEnabled(false);
+        middlename_TextField.setEnabled(false);
+        lastname_TextField.setEnabled(false);
+        birthday_day_TextField.setEnabled(false);
+        birthday_month_TextField.setEnabled(false);
+        birthday_year_TextField.setEnabled(false);
+        choose_Button.setEnabled(false);
+        oneOne_CheckBox.setEnabled(false);
+        save_Button.setEnabled(false);
+        
+        firstname_TextField.setText("");
+        middlename_TextField.setText("");
+        lastname_TextField.setText("");
+        birthday_day_TextField.setText("");
+        birthday_month_TextField.setText("");
+        birthday_year_TextField.setText("");
+        address_TextField.setText("");
+        picturepane_PicturePane.setPicture(null);
+        oneOne_CheckBox.setSelected(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,22 +66,328 @@ public class EditPersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        main_Pane = new javax.swing.JPanel();
+        search_Pane = new javax.swing.JPanel();
+        search_TextField = new javax.swing.JTextField();
+        search_Button = new javax.swing.JButton();
+        result_Pane = new javax.swing.JPanel();
+        result_ScrollPane = new javax.swing.JScrollPane();
+        result_List = new javax.swing.JList();
+        tool_Pane = new javax.swing.JPanel();
+        close_Button = new javax.swing.JButton();
+        default_Pane = new javax.swing.JPanel();
+        firstnameInfo_Label = new javax.swing.JLabel();
+        middlenameInfo_Label = new javax.swing.JLabel();
+        lastnameInfo_Label = new javax.swing.JLabel();
+        birthdayInfo_Label = new javax.swing.JLabel();
+        addressInfo_Label = new javax.swing.JLabel();
+        firstname_TextField = new javax.swing.JTextField();
+        middlename_TextField = new javax.swing.JTextField();
+        lastname_TextField = new javax.swing.JTextField();
+        birthday_day_TextField = new javax.swing.JTextField();
+        address_TextField = new javax.swing.JTextField();
+        birthday_month_TextField = new javax.swing.JTextField();
+        birthday_year_TextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        picture_Pane = new javax.swing.JPanel();
+        picturepane_PicturePane = new view.image.PicturePane();
+        choose_Button = new javax.swing.JButton();
+        save_Pane = new javax.swing.JPanel();
+        save_Button = new javax.swing.JButton();
+        oneOne_CheckBox = new javax.swing.JCheckBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        search_Button.setText("Søg");
+
+        javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
+        search_Pane.setLayout(search_PaneLayout);
+        search_PaneLayout.setHorizontalGroup(
+            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(search_TextField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_Button)
+                .addContainerGap())
+        );
+        search_PaneLayout.setVerticalGroup(
+            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_Button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_ScrollPane.setViewportView(result_List);
+
+        javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
+        result_Pane.setLayout(result_PaneLayout);
+        result_PaneLayout.setHorizontalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        result_PaneLayout.setVerticalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane)
+                .addContainerGap())
+        );
+
+        close_Button.setText("Luk");
+        close_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tool_PaneLayout = new javax.swing.GroupLayout(tool_Pane);
+        tool_Pane.setLayout(tool_PaneLayout);
+        tool_PaneLayout.setHorizontalGroup(
+            tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(close_Button)
+                .addContainerGap())
+        );
+        tool_PaneLayout.setVerticalGroup(
+            tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(close_Button)
+                .addContainerGap())
+        );
+
+        firstnameInfo_Label.setText("Fornavn:");
+
+        middlenameInfo_Label.setText("Mellemnavn:");
+
+        lastnameInfo_Label.setText("Efternavn:");
+
+        birthdayInfo_Label.setText("Fødselsdag:");
+
+        addressInfo_Label.setText("Adresse:");
+
+        firstname_TextField.setEnabled(false);
+
+        middlename_TextField.setEnabled(false);
+
+        lastname_TextField.setEnabled(false);
+
+        birthday_day_TextField.setEnabled(false);
+
+        address_TextField.setEnabled(false);
+
+        birthday_month_TextField.setEnabled(false);
+
+        birthday_year_TextField.setEnabled(false);
+
+        jLabel6.setText("dd/mm/yyyy");
+
+        jLabel7.setText("Blok - Husnummer");
+
+        javax.swing.GroupLayout default_PaneLayout = new javax.swing.GroupLayout(default_Pane);
+        default_Pane.setLayout(default_PaneLayout);
+        default_PaneLayout.setHorizontalGroup(
+            default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(default_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(firstname_TextField)
+                    .addComponent(middlename_TextField)
+                    .addComponent(lastname_TextField)
+                    .addGroup(default_PaneLayout.createSequentialGroup()
+                        .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(address_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, default_PaneLayout.createSequentialGroup()
+                                .addComponent(birthday_day_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthday_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthday_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(0, 123, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        default_PaneLayout.setVerticalGroup(
+            default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(default_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstnameInfo_Label)
+                    .addComponent(firstname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middlenameInfo_Label)
+                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastnameInfo_Label)
+                    .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdayInfo_Label)
+                    .addComponent(birthday_day_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthday_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthday_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(default_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addressInfo_Label)
+                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout picturepane_PicturePaneLayout = new javax.swing.GroupLayout(picturepane_PicturePane);
+        picturepane_PicturePane.setLayout(picturepane_PicturePaneLayout);
+        picturepane_PicturePaneLayout.setHorizontalGroup(
+            picturepane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturepane_PicturePaneLayout.setVerticalGroup(
+            picturepane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        choose_Button.setText("Vælg");
+        choose_Button.setEnabled(false);
+
+        javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
+        picture_Pane.setLayout(picture_PaneLayout);
+        picture_PaneLayout.setHorizontalGroup(
+            picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(picture_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picturepane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(choose_Button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        picture_PaneLayout.setVerticalGroup(
+            picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(picture_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choose_Button)
+                    .addComponent(picturepane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        save_Button.setText("Gem");
+        save_Button.setEnabled(false);
+
+        oneOne_CheckBox.setText("1-1");
+        oneOne_CheckBox.setEnabled(false);
+
+        javax.swing.GroupLayout save_PaneLayout = new javax.swing.GroupLayout(save_Pane);
+        save_Pane.setLayout(save_PaneLayout);
+        save_PaneLayout.setHorizontalGroup(
+            save_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, save_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(oneOne_CheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(save_Button)
+                .addContainerGap())
+        );
+        save_PaneLayout.setVerticalGroup(
+            save_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(save_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(save_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(save_Button, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(oneOne_CheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tool_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(search_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+                        .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(default_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(picture_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(save_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(result_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(search_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(result_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(main_PaneLayout.createSequentialGroup()
+                        .addComponent(default_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(picture_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(save_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tool_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        cleanResult();
+        cleanPerson();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_close_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -86,5 +431,35 @@ public class EditPersonDIA extends javax.swing.JDialog {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addressInfo_Label;
+    private javax.swing.JTextField address_TextField;
+    private javax.swing.JLabel birthdayInfo_Label;
+    private javax.swing.JTextField birthday_day_TextField;
+    private javax.swing.JTextField birthday_month_TextField;
+    private javax.swing.JTextField birthday_year_TextField;
+    private javax.swing.JButton choose_Button;
+    private javax.swing.JButton close_Button;
+    private javax.swing.JPanel default_Pane;
+    private javax.swing.JLabel firstnameInfo_Label;
+    private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lastnameInfo_Label;
+    private javax.swing.JTextField lastname_TextField;
+    private javax.swing.JPanel main_Pane;
+    private javax.swing.JLabel middlenameInfo_Label;
+    private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JCheckBox oneOne_CheckBox;
+    private javax.swing.JPanel picture_Pane;
+    private view.image.PicturePane picturepane_PicturePane;
+    private javax.swing.JList result_List;
+    private javax.swing.JPanel result_Pane;
+    private javax.swing.JScrollPane result_ScrollPane;
+    private javax.swing.JButton save_Button;
+    private javax.swing.JPanel save_Pane;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JPanel search_Pane;
+    private javax.swing.JTextField search_TextField;
+    private javax.swing.JPanel tool_Pane;
     // End of variables declaration//GEN-END:variables
 }

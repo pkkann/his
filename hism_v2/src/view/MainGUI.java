@@ -16,6 +16,7 @@ import javax.swing.DefaultListModel;
 import login.LoginHandler;
 import model.Person;
 import view.person.CreatePersonDIA;
+import view.person.EditPersonDIA;
 import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
 import view.user.EditUserDIA;
@@ -33,10 +34,11 @@ public class MainGUI extends javax.swing.JFrame {
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
+    private EditPersonDIA editPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private Person selectedPerson;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, RemovePersonDIA removePersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
@@ -44,6 +46,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editUserDIA = editUserDIA;
         this.removeUserDIA = removeUserDIA;
         this.createPersonDIA = createPersonDIA;
+        this.editPersonDIA = editPersonDIA;
         this.removePersonDIA = removePersonDIA;
     }
 
@@ -545,6 +548,11 @@ public class MainGUI extends javax.swing.JFrame {
         persons_Menu.add(createPerson_MenuItem);
 
         editPerson_MenuItem.setText("Rediger person");
+        editPerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPerson_MenuItemActionPerformed(evt);
+            }
+        });
         persons_Menu.add(editPerson_MenuItem);
 
         deletePerson_MenuItem.setText("Slet person");
@@ -675,6 +683,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
         editUserDIA.setVisible(true);
     }//GEN-LAST:event_editUser_MenuItemActionPerformed
+
+    private void editPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_MenuItemActionPerformed
+        editPersonDIA.setVisible(true);
+    }//GEN-LAST:event_editPerson_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

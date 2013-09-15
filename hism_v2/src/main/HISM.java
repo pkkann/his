@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import login.LoginHandler;
 import view.*;
 import view.person.CreatePersonDIA;
+import view.person.EditPersonDIA;
 import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
 import view.user.EditUserDIA;
@@ -42,6 +43,7 @@ public class HISM {
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
+    private EditPersonDIA editPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
@@ -66,11 +68,12 @@ public class HISM {
         
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
+        editPersonDIA = new EditPersonDIA(mainGUI, true, personHandler);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, personHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
         editUserDIA = new EditUserDIA(mainGUI, true, userHandler);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, editUserDIA, removeUserDIA, createPersonDIA, removePersonDIA);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, editUserDIA, removeUserDIA, createPersonDIA, editPersonDIA, removePersonDIA);
         dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 

@@ -60,6 +60,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Rediger person"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editPerson_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="deletePerson_MenuItem">
                   <Properties>
