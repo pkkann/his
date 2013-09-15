@@ -30,7 +30,7 @@ public class UserRegister {
     
     public User checkUser(String email, String password) {
         for(User u : users) {
-            if(u.getEmail().equals(email)) {
+            if(u.getEmail().equalsIgnoreCase(email)) {
                 if(u.getPassword().equals(password)) {
                     return u;
                 }

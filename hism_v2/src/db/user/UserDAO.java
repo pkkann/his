@@ -75,8 +75,6 @@ public class UserDAO {
             }
             User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
             u.setId(id);
-            System.out.println("index:" + users.size());
-            System.out.println("ID: " + u.getId());
             users.add(u);
         }
         

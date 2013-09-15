@@ -4,18 +4,88 @@
  */
 package view.person;
 
+import control.person.PersonHandler;
+import date.ADate;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.Person;
+
 /**
  *
  * @author patrick
  */
 public class RemovePersonDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RemovePersonDIA
-     */
-    public RemovePersonDIA(java.awt.Frame parent, boolean modal) {
+    private Person selectedPerson;
+    private PersonHandler personHandler;
+    
+    public RemovePersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
         super(parent, modal);
         initComponents();
+        this.personHandler = personHandler;
+    }
+    
+    private void setPerson(Person p) {
+        selectedPerson = p;
+        firstname_TextField.setText(p.getFirstname());
+        middlename_TextField.setText(p.getMiddlename());
+        lastname_TextField.setText(p.getLastname());
+        birthday_TextField.setText(ADate.formatADate(p.getBirthdayDate(), "/"));
+        address_TextField.setText(p.getAddress());
+        if(p.isOneOne()) {
+            oneOne_TextField.setText("Ja");
+        } else {
+            oneOne_TextField.setText("Nej");
+        }
+        try {
+            picturePane_PicturePane.setPicture(ImageIO.read(p.getPicturePath()));
+        } catch (IOException ex) {
+            Logger.getLogger(RemovePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        delete_Button.setEnabled(true);
+    }
+    
+    private void clean() {
+        clearPerson();
+        clearResult();
+    }
+    
+    private void clearResult() {
+        try {
+            DefaultListModel dlm = new DefaultListModel();
+            result_List.setModel(dlm);
+        } catch (NullPointerException ex) {
+        }
+    }
+    
+    private void clearPerson() {
+        firstname_TextField.setText("");
+        middlename_TextField.setText("");
+        lastname_TextField.setText("");
+        birthday_TextField.setText("");
+        address_TextField.setText("");
+        oneOne_TextField.setText("");
+        picturePane_PicturePane.setPicture(null);
+        delete_Button.setEnabled(false);
+        selectedPerson = null;
+    }
+    
+    private void search() {
+        clearResult();
+        clearPerson();
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
+        }
+
+        result_List.setModel(dlm);
     }
 
     /**
@@ -27,22 +97,307 @@ public class RemovePersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        main_Pane = new javax.swing.JPanel();
+        search_Pane = new javax.swing.JPanel();
+        search_TextField = new javax.swing.JTextField();
+        search_Button = new javax.swing.JButton();
+        result_Pane = new javax.swing.JPanel();
+        result_ScrollPane = new javax.swing.JScrollPane();
+        result_List = new javax.swing.JList();
+        bottom_Pane = new javax.swing.JPanel();
+        close_Button = new javax.swing.JButton();
+        detail_Pane = new javax.swing.JPanel();
+        firstnameInfo_Label = new javax.swing.JLabel();
+        middlenameInfo_Label = new javax.swing.JLabel();
+        lastnameInfo_label = new javax.swing.JLabel();
+        birthdayInfo_Label = new javax.swing.JLabel();
+        addressInfo_Label = new javax.swing.JLabel();
+        firstname_TextField = new javax.swing.JTextField();
+        middlename_TextField = new javax.swing.JTextField();
+        lastname_TextField = new javax.swing.JTextField();
+        birthday_TextField = new javax.swing.JTextField();
+        address_TextField = new javax.swing.JTextField();
+        picturePane_PicturePane = new view.image.PicturePane();
+        oneOneInfo_Label = new javax.swing.JLabel();
+        oneOne_TextField = new javax.swing.JTextField();
+        delete_Button = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
+        search_Pane.setLayout(search_PaneLayout);
+        search_PaneLayout.setHorizontalGroup(
+            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(search_TextField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_Button)
+                .addContainerGap())
+        );
+        search_PaneLayout.setVerticalGroup(
+            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_Button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_List.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                result_ListValueChanged(evt);
+            }
+        });
+        result_ScrollPane.setViewportView(result_List);
+
+        javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
+        result_Pane.setLayout(result_PaneLayout);
+        result_PaneLayout.setHorizontalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        result_PaneLayout.setVerticalGroup(
+            result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(result_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        close_Button.setText("Luk");
+        close_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
+        bottom_Pane.setLayout(bottom_PaneLayout);
+        bottom_PaneLayout.setHorizontalGroup(
+            bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(close_Button)
+                .addContainerGap())
+        );
+        bottom_PaneLayout.setVerticalGroup(
+            bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(close_Button)
+                .addContainerGap())
+        );
+
+        firstnameInfo_Label.setText("Fornavn:");
+
+        middlenameInfo_Label.setText("Mellemnavn:");
+
+        lastnameInfo_label.setText("Efternavn:");
+
+        birthdayInfo_Label.setText("Fødselsdag:");
+
+        addressInfo_Label.setText("Adresse:");
+
+        firstname_TextField.setEditable(false);
+
+        middlename_TextField.setEditable(false);
+
+        lastname_TextField.setEditable(false);
+
+        birthday_TextField.setEditable(false);
+
+        address_TextField.setEditable(false);
+
+        javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
+        picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
+        picturePane_PicturePaneLayout.setHorizontalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        picturePane_PicturePaneLayout.setVerticalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        oneOneInfo_Label.setText("1-1:");
+
+        oneOne_TextField.setEditable(false);
+
+        delete_Button.setText("Slet person");
+        delete_Button.setEnabled(false);
+        delete_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout detail_PaneLayout = new javax.swing.GroupLayout(detail_Pane);
+        detail_Pane.setLayout(detail_PaneLayout);
+        detail_PaneLayout.setHorizontalGroup(
+            detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detail_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(detail_PaneLayout.createSequentialGroup()
+                        .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(oneOneInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lastnameInfo_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addressInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(firstname_TextField)
+                            .addComponent(middlename_TextField)
+                            .addComponent(lastname_TextField)
+                            .addComponent(birthday_TextField)
+                            .addComponent(address_TextField)
+                            .addComponent(oneOne_TextField)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detail_PaneLayout.createSequentialGroup()
+                        .addGap(0, 331, Short.MAX_VALUE)
+                        .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(delete_Button, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+        );
+        detail_PaneLayout.setVerticalGroup(
+            detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detail_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstnameInfo_Label)
+                    .addComponent(firstname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middlenameInfo_Label)
+                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastnameInfo_label)
+                    .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdayInfo_Label)
+                    .addComponent(birthday_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addressInfo_Label)
+                    .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(oneOneInfo_Label)
+                    .addComponent(oneOne_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(delete_Button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bottom_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(search_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+                        .addComponent(detail_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(result_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(search_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(result_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(detail_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bottom_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_close_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        search();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
+        clearPerson();
+        if (!evt.getValueIsAdjusting()) {
+            String selectionText = (String) result_List.getSelectedValue();
+            String ids = "";
+            for (int i = 0; i <= selectionText.length(); i++) {
+                if (selectionText.substring(i, i + 1).equals(":")) {
+                    break;
+                }
+                String s = selectionText.substring(i, i + 1);
+                ids = ids + s;
+            }
+            int id = Integer.valueOf(ids);
+            setPerson(personHandler.getPerson(id));
+        }
+    }//GEN-LAST:event_result_ListValueChanged
+
+    private void delete_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_ButtonActionPerformed
+        int n = JOptionPane.showConfirmDialog(this, "Er du sikker på du vil slette " + selectedPerson.getFirstname() + "?", "Slet?", JOptionPane.YES_NO_OPTION);
+        if(n == 0) {
+            personHandler.removePerson(selectedPerson);
+            clearPerson();
+            search();
+        }
+    }//GEN-LAST:event_delete_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -86,5 +441,29 @@ public class RemovePersonDIA extends javax.swing.JDialog {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addressInfo_Label;
+    private javax.swing.JTextField address_TextField;
+    private javax.swing.JLabel birthdayInfo_Label;
+    private javax.swing.JTextField birthday_TextField;
+    private javax.swing.JPanel bottom_Pane;
+    private javax.swing.JButton close_Button;
+    private javax.swing.JButton delete_Button;
+    private javax.swing.JPanel detail_Pane;
+    private javax.swing.JLabel firstnameInfo_Label;
+    private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel lastnameInfo_label;
+    private javax.swing.JTextField lastname_TextField;
+    private javax.swing.JPanel main_Pane;
+    private javax.swing.JLabel middlenameInfo_Label;
+    private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JLabel oneOneInfo_Label;
+    private javax.swing.JTextField oneOne_TextField;
+    private view.image.PicturePane picturePane_PicturePane;
+    private javax.swing.JList result_List;
+    private javax.swing.JPanel result_Pane;
+    private javax.swing.JScrollPane result_ScrollPane;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JPanel search_Pane;
+    private javax.swing.JTextField search_TextField;
     // End of variables declaration//GEN-END:variables
 }

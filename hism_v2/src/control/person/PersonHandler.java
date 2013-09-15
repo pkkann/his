@@ -120,4 +120,13 @@ public class PersonHandler {
     public void setPersons(ArrayList<Person> persons) {
         personRegister.setPersons(persons);
     }
+    
+    public void removePerson(Person p) {
+        personRegister.remove(p);
+        try {
+            personDAO.deletePerson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

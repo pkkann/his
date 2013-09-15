@@ -127,4 +127,10 @@ public class PersonDAO {
         }
         return persons;
     }
+    
+    public void deletePerson(Person p) throws SQLException {
+        Statement s = conn.createStatement();
+        
+        s.execute("DELETE FROM person WHERE id = "+p.getId()+"");
+    }
 }

@@ -29,6 +29,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeUser_MenuItemActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="releaseNotes_MenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Release Notes"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="administration_Menu">
@@ -58,12 +65,15 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Slet person"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletePerson_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="oneTimeEnroll_MenuItem">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="En gangs indskrivning"/>
+                    <Property name="text" type="java.lang.String" value="Engangs indskrivning"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>

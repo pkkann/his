@@ -6,9 +6,7 @@ package view;
 
 import control.person.PersonHandler;
 import date.ADate;
-import file.FileTool;
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,6 +16,7 @@ import javax.swing.DefaultListModel;
 import login.LoginHandler;
 import model.Person;
 import view.person.CreatePersonDIA;
+import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
 import view.user.RemoveUserDIA;
 
@@ -32,15 +31,17 @@ public class MainGUI extends javax.swing.JFrame {
     private CreateUserDIA createUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
+    private RemovePersonDIA removePersonDIA;
     private Person selectedPerson;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, RemovePersonDIA removePersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
         this.createUserDIA = createUserDIA;
         this.removeUserDIA = removeUserDIA;
         this.createPersonDIA = createPersonDIA;
+        this.removePersonDIA = removePersonDIA;
     }
 
     public void setDate(ADate date) {
@@ -189,6 +190,8 @@ public class MainGUI extends javax.swing.JFrame {
         reset_MenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         changeUser_MenuItem = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        releaseNotes_MenuItem = new javax.swing.JMenuItem();
         administration_Menu = new javax.swing.JMenu();
         persons_Menu = new javax.swing.JMenu();
         createPerson_MenuItem = new javax.swing.JMenuItem();
@@ -512,6 +515,10 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         file_Menu.add(changeUser_MenuItem);
+        file_Menu.add(jSeparator3);
+
+        releaseNotes_MenuItem.setText("Release Notes");
+        file_Menu.add(releaseNotes_MenuItem);
 
         menuBar_MenuBar.add(file_Menu);
 
@@ -531,10 +538,15 @@ public class MainGUI extends javax.swing.JFrame {
         persons_Menu.add(editPerson_MenuItem);
 
         deletePerson_MenuItem.setText("Slet person");
+        deletePerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePerson_MenuItemActionPerformed(evt);
+            }
+        });
         persons_Menu.add(deletePerson_MenuItem);
         persons_Menu.add(jSeparator2);
 
-        oneTimeEnroll_MenuItem.setText("En gangs indskrivning");
+        oneTimeEnroll_MenuItem.setText("Engangs indskrivning");
         persons_Menu.add(oneTimeEnroll_MenuItem);
 
         administration_Menu.add(persons_Menu);
@@ -640,6 +652,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
         
     }//GEN-LAST:event_renew_ButtonActionPerformed
+
+    private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed
+        removePersonDIA.setVisible(true);
+    }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -704,6 +720,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JButton kick_Button;
     private javax.swing.JLabel lastnameInfo_Label;
     private javax.swing.JTextField lastname_TextField;
@@ -716,6 +733,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem oneTimeEnroll_MenuItem;
     private javax.swing.JMenu persons_Menu;
     private view.image.PicturePane picturePane_PicturePane;
+    private javax.swing.JMenuItem releaseNotes_MenuItem;
     private javax.swing.JButton renew_Button;
     private javax.swing.JMenuItem repport_MenuItem;
     private javax.swing.JButton requestQuarantine_Button;

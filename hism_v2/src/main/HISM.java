@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import login.LoginHandler;
 import view.*;
 import view.person.CreatePersonDIA;
+import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
 import view.user.RemoveUserDIA;
 
@@ -39,6 +40,7 @@ public class HISM {
     private CreateUserDIA createUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
+    private RemovePersonDIA removePersonDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
     private PictureRegister pictureRegister;
@@ -62,9 +64,10 @@ public class HISM {
         
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
+        removePersonDIA = new RemovePersonDIA(mainGUI, true, personHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, removeUserDIA, createPersonDIA);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, removeUserDIA, createPersonDIA, removePersonDIA);
         dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 
@@ -114,8 +117,10 @@ public class HISM {
     }
     
     private void testData() {
-        userHandler.createUser("test@test.dk", "test", "test", "test", "test", new ADate(01, 01, 2013), true, false);
-        personHandler.createPerson("Patrick", "", "Kann", "8-56", new ADate(21, 04, 1989), new ADate(11, 9, 2013), new File(""), new ADate(11, 9, 2013));
+        for(int i=0; i<=200; i++) {
+            personHandler.createPerson("test" + i, "test" + i, "test" + i, "test" + i, new ADate(12, 12, 1212), new ADate(15, 9, 2013), new File(""), new ADate(15, 9, 2013));
+            System.out.println("create " + i);
+        }
     }
 
 }
