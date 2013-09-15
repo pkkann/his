@@ -31,6 +31,14 @@ public class PersonHandler {
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
     }
+    
+    public void savePerson(Person p) {
+        try {
+            personDAO.savePerson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void populatePersonsFromDB() {
         try {
@@ -41,6 +49,7 @@ public class PersonHandler {
                     pictureHandler.insertPicture(p.getPicturePath());
                 }
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,12 +92,6 @@ public class PersonHandler {
 
             if (currentC.after(personC)) {
                 p.setExpired(true);
-                try {
-                    personDAO.savePerson_Expired(p);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
             }
         }
     }

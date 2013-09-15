@@ -18,7 +18,6 @@ import file.FileTool;
 import java.io.File;
 import javax.swing.JOptionPane;
 import login.LoginHandler;
-import model.User;
 import view.*;
 import view.person.CreatePersonDIA;
 import view.user.CreateUserDIA;

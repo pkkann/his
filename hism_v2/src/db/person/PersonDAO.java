@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Person;
 
 /**
@@ -54,39 +52,50 @@ public class PersonDAO {
         if (p.isOneOne()) {
             oneOne = 1;
         }
-        int expired = 0;
-        if (p.isExpired()) {
-            expired = 1;
-        }
 
-        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, expired) "
-                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+expired+"')");
+        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate) "
+                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "')");
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         int idback = rs.getInt(1);
         return idback;
     }
-    
-    public void savePerson_Expired(Person p) throws SQLException {
+
+    public void savePerson(Person p) throws SQLException {
         Statement s = conn.createStatement();
+
         int id = p.getId();
-        
-        int expired = 0;
-        if(p.isExpired()) {
-            expired = 1;
-        } else {
-            expired = 0;
+        String firstname = p.getFirstname();
+        String middlename = p.getMiddlename();
+        String lastname = p.getLastname();
+        String address = p.getAddress();
+        String birthday = p.getBirthdayDate().toString();
+        String expirationDate = p.getExpirationDate().toString();
+        File picturePathF = p.getPicturePath();
+        String picturePath = FileTool.getDefaultFolder() + "/" + picturePathF.getName();
+        int quarantine = 0;
+        String quarantineExpirationDate = "";
+        if (p.getQuarantineExpirationDate() != null) {
+            quarantineExpirationDate = p.getQuarantineExpirationDate().toString();
         }
-        
-        s.executeUpdate("UPDATE person SET expired = "+expired+" WHERE id = "+id+"");
+        int oneOne = 0;
+        String creationDate = p.getCreationDate().toString();
+        if (p.isQuarantine()) {
+            quarantine = 1;
+        }
+        if (p.isOneOne()) {
+            oneOne = 1;
+        }
+
+        s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+"");
     }
-    
+
     public ArrayList<Person> getAllPersons() throws SQLException {
         Statement s = conn.createStatement();
         ArrayList<Person> persons = new ArrayList<>();
-        
+
         ResultSet rs = s.executeQuery("SELECT * FROM person");
-        while(rs.next()) {
+        while (rs.next()) {
             int id = rs.getInt("id");
             String firstname = rs.getString("firstname");
             String middlename = rs.getString("middlename");
@@ -96,30 +105,25 @@ public class PersonDAO {
             ADate expirationDate = new ADate(rs.getString("expirationdate"));
             File picturePath = new File(rs.getString("picturepath"));
             ADate quarantineExpirationDate = null;
-            if(!rs.getString("quarantineexpirationdate").isEmpty()) {
+            if (!rs.getString("quarantineexpirationdate").isEmpty()) {
                 quarantineExpirationDate = new ADate(rs.getString("quarantineexpirationdate"));
             }
             ADate creationDate = new ADate(rs.getString("creationdate"));
+            boolean oneOne = false;
+            if (rs.getInt("oneone") == 1) {
+                oneOne = true;
+            }
             boolean quarantine = false;
             if(rs.getInt("quarantine") == 1) {
                 quarantine = true;
             }
-            boolean oneOne = false;
-            if(rs.getInt("oneone") == 1) {
-                oneOne = true;
-            }
-            boolean expired = false;
-            if(rs.getInt("expired") == 1) {
-                expired = true;
-            }
-            
+
             Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
             p.setId(id);
             p.setQuarantine(quarantine);
-            p.setExpired(expired);
             p.setQuarantineExpirationDate(quarantineExpirationDate);
             persons.add(p);
-            
+
         }
         return persons;
     }

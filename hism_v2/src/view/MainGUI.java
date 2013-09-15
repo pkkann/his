@@ -290,6 +290,11 @@ public class MainGUI extends javax.swing.JFrame {
         address_TextField.setEditable(false);
 
         renew_Button.setText("Forny");
+        renew_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renew_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
@@ -631,6 +636,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void deleteUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUser_MenuItemActionPerformed
         removeUserDIA.setVisible(true);
     }//GEN-LAST:event_deleteUser_MenuItemActionPerformed
+
+    private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
+        
+    }//GEN-LAST:event_renew_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
