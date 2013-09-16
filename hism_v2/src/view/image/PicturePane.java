@@ -4,6 +4,7 @@
  */
 package view.image;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -24,6 +25,9 @@ public class PicturePane extends javax.swing.JPanel {
         g.clearRect(0, 0, this.getWidth(), this.getHeight());
         if (image != null) {
             g.drawImage(image, 0, 0, null);
+        } else {
+            g.setColor(new Color(51,51,51));
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
     }
 

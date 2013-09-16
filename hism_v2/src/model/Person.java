@@ -40,6 +40,20 @@ public class Person {
         oneOne = false;
         expired = false;
     }
+    
+    public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne) {
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.address = address;
+        this.birthdayDate = birthdayDate;
+        this.expirationDate = expirationDate;
+        this.picturePath = picturePath;
+        this.creationDate = creationDate;
+        quarantine = false;
+        this.oneOne = oneOne;
+        expired = false;
+    }
 
     public int getId() {
         return id;

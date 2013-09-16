@@ -360,7 +360,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                                 Calendar c = Calendar.getInstance();
                                 ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH)+1), c.get(Calendar.YEAR));
 
-                                personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
+                                personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
                                 JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
                                 dispose();
                             } catch (NumberFormatException ex) {

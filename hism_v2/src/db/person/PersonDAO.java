@@ -58,6 +58,9 @@ public class PersonDAO {
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         int idback = rs.getInt(1);
+        
+        rs.close();
+        s.close();
         return idback;
     }
 
@@ -88,6 +91,7 @@ public class PersonDAO {
         }
 
         s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+"");
+        s.close();
     }
 
     public ArrayList<Person> getAllPersons() throws SQLException {
@@ -118,13 +122,15 @@ public class PersonDAO {
                 quarantine = true;
             }
 
-            Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate);
+            Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
             p.setId(id);
             p.setQuarantine(quarantine);
             p.setQuarantineExpirationDate(quarantineExpirationDate);
             persons.add(p);
 
         }
+        rs.close();
+        s.close();
         return persons;
     }
     
@@ -132,5 +138,6 @@ public class PersonDAO {
         Statement s = conn.createStatement();
         
         s.execute("DELETE FROM person WHERE id = "+p.getId()+"");
+        s.close();
     }
 }

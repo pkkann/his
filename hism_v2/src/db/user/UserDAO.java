@@ -49,6 +49,8 @@ public class UserDAO {
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         int idback = rs.getInt(1);
+        rs.close();
+        s.close();
         return idback;
     }
     
@@ -77,7 +79,8 @@ public class UserDAO {
             u.setId(id);
             users.add(u);
         }
-        
+        rs.close();
+        s.close();
         return users;
     }
     
@@ -85,6 +88,20 @@ public class UserDAO {
         Statement s = conn.createStatement();
         
         s.execute("DELETE FROM user WHERE id = '"+u.getId()+"'");
-
+        s.close();
+    }
+    
+    public void saveUser(User u) throws SQLException {
+        Statement s = conn.createStatement();
+        
+        int id = u.getId();
+        String firstname = u.getFirstname();
+        String middlename = u.getMiddlename();
+        String lastname = u.getLastname();
+        String email = u.getEmail();
+        String password = u.getPassword();
+        
+        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+"' WHERE id = "+id+"");
+        s.close();
     }
 }

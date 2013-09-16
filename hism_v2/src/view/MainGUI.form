@@ -555,6 +555,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="dateInfo_Label">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -564,13 +567,16 @@
         <Component class="javax.swing.JLabel" name="date_Label">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
+              <Color blue="0" green="99" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DATE"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="userInfo_Label">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -580,13 +586,16 @@
         <Component class="javax.swing.JLabel" name="user_Label">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
+              <Color blue="0" green="99" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="USER"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="enrolledInfo_Label">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -596,13 +605,16 @@
         <Component class="javax.swing.JLabel" name="enrolled_Label">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
+              <Color blue="0" green="99" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ENROLLED"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="administratorInfo_Label">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -612,13 +624,16 @@
         <Component class="javax.swing.JLabel" name="administrator_Label">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
+              <Color blue="0" green="99" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="reserveInfo_Label">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
@@ -628,7 +643,7 @@
         <Component class="javax.swing.JLabel" name="reserve_Label">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
+              <Color blue="0" green="99" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="RESERVE"/>
           </Properties>

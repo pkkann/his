@@ -65,8 +65,10 @@ public class MainGUI extends javax.swing.JFrame {
             }
             if (p.isOneOne()) {
                 oneOne_TextField.setText("Ja");
+                oneOne_TextField.setBackground(Color.cyan);
             } else {
                 oneOne_TextField.setText("Nej");
+                oneOne_TextField.setBackground(new Color(240, 240, 240));
             }
             address_TextField.setText(p.getAddress());
             try {
@@ -424,34 +426,39 @@ public class MainGUI extends javax.swing.JFrame {
 
         bottom_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
+        dateInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         dateInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         dateInfo_Label.setText("Dato:");
 
-        date_Label.setForeground(new java.awt.Color(102, 204, 0));
+        date_Label.setForeground(new java.awt.Color(102, 153, 0));
         date_Label.setText("DATE");
 
+        userInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         userInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         userInfo_Label.setText("Bruger:");
 
-        user_Label.setForeground(new java.awt.Color(102, 204, 0));
+        user_Label.setForeground(new java.awt.Color(102, 153, 0));
         user_Label.setText("USER");
 
+        enrolledInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         enrolledInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         enrolledInfo_Label.setText("Indskrevet:");
 
-        enrolled_Label.setForeground(new java.awt.Color(102, 204, 0));
+        enrolled_Label.setForeground(new java.awt.Color(102, 153, 0));
         enrolled_Label.setText("ENROLLED");
 
+        administratorInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         administratorInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         administratorInfo_Label.setText("Administrator:");
 
-        administrator_Label.setForeground(new java.awt.Color(102, 204, 0));
+        administrator_Label.setForeground(new java.awt.Color(102, 153, 0));
         administrator_Label.setText("ADMIN");
 
+        reserveInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         reserveInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         reserveInfo_Label.setText("Reserve:");
 
-        reserve_Label.setForeground(new java.awt.Color(102, 204, 0));
+        reserve_Label.setForeground(new java.awt.Color(102, 153, 0));
         reserve_Label.setText("RESERVE");
 
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);

@@ -118,7 +118,7 @@ public class HISM {
     
     private void testData() {
         for(int i=0; i<=200; i++) {
-            personHandler.createPerson("test" + i, "test" + i, "test" + i, "test" + i, new ADate(12, 12, 1212), new ADate(15, 9, 2013), new File(""), new ADate(15, 9, 2013));
+            personHandler.createPerson("test" + i, "test" + i, "test" + i, "test" + i, new ADate(12, 12, 1212), new ADate(15, 9, 2013), new File(""), new ADate(15, 9, 2013), false);
             System.out.println("create " + i);
         }
     }
