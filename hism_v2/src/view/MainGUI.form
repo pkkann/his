@@ -458,16 +458,19 @@
             <Component class="javax.swing.JButton" name="enroll_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Indskriv"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="requestQuarantine_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Anmod om karant&#xe6;ne"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="kick_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Smid ud"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="addressInfo_Label">
@@ -483,6 +486,7 @@
             <Component class="javax.swing.JButton" name="renew_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Forny"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="renew_ButtonActionPerformed"/>

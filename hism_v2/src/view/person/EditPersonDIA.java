@@ -21,7 +21,6 @@ import model.Person;
  *
  * @author patrick
  */
-
 class MyCustomFilter2 extends javax.swing.filechooser.FileFilter {
 
     @Override

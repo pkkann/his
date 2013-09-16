@@ -360,7 +360,10 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                                     boolean oneOne = oneOne_CheckBox.isSelected();
                                     Calendar c = Calendar.getInstance();
                                     ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
-
+                                    if(oneOne) {
+                                        expirationDate = new ADate(11, 11, 1111);
+                                        JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
+                                    }
                                     personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
                                     JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
                                     dispose();

@@ -96,8 +96,10 @@ public class PersonHandler {
             Calendar personC = Calendar.getInstance();
             personC.set(p.getExpirationDate().getYear(), p.getExpirationDate().getMonth() - 1, p.getExpirationDate().getDay());
 
-            if (currentC.after(personC)) {
-                p.setExpired(true);
+            if (!p.isOneOne()) {
+                if (currentC.after(personC)) {
+                    p.setExpired(true);
+                }
             }
         }
     }

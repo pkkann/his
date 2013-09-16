@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import login.LoginHandler;
+import main.HISM;
 import model.Person;
 import view.person.CreatePersonDIA;
 import view.person.EditPersonDIA;
@@ -48,10 +49,11 @@ public class MainGUI extends javax.swing.JFrame {
         this.createPersonDIA = createPersonDIA;
         this.editPersonDIA = editPersonDIA;
         this.removePersonDIA = removePersonDIA;
+        setTitle(HISM.title + " - " + HISM.version);
     }
 
     public void setDate(ADate date) {
-        date_Label.setText(date.getDay() + "/" + (date.getMonth() + 1) + "/" + date.getYear());
+        date_Label.setText(ADate.formatADate(date, "/"));
     }
 
     private void setPerson(Person p) {
@@ -62,20 +64,26 @@ public class MainGUI extends javax.swing.JFrame {
             lastname_TextField.setText(p.getLastname());
             birthday_TextField.setText(ADate.formatADate(p.getBirthdayDate(), "/"));
             expirationDate_TextField.setText(ADate.formatADate(p.getExpirationDate(), "/"));
-            if (p.isExpired()) {
-                expirationDate_TextField.setForeground(Color.white);
-                expirationDate_TextField.setBackground(Color.red);
-            } else {
-                expirationDate_TextField.setForeground(Color.black);
-                expirationDate_TextField.setBackground(new Color(240, 240, 240));
-            }
+            
             if (p.isOneOne()) {
                 oneOne_TextField.setText("Ja");
                 oneOne_TextField.setBackground(Color.cyan);
+                renew_Button.setEnabled(false);
             } else {
                 oneOne_TextField.setText("Nej");
                 oneOne_TextField.setBackground(new Color(240, 240, 240));
+                renew_Button.setEnabled(true);
             }
+            if (p.isExpired()) {
+                expirationDate_TextField.setForeground(Color.white);
+                expirationDate_TextField.setBackground(Color.red);
+                renew_Button.setEnabled(true);
+            } else {
+                expirationDate_TextField.setForeground(Color.black);
+                expirationDate_TextField.setBackground(new Color(240, 240, 240));
+                renew_Button.setEnabled(false);
+            }
+            
             address_TextField.setText(p.getAddress());
             try {
                 picturePane_PicturePane.setPicture(ImageIO.read(p.getPicturePath()));
@@ -89,7 +97,9 @@ public class MainGUI extends javax.swing.JFrame {
             } else {
                 statusPicPane_StatusPicPane.setStatus(0);
             }
-
+            enroll_Button.setEnabled(true);
+            kick_Button.setEnabled(true);
+            requestQuarantine_Button.setEnabled(true);
         }
     }
 
@@ -106,6 +116,11 @@ public class MainGUI extends javax.swing.JFrame {
         address_TextField.setText("");
         picturePane_PicturePane.setPicture(null);
         statusPicPane_StatusPicPane.setStatus(2);
+        enroll_Button.setEnabled(false);
+        renew_Button.setEnabled(false);
+        kick_Button.setEnabled(false);
+        requestQuarantine_Button.setEnabled(false);
+        oneOne_TextField.setBackground(new Color(240, 240, 240));
     }
 
     private void clearResult() {
@@ -291,16 +306,20 @@ public class MainGUI extends javax.swing.JFrame {
         oneOne_TextField.setEditable(false);
 
         enroll_Button.setText("Indskriv");
+        enroll_Button.setEnabled(false);
 
         requestQuarantine_Button.setText("Anmod om karantæne");
+        requestQuarantine_Button.setEnabled(false);
 
         kick_Button.setText("Smid ud");
+        kick_Button.setEnabled(false);
 
         addressInfo_Label.setText("Adresse:");
 
         address_TextField.setEditable(false);
 
         renew_Button.setText("Forny");
+        renew_Button.setEnabled(false);
         renew_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 renew_ButtonActionPerformed(evt);
