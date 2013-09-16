@@ -349,25 +349,29 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                 if (expirationDate_day_TextField.getText().length() == 2 && expirationDate_month_TextField.getText().length() == 2 && expirationDate_year_TextField.getText().length() == 4) {
                     if (Integer.valueOf(birthday_month_TextField.getText()) <= 12) {
                         if (Integer.valueOf(expirationDate_month_TextField.getText()) <= 12) {
-                            try {
-                                String firstname = firstname_TextField.getText();
-                                String middlename = middlename_TextField.getText();
-                                String lastname = lastname_TextField.getText();
-                                ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
-                                ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
-                                String address = address_TextField.getText();
-                                boolean oneOne = oneOne_CheckBox.isSelected();
-                                Calendar c = Calendar.getInstance();
-                                ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH)+1), c.get(Calendar.YEAR));
+                            if (Integer.valueOf(birthday_yeah_TextField.getText()) > 1860) {
+                                try {
+                                    String firstname = firstname_TextField.getText();
+                                    String middlename = middlename_TextField.getText();
+                                    String lastname = lastname_TextField.getText();
+                                    ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
+                                    ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
+                                    String address = address_TextField.getText();
+                                    boolean oneOne = oneOne_CheckBox.isSelected();
+                                    Calendar c = Calendar.getInstance();
+                                    ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
 
-                                personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
-                                JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
-                                dispose();
-                            } catch (NumberFormatException ex) {
-                                JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
+                                    personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
+                                    JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+                                    dispose();
+                                } catch (NumberFormatException ex) {
+                                    JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Jeg er ret sikker på personen er død..", "Fejl", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);

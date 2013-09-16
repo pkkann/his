@@ -194,6 +194,7 @@ public class LoginDIA extends javax.swing.JDialog {
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Email eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
+                password_TextField.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);

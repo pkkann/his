@@ -5,36 +5,85 @@
 package view.person;
 
 import control.person.PersonHandler;
+import date.ADate;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import model.Person;
 
 /**
  *
  * @author patrick
  */
+
+class MyCustomFilter2 extends javax.swing.filechooser.FileFilter {
+
+    @Override
+    public boolean accept(File file) {
+        return file.isDirectory() || file.getAbsolutePath().endsWith(".jpeg") || file.getAbsolutePath().endsWith(".jpg") || file.getAbsolutePath().endsWith(".png");
+    }
+
+    @Override
+    public String getDescription() {
+        return "Picture (.jpeg / .jpg / .png)";
+    }
+}
+
 public class EditPersonDIA extends javax.swing.JDialog {
 
     private Person selectedPerson;
     private PersonHandler personHandler;
-    
+    private boolean pictureChanged = false;
+
     public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
         super(parent, modal);
         initComponents();
         this.personHandler = personHandler;
     }
-    
+
     private void setPerson(Person p) {
-        
+        this.selectedPerson = p;
+        firstname_TextField.setText(p.getFirstname());
+        middlename_TextField.setText(p.getMiddlename());
+        lastname_TextField.setText(p.getLastname());
+        birthday_day_TextField.setText(p.getBirthdayDate().getDayAsString());
+        birthday_month_TextField.setText(p.getBirthdayDate().getMonthAsString());
+        birthday_year_TextField.setText(String.valueOf(p.getBirthdayDate().getYear()));
+        address_TextField.setText(p.getAddress());
+        try {
+            picturepane_PicturePane.setPicture(ImageIO.read(p.getPicturePath()));
+        } catch (IOException ex) {
+            Logger.getLogger(EditPersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        oneOne_CheckBox.setSelected(p.isOneOne());
+
+        firstname_TextField.setEnabled(true);
+        middlename_TextField.setEnabled(true);
+        lastname_TextField.setEnabled(true);
+        birthday_day_TextField.setEnabled(true);
+        birthday_month_TextField.setEnabled(true);
+        birthday_year_TextField.setEnabled(true);
+        address_TextField.setEnabled(true);
+        choose_Button.setEnabled(true);
+        oneOne_CheckBox.setEnabled(true);
+        save_Button.setEnabled(true);
     }
-    
+
     private void cleanResult() {
         search_TextField.setText("");
         try {
             DefaultListModel dlm = new DefaultListModel();
             result_List.setModel(dlm);
-        } catch (NumberFormatException ex) {}
+        } catch (NullPointerException ex) {
+        }
     }
-    
+
     private void cleanPerson() {
         firstname_TextField.setEnabled(false);
         middlename_TextField.setEnabled(false);
@@ -42,10 +91,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         birthday_day_TextField.setEnabled(false);
         birthday_month_TextField.setEnabled(false);
         birthday_year_TextField.setEnabled(false);
+        address_TextField.setEnabled(false);
         choose_Button.setEnabled(false);
         oneOne_CheckBox.setEnabled(false);
         save_Button.setEnabled(false);
-        
+
         firstname_TextField.setText("");
         middlename_TextField.setText("");
         lastname_TextField.setText("");
@@ -55,8 +105,23 @@ public class EditPersonDIA extends javax.swing.JDialog {
         address_TextField.setText("");
         picturepane_PicturePane.setPicture(null);
         oneOne_CheckBox.setSelected(false);
+
+        pictureChanged = false;
     }
-    
+
+    private void search() {
+        cleanResult();
+        cleanPerson();
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
+        }
+
+        result_List.setModel(dlm);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +131,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
         main_Pane = new javax.swing.JPanel();
         search_Pane = new javax.swing.JPanel();
         search_TextField = new javax.swing.JTextField();
@@ -109,6 +175,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
         search_Pane.setLayout(search_PaneLayout);
@@ -132,6 +203,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         );
 
         result_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_List.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                result_ListValueChanged(evt);
+            }
+        });
         result_ScrollPane.setViewportView(result_List);
 
         javax.swing.GroupLayout result_PaneLayout = new javax.swing.GroupLayout(result_Pane);
@@ -279,6 +355,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         choose_Button.setText("Vælg");
         choose_Button.setEnabled(false);
+        choose_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choose_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
         picture_Pane.setLayout(picture_PaneLayout);
@@ -303,6 +384,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         save_Button.setText("Gem");
         save_Button.setEnabled(false);
+        save_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_ButtonActionPerformed(evt);
+            }
+        });
 
         oneOne_CheckBox.setText("1-1");
         oneOne_CheckBox.setEnabled(false);
@@ -388,6 +474,70 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
         dispose();
     }//GEN-LAST:event_close_ButtonActionPerformed
+
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        search();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
+        cleanPerson();
+        if (!evt.getValueIsAdjusting()) {
+            String selectionText = (String) result_List.getSelectedValue();
+            String ids = "";
+            for (int i = 0; i <= selectionText.length(); i++) {
+                if (selectionText.substring(i, i + 1).equals(":")) {
+                    break;
+                }
+                String s = selectionText.substring(i, i + 1);
+                ids = ids + s;
+            }
+            int id = Integer.valueOf(ids);
+            setPerson(personHandler.getPerson(id));
+        }
+    }//GEN-LAST:event_result_ListValueChanged
+
+    private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_ButtonActionPerformed
+        if (!firstname_TextField.getText().isEmpty() && !lastname_TextField.getText().isEmpty() && !birthday_day_TextField.getText().isEmpty() && !birthday_month_TextField.getText().isEmpty() && !birthday_year_TextField.getText().isEmpty() && !address_TextField.getText().isEmpty()) {
+            if (birthday_day_TextField.getText().length() == 2 && birthday_month_TextField.getText().length() == 2 && birthday_year_TextField.getText().length() == 4) {
+                if (Integer.valueOf(birthday_month_TextField.getText()) <= 12) {
+                    if (Integer.valueOf(birthday_year_TextField.getText()) > 1860) {
+                        try {
+                            selectedPerson.setFirstname(firstname_TextField.getText());
+                            selectedPerson.setMiddlename(middlename_TextField.getText());
+                            selectedPerson.setLastname(lastname_TextField.getText());
+                            selectedPerson.setBirthdayDate(new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_year_TextField.getText())));
+                            selectedPerson.setAddress(address_TextField.getText());
+                            selectedPerson.setOneOne(oneOne_CheckBox.isSelected());
+                            personHandler.savePerson(selectedPerson, pictureChanged);
+                            JOptionPane.showMessageDialog(this, "Personen blev gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Jeg er ret sikker på personen er død..", "Fejl", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt", "Fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_save_ButtonActionPerformed
+
+    private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            selectedPerson.setPicturePath(fileChooser_FileChooser.getSelectedFile());
+            try {
+                picturepane_PicturePane.setPicture(ImageIO.read(selectedPerson.getPicturePath()));
+                pictureChanged = true;
+            } catch (IOException ex) {
+            }
+        }
+    }//GEN-LAST:event_choose_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -440,6 +590,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JButton choose_Button;
     private javax.swing.JButton close_Button;
     private javax.swing.JPanel default_Pane;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JLabel firstnameInfo_Label;
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JLabel jLabel6;

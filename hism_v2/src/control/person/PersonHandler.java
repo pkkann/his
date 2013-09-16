@@ -31,8 +31,14 @@ public class PersonHandler {
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
     }
-    
-    public void savePerson(Person p) {
+
+    public void savePerson(Person p, boolean pictureChanged) {
+        if (pictureChanged) {
+            File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture" + pictureHandler.getpictureID() + ".jpg");
+            FileTool.copyFile(p.getPicturePath(), newPicturePath);
+            p.setPicturePath(newPicturePath);
+            pictureHandler.insertPicture(newPicturePath);
+        }
         try {
             personDAO.savePerson(p);
         } catch (SQLException ex) {
@@ -49,7 +55,7 @@ public class PersonHandler {
                     pictureHandler.insertPicture(p.getPicturePath());
                 }
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,7 +126,7 @@ public class PersonHandler {
     public void setPersons(ArrayList<Person> persons) {
         personRegister.setPersons(persons);
     }
-    
+
     public void removePerson(Person p) {
         personRegister.remove(p);
         try {

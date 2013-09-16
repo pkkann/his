@@ -94,7 +94,6 @@ public class UserHandler {
     }
     
     public void saveUser(User u) {
-        userRegister.set(userRegister.indexOf(u), u);
         try {
             userDAO.saveUser(u);
         } catch (SQLException ex) {
