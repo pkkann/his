@@ -22,6 +22,7 @@ import view.*;
 import view.person.CreatePersonDIA;
 import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
+import view.user.EditUserDIA;
 import view.user.RemoveUserDIA;
 
 /**
@@ -38,6 +39,7 @@ public class HISM {
     private static MainGUI mainGUI;
     private static LoginDIA loginDIA;
     private CreateUserDIA createUserDIA;
+    private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
     private RemovePersonDIA removePersonDIA;
@@ -66,8 +68,9 @@ public class HISM {
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, personHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
+        editUserDIA = new EditUserDIA(mainGUI, true, userHandler);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, removeUserDIA, createPersonDIA, removePersonDIA);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, editUserDIA, removeUserDIA, createPersonDIA, removePersonDIA);
         dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 

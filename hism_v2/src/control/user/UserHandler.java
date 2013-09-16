@@ -93,4 +93,13 @@ public class UserHandler {
         }
     }
     
+    public void saveUser(User u) {
+        userRegister.set(userRegister.indexOf(u), u);
+        try {
+            userDAO.saveUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

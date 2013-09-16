@@ -18,6 +18,7 @@ import model.Person;
 import view.person.CreatePersonDIA;
 import view.person.RemovePersonDIA;
 import view.user.CreateUserDIA;
+import view.user.EditUserDIA;
 import view.user.RemoveUserDIA;
 
 /**
@@ -29,16 +30,18 @@ public class MainGUI extends javax.swing.JFrame {
     private LoginHandler loginHandler;
     private PersonHandler personHandler;
     private CreateUserDIA createUserDIA;
+    private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private CreatePersonDIA createPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private Person selectedPerson;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, RemovePersonDIA removePersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, RemovePersonDIA removePersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
         this.createUserDIA = createUserDIA;
+        this.editUserDIA = editUserDIA;
         this.removeUserDIA = removeUserDIA;
         this.createPersonDIA = createPersonDIA;
         this.removePersonDIA = removePersonDIA;
@@ -430,35 +433,35 @@ public class MainGUI extends javax.swing.JFrame {
         dateInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         dateInfo_Label.setText("Dato:");
 
-        date_Label.setForeground(new java.awt.Color(102, 153, 0));
+        date_Label.setForeground(new java.awt.Color(102, 204, 0));
         date_Label.setText("DATE");
 
         userInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         userInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         userInfo_Label.setText("Bruger:");
 
-        user_Label.setForeground(new java.awt.Color(102, 153, 0));
+        user_Label.setForeground(new java.awt.Color(102, 204, 0));
         user_Label.setText("USER");
 
         enrolledInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         enrolledInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         enrolledInfo_Label.setText("Indskrevet:");
 
-        enrolled_Label.setForeground(new java.awt.Color(102, 153, 0));
+        enrolled_Label.setForeground(new java.awt.Color(102, 204, 0));
         enrolled_Label.setText("ENROLLED");
 
         administratorInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         administratorInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         administratorInfo_Label.setText("Administrator:");
 
-        administrator_Label.setForeground(new java.awt.Color(102, 153, 0));
+        administrator_Label.setForeground(new java.awt.Color(102, 204, 0));
         administrator_Label.setText("ADMIN");
 
         reserveInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         reserveInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         reserveInfo_Label.setText("Reserve:");
 
-        reserve_Label.setForeground(new java.awt.Color(102, 153, 0));
+        reserve_Label.setForeground(new java.awt.Color(102, 204, 0));
         reserve_Label.setText("RESERVE");
 
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
@@ -569,6 +572,11 @@ public class MainGUI extends javax.swing.JFrame {
         users_Menu.add(createUser_MenuItem);
 
         editUser_MenuItem.setText("Rediger bruger");
+        editUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUser_MenuItemActionPerformed(evt);
+            }
+        });
         users_Menu.add(editUser_MenuItem);
 
         deleteUser_MenuItem.setText("Slet bruger");
@@ -663,6 +671,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed
         removePersonDIA.setVisible(true);
     }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
+
+    private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
+        editUserDIA.setVisible(true);
+    }//GEN-LAST:event_editUser_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
