@@ -19,6 +19,7 @@ import model.Person;
 import view.person.CreatePersonDIA;
 import view.person.EditPersonDIA;
 import view.person.RemovePersonDIA;
+import view.person.RenewPersonDIA;
 import view.user.CreateUserDIA;
 import view.user.EditUserDIA;
 import view.user.RemoveUserDIA;
@@ -37,9 +38,10 @@ public class MainGUI extends javax.swing.JFrame {
     private CreatePersonDIA createPersonDIA;
     private EditPersonDIA editPersonDIA;
     private RemovePersonDIA removePersonDIA;
+    private RenewPersonDIA renewPersonDIA;
     private Person selectedPerson;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA, RenewPersonDIA renewPersonDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
@@ -49,6 +51,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.createPersonDIA = createPersonDIA;
         this.editPersonDIA = editPersonDIA;
         this.removePersonDIA = removePersonDIA;
+        this.renewPersonDIA = renewPersonDIA;
         setTitle(HISM.title + " - " + HISM.version);
     }
 
@@ -692,7 +695,8 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteUser_MenuItemActionPerformed
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
-        
+        renewPersonDIA.setPerson(selectedPerson);
+        renewPersonDIA.setVisible(true);
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
     private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed

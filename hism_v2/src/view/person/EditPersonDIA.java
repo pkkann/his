@@ -38,12 +38,14 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
     private Person selectedPerson;
     private PersonHandler personHandler;
+    private RenewPersonDIA renewPersonDIA;
     private boolean pictureChanged = false;
 
-    public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler) {
+    public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler, RenewPersonDIA renewPersonDIA) {
         super(parent, modal);
         initComponents();
         this.personHandler = personHandler;
+        this.renewPersonDIA = renewPersonDIA;
     }
 
     private void setPerson(Person p) {
@@ -506,7 +508,21 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             selectedPerson.setLastname(lastname_TextField.getText());
                             selectedPerson.setBirthdayDate(new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_year_TextField.getText())));
                             selectedPerson.setAddress(address_TextField.getText());
+                            boolean wasOneone = selectedPerson.isOneOne();
                             selectedPerson.setOneOne(oneOne_CheckBox.isSelected());
+                            if (selectedPerson.isOneOne()) {
+                                if (!wasOneone) {
+                                    selectedPerson.setExpirationDate(new ADate("11111111"));
+                                    JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                            } else {
+                                if (wasOneone) {
+                                    JOptionPane.showMessageDialog(this, "Du skal nu fornye personen", "1-1", JOptionPane.INFORMATION_MESSAGE);
+                                    renewPersonDIA.setPerson(selectedPerson);
+                                    renewPersonDIA.setXMode();
+                                    renewPersonDIA.setVisible(true);
+                                }
+                            }
                             personHandler.savePerson(selectedPerson, pictureChanged);
                             JOptionPane.showMessageDialog(this, "Personen blev gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
                         } catch (NumberFormatException ex) {
