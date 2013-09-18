@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import model.Guest;
 import model.Person;
 
 /**
@@ -144,6 +145,14 @@ public class PersonDAO {
             if(rs.getInt("hone") == 1) {
                 hone = true;
             }
+            Statement s2 = conn.createStatement();
+            ArrayList<Guest> guests = new ArrayList<>();
+            ResultSet rsGuest = s2.executeQuery("SELECT * FROM guest WHERE idperson = "+idperson+"");
+            while(rsGuest.next()) {
+                Guest g = new Guest(rsGuest.getString("firstname"), rsGuest.getString("middlename"), rsGuest.getString("lastname"), new ADate(rsGuest.getString("birthday")), new ADate(rsGuest.getString("creationdate")));
+                g.setId(rsGuest.getInt("idguest"));
+                guests.add(g);
+            }
 
             Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
             p.setId(idperson);
@@ -151,7 +160,11 @@ public class PersonDAO {
             p.setQuarantineExpirationDate(quarantineExpirationDate);
             p.setEnrolled(enrolled);
             p.setHone(hone);
+            p.setGuests(guests);
             persons.add(p);
+            
+            rsGuest.close();
+            s2.close();
 
         }
         rs.close();
@@ -163,7 +176,33 @@ public class PersonDAO {
         Statement s = conn.createStatement();
         int idperson = p.getId();
         
+        s.execute("DELETE FROM guest WHERE idperson = "+idperson+"");
         s.execute("DELETE FROM person WHERE idperson = "+idperson+"");
+        
+        s.close();
+    }
+    
+    public int saveGuest(Person p, Guest g) throws SQLException {
+        Statement s = conn.createStatement();
+        
+        int idPerson = p.getId();
+        
+        String guestFirstname = g.getFirstname();
+        String guestMiddlename = g.getMiddlename();
+        String guestLastname = g.getLastname();
+        String guestBirthday = ADate.formatADate(g.getBirthday(), "");
+        String guestCreationdate = ADate.formatADate(g.getCreationDate(), "");
+        
+        s.execute("INSERT INTO guest (firstname, middlename, lastname, creationdate, birthday, idperson) VALUES('"+guestFirstname+"', '"+guestMiddlename+"', '"+guestLastname+"', '"+guestCreationdate+"', '"+guestBirthday+"', '"+idPerson+"')");
+        ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+        rs.next();
+        int returnId = rs.getInt(1);
+        return returnId;
+    }
+    
+    public void removeGuest(int id) throws SQLException {
+        Statement s = conn.createStatement();
+        s.execute("DELETE FROM guest WHERE idguest = "+id+"");
         s.close();
     }
 }

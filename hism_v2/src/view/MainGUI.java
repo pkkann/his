@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import login.LoginHandler;
 import main.HISM;
 import model.Person;
@@ -73,7 +74,7 @@ public class MainGUI extends javax.swing.JFrame {
             lastname_TextField.setText(p.getLastname());
             birthday_TextField.setText(ADate.formatADate(p.getBirthdayDate(), "/"));
             expirationDate_TextField.setText(ADate.formatADate(p.getExpirationDate(), "/"));
-            
+
             if (p.isOneOne()) {
                 oneOne_TextField.setText("Ja");
                 oneOne_TextField.setBackground(Color.cyan);
@@ -92,14 +93,14 @@ public class MainGUI extends javax.swing.JFrame {
                 expirationDate_TextField.setBackground(new Color(240, 240, 240));
                 renew_Button.setEnabled(false);
             }
-            if(p.isHone()) {
+            if (p.isHone()) {
                 hone_TextField.setText("Ja");
                 hone_TextField.setBackground(Color.PINK);
             } else {
                 hone_TextField.setText("Nej");
                 hone_TextField.setBackground(new Color(240, 240, 240));
             }
-            
+
             address_TextField.setText(p.getAddress());
             try {
                 picturePane_PicturePane.setPicture(ImageIO.read(p.getPicturePath()));
@@ -116,6 +117,15 @@ public class MainGUI extends javax.swing.JFrame {
             enroll_Button.setEnabled(true);
             kick_Button.setEnabled(true);
             requestQuarantine_Button.setEnabled(true);
+            if (p.isEnrolled()) {
+                enrollInfo_Label.setText("Indskrevet");
+                enrollInfo_Label.setForeground(Color.black);
+                lamp_Pane.setBackground(Color.green);
+            } else {
+                enrollInfo_Label.setText("Ikke indskrevet");
+                enrollInfo_Label.setForeground(Color.white);
+                lamp_Pane.setBackground(new Color(51, 51, 51));
+            }
         }
     }
 
@@ -139,6 +149,9 @@ public class MainGUI extends javax.swing.JFrame {
         oneOne_TextField.setBackground(new Color(240, 240, 240));
         hone_TextField.setText("");
         hone_TextField.setBackground(new Color(240, 240, 240));
+        enrollInfo_Label.setText("");
+        enrollInfo_Label.setForeground(Color.white);
+        lamp_Pane.setBackground(new Color(51, 51, 51));
     }
 
     private void clearResult() {
@@ -214,6 +227,8 @@ public class MainGUI extends javax.swing.JFrame {
         renew_Button = new javax.swing.JButton();
         honeInfo_Label = new javax.swing.JLabel();
         hone_TextField = new javax.swing.JTextField();
+        lamp_Pane = new javax.swing.JPanel();
+        enrollInfo_Label = new javax.swing.JLabel();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
@@ -221,8 +236,6 @@ public class MainGUI extends javax.swing.JFrame {
         date_Label = new javax.swing.JLabel();
         userInfo_Label = new javax.swing.JLabel();
         user_Label = new javax.swing.JLabel();
-        enrolledInfo_Label = new javax.swing.JLabel();
-        enrolled_Label = new javax.swing.JLabel();
         administratorInfo_Label = new javax.swing.JLabel();
         administrator_Label = new javax.swing.JLabel();
         reserveInfo_Label = new javax.swing.JLabel();
@@ -333,7 +346,7 @@ public class MainGUI extends javax.swing.JFrame {
         oneOne_TextField.setEditable(false);
         oneOne_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
-        enroll_Button.setText("Indskriv");
+        enroll_Button.setText("Indskrivning");
         enroll_Button.setEnabled(false);
         enroll_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,6 +356,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         requestQuarantine_Button.setText("Anmod om karantæne");
         requestQuarantine_Button.setEnabled(false);
+        requestQuarantine_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestQuarantine_ButtonActionPerformed(evt);
+            }
+        });
 
         kick_Button.setText("Smid ud");
         kick_Button.setEnabled(false);
@@ -365,6 +383,23 @@ public class MainGUI extends javax.swing.JFrame {
         hone_TextField.setEditable(false);
         hone_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
+        lamp_Pane.setBackground(new java.awt.Color(51, 51, 51));
+        lamp_Pane.setPreferredSize(new java.awt.Dimension(0, 4));
+
+        enrollInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
+        enrollInfo_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout lamp_PaneLayout = new javax.swing.GroupLayout(lamp_Pane);
+        lamp_Pane.setLayout(lamp_PaneLayout);
+        lamp_PaneLayout.setHorizontalGroup(
+            lamp_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(enrollInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        lamp_PaneLayout.setVerticalGroup(
+            lamp_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(enrollInfo_Label)
+        );
+
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
         details_PaneLayout.setHorizontalGroup(
@@ -372,14 +407,6 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(details_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(details_PaneLayout.createSequentialGroup()
-                        .addComponent(enroll_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(renew_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kick_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
-                        .addComponent(requestQuarantine_Button))
                     .addGroup(details_PaneLayout.createSequentialGroup()
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(honeInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -401,9 +428,22 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(oneOne_TextField)
                             .addComponent(address_TextField))
                         .addGap(18, 18, 18)
+                        .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(details_PaneLayout.createSequentialGroup()
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lamp_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(enroll_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(details_PaneLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(renew_Button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(kick_Button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(requestQuarantine_Button))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_PaneLayout.createSequentialGroup()
+                                .addGap(314, 314, 314)
+                                .addComponent(statusPicPane_StatusPicPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         details_PaneLayout.setVerticalGroup(
@@ -447,7 +487,9 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(honeInfo_Label)
                             .addComponent(hone_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(lamp_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enroll_Button)
                     .addComponent(requestQuarantine_Button)
@@ -510,13 +552,6 @@ public class MainGUI extends javax.swing.JFrame {
         user_Label.setForeground(new java.awt.Color(102, 204, 0));
         user_Label.setText("USER");
 
-        enrolledInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        enrolledInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
-        enrolledInfo_Label.setText("Indskrevet:");
-
-        enrolled_Label.setForeground(new java.awt.Color(102, 204, 0));
-        enrolled_Label.setText("ENROLLED");
-
         administratorInfo_Label.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         administratorInfo_Label.setForeground(new java.awt.Color(255, 255, 255));
         administratorInfo_Label.setText("Administrator:");
@@ -552,10 +587,6 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(reserveInfo_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reserve_Label)
-                .addGap(18, 18, 18)
-                .addComponent(enrolledInfo_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enrolled_Label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bottom_PaneLayout.setVerticalGroup(
@@ -567,8 +598,6 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(date_Label)
                     .addComponent(userInfo_Label)
                     .addComponent(user_Label)
-                    .addComponent(enrolledInfo_Label)
-                    .addComponent(enrolled_Label)
                     .addComponent(administratorInfo_Label)
                     .addComponent(administrator_Label)
                     .addComponent(reserveInfo_Label)
@@ -603,6 +632,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         persons_Menu.setText("Personer");
 
+        createPerson_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         createPerson_MenuItem.setText("Opret person");
         createPerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -628,6 +658,7 @@ public class MainGUI extends javax.swing.JFrame {
         persons_Menu.add(deletePerson_MenuItem);
         persons_Menu.add(jSeparator2);
 
+        oneTimeEnroll_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         oneTimeEnroll_MenuItem.setText("Engangs indskrivning");
         persons_Menu.add(oneTimeEnroll_MenuItem);
 
@@ -774,7 +805,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
         enrollPersonDIA.setPerson(selectedPerson);
         enrollPersonDIA.setVisible(true);
+        setPerson(selectedPerson);
     }//GEN-LAST:event_enroll_ButtonActionPerformed
+
+    private void requestQuarantine_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestQuarantine_ButtonActionPerformed
+        JOptionPane.showMessageDialog(this, "Du kan ikke anmode om garantæne, fordi du er grim", "Fejl", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_requestQuarantine_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -830,9 +866,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel details_Pane;
     private javax.swing.JMenuItem editPerson_MenuItem;
     private javax.swing.JMenuItem editUser_MenuItem;
+    private javax.swing.JLabel enrollInfo_Label;
     private javax.swing.JButton enroll_Button;
-    private javax.swing.JLabel enrolledInfo_Label;
-    private javax.swing.JLabel enrolled_Label;
     private javax.swing.JLabel expirationDateInfo_Label;
     private javax.swing.JTextField expirationDate_TextField;
     private javax.swing.JMenu file_Menu;
@@ -844,6 +879,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JButton kick_Button;
+    private javax.swing.JPanel lamp_Pane;
     private javax.swing.JLabel lastnameInfo_Label;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;

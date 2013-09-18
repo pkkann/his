@@ -200,6 +200,15 @@ public class Person {
     public Guest getGuest(int index) {
         return guests.get(index);
     }
+    
+    public Guest getGuestByID(int id) {
+        for(Guest g : guests) {
+            if(g.getId() == id) {
+                return g;
+            }
+        }
+        return null;
+    }
 
     public boolean addGuest(Guest e) {
         return guests.add(e);

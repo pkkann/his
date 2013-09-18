@@ -4,6 +4,7 @@
  */
 package view.person;
 
+import control.person.PersonHandler;
 import date.ADate;
 import javax.swing.DefaultListModel;
 import model.Guest;
@@ -17,10 +18,14 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
     private Person selectedPerson;
     private Guest selectedGuest;
+    private PersonHandler personHandler;
+    private AddGuestDIA addGuestDIA;
 
-    public EnrollPersonDIA(java.awt.Frame parent, boolean modal) {
+    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler personHandler, AddGuestDIA addGuestDIA) {
         super(parent, modal);
         initComponents();
+        this.personHandler = personHandler;
+        this.addGuestDIA = addGuestDIA;
     }
 
     public void setPerson(Person p) {
@@ -29,11 +34,25 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             guests_List.setEnabled(true);
             DefaultListModel dlm = new DefaultListModel();
             for (Guest g : p.getGuests()) {
-                dlm.addElement(g.getFirstname() + " " + g.getLastname() + " - " + ADate.formatADate(g.getBirthday(), "/"));
+                dlm.addElement(g.getId() + ":" + g.getFirstname() + " " + g.getLastname() + " - " + ADate.formatADate(g.getBirthday(), "/") + " tilføjet: " + ADate.formatADate(g.getCreationDate(), "/"));
             }
             guests_List.setModel(dlm);
             enroll_Button.setText("Fjern indskrivning");
             countGuests();
+            if(p.isHone()) {
+                info_Label.setText("Denne person kan i alt få 5 gæster med ind");
+            } else {
+                info_Label.setText("Denne person kan i alt få 3 gæster med ind");
+            }
+        } else {
+            enroll_Button.setText("Indskriv");
+            guests_List.setEnabled(false);
+            DefaultListModel dlm = new DefaultListModel();
+            guests_List.setModel(dlm);
+            addGuest_Button.setEnabled(false);
+            removeGuest_Button.setEnabled(false);
+            personHandler.removeAllGuests(p);
+            info_Label.setText("");
         }
     }
 
@@ -41,19 +60,15 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         int count = guests_List.getModel().getSize();
         if (count != 0) {
             if (selectedPerson.isHone()) {
-                if (count >= 5) {
-                    removeGuest_Button.setEnabled(true);
+                if (count >= 5) { 
                     addGuest_Button.setEnabled(false);
                 } else {
-                    removeGuest_Button.setEnabled(true);
                     addGuest_Button.setEnabled(true);
                 }
             } else {
                 if (count >= 3) {
-                    removeGuest_Button.setEnabled(true);
                     addGuest_Button.setEnabled(false);
                 } else {
-                    removeGuest_Button.setEnabled(true);
                     addGuest_Button.setEnabled(true);
                 }
             }
@@ -78,6 +93,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }
 
     private void save() {
+        personHandler.savePerson(selectedPerson, false);
     }
 
     /**
@@ -100,6 +116,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         save_Button = new javax.swing.JButton();
         tool_Pane = new javax.swing.JPanel();
         enroll_Button = new javax.swing.JButton();
+        info_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -116,9 +133,19 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
         addGuest_Button.setText("Tilføj gæst");
         addGuest_Button.setEnabled(false);
+        addGuest_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addGuest_ButtonActionPerformed(evt);
+            }
+        });
 
         removeGuest_Button.setText("Fjern gæst");
         removeGuest_Button.setEnabled(false);
+        removeGuest_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeGuest_ButtonActionPerformed(evt);
+            }
+        });
 
         guests_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         guests_List.setEnabled(false);
@@ -196,7 +223,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         tool_PaneLayout.setHorizontalGroup(
             tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tool_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(info_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(enroll_Button)
                 .addContainerGap())
         );
@@ -204,7 +233,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tool_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(enroll_Button)
+                .addGroup(tool_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enroll_Button)
+                    .addComponent(info_Label))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -257,13 +288,41 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_save_ButtonActionPerformed
 
     private void guests_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_guests_ListValueChanged
-        countGuests();
+        if (!evt.getValueIsAdjusting()) {
+            removeGuest_Button.setEnabled(true);
+            countGuests();
+        }
     }//GEN-LAST:event_guests_ListValueChanged
 
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
-        selectedPerson.setEnrolled(true);
+        if (!selectedPerson.isEnrolled()) {
+            selectedPerson.setEnrolled(true);
+        } else {
+            selectedPerson.setEnrolled(false);
+        }
         setPerson(selectedPerson);
     }//GEN-LAST:event_enroll_ButtonActionPerformed
+
+    private void addGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGuest_ButtonActionPerformed
+        addGuestDIA.setPerson(selectedPerson);
+        addGuestDIA.setVisible(true);
+        setPerson(selectedPerson);
+    }//GEN-LAST:event_addGuest_ButtonActionPerformed
+
+    private void removeGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeGuest_ButtonActionPerformed
+        String selectionText = (String) guests_List.getSelectedValue();
+        String ids = "";
+        for (int i = 0; i <= selectionText.length(); i++) {
+            if (selectionText.substring(i, i + 1).equals(":")) {
+                break;
+            }
+            String s = selectionText.substring(i, i + 1);
+            ids = ids + s;
+        }
+        int id = Integer.valueOf(ids);
+        personHandler.removeGuest(selectedPerson, id);
+        setPerson(selectedPerson);
+    }//GEN-LAST:event_removeGuest_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -312,6 +371,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     private javax.swing.JLabel guestInfo_Label;
     private javax.swing.JList guests_List;
     private javax.swing.JPanel guests_Pane;
+    private javax.swing.JLabel info_Label;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JButton removeGuest_Button;

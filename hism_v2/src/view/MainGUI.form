@@ -50,6 +50,9 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="createPerson_MenuItem">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Ctrl+R"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Opret person"/>
                   </Properties>
                   <Events>
@@ -76,6 +79,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="oneTimeEnroll_MenuItem">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Ctrl+E"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Engangs indskrivning"/>
                   </Properties>
                 </MenuItem>
@@ -277,19 +283,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="enroll_Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="renew_Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="kick_Button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="165" max="32767" attributes="0"/>
-                              <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="honeInfo_Label" max="32767" attributes="0"/>
                                   <Component id="middlenameInfo_Label" alignment="0" max="32767" attributes="0"/>
@@ -312,9 +309,26 @@
                                   <Component id="address_TextField" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="picturePane_PicturePane" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lamp_Pane" pref="103" max="32767" attributes="0"/>
+                                  <Component id="enroll_Button" max="32767" attributes="0"/>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="picturePane_PicturePane" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="statusPicPane_StatusPicPane" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="renew_Button" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="kick_Button" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="314" max="-2" attributes="0"/>
+                                      <Component id="statusPicPane_StatusPicPane" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -374,7 +388,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Component id="lamp_Pane" min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="enroll_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="requestQuarantine_Button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -497,7 +513,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="enroll_Button">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Indskriv"/>
+                <Property name="text" type="java.lang.String" value="Indskrivning"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -509,6 +525,9 @@
                 <Property name="text" type="java.lang.String" value="Anmod om karant&#xe6;ne"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="requestQuarantine_ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="kick_Button">
               <Properties>
@@ -551,6 +570,39 @@
                 </Property>
               </Properties>
             </Component>
+            <Container class="javax.swing.JPanel" name="lamp_Pane">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="33" type="rgb"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 4]"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="enrollInfo_Label" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="enrollInfo_Label" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="enrollInfo_Label">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="search_TextField">
@@ -592,10 +644,6 @@
                   <Component id="reserveInfo_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="reserve_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="enrolledInfo_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="enrolled_Label" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -609,8 +657,6 @@
                       <Component id="date_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="userInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="user_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="enrolledInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="enrolled_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="administratorInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="administrator_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="reserveInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -658,25 +704,6 @@
               <Color blue="0" green="cc" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="USER"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="enrolledInfo_Label">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="13" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Indskrevet:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="enrolled_Label">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="cc" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="ENROLLED"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="administratorInfo_Label">

@@ -79,12 +79,15 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }
 
     private void cleanResult() {
-        search_TextField.setText("");
         try {
             DefaultListModel dlm = new DefaultListModel();
             result_List.setModel(dlm);
         } catch (NullPointerException ex) {
         }
+    }
+    
+    private void cleanSearch() {
+        search_TextField.setText("");
     }
 
     private void cleanPerson() {
@@ -112,19 +115,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         hone_CheckBox.setSelected(false);
 
         pictureChanged = false;
-    }
-
-    private void search() {
-        cleanResult();
-        cleanPerson();
-        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
-        DefaultListModel dlm = new DefaultListModel();
-
-        for (Person p : persons) {
-            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
-        }
-
-        result_List.setModel(dlm);
     }
 
     /**
@@ -482,6 +472,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         cleanResult();
         cleanPerson();
+        cleanSearch();
     }//GEN-LAST:event_formWindowClosed
 
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
@@ -489,7 +480,16 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        search();
+        cleanResult();
+        cleanPerson();
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
+        }
+
+        result_List.setModel(dlm);
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged

@@ -4,6 +4,8 @@
  */
 package date;
 
+import java.util.Calendar;
+
 /**
  *
  * @author patrick
@@ -24,6 +26,14 @@ public class ADate {
         this.day = Integer.valueOf(date.substring(0, 2));
         this.month = Integer.valueOf(date.substring(2, 4));
         this.year = Integer.valueOf(date.substring(4, 8));
+    }
+    
+    public ADate() {
+        Calendar c = Calendar.getInstance();
+        this.day = c.get(Calendar.DATE);
+        this.month = (c.get(Calendar.MONTH) + 1);
+        this.year = c.get(Calendar.YEAR);
+        c = null;
     }
     
     public static String formatADate(ADate date, String seperator) {

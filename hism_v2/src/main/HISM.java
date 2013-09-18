@@ -19,6 +19,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import login.LoginHandler;
 import view.*;
+import view.person.AddGuestDIA;
 import view.person.CreatePersonDIA;
 import view.person.EditPersonDIA;
 import view.person.EnrollPersonDIA;
@@ -36,7 +37,7 @@ import view.user.ResetUserPasswordDIA;
 public class HISM {
     
     public static final String title = "Den våde høne - Indskrivnings system";
-    public static final String version = "v0.2 ALPHA";
+    public static final String version = "v0.2 BETA-ALPHA-ISH-THING";
     
     private DateChangeDetecter dch;
 
@@ -54,6 +55,7 @@ public class HISM {
     private RemovePersonDIA removePersonDIA;
     private RenewPersonDIA renewPersonDIA;
     private EnrollPersonDIA enrollPersonDIA;
+    private AddGuestDIA addGuestDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
     private PictureRegister pictureRegister;
@@ -80,7 +82,8 @@ public class HISM {
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, personHandler);
         editPersonDIA = new EditPersonDIA(mainGUI, true, personHandler, renewPersonDIA);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, personHandler);
-        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true);
+        addGuestDIA = new AddGuestDIA(mainGUI, true, personHandler);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, personHandler, addGuestDIA);
         resetUserPasswordDIA = new ResetUserPasswordDIA(mainGUI, true, userHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
         editUserDIA = new EditUserDIA(mainGUI, true, userHandler, resetUserPasswordDIA, loginHandler);

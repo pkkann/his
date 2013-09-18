@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Guest;
 import model.Person;
 
 /**
@@ -30,6 +31,38 @@ public class PersonHandler {
         this.personDAO = personDAO;
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
+    }
+    
+    public void removeGuest(Person p, int id) {
+        p.removeGuest(p.getGuestByID(id));
+        removeGuestFromDB(id);
+    }
+    
+    public void removeAllGuests(Person p) {
+        for(Guest g : p.getGuests()) {
+            removeGuestFromDB(g.getId());
+        }
+        p.setGuests(new ArrayList<Guest>());
+    }
+    
+    public void removeGuestFromDB(int id) {
+        try {
+            personDAO.removeGuest(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addGuestToPerson(Person p, String firstname, String middlename, String lastname, ADate birthday) {
+        Guest g = new Guest(firstname, middlename, lastname, birthday, new ADate());
+        p.addGuest(g);
+        int gID = 0;
+        try {
+            gID = personDAO.saveGuest(p, g);
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        g.setId(gID);
     }
 
     public void savePerson(Person p, boolean pictureChanged) {
