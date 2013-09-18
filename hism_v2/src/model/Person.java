@@ -6,6 +6,7 @@ package model;
 
 import date.ADate;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Person {
     private ADate creationDate;
     private boolean enrolled;
     private boolean hone;
+    private ArrayList<Guest> guests;
 
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         this.firstname = firstname;
@@ -43,6 +45,7 @@ public class Person {
         this.expired = false;
         this.enrolled = false;
         this.hone = false;
+        guests = new ArrayList<>();
     }
     
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne) {
@@ -59,6 +62,7 @@ public class Person {
         this.expired = false;
         this.enrolled = false;
         this.hone = false;
+        guests = new ArrayList<>();
     }
 
     public int getId() {
@@ -179,6 +183,38 @@ public class Person {
 
     public void setHone(boolean hone) {
         this.hone = hone;
+    }
+
+    public ArrayList<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(ArrayList<Guest> guests) {
+        this.guests = guests;
+    }
+
+    public int guestsSize() {
+        return guests.size();
+    }
+
+    public Guest getGuest(int index) {
+        return guests.get(index);
+    }
+
+    public boolean addGuest(Guest e) {
+        return guests.add(e);
+    }
+
+    public void addGuest(int index, Guest element) {
+        guests.add(index, element);
+    }
+
+    public Guest removeGuest(int index) {
+        return guests.remove(index);
+    }
+
+    public boolean removeGuest(Object o) {
+        return guests.remove(o);
     }
     
 }

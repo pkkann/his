@@ -21,6 +21,7 @@ import login.LoginHandler;
 import view.*;
 import view.person.CreatePersonDIA;
 import view.person.EditPersonDIA;
+import view.person.EnrollPersonDIA;
 import view.person.RemovePersonDIA;
 import view.person.RenewPersonDIA;
 import view.user.CreateUserDIA;
@@ -52,6 +53,7 @@ public class HISM {
     private EditPersonDIA editPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private RenewPersonDIA renewPersonDIA;
+    private EnrollPersonDIA enrollPersonDIA;
     private PersonRegister personRegister;
     private PersonHandler personHandler;
     private PictureRegister pictureRegister;
@@ -78,11 +80,12 @@ public class HISM {
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, personHandler);
         editPersonDIA = new EditPersonDIA(mainGUI, true, personHandler, renewPersonDIA);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, personHandler);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true);
         resetUserPasswordDIA = new ResetUserPasswordDIA(mainGUI, true, userHandler);
         createUserDIA = new CreateUserDIA(mainGUI, true, userHandler);
         editUserDIA = new EditUserDIA(mainGUI, true, userHandler, resetUserPasswordDIA, loginHandler);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, userHandler);
-        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, editUserDIA, removeUserDIA, createPersonDIA, editPersonDIA, removePersonDIA, renewPersonDIA, resetUserPasswordDIA);
+        mainGUI = new MainGUI(loginHandler, personHandler, createUserDIA, editUserDIA, removeUserDIA, createPersonDIA, editPersonDIA, removePersonDIA, renewPersonDIA, enrollPersonDIA, resetUserPasswordDIA);
         dch = new DateChangeDetecter(personHandler, mainGUI);
     }
 

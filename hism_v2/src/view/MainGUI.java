@@ -18,6 +18,7 @@ import main.HISM;
 import model.Person;
 import view.person.CreatePersonDIA;
 import view.person.EditPersonDIA;
+import view.person.EnrollPersonDIA;
 import view.person.RemovePersonDIA;
 import view.person.RenewPersonDIA;
 import view.user.CreateUserDIA;
@@ -40,10 +41,11 @@ public class MainGUI extends javax.swing.JFrame {
     private EditPersonDIA editPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private RenewPersonDIA renewPersonDIA;
+    private EnrollPersonDIA enrollPersonDIA;
     private Person selectedPerson;
     private ResetUserPasswordDIA resetUserPasswordDIA;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA, RenewPersonDIA renewPersonDIA, ResetUserPasswordDIA resetUserPasswordDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA, RenewPersonDIA renewPersonDIA, EnrollPersonDIA enrollPersonDIA, ResetUserPasswordDIA resetUserPasswordDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
@@ -54,6 +56,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editPersonDIA = editPersonDIA;
         this.removePersonDIA = removePersonDIA;
         this.renewPersonDIA = renewPersonDIA;
+        this.enrollPersonDIA = enrollPersonDIA;
         this.resetUserPasswordDIA = resetUserPasswordDIA;
         setTitle(HISM.title + " - " + HISM.version);
     }
@@ -88,6 +91,13 @@ public class MainGUI extends javax.swing.JFrame {
                 expirationDate_TextField.setForeground(Color.black);
                 expirationDate_TextField.setBackground(new Color(240, 240, 240));
                 renew_Button.setEnabled(false);
+            }
+            if(p.isHone()) {
+                hone_TextField.setText("Ja");
+                hone_TextField.setBackground(Color.PINK);
+            } else {
+                hone_TextField.setText("Nej");
+                hone_TextField.setBackground(new Color(240, 240, 240));
             }
             
             address_TextField.setText(p.getAddress());
@@ -127,6 +137,8 @@ public class MainGUI extends javax.swing.JFrame {
         kick_Button.setEnabled(false);
         requestQuarantine_Button.setEnabled(false);
         oneOne_TextField.setBackground(new Color(240, 240, 240));
+        hone_TextField.setText("");
+        hone_TextField.setBackground(new Color(240, 240, 240));
     }
 
     private void clearResult() {
@@ -200,6 +212,8 @@ public class MainGUI extends javax.swing.JFrame {
         addressInfo_Label = new javax.swing.JLabel();
         address_TextField = new javax.swing.JTextField();
         renew_Button = new javax.swing.JButton();
+        honeInfo_Label = new javax.swing.JLabel();
+        hone_TextField = new javax.swing.JTextField();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
@@ -300,21 +314,32 @@ public class MainGUI extends javax.swing.JFrame {
         expirationDateInfo_Label.setText("Udløbsdato:");
 
         firstname_TextField.setEditable(false);
+        firstname_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         middlename_TextField.setEditable(false);
+        middlename_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         lastname_TextField.setEditable(false);
+        lastname_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         birthday_TextField.setEditable(false);
+        birthday_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         expirationDate_TextField.setEditable(false);
+        expirationDate_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         oneOneInfo_Label.setText("1-1:");
 
         oneOne_TextField.setEditable(false);
+        oneOne_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         enroll_Button.setText("Indskriv");
         enroll_Button.setEnabled(false);
+        enroll_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enroll_ButtonActionPerformed(evt);
+            }
+        });
 
         requestQuarantine_Button.setText("Anmod om karantæne");
         requestQuarantine_Button.setEnabled(false);
@@ -325,6 +350,7 @@ public class MainGUI extends javax.swing.JFrame {
         addressInfo_Label.setText("Adresse:");
 
         address_TextField.setEditable(false);
+        address_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         renew_Button.setText("Forny");
         renew_Button.setEnabled(false);
@@ -333,6 +359,11 @@ public class MainGUI extends javax.swing.JFrame {
                 renew_ButtonActionPerformed(evt);
             }
         });
+
+        honeInfo_Label.setText("Høne:");
+
+        hone_TextField.setEditable(false);
+        hone_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout details_PaneLayout = new javax.swing.GroupLayout(details_Pane);
         details_Pane.setLayout(details_PaneLayout);
@@ -350,16 +381,18 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                         .addComponent(requestQuarantine_Button))
                     .addGroup(details_PaneLayout.createSequentialGroup()
-                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(expirationDateInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(oneOneInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addressInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(honeInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(middlenameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(firstnameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lastnameInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(birthdayInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(expirationDateInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(oneOneInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addressInfo_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hone_TextField)
                             .addComponent(firstname_TextField)
                             .addComponent(middlename_TextField)
                             .addComponent(lastname_TextField)
@@ -409,7 +442,11 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressInfo_Label)
-                            .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(honeInfo_Label)
+                            .addComponent(hone_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enroll_Button)
@@ -733,6 +770,11 @@ public class MainGUI extends javax.swing.JFrame {
         resetUserPasswordDIA.setUser(loginHandler.getLoggedInUser());
         resetUserPasswordDIA.setVisible(true);
     }//GEN-LAST:event_resetPassword_MenuItemActionPerformed
+
+    private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
+        enrollPersonDIA.setPerson(selectedPerson);
+        enrollPersonDIA.setVisible(true);
+    }//GEN-LAST:event_enroll_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -796,6 +838,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu file_Menu;
     private javax.swing.JLabel firstnameInfo_Label;
     private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel honeInfo_Label;
+    private javax.swing.JTextField hone_TextField;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

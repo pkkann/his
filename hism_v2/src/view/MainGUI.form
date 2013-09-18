@@ -280,7 +280,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="enroll_Button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="renew_Button" min="-2" max="-2" attributes="0"/>
@@ -290,17 +290,19 @@
                               <Component id="requestQuarantine_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="honeInfo_Label" max="32767" attributes="0"/>
                                   <Component id="middlenameInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="firstnameInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lastnameInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="birthdayInfo_Label" alignment="0" max="32767" attributes="0"/>
                                   <Component id="expirationDateInfo_Label" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="oneOneInfo_Label" max="32767" attributes="0"/>
-                                  <Component id="addressInfo_Label" max="32767" attributes="0"/>
+                                  <Component id="oneOneInfo_Label" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="addressInfo_Label" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="hone_TextField" max="32767" attributes="0"/>
                                   <Component id="firstname_TextField" max="32767" attributes="0"/>
                                   <Component id="middlename_TextField" max="32767" attributes="0"/>
                                   <Component id="lastname_TextField" alignment="0" max="32767" attributes="0"/>
@@ -364,6 +366,11 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="addressInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="address_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="honeInfo_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hone_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -438,26 +445,41 @@
             <Component class="javax.swing.JTextField" name="firstname_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="middlename_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="lastname_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="birthday_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="expirationDate_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="oneOneInfo_Label">
@@ -468,6 +490,9 @@
             <Component class="javax.swing.JTextField" name="oneOne_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="enroll_Button">
@@ -475,6 +500,9 @@
                 <Property name="text" type="java.lang.String" value="Indskriv"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enroll_ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="requestQuarantine_Button">
               <Properties>
@@ -496,6 +524,9 @@
             <Component class="javax.swing.JTextField" name="address_TextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="renew_Button">
@@ -506,6 +537,19 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="renew_ButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="honeInfo_Label">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="H&#xf8;ne:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="hone_TextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

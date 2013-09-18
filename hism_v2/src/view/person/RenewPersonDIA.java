@@ -63,6 +63,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
                 selectedPerson.setPicturePath(picturePath);
                 personHandler.savePerson(selectedPerson, pictureChanged);
                 JOptionPane.showMessageDialog(this, "Personen blev fornyet", "Fornyelse", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Udløbsdatoen kan ikke være før eller lig den nuværende dato", "Fejl", JOptionPane.ERROR_MESSAGE);
             }
@@ -292,7 +293,6 @@ public class RenewPersonDIA extends javax.swing.JDialog {
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
         renew();
-        dispose();
     }//GEN-LAST:event_renew_ButtonActionPerformed
 //
 //    /**
