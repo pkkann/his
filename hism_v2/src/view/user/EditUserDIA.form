@@ -113,6 +113,8 @@
                                   <Group type="102" attributes="0">
                                       <Component id="admin_CheckBox" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="resetPassword_Button" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="save_Button" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -149,7 +151,10 @@
                       <Component id="info_Label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="save_Button" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="save_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="resetPassword_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="reserve_CheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="admin_CheckBox" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -228,6 +233,15 @@
                 <Property name="text" type="java.lang.String" value="Du kan ikke fjerne den sidste admin"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="resetPassword_Button">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reset kode"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetPassword_ButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="result_Pane">
@@ -246,7 +260,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="result_ScrollPane" pref="164" max="32767" attributes="0"/>
+                      <Component id="result_ScrollPane" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

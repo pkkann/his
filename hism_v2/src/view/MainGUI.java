@@ -23,6 +23,7 @@ import view.person.RenewPersonDIA;
 import view.user.CreateUserDIA;
 import view.user.EditUserDIA;
 import view.user.RemoveUserDIA;
+import view.user.ResetUserPasswordDIA;
 
 /**
  *
@@ -40,8 +41,9 @@ public class MainGUI extends javax.swing.JFrame {
     private RemovePersonDIA removePersonDIA;
     private RenewPersonDIA renewPersonDIA;
     private Person selectedPerson;
+    private ResetUserPasswordDIA resetUserPasswordDIA;
 
-    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA, RenewPersonDIA renewPersonDIA) {
+    public MainGUI(LoginHandler loginHandler, PersonHandler personHandler, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA, CreatePersonDIA createPersonDIA, EditPersonDIA editPersonDIA, RemovePersonDIA removePersonDIA, RenewPersonDIA renewPersonDIA, ResetUserPasswordDIA resetUserPasswordDIA) {
         initComponents();
         this.loginHandler = loginHandler;
         this.personHandler = personHandler;
@@ -52,6 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editPersonDIA = editPersonDIA;
         this.removePersonDIA = removePersonDIA;
         this.renewPersonDIA = renewPersonDIA;
+        this.resetUserPasswordDIA = resetUserPasswordDIA;
         setTitle(HISM.title + " - " + HISM.version);
     }
 
@@ -229,6 +232,8 @@ public class MainGUI extends javax.swing.JFrame {
         createUser_MenuItem = new javax.swing.JMenuItem();
         editUser_MenuItem = new javax.swing.JMenuItem();
         deleteUser_MenuItem = new javax.swing.JMenuItem();
+        bruger_Menu = new javax.swing.JMenu();
+        resetPassword_MenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -621,6 +626,18 @@ public class MainGUI extends javax.swing.JFrame {
 
         menuBar_MenuBar.add(administration_Menu);
 
+        bruger_Menu.setText("Bruger");
+
+        resetPassword_MenuItem.setText("Nulstil kode");
+        resetPassword_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPassword_MenuItemActionPerformed(evt);
+            }
+        });
+        bruger_Menu.add(resetPassword_MenuItem);
+
+        menuBar_MenuBar.add(bruger_Menu);
+
         setJMenuBar(menuBar_MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -705,11 +722,17 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
         editUserDIA.setVisible(true);
+        setUser();
     }//GEN-LAST:event_editUser_MenuItemActionPerformed
 
     private void editPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_MenuItemActionPerformed
         editPersonDIA.setVisible(true);
     }//GEN-LAST:event_editPerson_MenuItemActionPerformed
+
+    private void resetPassword_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPassword_MenuItemActionPerformed
+        resetUserPasswordDIA.setUser(loginHandler.getLoggedInUser());
+        resetUserPasswordDIA.setVisible(true);
+    }//GEN-LAST:event_resetPassword_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -754,6 +777,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel birthdayInfo_Label;
     private javax.swing.JTextField birthday_TextField;
     private javax.swing.JPanel bottom_Pane;
+    private javax.swing.JMenu bruger_Menu;
     private javax.swing.JMenuItem changeUser_MenuItem;
     private javax.swing.JMenuItem createPerson_MenuItem;
     private javax.swing.JMenuItem createUser_MenuItem;
@@ -793,6 +817,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton requestQuarantine_Button;
     private javax.swing.JLabel reserveInfo_Label;
     private javax.swing.JLabel reserve_Label;
+    private javax.swing.JMenuItem resetPassword_MenuItem;
     private javax.swing.JMenuItem reset_MenuItem;
     private javax.swing.JList result_List;
     private javax.swing.JPanel result_Pane;

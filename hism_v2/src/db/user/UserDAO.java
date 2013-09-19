@@ -100,8 +100,16 @@ public class UserDAO {
         String lastname = u.getLastname();
         String email = u.getEmail();
         String password = u.getPassword();
+        int admin = 0;
+        if(u.isAdministrator()) {
+            admin = 1;
+        }
+        int reserve = 0;
+        if(u.isReserve()) {
+            reserve = 1;
+        }
         
-        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+"' WHERE id = "+id+"");
+        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+", administrator = "+admin+", reserve = "+reserve+"' WHERE id = "+id+"");
         s.close();
     }
 }

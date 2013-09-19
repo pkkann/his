@@ -8,6 +8,7 @@ import control.user.UserHandler;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import login.LoginHandler;
 import model.User;
 
 /**
@@ -18,11 +19,15 @@ public class EditUserDIA extends javax.swing.JDialog {
 
     private User selectedUser;
     private UserHandler userHandler;
+    private ResetUserPasswordDIA resetUserPasswordDIA;
+    private LoginHandler loginHandler;
 
-    public EditUserDIA(java.awt.Frame parent, boolean modal, UserHandler userHandler) {
+    public EditUserDIA(java.awt.Frame parent, boolean modal, UserHandler userHandler, ResetUserPasswordDIA resetUserPasswordDIA, LoginHandler loginHandler) {
         super(parent, modal);
         initComponents();
         this.userHandler = userHandler;
+        this.resetUserPasswordDIA = resetUserPasswordDIA;
+        this.loginHandler = loginHandler;
         info_Label.setVisible(false);
     }
 
@@ -48,15 +53,18 @@ public class EditUserDIA extends javax.swing.JDialog {
         reserve_CheckBox.setEnabled(true);
         reserve_CheckBox.setSelected(u.isReserve());
 
-        if (userHandler.countAdmins() > 1) {
+        if (userHandler.countAdmins() > 1 || !u.isAdministrator()) {
+            info_Label.setVisible(false);
             admin_CheckBox.setEnabled(true);
         } else {
             info_Label.setVisible(true);
+            admin_CheckBox.setEnabled(false);
         }
 
         admin_CheckBox.setSelected(u.isAdministrator());
 
         save_Button.setEnabled(true);
+        resetPassword_Button.setEnabled(true);
     }
 
     private void cleanUser() {
@@ -73,6 +81,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         admin_CheckBox.setEnabled(false);
         admin_CheckBox.setSelected(false);
         save_Button.setEnabled(false);
+        resetPassword_Button.setEnabled(false);
         info_Label.setVisible(false);
     }
 
@@ -107,6 +116,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         admin_CheckBox = new javax.swing.JCheckBox();
         save_Button = new javax.swing.JButton();
         info_Label = new javax.swing.JLabel();
+        resetPassword_Button = new javax.swing.JButton();
         result_Pane = new javax.swing.JPanel();
         result_ScrollPane = new javax.swing.JScrollPane();
         list_List = new javax.swing.JList();
@@ -160,6 +170,14 @@ public class EditUserDIA extends javax.swing.JDialog {
         info_Label.setForeground(new java.awt.Color(255, 0, 0));
         info_Label.setText("Du kan ikke fjerne den sidste admin");
 
+        resetPassword_Button.setText("Reset kode");
+        resetPassword_Button.setEnabled(false);
+        resetPassword_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPassword_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout detail_PaneLayout = new javax.swing.GroupLayout(detail_Pane);
         detail_Pane.setLayout(detail_PaneLayout);
         detail_PaneLayout.setHorizontalGroup(
@@ -189,6 +207,8 @@ public class EditUserDIA extends javax.swing.JDialog {
                             .addGroup(detail_PaneLayout.createSequentialGroup()
                                 .addComponent(admin_CheckBox)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(resetPassword_Button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(save_Button)))))
                 .addContainerGap())
         );
@@ -215,7 +235,9 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addComponent(info_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(save_Button)
+                    .addGroup(detail_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(save_Button)
+                        .addComponent(resetPassword_Button))
                     .addComponent(reserve_CheckBox)
                     .addComponent(admin_CheckBox))
                 .addContainerGap())
@@ -242,7 +264,7 @@ public class EditUserDIA extends javax.swing.JDialog {
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(result_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(result_ScrollPane)
                 .addContainerGap())
         );
 
@@ -356,8 +378,18 @@ public class EditUserDIA extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt", "Fejl", JOptionPane.ERROR_MESSAGE);
         }
-                
+
     }//GEN-LAST:event_save_ButtonActionPerformed
+
+    private void resetPassword_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPassword_ButtonActionPerformed
+        if (!selectedUser.equals(loginHandler.getLoggedInUser())) {
+            resetUserPasswordDIA.enableAdminMode();
+            resetUserPasswordDIA.setUser(selectedUser);
+            resetUserPasswordDIA.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Du skal nulstille din egen kode via menuen Bruger -> nulstil kode", "Fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_resetPassword_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -416,6 +448,7 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JLabel middlenameInfo_Label;
     private javax.swing.JTextField middlename_TextField;
     private javax.swing.JCheckBox reserve_CheckBox;
+    private javax.swing.JButton resetPassword_Button;
     private javax.swing.JPanel result_Pane;
     private javax.swing.JScrollPane result_ScrollPane;
     private javax.swing.JButton save_Button;
