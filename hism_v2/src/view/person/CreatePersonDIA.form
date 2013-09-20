@@ -305,6 +305,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="oneOne_CheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="hone_CheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="cancel_Button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -321,6 +323,7 @@
                           <Component id="oneOne_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="create_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cancel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hone_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -348,6 +351,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancel_ButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="hone_CheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="H&#xf8;ne"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -427,6 +427,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="oneOne_CheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="hone_CheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="save_Button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -439,7 +441,10 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="save_Button" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="oneOne_CheckBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="oneOne_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hone_CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -459,6 +464,12 @@
             <Component class="javax.swing.JCheckBox" name="oneOne_CheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="1-1"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="hone_CheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="H&#xf8;ne"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>

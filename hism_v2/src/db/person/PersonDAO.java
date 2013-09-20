@@ -30,13 +30,12 @@ public class PersonDAO {
     public int insertPerson(Person p) throws SQLException {
         Statement s = conn.createStatement();
 
-        int id = p.getId();
         String firstname = p.getFirstname();
         String middlename = p.getMiddlename();
         String lastname = p.getLastname();
         String address = p.getAddress();
-        String birthday = p.getBirthdayDate().toString();
-        String expirationDate = p.getExpirationDate().toString();
+        String birthday = ADate.formatADate(p.getBirthdayDate(), "");
+        String expirationDate = ADate.formatADate(p.getExpirationDate(), "");
         File picturePathF = p.getPicturePath();
         String picturePath = FileTool.getDefaultFolder() + "/" + picturePathF.getName();
         int quarantine = 0;
@@ -45,7 +44,7 @@ public class PersonDAO {
             quarantineExpirationDate = p.getQuarantineExpirationDate().toString();
         }
         int oneOne = 0;
-        String creationDate = p.getCreationDate().toString();
+        String creationDate = ADate.formatADate(p.getCreationDate(), "");
         if (p.isQuarantine()) {
             quarantine = 1;
         }
@@ -56,9 +55,13 @@ public class PersonDAO {
         if (p.isEnrolled()) {
             enrolled = 1;
         }
+        int hone = 0;
+        if(p.isHone()) {
+            hone = 1;
+        }
 
-        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, enrolled) "
-                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+enrolled+"')");
+        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, enrolled, hone) "
+                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+enrolled+"', '"+hone+"')");
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         int idback = rs.getInt(1);
@@ -71,13 +74,13 @@ public class PersonDAO {
     public void savePerson(Person p) throws SQLException {
         Statement s = conn.createStatement();
 
-        int id = p.getId();
+        int idperson = p.getId();
         String firstname = p.getFirstname();
         String middlename = p.getMiddlename();
         String lastname = p.getLastname();
         String address = p.getAddress();
-        String birthday = p.getBirthdayDate().toString();
-        String expirationDate = p.getExpirationDate().toString();
+        String birthday = ADate.formatADate(p.getBirthdayDate(), "");
+        String expirationDate = ADate.formatADate(p.getExpirationDate(), "");
         File picturePathF = p.getPicturePath();
         String picturePath = FileTool.getDefaultFolder() + "/" + picturePathF.getName();
         int quarantine = 0;
@@ -86,7 +89,6 @@ public class PersonDAO {
             quarantineExpirationDate = p.getQuarantineExpirationDate().toString();
         }
         int oneOne = 0;
-        String creationDate = p.getCreationDate().toString();
         if (p.isQuarantine()) {
             quarantine = 1;
         }
@@ -97,8 +99,13 @@ public class PersonDAO {
         if(p.isEnrolled()) {
             enrolled = 1;
         }
+        int hone = 0; {
+        if(p.isHone()) {
+            hone = 1;
+        }
+    }
 
-        s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+", enrolled = "+enrolled+"");
+        s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+", enrolled = "+enrolled+", hone= "+hone+" WHERE idperson = "+idperson+"");
         s.close();
     }
 
@@ -108,7 +115,7 @@ public class PersonDAO {
 
         ResultSet rs = s.executeQuery("SELECT * FROM person");
         while (rs.next()) {
-            int id = rs.getInt("id");
+            int idperson = rs.getInt("idperson");
             String firstname = rs.getString("firstname");
             String middlename = rs.getString("middlename");
             String lastname = rs.getString("lastname");
@@ -133,12 +140,17 @@ public class PersonDAO {
             if(rs.getInt("enrolled") == 1) {
                 enrolled = true;
             }
+            boolean hone = false;
+            if(rs.getInt("hone") == 1) {
+                hone = true;
+            }
 
             Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
-            p.setId(id);
+            p.setId(idperson);
             p.setQuarantine(quarantine);
             p.setQuarantineExpirationDate(quarantineExpirationDate);
             p.setEnrolled(enrolled);
+            p.setHone(hone);
             persons.add(p);
 
         }
@@ -149,9 +161,9 @@ public class PersonDAO {
     
     public void deletePerson(Person p) throws SQLException {
         Statement s = conn.createStatement();
-        int id = p.getId();
+        int idperson = p.getId();
         
-        s.execute("DELETE FROM person WHERE id = "+id+"");
+        s.execute("DELETE FROM person WHERE idperson = "+idperson+"");
         s.close();
     }
 }

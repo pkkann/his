@@ -70,8 +70,9 @@ public class PersonHandler {
         return null;
     }
 
-    public void createPerson(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne) {
+    public void createPerson(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne, boolean hone) {
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, picturePath, creationDate, oneOne);
+        p.setHone(hone);
         personRegister.add(p);
         File newPicturePath = new File(FileTool.getDefaultFolder() + "\\personPicture" + pictureHandler.getpictureID() + ".jpg");
         FileTool.copyFile(picturePath, newPicturePath);

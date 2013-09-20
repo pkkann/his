@@ -27,13 +27,12 @@ public class UserDAO {
 
     public int insertUser(User u) throws SQLException {
         Statement s = conn.createStatement();
-        int id = u.getId();
         String email = u.getEmail();
         String password = u.getPassword();
         String firstname = u.getFirstname();
         String middlename = u.getMiddlename();
         String lastname = u.getLastname();
-        String creationDate = u.getCreationDate().toString();
+        String creationDate = ADate.formatADate(u.getCreationDate(), "");
         int administrator = 0;
         int reserve = 0;
 
@@ -60,7 +59,7 @@ public class UserDAO {
         
         ResultSet rs = s.executeQuery("SELECT * FROM user");
         while(rs.next()) {
-            int id = rs.getInt("id");
+            int iduser = rs.getInt("iduser");
             String email = rs.getString("email");
             String password = rs.getString("password");
             String firstname = rs.getString("firstname");
@@ -76,7 +75,7 @@ public class UserDAO {
                 reserve = true;
             }
             User u = new User(email, password, firstname, middlename, lastname, creationDate, administrator, reserve);
-            u.setId(id);
+            u.setId(iduser);
             users.add(u);
         }
         rs.close();
@@ -87,14 +86,14 @@ public class UserDAO {
     public void deleteUser(User u) throws SQLException {
         Statement s = conn.createStatement();
         
-        s.execute("DELETE FROM user WHERE id = '"+u.getId()+"'");
+        s.execute("DELETE FROM user WHERE iduser = '"+u.getId()+"'");
         s.close();
     }
     
     public void saveUser(User u) throws SQLException {
         Statement s = conn.createStatement();
         
-        int id = u.getId();
+        int iduser = u.getId();
         String firstname = u.getFirstname();
         String middlename = u.getMiddlename();
         String lastname = u.getLastname();
@@ -109,7 +108,7 @@ public class UserDAO {
             reserve = 1;
         }
         
-        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+"', administrator = "+admin+", reserve = "+reserve+" WHERE id = "+id+"");
+        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+"', administrator = "+admin+", reserve = "+reserve+" WHERE iduser = "+iduser+"");
         s.close();
     }
 }

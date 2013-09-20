@@ -63,6 +63,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             Logger.getLogger(EditPersonDIA.class.getName()).log(Level.SEVERE, null, ex);
         }
         oneOne_CheckBox.setSelected(p.isOneOne());
+        hone_CheckBox.setSelected(p.isHone());
 
         firstname_TextField.setEnabled(true);
         middlename_TextField.setEnabled(true);
@@ -73,6 +74,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         address_TextField.setEnabled(true);
         choose_Button.setEnabled(true);
         oneOne_CheckBox.setEnabled(true);
+        hone_CheckBox.setEnabled(true);
         save_Button.setEnabled(true);
     }
 
@@ -95,6 +97,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         address_TextField.setEnabled(false);
         choose_Button.setEnabled(false);
         oneOne_CheckBox.setEnabled(false);
+        hone_CheckBox.setEnabled(false);
         save_Button.setEnabled(false);
 
         firstname_TextField.setText("");
@@ -106,6 +109,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         address_TextField.setText("");
         picturepane_PicturePane.setPicture(null);
         oneOne_CheckBox.setSelected(false);
+        hone_CheckBox.setSelected(false);
 
         pictureChanged = false;
     }
@@ -163,6 +167,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         save_Pane = new javax.swing.JPanel();
         save_Button = new javax.swing.JButton();
         oneOne_CheckBox = new javax.swing.JCheckBox();
+        hone_CheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -394,6 +399,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
         oneOne_CheckBox.setText("1-1");
         oneOne_CheckBox.setEnabled(false);
 
+        hone_CheckBox.setText("Høne");
+        hone_CheckBox.setEnabled(false);
+
         javax.swing.GroupLayout save_PaneLayout = new javax.swing.GroupLayout(save_Pane);
         save_Pane.setLayout(save_PaneLayout);
         save_PaneLayout.setHorizontalGroup(
@@ -401,6 +409,8 @@ public class EditPersonDIA extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, save_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(oneOne_CheckBox)
+                .addGap(18, 18, 18)
+                .addComponent(hone_CheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_Button)
                 .addContainerGap())
@@ -411,7 +421,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(save_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(save_Button, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(oneOne_CheckBox, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, save_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(oneOne_CheckBox)
+                        .addComponent(hone_CheckBox)))
                 .addContainerGap())
         );
 
@@ -508,6 +520,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             selectedPerson.setLastname(lastname_TextField.getText());
                             selectedPerson.setBirthdayDate(new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_year_TextField.getText())));
                             selectedPerson.setAddress(address_TextField.getText());
+                            selectedPerson.setHone(hone_CheckBox.isSelected());
                             boolean wasOneone = selectedPerson.isOneOne();
                             selectedPerson.setOneOne(oneOne_CheckBox.isSelected());
                             if (selectedPerson.isOneOne()) {
@@ -608,6 +621,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JLabel firstnameInfo_Label;
     private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lastnameInfo_Label;

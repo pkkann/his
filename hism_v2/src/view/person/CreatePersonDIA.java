@@ -50,8 +50,10 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     public void setUser() {
         if (loginHandler.getLoggedInUser().isAdministrator()) {
             oneOne_CheckBox.setEnabled(true);
+            hone_CheckBox.setEnabled(true);
         } else {
             oneOne_CheckBox.setEnabled(false);
+            hone_CheckBox.setEnabled(false);
         }
     }
 
@@ -67,6 +69,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         expirationDate_year_TextField.setText("");
         address_TextField.setText("");
         oneOne_CheckBox.setSelected(false);
+        hone_CheckBox.setSelected(false);
         picturePath = null;
         picturePane_PicturePane.setPicture(null);
     }
@@ -109,6 +112,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         oneOne_CheckBox = new javax.swing.JCheckBox();
         create_Button = new javax.swing.JButton();
         cancel_Button = new javax.swing.JButton();
+        hone_CheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -272,6 +276,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             }
         });
 
+        hone_CheckBox.setText("Høne");
+
         javax.swing.GroupLayout pane3_PaneLayout = new javax.swing.GroupLayout(pane3_Pane);
         pane3_Pane.setLayout(pane3_PaneLayout);
         pane3_PaneLayout.setHorizontalGroup(
@@ -279,6 +285,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             .addGroup(pane3_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(oneOne_CheckBox)
+                .addGap(18, 18, 18)
+                .addComponent(hone_CheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancel_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,7 +300,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                 .addGroup(pane3_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(oneOne_CheckBox)
                     .addComponent(create_Button)
-                    .addComponent(cancel_Button))
+                    .addComponent(cancel_Button)
+                    .addComponent(hone_CheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -358,13 +367,14 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                                     ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
                                     String address = address_TextField.getText();
                                     boolean oneOne = oneOne_CheckBox.isSelected();
+                                    boolean hone = hone_CheckBox.isSelected();
                                     Calendar c = Calendar.getInstance();
                                     ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
                                     if(oneOne) {
                                         expirationDate = new ADate(11, 11, 1111);
                                         JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
                                     }
-                                    personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
+                                    personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne, hone);
                                     JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
                                     dispose();
                                 } catch (NumberFormatException ex) {
@@ -461,6 +471,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JLabel firstnameInfo_Label;
     private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JCheckBox hone_CheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

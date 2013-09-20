@@ -27,6 +27,7 @@ public class Person {
     private boolean oneOne;
     private ADate creationDate;
     private boolean enrolled;
+    private boolean hone;
 
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         this.firstname = firstname;
@@ -41,6 +42,7 @@ public class Person {
         this.oneOne = false;
         this.expired = false;
         this.enrolled = false;
+        this.hone = false;
     }
     
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne) {
@@ -56,6 +58,7 @@ public class Person {
         this.oneOne = oneOne;
         this.expired = false;
         this.enrolled = false;
+        this.hone = false;
     }
 
     public int getId() {
@@ -168,6 +171,14 @@ public class Person {
 
     public void setEnrolled(boolean enrolled) {
         this.enrolled = enrolled;
+    }
+
+    public boolean isHone() {
+        return hone;
+    }
+
+    public void setHone(boolean hone) {
+        this.hone = hone;
     }
     
 }
