@@ -52,9 +52,13 @@ public class PersonDAO {
         if (p.isOneOne()) {
             oneOne = 1;
         }
+        int enrolled = 0;
+        if (p.isEnrolled()) {
+            enrolled = 1;
+        }
 
-        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate) "
-                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "')");
+        s.executeUpdate("INSERT INTO person (firstname, middlename, lastname, address, birthday, expirationdate, picturepath, quarantine, quarantineexpirationdate, oneone, creationdate, enrolled) "
+                + "VALUES('" + firstname + "', '" + middlename + "', '" + lastname + "', '" + address + "', '" + birthday + "', '" + expirationDate + "', '" + picturePath + "', '" + quarantine + "', '" + quarantineExpirationDate + "', '" + oneOne + "', '" + creationDate + "', '"+enrolled+"')");
         ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         int idback = rs.getInt(1);
@@ -89,8 +93,12 @@ public class PersonDAO {
         if (p.isOneOne()) {
             oneOne = 1;
         }
+        int enrolled = 0;
+        if(p.isEnrolled()) {
+            enrolled = 1;
+        }
 
-        s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+"");
+        s.executeUpdate("UPDATE person SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', address = '"+address+"', birthday = '"+birthday+"', expirationdate = '"+expirationDate+"', picturepath = '"+picturePath+"', oneone = "+oneOne+", quarantine = "+quarantine+", enrolled = "+enrolled+"");
         s.close();
     }
 
@@ -121,11 +129,16 @@ public class PersonDAO {
             if(rs.getInt("quarantine") == 1) {
                 quarantine = true;
             }
+            boolean enrolled = false;
+            if(rs.getInt("enrolled") == 1) {
+                enrolled = true;
+            }
 
             Person p = new Person(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne);
             p.setId(id);
             p.setQuarantine(quarantine);
             p.setQuarantineExpirationDate(quarantineExpirationDate);
+            p.setEnrolled(enrolled);
             persons.add(p);
 
         }

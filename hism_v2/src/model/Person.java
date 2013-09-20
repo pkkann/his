@@ -26,6 +26,7 @@ public class Person {
     private ADate quarantineExpirationDate;
     private boolean oneOne;
     private ADate creationDate;
+    private boolean enrolled;
 
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate) {
         this.firstname = firstname;
@@ -36,9 +37,10 @@ public class Person {
         this.expirationDate = expirationDate;
         this.picturePath = picturePath;
         this.creationDate = creationDate;
-        quarantine = false;
-        oneOne = false;
-        expired = false;
+        this.quarantine = false;
+        this.oneOne = false;
+        this.expired = false;
+        this.enrolled = false;
     }
     
     public Person(String firstname, String middlename, String lastname, String address, ADate birthdayDate, ADate expirationDate, File picturePath, ADate creationDate, boolean oneOne) {
@@ -50,9 +52,10 @@ public class Person {
         this.expirationDate = expirationDate;
         this.picturePath = picturePath;
         this.creationDate = creationDate;
-        quarantine = false;
+        this.quarantine = false;
         this.oneOne = oneOne;
-        expired = false;
+        this.expired = false;
+        this.enrolled = false;
     }
 
     public int getId() {
@@ -158,6 +161,13 @@ public class Person {
     public void setExpired(boolean expired) {
         this.expired = expired;
     }
-    
+
+    public boolean isEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(boolean enrolled) {
+        this.enrolled = enrolled;
+    }
     
 }

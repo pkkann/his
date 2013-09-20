@@ -109,7 +109,7 @@ public class UserDAO {
             reserve = 1;
         }
         
-        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+", administrator = "+admin+", reserve = "+reserve+"' WHERE id = "+id+"");
+        s.executeUpdate("UPDATE user SET firstname = '"+firstname+"', middlename = '"+middlename+"', lastname = '"+lastname+"', email = '"+email+"', password = '"+password+"', administrator = "+admin+", reserve = "+reserve+" WHERE id = "+id+"");
         s.close();
     }
 }
