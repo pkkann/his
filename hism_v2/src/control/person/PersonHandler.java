@@ -8,7 +8,10 @@ import control.picture.PictureHandler;
 import date.ADate;
 import db.person.PersonDAO;
 import file.FileTool;
+import file.csv.CSVTool;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,19 +35,19 @@ public class PersonHandler {
         this.personRegister = personRegister;
         this.pictureHandler = pictureHandler;
     }
-    
+
     public void removeGuest(Person p, int id) {
         p.removeGuest(p.getGuestByID(id));
         removeGuestFromDB(id);
     }
-    
+
     public void removeAllGuests(Person p) {
-        for(Guest g : p.getGuests()) {
+        for (Guest g : p.getGuests()) {
             removeGuestFromDB(g.getId());
         }
         p.setGuests(new ArrayList<Guest>());
     }
-    
+
     public void removeGuestFromDB(int id) {
         try {
             personDAO.removeGuest(id);
@@ -52,7 +55,7 @@ public class PersonHandler {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void addGuestToPerson(Person p, String firstname, String middlename, String lastname, ADate birthday) {
         Guest g = new Guest(firstname, middlename, lastname, birthday, new ADate());
         p.addGuest(g);
@@ -170,5 +173,84 @@ public class PersonHandler {
         } catch (SQLException ex) {
             Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void generateReport() {
+        ArrayList<Person> enrolled = new ArrayList<>();
+        for (Person p : personRegister.getPersons()) {
+            if (p.isEnrolled()) {
+                enrolled.add(p);
+            }
+        }
+
+        ArrayList<String[]> data = new ArrayList<>();
+        String[] f = {"Total: " + enrolled.size()};
+        data.add(f);
+        for (Person p : enrolled) {
+
+            String hone = "Nej";
+            if (p.isHone()) {
+                hone = "Ja";
+            }
+            String gs1 = "";
+            String gs2 = "";
+            String gs3 = "";
+            String gs4 = "";
+            String gs5 = "";
+            int gSize = p.getGuests().size();
+            if (gSize == 1) {
+                Guest g1 = p.getGuest(0);
+                gs1 = g1.getFirstname() + " " + g1.getLastname() + ": " + ADate.formatADate(g1.getBirthday(), "/");
+            } else if (gSize == 2) {
+                Guest g1 = p.getGuest(0);
+                Guest g2 = p.getGuest(1);
+                gs1 = g1.getFirstname() + " " + g1.getLastname() + ": " + ADate.formatADate(g1.getBirthday(), "/");
+                gs2 = g2.getFirstname() + " " + g2.getLastname() + ": " + ADate.formatADate(g2.getBirthday(), "/");
+            } else if (gSize == 3) {
+                Guest g1 = p.getGuest(0);
+                Guest g2 = p.getGuest(1);
+                Guest g3 = p.getGuest(2);
+                gs1 = g1.getFirstname() + " " + g1.getLastname() + ": " + ADate.formatADate(g1.getBirthday(), "/");
+                gs2 = g2.getFirstname() + " " + g2.getLastname() + ": " + ADate.formatADate(g2.getBirthday(), "/");
+                gs3 = g3.getFirstname() + " " + g3.getLastname() + ": " + ADate.formatADate(g3.getBirthday(), "/");
+            } else if (gSize == 4) {
+                Guest g1 = p.getGuest(0);
+                Guest g2 = p.getGuest(1);
+                Guest g3 = p.getGuest(2);
+                Guest g4 = p.getGuest(3);
+                gs1 = g1.getFirstname() + " " + g1.getLastname() + ": " + ADate.formatADate(g1.getBirthday(), "/");
+                gs2 = g2.getFirstname() + " " + g2.getLastname() + ": " + ADate.formatADate(g2.getBirthday(), "/");
+                gs3 = g3.getFirstname() + " " + g3.getLastname() + ": " + ADate.formatADate(g3.getBirthday(), "/");
+                gs4 = g4.getFirstname() + " " + g4.getLastname() + ": " + ADate.formatADate(g4.getBirthday(), "/");
+            } else if (gSize == 5) {
+                Guest g1 = p.getGuest(0);
+                Guest g2 = p.getGuest(1);
+                Guest g3 = p.getGuest(2);
+                Guest g4 = p.getGuest(3);
+                Guest g5 = p.getGuest(4);
+                gs1 = g1.getFirstname() + " " + g1.getLastname() + ": " + ADate.formatADate(g1.getBirthday(), "/");
+                gs2 = g2.getFirstname() + " " + g2.getLastname() + ": " + ADate.formatADate(g2.getBirthday(), "/");
+                gs3 = g3.getFirstname() + " " + g3.getLastname() + ": " + ADate.formatADate(g3.getBirthday(), "/");
+                gs4 = g4.getFirstname() + " " + g4.getLastname() + ": " + ADate.formatADate(g4.getBirthday(), "/");
+                gs5 = g5.getFirstname() + " " + g5.getLastname() + ": " + ADate.formatADate(g5.getBirthday(), "/");
+            }
+
+            String[] s = {p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), ADate.formatADate(p.getBirthdayDate(), "/"), gs1, gs2, gs3, gs4, gs5};
+            data.add(s);
+
+        }
+        
+        Calendar c = Calendar.getInstance();
+        ADate date = new ADate();
+        String time = "" + c.get(Calendar.HOUR_OF_DAY) + c.get(Calendar.MINUTE);
+        try {
+            CSVTool.generateReport(data, FileTool.reportDir + "/report_" + ADate.formatADate(date, "") + "_" + time);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }
 }

@@ -325,24 +325,18 @@ public class MainGUI extends javax.swing.JFrame {
         expirationDateInfo_Label.setText("Udløbsdato:");
 
         firstname_TextField.setEditable(false);
-        firstname_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         middlename_TextField.setEditable(false);
-        middlename_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         lastname_TextField.setEditable(false);
-        lastname_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         birthday_TextField.setEditable(false);
-        birthday_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         expirationDate_TextField.setEditable(false);
-        expirationDate_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         oneOneInfo_Label.setText("1-1:");
 
         oneOne_TextField.setEditable(false);
-        oneOne_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         enroll_Button.setText("Indskrivning");
         enroll_Button.setEnabled(false);
@@ -371,7 +365,6 @@ public class MainGUI extends javax.swing.JFrame {
         addressInfo_Label.setText("Adresse:");
 
         address_TextField.setEditable(false);
-        address_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         renew_Button.setText("Forny");
         renew_Button.setEnabled(false);
@@ -384,7 +377,6 @@ public class MainGUI extends javax.swing.JFrame {
         honeInfo_Label.setText("Høne:");
 
         hone_TextField.setEditable(false);
-        hone_TextField.setBackground(new java.awt.Color(240, 240, 240));
 
         lamp_Pane.setBackground(new java.awt.Color(51, 51, 51));
         lamp_Pane.setPreferredSize(new java.awt.Dimension(0, 4));
@@ -435,7 +427,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(details_PaneLayout.createSequentialGroup()
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lamp_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(enroll_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(enroll_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
                         .addGroup(details_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(details_PaneLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -611,6 +603,11 @@ public class MainGUI extends javax.swing.JFrame {
         file_Menu.setText("Filer");
 
         report_MenuItem.setText("Gem rapport");
+        report_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_MenuItemActionPerformed(evt);
+            }
+        });
         file_Menu.add(report_MenuItem);
 
         reset_MenuItem.setText("Daglig nulstilling");
@@ -813,6 +810,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void kick_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kick_ButtonActionPerformed
         JOptionPane.showMessageDialog(this, "Funktion ikke implementeret endnu.\nSkriv det ned på et stykke papir", "Fejl", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_kick_ButtonActionPerformed
+
+    private void report_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_MenuItemActionPerformed
+        personHandler.generateReport();
+    }//GEN-LAST:event_report_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
