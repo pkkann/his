@@ -40,7 +40,7 @@ public class DateChangeDetecter implements Runnable {
     public void run() {
         c = Calendar.getInstance();
         int date = c.get(Calendar.DATE);
-        currentDate = new ADate(c.get(Calendar.DATE), c.get(Calendar.MONTH), c.get(Calendar.YEAR));
+        currentDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
         mainGUI.setDate(currentDate);
         personHandler.checkExpirationDates(currentDate);
         

@@ -242,7 +242,7 @@ public class MainGUI extends javax.swing.JFrame {
         reserve_Label = new javax.swing.JLabel();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         file_Menu = new javax.swing.JMenu();
-        repport_MenuItem = new javax.swing.JMenuItem();
+        report_MenuItem = new javax.swing.JMenuItem();
         reset_MenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         changeUser_MenuItem = new javax.swing.JMenuItem();
@@ -253,8 +253,6 @@ public class MainGUI extends javax.swing.JFrame {
         createPerson_MenuItem = new javax.swing.JMenuItem();
         editPerson_MenuItem = new javax.swing.JMenuItem();
         deletePerson_MenuItem = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        oneTimeEnroll_MenuItem = new javax.swing.JMenuItem();
         users_Menu = new javax.swing.JMenu();
         createUser_MenuItem = new javax.swing.JMenuItem();
         editUser_MenuItem = new javax.swing.JMenuItem();
@@ -364,6 +362,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         kick_Button.setText("Smid ud");
         kick_Button.setEnabled(false);
+        kick_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kick_ButtonActionPerformed(evt);
+            }
+        });
 
         addressInfo_Label.setText("Adresse:");
 
@@ -607,8 +610,8 @@ public class MainGUI extends javax.swing.JFrame {
 
         file_Menu.setText("Filer");
 
-        repport_MenuItem.setText("Print rapport");
-        file_Menu.add(repport_MenuItem);
+        report_MenuItem.setText("Gem rapport");
+        file_Menu.add(report_MenuItem);
 
         reset_MenuItem.setText("Daglig nulstilling");
         file_Menu.add(reset_MenuItem);
@@ -656,11 +659,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         persons_Menu.add(deletePerson_MenuItem);
-        persons_Menu.add(jSeparator2);
-
-        oneTimeEnroll_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        oneTimeEnroll_MenuItem.setText("Engangs indskrivning");
-        persons_Menu.add(oneTimeEnroll_MenuItem);
 
         administration_Menu.add(persons_Menu);
 
@@ -740,11 +738,6 @@ public class MainGUI extends javax.swing.JFrame {
         createUserDIA.setVisible(true);
     }//GEN-LAST:event_createUser_MenuItemActionPerformed
 
-    private void createPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPerson_MenuItemActionPerformed
-        createPersonDIA.setUser();
-        createPersonDIA.setVisible(true);
-    }//GEN-LAST:event_createPerson_MenuItemActionPerformed
-
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         clearResult();
         clearPerson();
@@ -784,18 +777,10 @@ public class MainGUI extends javax.swing.JFrame {
         renewPersonDIA.setVisible(true);
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
-    private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed
-        removePersonDIA.setVisible(true);
-    }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
-
     private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
         editUserDIA.setVisible(true);
         setUser();
     }//GEN-LAST:event_editUser_MenuItemActionPerformed
-
-    private void editPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_MenuItemActionPerformed
-        editPersonDIA.setVisible(true);
-    }//GEN-LAST:event_editPerson_MenuItemActionPerformed
 
     private void resetPassword_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPassword_MenuItemActionPerformed
         resetUserPasswordDIA.setUser(loginHandler.getLoggedInUser());
@@ -811,6 +796,23 @@ public class MainGUI extends javax.swing.JFrame {
     private void requestQuarantine_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestQuarantine_ButtonActionPerformed
         JOptionPane.showMessageDialog(this, "Du kan ikke anmode om garantæne, fordi du er grim", "Fejl", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_requestQuarantine_ButtonActionPerformed
+
+    private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed
+        removePersonDIA.setVisible(true);
+    }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
+
+    private void editPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_MenuItemActionPerformed
+        editPersonDIA.setVisible(true);
+    }//GEN-LAST:event_editPerson_MenuItemActionPerformed
+
+    private void createPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPerson_MenuItemActionPerformed
+        createPersonDIA.setUser();
+        createPersonDIA.setVisible(true);
+    }//GEN-LAST:event_createPerson_MenuItemActionPerformed
+
+    private void kick_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kick_ButtonActionPerformed
+        JOptionPane.showMessageDialog(this, "Funktion ikke implementeret endnu.\nSkriv det ned på et stykke papir", "Fejl", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_kick_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -876,7 +878,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel honeInfo_Label;
     private javax.swing.JTextField hone_TextField;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JButton kick_Button;
     private javax.swing.JPanel lamp_Pane;
@@ -888,12 +889,11 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField middlename_TextField;
     private javax.swing.JLabel oneOneInfo_Label;
     private javax.swing.JTextField oneOne_TextField;
-    private javax.swing.JMenuItem oneTimeEnroll_MenuItem;
     private javax.swing.JMenu persons_Menu;
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JMenuItem releaseNotes_MenuItem;
     private javax.swing.JButton renew_Button;
-    private javax.swing.JMenuItem repport_MenuItem;
+    private javax.swing.JMenuItem report_MenuItem;
     private javax.swing.JButton requestQuarantine_Button;
     private javax.swing.JLabel reserveInfo_Label;
     private javax.swing.JLabel reserve_Label;
