@@ -108,6 +108,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         pane2_Pane = new javax.swing.JPanel();
         picturePane_PicturePane = new view.image.PicturePane();
         choose_Button = new javax.swing.JButton();
+        noPicture_CheckBox = new javax.swing.JCheckBox();
         pane3_Pane = new javax.swing.JPanel();
         oneOne_CheckBox = new javax.swing.JCheckBox();
         create_Button = new javax.swing.JButton();
@@ -239,6 +240,13 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             }
         });
 
+        noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                noPicture_CheckBoxItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout pane2_PaneLayout = new javax.swing.GroupLayout(pane2_Pane);
         pane2_Pane.setLayout(pane2_PaneLayout);
         pane2_PaneLayout.setHorizontalGroup(
@@ -247,15 +255,20 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(choose_Button)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGroup(pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choose_Button)
+                    .addComponent(noPicture_CheckBox))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pane2_PaneLayout.setVerticalGroup(
             pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pane2_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pane2_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choose_Button)
+                    .addGroup(pane2_PaneLayout.createSequentialGroup()
+                        .addComponent(choose_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(noPicture_CheckBox))
                     .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -370,7 +383,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                                     boolean hone = hone_CheckBox.isSelected();
                                     Calendar c = Calendar.getInstance();
                                     ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
-                                    if(oneOne) {
+                                    if (oneOne) {
                                         expirationDate = new ADate(11, 11, 1111);
                                         JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
                                     }
@@ -402,6 +415,12 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_create_ButtonActionPerformed
 
     private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        if (noPicture_CheckBox.isSelected()) {
+            noPicture_CheckBox.setSelected(false);
+            picturePath = null;
+            picture = null;
+            picturePane_PicturePane.setPicture(picture);
+        }
         int returnVal = fileChooser_FileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             picturePath = fileChooser_FileChooser.getSelectedFile();
@@ -412,6 +431,21 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_choose_ButtonActionPerformed
+
+    private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
+        if (noPicture_CheckBox.isSelected()) {
+            picturePath = new File("src/view/image/billedid.png");
+            try {
+                picture = ImageIO.read(picturePath);
+                picturePane_PicturePane.setPicture(picture);
+            } catch (IOException ex) {
+            }
+        } else {
+            picturePath = null;
+            picture = null;
+            picturePane_PicturePane.setPicture(picture);
+        }
+    }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 //
 //    /**
 //     * @param args the command line arguments
@@ -480,6 +514,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JPanel main_Pane;
     private javax.swing.JLabel middlenameInfo_Label;
     private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JCheckBox noPicture_CheckBox;
     private javax.swing.JCheckBox oneOne_CheckBox;
     private javax.swing.JPanel pane1_Pane;
     private javax.swing.JPanel pane2_Pane;

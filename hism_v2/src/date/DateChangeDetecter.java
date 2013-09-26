@@ -55,9 +55,10 @@ public class DateChangeDetecter implements Runnable {
                 if (c.get(Calendar.DATE) != date) {
                     date = c.get(Calendar.DATE);
                     currentDate.setDay(c.get(Calendar.DATE));
-                    currentDate.setMonth(c.get(Calendar.MONTH));
+                    currentDate.setMonth((c.get(Calendar.MONTH) + 1));
                     currentDate.setYear(c.get(Calendar.YEAR));
                     mainGUI.setDate(currentDate);
+                    System.out.println(ADate.formatADate(currentDate, "/"));
                     personHandler.checkExpirationDates(currentDate);
                 }
 

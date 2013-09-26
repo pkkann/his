@@ -35,12 +35,10 @@ import view.user.ResetUserPasswordDIA;
  * @author patrick
  */
 public class HISM {
-    
-    public static final String title = "Den våde høne - Indskrivnings system";
-    public static final String version = "v0.2 BETA-ALPHA-ISH-THING";
-    
-    private DateChangeDetecter dch;
 
+    public static final String title = "Den våde høne - Indskrivnings system";
+    public static final String version = "v0.9 BETA-Release";
+    private DateChangeDetecter dch;
     private UserRegister userRegister;
     private UserHandler userHandler;
     private LoginHandler loginHandler;
@@ -60,23 +58,22 @@ public class HISM {
     private PersonHandler personHandler;
     private PictureRegister pictureRegister;
     private PictureHandler pictureHandler;
-    
     private UserDAO userDAO;
     private PersonDAO personDAO;
 
     public HISM() {
         setLookAndFeel();
-        
+
         pictureRegister = new PictureRegister();
         pictureHandler = new PictureHandler(pictureRegister);
         personRegister = new PersonRegister();
         personDAO = new PersonDAO();
         personHandler = new PersonHandler(personRegister, pictureHandler, personDAO);
-        
+
         userDAO = new UserDAO();
         userRegister = new UserRegister();
         userHandler = new UserHandler(userRegister, userDAO);
-        
+
         loginHandler = new LoginHandler(loginDIA, userHandler, mainGUI);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, personHandler, loginHandler);
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, personHandler);
@@ -93,17 +90,26 @@ public class HISM {
     }
 
     public static void main(String[] args) {
-        HISM hism = new HISM();
-        FileTool.createFolders();
-        hism.userHandler.populateUsersFromDB();
-        hism.personHandler.populatePersonsFromDB();
-        hism.dch.start();
-        hism.firstStart();
-        hism.loginHandler.requestLoginView();
-        mainGUI.setUser();
-        mainGUI.setVisible(true);
+        try {
+            HISM hism = new HISM();
+            FileTool.createFolders();
+            hism.userHandler.populateUsersFromDB();
+            hism.personHandler.populatePersonsFromDB();
+            hism.dch.start();
+            hism.firstStart();
+            JOptionPane.showMessageDialog(loginDIA, "LÆS, HVIS DU IKKE HAR LÆST.\nDa dette program er i beta test, kan der forekomme fejl.\nI tilfælde af fejl, eller der intet sker nå man trykker på en knap,\nskriv da dato og tidspunkt ned på et stykke papir og aflever til Patrick Kann i høne gruppen.", "Udgivelses info", JOptionPane.PLAIN_MESSAGE);
+            hism.loginHandler.requestLoginView();
+            mainGUI.setUser();
+            mainGUI.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(loginDIA, "Der opstod en uventet fejl. Kontakt en administrator.\n"
+                    + "Databasen er stadig intakt, så hvis programmet gik ned, skal du blot åbne det igen.\n"
+                    + "Husk på, dette er beta software! Hvis du ikke rapportere fejlen, bliver den ikke rettet!\n"
+                    + "Nå du rapportere fejlen, skal administratoren bruge dato og tidspunkt.", "Uventet fejl", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
     }
-    
+
     private void setLookAndFeel() {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -127,21 +133,20 @@ public class HISM {
         }
         //</editor-fold>
     }
-    
+
     private void firstStart() {
         //testData();
-        if(userHandler.countAdmins() == 0) {
+        if (userHandler.countAdmins() == 0) {
             JOptionPane.showMessageDialog(loginDIA, "Der er ingen administrator. Du skal nu lave en...", "Fejl", JOptionPane.ERROR_MESSAGE);
             createUserDIA.setCreateAdmin();
             createUserDIA.setVisible(true);
         }
     }
-    
+
     private void testData() {
-        for(int i=0; i<=200; i++) {
-            personHandler.createPerson("test" + i, "test" + i, "test" + i, "test" + i, new ADate(12, 12, 1212), new ADate(15, 9, 2013), new File(""), new ADate(15, 9, 2013), false, false);
+        for (int i = 0; i <= 200; i++) {
+            personHandler.createPerson("test" + i, "test" + i, "test" + i, "test" + i, new ADate(12, 12, 2013), new ADate(15, 11, 2013), new File(""), new ADate(15, 9, 2013), false, false);
             System.out.println("create " + i);
         }
     }
-
 }

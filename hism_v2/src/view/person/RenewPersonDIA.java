@@ -61,6 +61,15 @@ public class RenewPersonDIA extends javax.swing.JDialog {
                 selectedPerson.setExpired(false);
                 selectedPerson.setExpirationDate(new ADate(expiration_day_TextField.getText() + expiration_month_TextField.getText() + expiration_year_TextField.getText()));
                 selectedPerson.setPicturePath(picturePath);
+
+                if (selectedPerson == null) {
+                    System.out.println("NULL");
+                } else {
+                    System.out.println("Person to save: " + selectedPerson.getFirstname() + " " + selectedPerson.getMiddlename() + " " + selectedPerson.getLastname());
+                    System.out.println("Birthday: " + selectedPerson.getBirthdayDate());
+                    System.out.println("PicturePath: " + selectedPerson.getPicturePath().getPath());
+                }
+
                 personHandler.savePerson(selectedPerson, pictureChanged);
                 JOptionPane.showMessageDialog(this, "Personen blev fornyet", "Fornyelse", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
@@ -103,6 +112,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
         picturePane_PicturePane = new view.image.PicturePane();
         choose_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        noPicture_CheckBox = new javax.swing.JCheckBox();
         tool_Pane = new javax.swing.JPanel();
         renew_Button = new javax.swing.JButton();
         cancel_Button = new javax.swing.JButton();
@@ -172,6 +182,13 @@ public class RenewPersonDIA extends javax.swing.JDialog {
 
         jLabel1.setText("Nyt billed");
 
+        noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                noPicture_CheckBoxItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
         picture_Pane.setLayout(picture_PaneLayout);
         picture_PaneLayout.setHorizontalGroup(
@@ -180,9 +197,12 @@ public class RenewPersonDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(choose_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(picture_PaneLayout.createSequentialGroup()
+                        .addComponent(choose_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(noPicture_CheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         picture_PaneLayout.setVerticalGroup(
@@ -190,9 +210,12 @@ public class RenewPersonDIA extends javax.swing.JDialog {
             .addGroup(picture_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(choose_Button)
-                        .addComponent(jLabel1))
+                    .addGroup(picture_PaneLayout.createSequentialGroup()
+                        .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(choose_Button)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(noPicture_CheckBox))
                     .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -280,6 +303,12 @@ public class RenewPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        if (noPicture_CheckBox.isSelected()) {
+            noPicture_CheckBox.setSelected(false);
+            picturePath = null;
+            picturePane_PicturePane.setPicture(null);
+            pictureChanged = false;
+        }
         int returnVal = fileChooser_FileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             picturePath = fileChooser_FileChooser.getSelectedFile();
@@ -294,6 +323,21 @@ public class RenewPersonDIA extends javax.swing.JDialog {
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
         renew();
     }//GEN-LAST:event_renew_ButtonActionPerformed
+
+    private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
+        if (noPicture_CheckBox.isSelected()) {
+            picturePath = new File("src/view/image/billedid.png");
+            try {
+                picturePane_PicturePane.setPicture(ImageIO.read(picturePath));
+            } catch (IOException ex) {
+            }
+            pictureChanged = true;
+        } else {
+            picturePath = null;
+            picturePane_PicturePane.setPicture(null);
+            pictureChanged = false;
+        }
+    }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 //
 //    /**
 //     * @param args the command line arguments
@@ -348,6 +392,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
     private javax.swing.JLabel info_Label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel main_Pane;
+    private javax.swing.JCheckBox noPicture_CheckBox;
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JPanel picture_Pane;
     private javax.swing.JButton renew_Button;

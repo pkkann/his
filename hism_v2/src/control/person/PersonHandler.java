@@ -125,13 +125,14 @@ public class PersonHandler {
 
     public void checkExpirationDates(ADate date) {
         ArrayList<Person> persons = personRegister.getPersons();
+        //System.out.println(date);
 
         Calendar currentC = Calendar.getInstance();
         currentC.set(date.getYear(), date.getMonth(), date.getDay());
 
         for (Person p : persons) {
             Calendar personC = Calendar.getInstance();
-            personC.set(p.getExpirationDate().getYear(), p.getExpirationDate().getMonth() - 1, p.getExpirationDate().getDay());
+            personC.set(p.getExpirationDate().getYear(), p.getExpirationDate().getMonth(), p.getExpirationDate().getDay());
 
             if (!p.isOneOne()) {
                 if (currentC.after(personC)) {
@@ -175,7 +176,8 @@ public class PersonHandler {
         }
     }
 
-    public void generateReport() {
+    public void generateReport(boolean resetReport) {
+        System.out.println("GENRATING");
         ArrayList<Person> enrolled = new ArrayList<>();
         for (Person p : personRegister.getPersons()) {
             if (p.isEnrolled()) {
@@ -184,10 +186,38 @@ public class PersonHandler {
         }
 
         ArrayList<String[]> data = new ArrayList<>();
+        
+        if(resetReport) {
+            String[] f = {"RESET REPORT"};
+            data.add(f);
+        }
+        
         String[] f = {"Total: " + enrolled.size()};
         data.add(f);
+        
+        Calendar c = Calendar.getInstance();
+        ADate date = new ADate();
+        String hoursS = String.valueOf(c.get(Calendar.HOUR_OF_DAY)) ;
+        String minutesS = String.valueOf(c.get(Calendar.MINUTE));
+        
+        if(hoursS.length() != 2) {
+            hoursS = "0" + hoursS;
+        }
+        if(minutesS.length() != 2) {
+            minutesS = "0" + minutesS;
+        }
+        int hours = Integer.valueOf(hoursS);
+        int minutes = Integer.valueOf(minutesS);
+        
+        String time = "" + hours + minutes;
+        String[] ftime = {"Date: " + ADate.formatADate(date, "/") + " Time: " + time};
+        data.add(ftime);
+        
+        String[] columns = {"Navn", "Fødselsdag", "Gæst1", "Gæst2", "Gæst3", "Gæst4", "Gæst5"};
+        data.add(columns);
+        
         for (Person p : enrolled) {
-
+            System.out.println("FOUND ONE");
             String hone = "Nej";
             if (p.isHone()) {
                 hone = "Ja";
@@ -239,18 +269,47 @@ public class PersonHandler {
             data.add(s);
 
         }
+
         
-        Calendar c = Calendar.getInstance();
-        ADate date = new ADate();
-        String time = "" + c.get(Calendar.HOUR_OF_DAY) + c.get(Calendar.MINUTE);
-        try {
-            CSVTool.generateReport(data, FileTool.reportDir + "/report_" + ADate.formatADate(date, "") + "_" + time);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+        if (resetReport) {
+            try {
+                CSVTool.generateReport(data, FileTool.reportDir + "/report_" + ADate.formatADate(date, "") + "_" + time + "_resetReport");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                CSVTool.generateReport(data, FileTool.reportDir + "/report_" + ADate.formatADate(date, "") + "_" + time);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
+    }
+
+    public void resetSystem() {
+        ArrayList<Person> persons = personRegister.getPersons();
+        for (Person p : persons) {
+            for (Guest g : p.getGuests()) {
+                try {
+                    personDAO.removeGuest(g.getId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                p.getGuests().remove(g);
+            }
+            p.setEnrolled(false);
+            try {
+                personDAO.savePerson(p);
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 }

@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -29,12 +31,17 @@ public class DBTool {
      * @return 
      */
     public static Connection getInstance() {
-        if (instance == null) {
-            makeInstance();
-            return instance;
-        } else {
-            return instance;
+        try {
+            if (instance == null || instance.isClosed()) {
+                makeInstance();
+                return instance;
+            } else {
+                return instance;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBTool.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     /**

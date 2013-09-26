@@ -6,6 +6,7 @@ package view.person;
 
 import control.person.PersonHandler;
 import date.ADate;
+import javax.swing.JOptionPane;
 import model.Person;
 
 /**
@@ -223,13 +224,12 @@ public class AddGuestDIA extends javax.swing.JDialog {
                 String lastname = lastname_TextField.getText();
                 ADate birthday = new ADate(birthday_day_TextField.getText() + birthday_month_TextField.getText() + birthday_year_TextField.getText());
                 personHandler.addGuestToPerson(selectedPerson, firstname, middlename, lastname, birthday);
-                System.out.println("DONE");
                 dispose();
             } else {
-                System.out.println("Fødselsdag er i forkert format");
+                JOptionPane.showMessageDialog(this, "Fødselsdag er i forkert format. Format: dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            System.out.println("Alle felter skal udfyldes");
+            JOptionPane.showMessageDialog(this, "Alle felter skal være udfyldt", "Fejl", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_add_ButtonActionPerformed
 //

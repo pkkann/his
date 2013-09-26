@@ -21,6 +21,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Daglig nulstilling"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reset_MenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
@@ -498,6 +501,7 @@
             <Component class="javax.swing.JButton" name="requestQuarantine_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Anmod om karant&#xe6;ne"/>
+                <Property name="toolTipText" type="java.lang.String" value="Denne funktion er ikke implementeret endnu"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -507,6 +511,7 @@
             <Component class="javax.swing.JButton" name="kick_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Smid ud"/>
+                <Property name="toolTipText" type="java.lang.String" value="Denne funktion er ikke implementeret endnu"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>

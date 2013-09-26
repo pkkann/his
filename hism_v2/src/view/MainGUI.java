@@ -88,10 +88,12 @@ public class MainGUI extends javax.swing.JFrame {
                 expirationDate_TextField.setForeground(Color.white);
                 expirationDate_TextField.setBackground(Color.red);
                 renew_Button.setEnabled(true);
+                enroll_Button.setEnabled(false);
             } else {
                 expirationDate_TextField.setForeground(Color.black);
                 expirationDate_TextField.setBackground(new Color(240, 240, 240));
                 renew_Button.setEnabled(false);
+                enroll_Button.setEnabled(true);
             }
             if (p.isHone()) {
                 hone_TextField.setText("Ja");
@@ -109,14 +111,14 @@ public class MainGUI extends javax.swing.JFrame {
             }
             if (p.isQuarantine()) {
                 statusPicPane_StatusPicPane.setStatus(1);
+                enroll_Button.setEnabled(false);
             } else if (p.isExpired()) {
                 statusPicPane_StatusPicPane.setStatus(3);
             } else {
                 statusPicPane_StatusPicPane.setStatus(0);
             }
-            enroll_Button.setEnabled(true);
-            kick_Button.setEnabled(true);
-            requestQuarantine_Button.setEnabled(true);
+//            kick_Button.setEnabled(true);
+//            requestQuarantine_Button.setEnabled(true);
             if (p.isEnrolled()) {
                 enrollInfo_Label.setText("Indskrevet");
                 enrollInfo_Label.setForeground(Color.black);
@@ -347,6 +349,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         requestQuarantine_Button.setText("Anmod om karantæne");
+        requestQuarantine_Button.setToolTipText("Denne funktion er ikke implementeret endnu");
         requestQuarantine_Button.setEnabled(false);
         requestQuarantine_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,6 +358,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         kick_Button.setText("Smid ud");
+        kick_Button.setToolTipText("Denne funktion er ikke implementeret endnu");
         kick_Button.setEnabled(false);
         kick_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -611,6 +615,11 @@ public class MainGUI extends javax.swing.JFrame {
         file_Menu.add(report_MenuItem);
 
         reset_MenuItem.setText("Daglig nulstilling");
+        reset_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_MenuItemActionPerformed(evt);
+            }
+        });
         file_Menu.add(reset_MenuItem);
         file_Menu.add(jSeparator1);
 
@@ -812,8 +821,28 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_kick_ButtonActionPerformed
 
     private void report_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_MenuItemActionPerformed
-        personHandler.generateReport();
+        personHandler.generateReport(false);
+        JOptionPane.showMessageDialog(this, "Rapport blev oprettet. Du finder den i report mappen.\nDa dette er en beta version, er rapporten eksporteret som en .csv fil, og skal derfor åbnes i excel.\nPDF kommer senere...", "Rapport", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_report_MenuItemActionPerformed
+
+    private void reset_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_MenuItemActionPerformed
+        int n = JOptionPane.showConfirmDialog(this, "Er du helt sikker på at du vil nulstille systemet?\nDer vil automatisk blive oprettet en rapport, men du vil ikke kunne loade indskrivningerne ind for idag igen...", "Nulstil", JOptionPane.YES_NO_OPTION);
+        if (n == 0) {
+            int n2 = JOptionPane.showConfirmDialog(this, "Er du HELT sikker på du vil nulstille?", "Nulstil", JOptionPane.YES_NO_OPTION);
+            if (n2 == 0) {
+                personHandler.generateReport(true);
+                personHandler.resetSystem();
+                JOptionPane.showMessageDialog(this, "Systemet blev nulstillet, og en rapport blev oprettet og gemt i report mappen\nDa dette er en beta version, er rapporten eksporteret som en .csv fil, og skal derfor åbnes i excel.\nPDF kommer senere...", "Nulstil", JOptionPane.PLAIN_MESSAGE);
+
+                setVisible(false);
+                clearPerson();
+                clearResult();
+                loginHandler.requestLoginView();
+                setUser();
+                setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_reset_MenuItemActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
