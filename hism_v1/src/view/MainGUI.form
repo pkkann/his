@@ -123,7 +123,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="resetPassword_MenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nulstil kode"/>
+                <Property name="text" type="java.lang.String" value="&#xc6;ndre din kode"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetPassword_MenuItemActionPerformed"/>

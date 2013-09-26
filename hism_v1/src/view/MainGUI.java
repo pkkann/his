@@ -700,7 +700,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         bruger_Menu.setText("Bruger");
 
-        resetPassword_MenuItem.setText("Nulstil kode");
+        resetPassword_MenuItem.setText("Ændre din kode");
         resetPassword_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetPassword_MenuItemActionPerformed(evt);

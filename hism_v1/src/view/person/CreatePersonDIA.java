@@ -431,7 +431,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
         if (noPicture_CheckBox.isSelected()) {
-            picturePath = new File("src/view/image/billedid.png");
+            picturePath = new File("billedid.png");
             try {
                 picture = ImageIO.read(picturePath);
                 picturePane_PicturePane.setPicture(picture);

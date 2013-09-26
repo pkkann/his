@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-09-2013 19:42:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="entity.Guest" table="guest" catalog="hism">
+        <id name="idguest" type="java.lang.Integer">
+            <column name="idguest" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="person" class="entity.Person" fetch="select">
+            <column name="idperson" />
+        </many-to-one>
+        <property name="firstname" type="string">
+            <column name="firstname" length="45" />
+        </property>
+        <property name="middlename" type="string">
+            <column name="middlename" length="45" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="45" />
+        </property>
+        <property name="birthday" type="string">
+            <column name="birthday" length="45" />
+        </property>
+        <property name="creationdate" type="string">
+            <column name="creationdate" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
