@@ -1,5 +1,5 @@
 package entity;
-// Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA
+// Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -10,7 +10,7 @@ public class Guest  implements java.io.Serializable {
 
 
      private Integer idguest;
-     private Integer idperson;
+     private Person person;
      private String firstname;
      private String middlename;
      private String lastname;
@@ -20,8 +20,8 @@ public class Guest  implements java.io.Serializable {
     public Guest() {
     }
 
-    public Guest(Integer idperson, String firstname, String middlename, String lastname, String birthday, String creationdate) {
-       this.idperson = idperson;
+    public Guest(Person person, String firstname, String middlename, String lastname, String birthday, String creationdate) {
+       this.person = person;
        this.firstname = firstname;
        this.middlename = middlename;
        this.lastname = lastname;
@@ -36,12 +36,12 @@ public class Guest  implements java.io.Serializable {
     public void setIdguest(Integer idguest) {
         this.idguest = idguest;
     }
-    public Integer getIdperson() {
-        return this.idperson;
+    public Person getPerson() {
+        return this.person;
     }
     
-    public void setIdperson(Integer idperson) {
-        this.idperson = idperson;
+    public void setPerson(Person person) {
+        this.person = person;
     }
     public String getFirstname() {
         return this.firstname;

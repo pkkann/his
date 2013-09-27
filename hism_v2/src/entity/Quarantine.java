@@ -1,5 +1,5 @@
 package entity;
-// Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA
+// Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -16,12 +16,7 @@ public class Quarantine  implements java.io.Serializable {
     public Quarantine() {
     }
 
-	
-    public Quarantine(int idquarantine) {
-        this.idquarantine = idquarantine;
-    }
-    public Quarantine(int idquarantine, Person person, String expirationdate) {
-       this.idquarantine = idquarantine;
+    public Quarantine(Person person, String expirationdate) {
        this.person = person;
        this.expirationdate = expirationdate;
     }

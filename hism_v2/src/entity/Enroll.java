@@ -1,5 +1,5 @@
 package entity;
-// Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA
+// Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -22,8 +22,7 @@ public class Enroll  implements java.io.Serializable {
     public Enroll(int idenroll) {
         this.idenroll = idenroll;
     }
-    public Enroll(int idenroll, Person person, User user, String enrolldate, String enrolltime) {
-       this.idenroll = idenroll;
+    public Enroll(Person person, User user, String enrolldate, String enrolltime) {
        this.person = person;
        this.user = user;
        this.enrolldate = enrolldate;

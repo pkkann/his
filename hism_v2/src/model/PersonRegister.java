@@ -4,6 +4,7 @@
  */
 package model;
 
+import entity.Guest;
 import entity.Person;
 import hibernate.HiberUtil;
 import java.util.ArrayList;

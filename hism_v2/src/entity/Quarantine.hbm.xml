@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="entity.Quarantine" table="quarantine" catalog="hism_dev">
         <id name="idquarantine" type="int">

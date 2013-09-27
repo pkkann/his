@@ -1,5 +1,5 @@
 package entity;
-// Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA
+// Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -23,12 +23,13 @@ public class Person  implements java.io.Serializable {
      private String expirationdate;
      private String creationdate;
      private Set quarantines = new HashSet(0);
+     private Set guests = new HashSet(0);
      private Set enrolls = new HashSet(0);
 
     public Person() {
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthday, String picturepath, Integer oneone, Integer hone, String expirationdate, String creationdate, Set quarantines, Set enrolls) {
+    public Person(String firstname, String middlename, String lastname, String address, String birthday, String picturepath, Integer oneone, Integer hone, String expirationdate, String creationdate) {
        this.firstname = firstname;
        this.middlename = middlename;
        this.lastname = lastname;
@@ -39,8 +40,6 @@ public class Person  implements java.io.Serializable {
        this.hone = hone;
        this.expirationdate = expirationdate;
        this.creationdate = creationdate;
-       this.quarantines = quarantines;
-       this.enrolls = enrolls;
     }
    
     public Integer getIdperson() {
@@ -126,6 +125,13 @@ public class Person  implements java.io.Serializable {
     
     public void setQuarantines(Set quarantines) {
         this.quarantines = quarantines;
+    }
+    public Set getGuests() {
+        return this.guests;
+    }
+    
+    public void setGuests(Set guests) {
+        this.guests = guests;
     }
     public Set getEnrolls() {
         return this.enrolls;

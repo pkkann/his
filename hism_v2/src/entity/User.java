@@ -1,5 +1,5 @@
 package entity;
-// Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA
+// Generated 27-09-2013 16:45:03 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class User  implements java.io.Serializable {
     public User() {
     }
 
-    public User(String email, String password, String firstname, String middlename, String lastname, String creationdate, Integer administrator, Integer reserve, Set enrolls) {
+    public User(String email, String password, String firstname, String middlename, String lastname, String creationdate, Integer administrator, Integer reserve) {
        this.email = email;
        this.password = password;
        this.firstname = firstname;
@@ -34,7 +34,6 @@ public class User  implements java.io.Serializable {
        this.creationdate = creationdate;
        this.administrator = administrator;
        this.reserve = reserve;
-       this.enrolls = enrolls;
     }
    
     public Integer getIduser() {
