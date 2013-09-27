@@ -3,6 +3,8 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="hism_dev"/>
   <table-filter match-name="user"/>
-  <table-filter match-name="guest"/>
   <table-filter match-name="person"/>
+  <table-filter match-name="quarantine"/>
+  <table-filter match-name="enroll"/>
+  <table-filter match-name="guest"/>
 </hibernate-reverse-engineering>

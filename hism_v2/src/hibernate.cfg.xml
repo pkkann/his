@@ -10,5 +10,16 @@
     <mapping resource="entity/Person.hbm.xml"/>
     <mapping resource="entity/User.hbm.xml"/>
     <mapping resource="entity/Guest.hbm.xml"/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping resource="entity/Quarantine.hbm.xml"/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping resource="entity/Enroll.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

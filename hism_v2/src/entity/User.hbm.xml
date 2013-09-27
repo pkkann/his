@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-09-2013 16:34:02 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="entity.User" table="user" catalog="hism_dev">
+        <id name="iduser" type="java.lang.Integer">
+            <column name="iduser" />
+            <generator class="identity" />
+        </id>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="100" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="45" />
+        </property>
+        <property name="middlename" type="string">
+            <column name="middlename" length="45" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="45" />
+        </property>
+        <property name="creationdate" type="string">
+            <column name="creationdate" length="45" />
+        </property>
+        <property name="administrator" type="java.lang.Integer">
+            <column name="administrator" />
+        </property>
+        <property name="reserve" type="java.lang.Integer">
+            <column name="reserve" />
+        </property>
+        <set name="enrolls" inverse="true">
+            <key>
+                <column name="iduser" />
+            </key>
+            <one-to-many class="entity.Enroll" />
+        </set>
+    </class>
+</hibernate-mapping>
