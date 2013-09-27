@@ -89,6 +89,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
         pictureChanged = false;
         picturePath = null;
         cancel_Button.setEnabled(true);
+        noPicture_CheckBox.setSelected(false);
     }
 
     /**

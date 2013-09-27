@@ -70,6 +70,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         address_TextField.setText("");
         oneOne_CheckBox.setSelected(false);
         hone_CheckBox.setSelected(false);
+        noPicture_CheckBox.setSelected(false);
         picturePath = null;
         picturePane_PicturePane.setPicture(null);
     }
@@ -370,34 +371,30 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             if (birthday_day_TextField.getText().length() == 2 && birthday_month_TextField.getText().length() == 2 && birthday_yeah_TextField.getText().length() == 4) {
                 if (expirationDate_day_TextField.getText().length() == 2 && expirationDate_month_TextField.getText().length() == 2 && expirationDate_year_TextField.getText().length() == 4) {
                     if (Integer.valueOf(birthday_month_TextField.getText()) <= 12) {
-                        if (Integer.valueOf(expirationDate_month_TextField.getText()) <= 12) {
-                            if (Integer.valueOf(birthday_yeah_TextField.getText()) > 1860) {
-                                try {
-                                    String firstname = firstname_TextField.getText();
-                                    String middlename = middlename_TextField.getText();
-                                    String lastname = lastname_TextField.getText();
-                                    ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
-                                    ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
-                                    String address = address_TextField.getText();
-                                    boolean oneOne = oneOne_CheckBox.isSelected();
-                                    boolean hone = hone_CheckBox.isSelected();
-                                    Calendar c = Calendar.getInstance();
-                                    ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
-                                    if (oneOne) {
-                                        expirationDate = new ADate(11, 11, 1111);
-                                        JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
-                                    }
-                                    personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne, hone);
-                                    JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
-                                    dispose();
-                                } catch (NumberFormatException ex) {
-                                    JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
+                        if (Integer.valueOf(birthday_yeah_TextField.getText()) > 1860) {
+                            try {
+                                String firstname = firstname_TextField.getText();
+                                String middlename = middlename_TextField.getText();
+                                String lastname = lastname_TextField.getText();
+                                ADate birthday = new ADate(Integer.valueOf(birthday_day_TextField.getText()), Integer.valueOf(birthday_month_TextField.getText()), Integer.valueOf(birthday_yeah_TextField.getText()));
+                                ADate expirationDate = new ADate(Integer.valueOf(expirationDate_day_TextField.getText()), Integer.valueOf(expirationDate_month_TextField.getText()), Integer.valueOf(expirationDate_year_TextField.getText()));
+                                String address = address_TextField.getText();
+                                boolean oneOne = oneOne_CheckBox.isSelected();
+                                boolean hone = hone_CheckBox.isSelected();
+                                Calendar c = Calendar.getInstance();
+                                ADate creationDate = new ADate(c.get(Calendar.DATE), (c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR));
+                                if (oneOne) {
+                                    expirationDate = new ADate(11, 11, 1111);
+                                    JOptionPane.showMessageDialog(this, "Da der blev valgt 1-1, bliver udløbsdatoen fjernet", "1-1", JOptionPane.INFORMATION_MESSAGE);
                                 }
-                            } else {
-                                JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
+                                personHandler.createPerson(firstname, middlename, lastname, address, birthday, expirationDate, picturePath, creationDate, oneOne, hone);
+                                JOptionPane.showMessageDialog(this, "Personen blev oprettet", "Oprettet", JOptionPane.INFORMATION_MESSAGE);
+                                dispose();
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(this, "En dato består kun af tal", "Fejl", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(this, "Jeg er ret sikker på personen er død..", "Fejl", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
