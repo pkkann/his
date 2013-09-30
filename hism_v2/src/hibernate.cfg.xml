@@ -7,19 +7,11 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hism_dev?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">hism</property>
     <property name="hibernate.connection.password">Rollercoaster2</property>
-    <mapping resource="entity/Person.hbm.xml"/>
-    <mapping resource="entity/User.hbm.xml"/>
-    <mapping resource="entity/Guest.hbm.xml"/>
-    <mapping/>
-    <mapping/>
-    <mapping/>
-    <mapping/>
-    <mapping/>
-    <mapping/>
-    <mapping resource="entity/Quarantine.hbm.xml"/>
-    <mapping/>
-    <mapping/>
-    <mapping/>
-    <mapping resource="entity/Enroll.hbm.xml"/>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <mapping class="entity.User"/>
+    <mapping class="entity.Enrollment"/>
+    <mapping class="entity.Guest"/>
+    <mapping class="entity.Person"/>
+    <mapping class="entity.Quarantine"/>
   </session-factory>
 </hibernate-configuration>
