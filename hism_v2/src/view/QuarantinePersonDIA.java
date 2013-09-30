@@ -8,12 +8,12 @@ package view;
  *
  * @author patrick
  */
-public class QuarantineOptionsPersonDIA extends javax.swing.JDialog {
+public class QuarantinePersonDIA extends javax.swing.JDialog {
 
     /**
      * Creates new form QuarantineOptionsDIA
      */
-    public QuarantineOptionsPersonDIA(java.awt.Frame parent, boolean modal) {
+    public QuarantinePersonDIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
