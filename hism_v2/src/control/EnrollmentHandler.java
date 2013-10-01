@@ -34,33 +34,88 @@ public class EnrollmentHandler {
      * with string arrays representing every guest
      *
      * @param idPerson
+     * @param idUser
      * @param guests
      */
-    public void createEnrollment(int idPerson, int idUser, HashSet<String[]> guests) throws IDNotFoundException{
+    public void createEnrollment(int idPerson, int idUser, HashSet<String[]> guests) throws IDNotFoundException {
         System.out.println("Creating an enrollment...");
+
+        Person p = peR.getPerson(idPerson);
+        User u = usR.getUser(idUser);
+        HashSet<Guest> gg = new HashSet();
+
+        if (p != null && u != null) {
+            System.out.println("Doing sub-creations");
+            for (String[] sa : guests) {
+                Guest g = new Guest(sa[0], sa[1], sa[2], sa[3], sa[4]);
+                gg.add(g);
+            }
+            System.out.println("Sub-creations complete!");
+
+            Enrollment en = new Enrollment(p, u);
+            en.setGuests(gg);
+
+            System.out.println("Creation complete!");
+
+            enR.registerEnrollment(en);
+        } else {
+            throw new IDNotFoundException();
+        }
+
+    }
+
+    /**
+     * Save an enrollment with new details
+     * @param idEnrollment
+     * @param idPerson
+     * @param idUser
+     * @param guests
+     * @throws IDNotFoundException 
+     */
+    public void saveEnrollment(int idEnrollment, int idPerson, int idUser, HashSet<String[]> guests) throws IDNotFoundException {
+        System.out.println("Setting an enrollment to new details...");
         
+        Enrollment en = enR.getEnrollment(idEnrollment);
         Person p = peR.getPerson(idPerson);
         User u = usR.getUser(idUser);
         HashSet<Guest> gg = new HashSet();
         
-        if (p != null) {
+        if (en != null && p != null && u != null) {
             System.out.println("Doing sub-creations");
-            for(String[] sa : guests) {
+            for (String[] sa : guests) {
                 Guest g = new Guest(sa[0], sa[1], sa[2], sa[3], sa[4]);
                 gg.add(g);
             }
             System.out.println("Sub-creations complete!");
             
-            Enrollment en = new Enrollment(p, u);
+            en.setEnrolledPerson(p);
+            en.setEnrolledByUser(u);
             en.setGuests(gg);
-            
-            System.out.println("Creation complete!");
-            
-            enR.registerEnrollment(en);
+
+            System.out.println("Set complete!");
+
+            enR.saveEnrollment(en);
         } else {
             throw new IDNotFoundException();
         }
-        
-        
+    }
+
+    /**
+     * Removes an enrollment
+     * @param idEnrollment
+     * @throws IDNotFoundException 
+     */
+    public void removeEnrollment(int idEnrollment) throws IDNotFoundException {
+        System.out.println("Removing an enrollment...");
+
+        Enrollment en = enR.getEnrollment(idEnrollment);
+
+        if (en != null) {
+            enR.deleteEnrollment(en);
+
+            System.out.println("Removal complete!");
+        } else {
+            throw new IDNotFoundException();
+        }
     }
 }

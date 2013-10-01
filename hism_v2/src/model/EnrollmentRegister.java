@@ -41,6 +41,56 @@ public class EnrollmentRegister {
         s.close();
         System.out.println("Registration complete!");
     }
+    
+    /**
+     * Returns an enrollment
+     * @param idEnrollment
+     * @return Enrollment
+     */
+    public Enrollment getEnrollment(int idEnrollment) {
+        for(Enrollment en : enrollments) {
+            if(en.getIdEnrollment() == idEnrollment) {
+                return en;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Deletes an enrollment
+     * @param en 
+     */
+    public void deleteEnrollment(Enrollment en) {
+        System.out.println("Deleting enrollment...");
+        
+        enrollments.remove(en);
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.delete(en);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Deletion complete!");
+    }
+    
+    /**
+     * Saves an enrollment
+     * @param en 
+     */
+    public void saveEnrollment(Enrollment en) {
+        System.out.println("Saving enrollment...");
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.saveOrUpdate(en);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Save complete!");
+    }
 
     /**
      * Returns all enrollments
