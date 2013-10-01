@@ -39,5 +39,66 @@ public class Guest implements Serializable {
     
     @Column(name = "creationdate")
     private String creationDate;
+
+    public Guest() {
+    }
+
+    public Guest(String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.birthdayDate = birthdayDate;
+        this.creationDate = creationDate;
+    }
+
+    public int getIdGuest() {
+        return idGuest;
+    }
+
+    public void setIdGuest(int idGuest) {
+        this.idGuest = idGuest;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getBirthdayDate() {
+        return birthdayDate;
+    }
+
+    public void setBirthdayDate(String birthdayDate) {
+        this.birthdayDate = birthdayDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+    
+    
     
 }
