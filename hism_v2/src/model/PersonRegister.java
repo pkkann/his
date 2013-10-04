@@ -92,7 +92,7 @@ public class PersonRegister {
      * @return HashSet<Person>
      */
     public HashSet<Person> getPersons() {
-        System.out.println("Getting all persons");
+        System.out.println("Getting all persons...");
         System.out.println("Get complete!");
         return persons;
     }
@@ -102,7 +102,7 @@ public class PersonRegister {
      * @param persons 
      */
     public void setPersons(HashSet<Person> persons) {
-        System.out.println("Setting all persons");
+        System.out.println("Setting all persons...");
         this.persons = persons;
         System.out.println("Set complete!");
     }

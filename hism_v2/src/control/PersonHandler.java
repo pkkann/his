@@ -15,7 +15,7 @@ public class PersonHandler {
     
     private PersonRegister peR;
     public static final int NO_ERROR = 0;
-    public static final int FILL_OUT_ALL_FIELDS = 1;
+    public static final int FIELDS_NOT_FILLED_ERROR = 1;
     public static final int BIRTHDAY_FORMAT_ERROR = 2;
     public static final int EXPIRATION_FORMAT_ERROR = 3;
     public static final int EXPIRATION_DATE_ERROR = 4;
@@ -42,7 +42,7 @@ public class PersonHandler {
         
         // Check fields are filled out
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
-            return FILL_OUT_ALL_FIELDS;
+            return FIELDS_NOT_FILLED_ERROR;
         }
         
         // Check birthday is written correctly
@@ -93,7 +93,7 @@ public class PersonHandler {
     public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String picturePath) {
         // Check fields are filled out
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
-            return FILL_OUT_ALL_FIELDS;
+            return FIELDS_NOT_FILLED_ERROR;
         }
         
         // Check birthday is written correctly

@@ -97,6 +97,8 @@ public class EnrollmentRegister {
      * @return HashSet<Enrollment>
      */
     public HashSet<Enrollment> getEnrollments() {
+        System.out.println("Getting all enrollments...");
+        System.out.println("Get complete!");
         return enrollments;
     }
 
@@ -105,6 +107,8 @@ public class EnrollmentRegister {
      * @param enrollments 
      */
     public void setEnrollments(HashSet<Enrollment> enrollments) {
+        System.out.println("Setting all enrollments...");
+        System.out.println("Set complete!");
         this.enrollments = enrollments;
     }
     

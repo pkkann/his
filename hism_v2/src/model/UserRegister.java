@@ -61,6 +61,8 @@ public class UserRegister {
      * @return HashSet<User>
      */
     public HashSet<User> getUsers() {
+        System.out.println("Getting all users...");
+        System.out.println("Get complete!");
         return users;
     }
 
@@ -69,6 +71,8 @@ public class UserRegister {
      * @param users 
      */
     public void setUsers(HashSet<User> users) {
+        System.out.println("Setting all users...");
+        System.out.println("Set complete!");
         this.users = users;
     }
     

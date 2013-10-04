@@ -47,6 +47,8 @@ public class QuarantineRegister {
      * @return HashSet<Quarantine>
      */
     public HashSet<Quarantine> getQuarantines() {
+        System.out.println("Getting all quarantines...");
+        System.out.println("Get complete!");
         return quarantines;
     }
 
@@ -55,6 +57,8 @@ public class QuarantineRegister {
      * @param quarantines 
      */
     public void setQuarantines(HashSet<Quarantine> quarantines) {
+        System.out.println("Setting all quarantines...");
+        System.out.println("Set complete!");
         this.quarantines = quarantines;
     }
     
