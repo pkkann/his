@@ -42,6 +42,10 @@ public class PersonRegister {
         System.out.println("Registration complete!");
     }
     
+    /**
+     * Saves a person
+     * @param p 
+     */
     public void savePerson(Person p) {
         System.out.println("Saving person...");
         
@@ -72,6 +76,10 @@ public class PersonRegister {
         return null;
     }
     
+    /**
+     * Deletes a person
+     * @param p 
+     */
     public void deletePerson(Person p) {
         System.out.println("Deleting person...");
         

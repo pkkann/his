@@ -86,7 +86,7 @@ public class EnrollmentHandler {
 
             // Check number of guests allowed
             if (p.isHoene()) {
-                if (en.getGuests().size() <= 5) {
+                if (en.getGuests().size() < 5) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate);
 
@@ -96,7 +96,7 @@ public class EnrollmentHandler {
                     return TOO_MANY_GUESTS;
                 }
             } else {
-                if (en.getGuests().size() <= 3) {
+                if (en.getGuests().size() < 3) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate);
 
@@ -113,6 +113,12 @@ public class EnrollmentHandler {
         return NO_ERROR;
     }
     
+    /**
+     * Remove a guest
+     * @param enrollmentID
+     * @param guestID
+     * @return Error code : Integer
+     */
     public int removeGuest(int enrollmentID, int guestID) {
         
         // Get enrollment
@@ -132,7 +138,6 @@ public class EnrollmentHandler {
 
     /**
      * Remove an enrollment
-     *
      * @param enrollmentID
      * @return Error code : Integer
      */

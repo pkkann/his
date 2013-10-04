@@ -40,8 +40,12 @@ public class Hism {
         
         errorCode = enH.createGuest(1, 1, "Lars", "", "Kann", "21/04/1989", "05/10/2013");
         System.out.println(errorCode);
-        
-        enH.removeGuest(1, 1);
+        errorCode = enH.createGuest(1, 1, "Lars1", "", "Kann1", "21/04/1989", "05/10/2013");
+        System.out.println(errorCode);
+        errorCode = enH.createGuest(1, 1, "Lars2", "", "Kann2", "21/04/1989", "05/10/2013");
+        System.out.println(errorCode);
+        errorCode = enH.createGuest(1, 1, "Lars3", "", "Kann3", "21/04/1989", "05/10/2013");
+        System.out.println(errorCode);
         
     }
     
