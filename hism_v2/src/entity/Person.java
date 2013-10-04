@@ -48,11 +48,17 @@ public class Person implements Serializable {
     
     @Column(name = "picturepath")
     private String picturePath;
+    
+    @Column(name = "hoene")
+    private boolean hoene;
+    
+    @Column(name = "reserve")
+    private boolean reserve;
 
     public Person() {
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate) {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
@@ -62,7 +68,7 @@ public class Person implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, String picturePath) {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, String picturePath) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
@@ -70,6 +76,8 @@ public class Person implements Serializable {
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
+        this.hoene = hoene;
+        this.reserve = reserve;
         this.picturePath = picturePath;
     }
 
@@ -143,6 +151,22 @@ public class Person implements Serializable {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    public boolean isHoene() {
+        return hoene;
+    }
+
+    public void setHoene(boolean hoene) {
+        this.hoene = hoene;
+    }
+
+    public boolean isReserve() {
+        return reserve;
+    }
+
+    public void setReserve(boolean reserve) {
+        this.reserve = reserve;
     }
     
     

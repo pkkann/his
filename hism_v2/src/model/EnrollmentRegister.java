@@ -5,6 +5,7 @@
 package model;
 
 import entity.Enrollment;
+import entity.Guest;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -40,6 +41,66 @@ public class EnrollmentRegister {
         tx.commit();
         s.close();
         System.out.println("Registration complete!");
+    }
+    
+    /**
+     * Registers a guest
+     * @param en
+     * @param g 
+     */
+    public void registerGuest(Enrollment en, Guest g) {
+        System.out.println("Registering guest...");
+        
+        en.getGuests().add(g);
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        Serializable sz = s.save(g);
+        g.setIdGuest((Integer)sz);
+        
+        s.saveOrUpdate(en);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Registration complete!");
+    }
+    
+    /**
+     * Deletes a guest
+     * @param en
+     * @param g 
+     */
+    public void DeleteGuest(Enrollment en, Guest g) {
+        System.out.println("Deleting guest...");
+        en.getGuests().remove(g);
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.saveOrUpdate(en);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Delete complete!");
+    }
+    
+    /**
+     * Get a guest
+     * @param en
+     * @param guestID
+     * @return Guest
+     */
+    public Guest getGuest(Enrollment en, int guestID) {
+        System.out.println("Getting guest...");
+        for(Guest gu : en.getGuests()) {
+            if(gu.getIdGuest() == guestID) {
+                System.out.println("Guest found\nGet complete!");
+                return gu;
+            }
+        }
+        System.out.println("Guest not found\nGet complete!");
+        return null;
     }
     
     /**

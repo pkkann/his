@@ -78,11 +78,11 @@ public class Enrollment implements Serializable {
         this.enrolledByUser = enrolledByUser;
     }
 
-    public Set getGuests() {
+    public Set<Guest> getGuests() {
         return guests;
     }
 
-    public void setGuests(Set guests) {
+    public void setGuests(Set<Guest> guests) {
         this.guests = guests;
     }
     

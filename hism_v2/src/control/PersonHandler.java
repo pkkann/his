@@ -38,7 +38,7 @@ public class PersonHandler {
      * @param picturePath
      * @return Error code : Integer
      */
-    public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, String picturePath) {
+    public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, String picturePath) {
         
         // Check fields are filled
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
@@ -70,7 +70,7 @@ public class PersonHandler {
         }
         
         // Create person
-        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, picturePath);
+        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, picturePath);
         
         // Register person
         peR.registerPerson(p);

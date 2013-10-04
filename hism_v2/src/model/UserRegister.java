@@ -65,11 +65,14 @@ public class UserRegister {
      * @return User
      */
     public User getUser(int idUser) {
+        System.out.println("Getting user...");
         for(User u : users) {
             if(u.getIduser() == idUser) {
+                System.out.println("Found user\nGet complete!");
                 return u;
             }
         }
+        System.out.println("No user found\nGet complete!");
         return null;
     }
     
