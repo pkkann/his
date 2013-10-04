@@ -43,6 +43,23 @@ public class UserRegister {
     }
     
     /**
+     * Save a user
+     * @param u 
+     */
+    public void saveUser(User u) {
+        System.out.println("Saving user...");
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.save(u);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Save complete!");
+    }
+    
+    /**
      * Returns a user
      * @param idUser
      * @return User
@@ -54,6 +71,25 @@ public class UserRegister {
             }
         }
         return null;
+    }
+    
+    /**
+     * Delete a user
+     * @param u 
+     */
+    public void deleteUser(User u) {
+        System.out.println("Deleting user...");
+        
+        users.remove(u);
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.delete(u);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Deletion complete!");
     }
 
     /**

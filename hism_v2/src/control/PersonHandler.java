@@ -40,7 +40,7 @@ public class PersonHandler {
      */
     public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, String picturePath) {
         
-        // Check fields are filled out
+        // Check fields are filled
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
         }
@@ -91,7 +91,7 @@ public class PersonHandler {
      * @return Error code : Integer
      */
     public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String picturePath) {
-        // Check fields are filled out
+        // Check fields are filled
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
         }
