@@ -41,6 +41,60 @@ public class QuarantineRegister {
         s.close();
         System.out.println("Registration complete!");
     }
+    
+    /**
+     * Saves a quarantine
+     * @param q 
+     */
+    public void saveQuarantine(Quarantine q) {
+        System.out.println("Saving quarantine...");
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.saveOrUpdate(q);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Save complete!");
+    }
+    
+    /**
+     * Returns a quarantine
+     * @param quarantineID
+     * @return Quarantine
+     */
+    public Quarantine getQuarantine(int quarantineID) {
+        System.out.println("Getting quarantine...");
+        
+        for(Quarantine q : quarantines) {
+            if(q.getIdQuarantine() == quarantineID) {
+                System.out.println("Found quarantine\nGet complete!");
+                return q;
+            }
+        }
+        System.out.println("No quarantine found\nGet complete!");
+        return null;
+    }
+    
+    /**
+     * Deletes a quarantine
+     * @param q 
+     */
+    public void deleteQuarantine(Quarantine q) {
+        System.out.println("Deleting quarantine...");
+        
+        quarantines.remove(q);
+        
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        s.delete(q);
+        
+        tx.commit();
+        s.close();
+        System.out.println("Deletion complete!");
+    }
 
     /**
      * Returns all quarantines
