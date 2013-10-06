@@ -13,7 +13,7 @@ import view.MainGUI;
 public class Hism {
     
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "2.0 Beta";
+    public static final String version = "2.0 Alpha";
 
     public Hism() {
         
