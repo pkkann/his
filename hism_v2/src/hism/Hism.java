@@ -63,6 +63,8 @@ public class Hism {
         mainGUI = new MainGUI(peH);
         
         // Start sequence
+        mainGUI.updateEnrolledCounter();
+        mainGUI.updateDate("");
         mainGUI.setVisible(true);
     }
 

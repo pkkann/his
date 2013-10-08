@@ -6,6 +6,8 @@ package view;
 
 import control.PersonHandler;
 import hism.Hism;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -18,11 +20,17 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI(PersonHandler peH) {
         initComponents();
         this.peH = peH;
-        updateEnrolledCounter();
     }
     
     public void updateDate(String date) {
-        date_Label.setText(date);
+        String d = "";
+        
+        if(date.isEmpty()) {
+            Calendar c = Calendar.getInstance();
+            d = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
+        }
+        
+        date_Label.setText(d);
     }
     
     public void updateEnrolledCounter() {
