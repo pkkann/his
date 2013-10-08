@@ -4,7 +4,9 @@
  */
 package control;
 
+import entity.Enrollment;
 import entity.Person;
+import model.EnrollmentRegister;
 import model.PersonRegister;
 
 /**
@@ -14,9 +16,11 @@ import model.PersonRegister;
 public class PersonHandler implements HismHandler{
     
     private PersonRegister peR;
+    private EnrollmentRegister enR;
     
-    public PersonHandler(PersonRegister peR) {
+    public PersonHandler(PersonRegister peR, EnrollmentRegister enR) {
         this.peR = peR;
+        this.enR = enR;
     }
     
     /**
@@ -148,6 +152,23 @@ public class PersonHandler implements HismHandler{
         }
         
         return NO_ERROR;
+    }
+    
+    /**
+     * Returns number of enrolled persons
+     * @return count : Integer
+     */
+    public int getEnrolledCount() {
+        int count = 0;
+        
+        for(Enrollment en : enR.getEnrollments()) {
+            for(Person p : peR.getPersons()) {
+                if(en.getEnrolledPerson().equals(p)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
     
 }

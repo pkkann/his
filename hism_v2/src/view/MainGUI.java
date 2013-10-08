@@ -4,6 +4,7 @@
  */
 package view;
 
+import control.PersonHandler;
 import hism.Hism;
 
 /**
@@ -12,11 +13,21 @@ import hism.Hism;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainGUI
-     */
-    public MainGUI() {
+    private PersonHandler peH;
+    
+    public MainGUI(PersonHandler peH) {
         initComponents();
+        this.peH = peH;
+        updateEnrolledCounter();
+    }
+    
+    public void updateDate(String date) {
+        date_Label.setText(date);
+    }
+    
+    public void updateEnrolledCounter() {
+        int count = peH.getEnrolledCount();
+        enrolled_Label.setText(String.valueOf(count));
     }
 
     /**
