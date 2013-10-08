@@ -13,13 +13,10 @@ import model.QuarantineRegister;
  *
  * @author patrick
  */
-public class QuarantineHandler {
+public class QuarantineHandler implements HismHandler{
     
     private QuarantineRegister qaR;
     private PersonRegister peR;
-    public static final int NO_ERROR = 0;
-    public static final int GET_ERROR = 1;
-    public static final int FORMAT_ERROR = 2;
     
     public QuarantineHandler(QuarantineRegister qaR, PersonRegister peR) {
         this.qaR = qaR;
@@ -48,7 +45,7 @@ public class QuarantineHandler {
                 String quaran_Year = quarantineExpireDate_Split[1];
                 
                 if(quaran_Month.length() != 2 || quaran_Year.length() != 4) {
-                    return FORMAT_ERROR;
+                    return QUARANTINE_FORMAT_ERROR;
                 }
                 
                 // Create quarantine
@@ -90,7 +87,7 @@ public class QuarantineHandler {
                 String quaran_Year = quarantineExpireDate_Split[1];
                 
                 if(quaran_Month.length() != 2 || quaran_Year.length() != 4) {
-                    return FORMAT_ERROR;
+                    return QUARANTINE_FORMAT_ERROR;
                 }
                 
                 // Set quarantine

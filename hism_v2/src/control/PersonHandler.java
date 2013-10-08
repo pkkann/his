@@ -11,16 +11,9 @@ import model.PersonRegister;
  *
  * @author patrick
  */
-public class PersonHandler {
+public class PersonHandler implements HismHandler{
     
     private PersonRegister peR;
-    public static final int NO_ERROR = 0;
-    public static final int FIELDS_NOT_FILLED_ERROR = 1;
-    public static final int BIRTHDAY_FORMAT_ERROR = 2;
-    public static final int EXPIRATION_FORMAT_ERROR = 3;
-    public static final int EXPIRATION_DATE_ERROR = 4;
-    public static final int PICTUREPATH_EMPTY_ERROR = 5;
-    public static final int GET_ERROR = 6;
     
     public PersonHandler(PersonRegister peR) {
         this.peR = peR;

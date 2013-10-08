@@ -11,14 +11,9 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class UserHandler {
+public class UserHandler implements HismHandler{
 
     private UserRegister usR;
-    public static final int NO_ERROR = 0;
-    public static final int FIELDS_NOT_FILLED_ERROR = 1;
-    public static final int USERNAME_NOT_FREE_ERROR = 2;
-    public static final int PASSWORD_NOT_LONG_ENOUGH_ERROR = 3;
-    public static final int GET_ERROR = 4;
 
     public UserHandler(UserRegister usR) {
         this.usR = usR;

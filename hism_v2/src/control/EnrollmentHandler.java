@@ -16,15 +16,11 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class EnrollmentHandler {
+public class EnrollmentHandler implements HismHandler{
 
     private EnrollmentRegister enR;
     private PersonRegister peR;
     private UserRegister usR;
-    public static final int NO_ERROR = 0;
-    public static final int GET_ERROR = 1;
-    public static final int FIELDS_NOT_FILLED_ERROR = 2;
-    public static final int TOO_MANY_GUESTS = 3;
 
     public EnrollmentHandler(EnrollmentRegister enR, PersonRegister peR, UserRegister usR) {
         this.enR = enR;
