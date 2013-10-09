@@ -7,7 +7,6 @@ package view;
 import control.PersonHandler;
 import hism.Hism;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -20,11 +19,13 @@ public class MainGUI extends javax.swing.JFrame {
     
     // View
     private CreateUserDIA createUserDIA;
+    private EditUserDIA editUserDIA;
     
-    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA) {
+    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA, EditUserDIA editUserDIA) {
         initComponents();
         this.peH = peH;
         this.createUserDIA = createUserDIA;
+        this.editUserDIA = editUserDIA;
     }
     
     public void updateDate(String date) {
@@ -106,17 +107,17 @@ public class MainGUI extends javax.swing.JFrame {
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
+                "ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -338,6 +339,11 @@ public class MainGUI extends javax.swing.JFrame {
         brugere_Menu.add(jMenuItem1);
 
         jMenuItem2.setText("Rediger bruger");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         brugere_Menu.add(jMenuItem2);
 
         jMenuItem3.setText("Slet bruger");
@@ -383,6 +389,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         createUserDIA.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        editUserDIA.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
