@@ -54,11 +54,14 @@ public class Person implements Serializable {
     
     @Column(name = "reserve")
     private boolean reserve;
+    
+    @Column(name = "oneone")
+    private boolean oneOne;
 
     public Person() {
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve) {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
@@ -66,9 +69,10 @@ public class Person implements Serializable {
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
+        this.oneOne = oneOne;
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, String picturePath) {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
@@ -78,6 +82,7 @@ public class Person implements Serializable {
         this.creationDate = creationDate;
         this.hoene = hoene;
         this.reserve = reserve;
+        this.oneOne = oneOne;
         this.picturePath = picturePath;
     }
 
@@ -167,6 +172,14 @@ public class Person implements Serializable {
 
     public void setReserve(boolean reserve) {
         this.reserve = reserve;
+    }
+
+    public boolean isOneOne() {
+        return oneOne;
+    }
+
+    public void setOneOne(boolean oneOne) {
+        this.oneOne = oneOne;
     }
     
     

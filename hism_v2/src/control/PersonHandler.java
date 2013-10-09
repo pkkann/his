@@ -32,10 +32,13 @@ public class PersonHandler implements HismHandler{
      * @param birthdayDate
      * @param expirationDate
      * @param creationDate
+     * @param hoene
+     * @param reserve
+     * @param oneOne
      * @param picturePath
      * @return Error code : Integer
      */
-    public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, String picturePath) {
+    public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         
         // Check fields are filled
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
@@ -67,7 +70,7 @@ public class PersonHandler implements HismHandler{
         }
         
         // Create person
-        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, picturePath);
+        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
         
         // Register person
         peR.registerPerson(p);
@@ -84,10 +87,13 @@ public class PersonHandler implements HismHandler{
      * @param address
      * @param birthdayDate
      * @param expirationDate
+     * @param reserve
+     * @param hoene
+     * @param oneOne
      * @param picturePath
      * @return Error code : Integer
      */
-    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String picturePath) {
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         // Check fields are filled
         if(firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
@@ -128,6 +134,9 @@ public class PersonHandler implements HismHandler{
             p.setAddress(address);
             p.setBirthdayDate(birthdayDate);
             p.setExpirationDate(expirationDate);
+            p.setHoene(hoene);
+            p.setReserve(reserve);
+            p.setOneOne(oneOne);
             p.setPicturePath(picturePath);
         }
         

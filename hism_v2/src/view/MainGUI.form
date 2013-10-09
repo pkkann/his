@@ -213,7 +213,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="enroll_Button" alignment="1" pref="260" max="32767" attributes="0"/>
                                   <Component id="status_Pane" max="32767" attributes="0"/>
-                                  <Component id="picturePane_PicturePane" max="32767" attributes="0"/>
+                                  <Component id="picturePane_PicturePane" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -267,18 +267,24 @@
                       <Font name="Tahoma" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="1">
+                      <Table columnCount="8" rowCount="1">
                         <Column editable="false" title="Navn" type="java.lang.String"/>
                         <Column editable="false" title="Adresse" type="java.lang.String"/>
                         <Column editable="false" title="F&#xf8;dselsdag" type="java.lang.String"/>
-                        <Column editable="true" title="Udl&#xf8;bsdato" type="java.lang.String"/>
+                        <Column editable="false" title="Udl&#xf8;bsdato" type="java.lang.String"/>
                         <Column editable="false" title="Oprettelsesdato" type="java.lang.String"/>
                         <Column editable="false" title="H&#xf8;ne" type="java.lang.Boolean"/>
                         <Column editable="false" title="Reserve" type="java.lang.Boolean"/>
+                        <Column editable="false" title="1-1" type="java.lang.Boolean"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
