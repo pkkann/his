@@ -32,7 +32,7 @@ public class UserHandler implements HismHandler{
      * @param administrator
      * @return Error code : Integer
      */
-    public int createUser(String username, String password, String firstname, String middlename, String lastname, String creationDate, boolean reserve, boolean administrator) {
+    public int createUser(String username, String password, String passwordAgain, String firstname, String middlename, String lastname, String creationDate, boolean reserve, boolean administrator) {
 
         // Check fields are filled
         if (username.isEmpty() || password.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || creationDate.isEmpty()) {
@@ -47,8 +47,13 @@ public class UserHandler implements HismHandler{
         }
 
         // Check if password is more than 8 characters
-        if (password.length() < 8) {
+        if (password.length() < 10) {
             return PASSWORD_NOT_LONG_ENOUGH_ERROR;
+        }
+        
+        // Check if passwords are the same
+        if (!password.equals(passwordAgain)) {
+            return PASSWORDS_DO_NOT_MATCH;
         }
 
         // Create user

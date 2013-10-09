@@ -47,11 +47,20 @@ public interface HismHandler {
      */
     public static final int QUARANTINE_FORMAT_ERROR = 8;
     /**
+     * Will be send if the quarantine expiration date can not be used
+     */
+    public static final int QUARANTINE_DATE_ERROR = 9;
+    /**
      * Will be send if the username is already in use
      */
-    public static final int USERNAME_NOT_FREE_ERROR = 9;
+    public static final int USERNAME_NOT_FREE_ERROR = 10;
     /**
      * Will be send if the password is not long enough
      */
-    public static final int PASSWORD_NOT_LONG_ENOUGH_ERROR = 10;
+    public static final int PASSWORD_NOT_LONG_ENOUGH_ERROR = 11;
+    
+    /**
+     * Will be send if the passwords do not match
+     */
+    public static final int PASSWORDS_DO_NOT_MATCH = 12;
 }

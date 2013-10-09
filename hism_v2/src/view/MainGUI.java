@@ -15,11 +15,16 @@ import java.util.Date;
  */
 public class MainGUI extends javax.swing.JFrame {
 
+    // Control
     private PersonHandler peH;
     
-    public MainGUI(PersonHandler peH) {
+    // View
+    private CreateUserDIA createUserDIA;
+    
+    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA) {
         initComponents();
         this.peH = peH;
+        this.createUserDIA = createUserDIA;
     }
     
     public void updateDate(String date) {
@@ -93,9 +98,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         inner_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_Button.setText("Søg");
 
-        result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null}
@@ -122,6 +130,7 @@ public class MainGUI extends javax.swing.JFrame {
         result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         result_ScrollPane.setViewportView(result_Table);
 
+        enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enroll_Button.setText("Indskriv");
 
         status_Pane.setBackground(new java.awt.Color(51, 51, 51));
@@ -190,7 +199,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 5, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE))
                     .addComponent(result_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -231,6 +240,7 @@ public class MainGUI extends javax.swing.JFrame {
         user_Label.setText("USER.NAME");
 
         editProfile_Button.setBackground(new java.awt.Color(51, 51, 51));
+        editProfile_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         editProfile_Button.setText("Rediger profil");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -258,7 +268,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
                 .addComponent(editProfile_Button)
                 .addContainerGap())
         );
@@ -320,6 +330,11 @@ public class MainGUI extends javax.swing.JFrame {
         brugere_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenuItem1.setText("Opret bruger");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         brugere_Menu.add(jMenuItem1);
 
         jMenuItem2.setText("Rediger bruger");
@@ -364,6 +379,10 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        createUserDIA.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;

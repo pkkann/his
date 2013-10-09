@@ -4,15 +4,15 @@
  */
 package view;
 
+import control.UserHandler;
+
 /**
  *
  * @author patrick
  */
 public class CreateGuestDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CreateGuestDIA
-     */
+    
     public CreateGuestDIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,16 +28,18 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 429, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 268, Short.MAX_VALUE)
         );
 
         pack();
