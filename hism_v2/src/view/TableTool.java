@@ -4,8 +4,8 @@
  */
 package view;
 
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -16,23 +16,15 @@ public class TableTool {
     private TableTool() {
     }
 
-    public static DefaultTableModel generateTableModel(String[] columns, ArrayList<String[]> data) {
-        DefaultTableModel dtm = new DefaultTableModel();
-        
-        if (columns.length != 0 && data != null) {
-            // Add columns
-            for (String s : columns) {
-                dtm.addColumn(s);
-            }
-            
-            // Add data
-            for (String[] ss : data) {
-                dtm.addRow(ss);
-            }
-            
-            return dtm;
-        }
-        
-        return null;
+    /**
+     * Remove all elements in a tablemodel
+     * @param tm
+     * @return dtm : DefaultTableModel
+     */
+    public static DefaultTableModel cleanTableModel(TableModel tm) {
+        DefaultTableModel dtm = (DefaultTableModel) tm;
+        dtm.getDataVector().removeAllElements();
+        dtm.fireTableDataChanged();
+        return dtm;
     }
 }

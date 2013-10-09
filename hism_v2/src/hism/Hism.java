@@ -60,8 +60,8 @@ public class Hism {
         quH = new QuarantineHandler(quR, peR);
         
         // View
-        removeUserDIA = new RemoveUserDIA(mainGUI, true);
-        editUserDIA = new EditUserDIA(mainGUI, true);
+        removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
+        editUserDIA = new EditUserDIA(mainGUI, true, usH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         mainGUI = new MainGUI(peH, createUserDIA, editUserDIA, removeUserDIA);
         

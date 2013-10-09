@@ -5,6 +5,8 @@
 package control;
 
 import entity.User;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import model.UserRegister;
 
 /**
@@ -137,5 +139,29 @@ public class UserHandler implements HismHandler{
         }
         
         return NO_ERROR;
+    }
+    
+    /**
+     * Returns a result based on a string
+     * @param search
+     * @return data : ArrayList<Object[]>
+     */
+    public ArrayList<Object[]> searchUser(String search) {
+        // Create collections
+        ArrayList<Object[]> data = new ArrayList<>();
+        String[] sSplit = search.split(" ");
+        
+        // Do search
+        for(User u : usR.getUsers()) {
+            for(String s : sSplit) {
+                if(u.getFirstname().equalsIgnoreCase(s) || u.getMiddlename().equalsIgnoreCase(s) || u.getLastname().equalsIgnoreCase(s) || u.getUsername().equalsIgnoreCase(s)) {
+                    Object[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), u.isAdministrator(), u.isReserve()};
+                    data.add(dat);
+                    break;
+                }
+            }
+        }
+        
+        return data;
     }
 }

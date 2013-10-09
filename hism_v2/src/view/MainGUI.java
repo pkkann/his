@@ -7,6 +7,7 @@ package view;
 import control.PersonHandler;
 import hism.Hism;
 import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +29,9 @@ public class MainGUI extends javax.swing.JFrame {
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
+        
+        DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
+        
     }
     
     public void updateDate(String date) {
@@ -65,6 +69,7 @@ public class MainGUI extends javax.swing.JFrame {
         status_Pane = new javax.swing.JPanel();
         status_Label = new javax.swing.JLabel();
         picturePane_PicturePane = new view.image.PicturePane();
+        renew_Button = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -98,7 +103,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Hism.title + " - " + Hism.version);
-        setMinimumSize(new java.awt.Dimension(900, 500));
+        setMinimumSize(new java.awt.Dimension(1300, 550));
 
         inner_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -110,7 +115,7 @@ public class MainGUI extends javax.swing.JFrame {
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
@@ -168,6 +173,9 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 240, Short.MAX_VALUE)
         );
 
+        renew_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        renew_Button.setText("Forny");
+
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
         inner_PaneLayout.setHorizontalGroup(
@@ -180,11 +188,12 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search_Button))
                     .addGroup(inner_PaneLayout.createSequentialGroup()
-                        .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                        .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(enroll_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(status_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(renew_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -203,8 +212,9 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(result_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(renew_Button))
+                    .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -446,6 +456,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu personer_Menu;
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JMenu rapport_Menu;
+    private javax.swing.JButton renew_Button;
     private javax.swing.JScrollPane result_ScrollPane;
     private javax.swing.JTable result_Table;
     private javax.swing.JButton search_Button;

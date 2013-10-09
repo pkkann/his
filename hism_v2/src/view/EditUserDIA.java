@@ -4,18 +4,22 @@
  */
 package view;
 
+import control.UserHandler;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author patrick
  */
 public class EditUserDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form EditUserDIA
-     */
-    public EditUserDIA(java.awt.Frame parent, boolean modal) {
+    private UserHandler usH;
+    
+    public EditUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
         initComponents();
+        this.usH = usH;
     }
     
     private void clean() {
@@ -83,7 +87,7 @@ public class EditUserDIA extends javax.swing.JDialog {
 
         users_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Navn", "Brugernavn", "Administrator", "Reserve"
@@ -93,7 +97,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -345,7 +349,12 @@ public class EditUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        // TODO add your handling code here:
+        TableTool.cleanTableModel(users_Table.getModel());
+        ArrayList<Object[]> data = usH.searchUser(search_TextField.getText());
+        DefaultTableModel dtm = (DefaultTableModel) users_Table.getModel();
+        for(Object[] o : data) {
+            dtm.addRow(o);
+        }
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
