@@ -60,9 +60,10 @@ public class Hism {
         quH = new QuarantineHandler(quR, peR);
         
         // View
+        removeUserDIA = new RemoveUserDIA(mainGUI, true);
         editUserDIA = new EditUserDIA(mainGUI, true);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
-        mainGUI = new MainGUI(peH, createUserDIA, editUserDIA);
+        mainGUI = new MainGUI(peH, createUserDIA, editUserDIA, removeUserDIA);
         
         // Start sequence
         mainGUI.updateEnrolledCounter();

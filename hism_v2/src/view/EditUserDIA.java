@@ -23,7 +23,16 @@ public class EditUserDIA extends javax.swing.JDialog {
         middlename_TextField.setText("");
         lastname_TextField.setText("");
         username_TextField.setText("");
+        search_TextField.setText("");
         
+        firstname_TextField.setEnabled(false);
+        middlename_TextField.setEnabled(false);
+        lastname_TextField.setEnabled(false);
+        username_TextField.setEnabled(false);
+        changePassword_Button.setEnabled(false);
+        admin_CheckBox.setEnabled(false);
+        reserve_CheckBox.setEnabled(false);
+        save_Button.setEnabled(false);
     }
 
     /**
@@ -39,8 +48,8 @@ public class EditUserDIA extends javax.swing.JDialog {
         users_Pane = new javax.swing.JPanel();
         users_ScrollPane = new javax.swing.JScrollPane();
         users_Table = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        search_TextField = new javax.swing.JTextField();
+        search_Button = new javax.swing.JButton();
         fields_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,12 +67,17 @@ public class EditUserDIA extends javax.swing.JDialog {
         save_Button = new javax.swing.JButton();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        title_Pane = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -93,13 +107,13 @@ public class EditUserDIA extends javax.swing.JDialog {
         users_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         users_ScrollPane.setViewportView(users_Table);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Søg");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                search_ButtonActionPerformed(evt);
             }
         });
 
@@ -112,9 +126,9 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addGroup(users_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(users_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                     .addGroup(users_PaneLayout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(search_TextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(search_Button)))
                 .addContainerGap())
         );
         users_PaneLayout.setVerticalGroup(
@@ -122,8 +136,8 @@ public class EditUserDIA extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, users_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(users_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(users_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -267,18 +281,18 @@ public class EditUserDIA extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Rediger en bruger");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
+        title_Pane.setLayout(title_PaneLayout);
+        title_PaneLayout.setHorizontalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        title_PaneLayout.setVerticalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
@@ -294,14 +308,14 @@ public class EditUserDIA extends javax.swing.JDialog {
                     .addComponent(users_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tools_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(title_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         main_PaneLayout.setVerticalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(title_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(users_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -330,9 +344,13 @@ public class EditUserDIA extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_close_ButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
 //
 //    /**
 //     * @param args the command line arguments
@@ -381,7 +399,6 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JButton close_Button;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTextField firstname_TextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -389,13 +406,14 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
     private javax.swing.JCheckBox reserve_CheckBox;
     private javax.swing.JButton save_Button;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JTextField search_TextField;
+    private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;
     private javax.swing.JTextField username_TextField;
     private javax.swing.JPanel users_Pane;

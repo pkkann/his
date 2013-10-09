@@ -18,14 +18,16 @@ public class MainGUI extends javax.swing.JFrame {
     private PersonHandler peH;
     
     // View
-    private CreateUserDIA createUserDIA;
+    private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
+    private CreateUserDIA createUserDIA;
     
-    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA, EditUserDIA editUserDIA) {
+    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA) {
         initComponents();
         this.peH = peH;
-        this.createUserDIA = createUserDIA;
+        this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
+        this.createUserDIA = createUserDIA;
     }
     
     public void updateDate(String date) {
@@ -71,6 +73,7 @@ public class MainGUI extends javax.swing.JFrame {
         editProfile_Button = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         enrolled_Label = new javax.swing.JLabel();
+        logoff_Button = new javax.swing.JButton();
         menuBar_MenuBar = new javax.swing.JMenuBar();
         filer_Menu = new javax.swing.JMenu();
         rapport_Menu = new javax.swing.JMenu();
@@ -252,6 +255,9 @@ public class MainGUI extends javax.swing.JFrame {
         enrolled_Label.setForeground(new java.awt.Color(153, 204, 0));
         enrolled_Label.setText("ENROLLED");
 
+        logoff_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        logoff_Button.setText("Log af");
+
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
         bottom_Pane.setLayout(bottom_PaneLayout);
         bottom_PaneLayout.setHorizontalGroup(
@@ -269,8 +275,10 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editProfile_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoff_Button)
                 .addContainerGap())
         );
         bottom_PaneLayout.setVerticalGroup(
@@ -278,7 +286,9 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editProfile_Button, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editProfile_Button)
+                        .addComponent(logoff_Button))
                     .addGroup(bottom_PaneLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(bottom_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,6 +357,11 @@ public class MainGUI extends javax.swing.JFrame {
         brugere_Menu.add(jMenuItem2);
 
         jMenuItem3.setText("Slet bruger");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         brugere_Menu.add(jMenuItem3);
 
         menuBar_MenuBar.add(brugere_Menu);
@@ -394,6 +409,10 @@ public class MainGUI extends javax.swing.JFrame {
         editUserDIA.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        removeUserDIA.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
@@ -419,6 +438,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JButton logoff_Button;
     private javax.swing.JMenuItem luk_MenuItem;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;
