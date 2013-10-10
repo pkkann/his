@@ -5,7 +5,10 @@
 package hism;
 
 import control.*;
+import hibernate.HiberUtil;
+import javax.swing.JFrame;
 import model.*;
+import org.hibernate.classic.Session;
 import view.*;
 
 /**
@@ -66,6 +69,9 @@ public class Hism {
         mainGUI = new MainGUI(peH, createUserDIA, editUserDIA, removeUserDIA);
         
         // Start sequence
+        Session s = HiberUtil.getSessionFactory().openSession();
+        s.close();
+        testData();
         mainGUI.updateEnrolledCounter();
         mainGUI.updateDate("");
         mainGUI.setVisible(true);
@@ -89,6 +95,10 @@ public class Hism {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
         }
         //</editor-fold>
+    }
+    
+    private void testData() {
+        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "", "Kann", "10102013", false, false);
     }
 
     public static void main(String[] args) {

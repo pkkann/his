@@ -37,6 +37,15 @@ public class EditUserDIA extends javax.swing.JDialog {
         admin_CheckBox.setEnabled(false);
         reserve_CheckBox.setEnabled(false);
         save_Button.setEnabled(false);
+        
+    }
+    
+    public void search() {
+        ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
+        DefaultTableModel dtm = (DefaultTableModel) users_Table.getModel();
+        for (String[] s : data) {
+            dtm.addRow(s);
+        }
     }
 
     /**
@@ -349,12 +358,7 @@ public class EditUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        TableTool.cleanTableModel(users_Table.getModel());
-        ArrayList<Object[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = (DefaultTableModel) users_Table.getModel();
-        for(Object[] o : data) {
-            dtm.addRow(o);
-        }
+        search();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

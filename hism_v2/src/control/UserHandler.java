@@ -6,7 +6,6 @@ package control;
 
 import entity.User;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import model.UserRegister;
 
 /**
@@ -146,16 +145,26 @@ public class UserHandler implements HismHandler{
      * @param search
      * @return data : ArrayList<Object[]>
      */
-    public ArrayList<Object[]> searchUser(String search) {
-        // Create collections
-        ArrayList<Object[]> data = new ArrayList<>();
+    public ArrayList<String[]> searchUser(String search) {
+        // Create collection
+        ArrayList<String[]> data = new ArrayList<>();
+        
+        // Split the string into words
         String[] sSplit = search.split(" ");
         
         // Do search
         for(User u : usR.getUsers()) {
             for(String s : sSplit) {
                 if(u.getFirstname().equalsIgnoreCase(s) || u.getMiddlename().equalsIgnoreCase(s) || u.getLastname().equalsIgnoreCase(s) || u.getUsername().equalsIgnoreCase(s)) {
-                    Object[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), u.isAdministrator(), u.isReserve()};
+                    String admin = "Nej";
+                    if(u.isAdministrator()) {
+                        admin = "Ja";
+                    }
+                    String reserve = "Nej";
+                    if(u.isReserve()) {
+                        reserve = "Ja";
+                    }
+                    String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
                     data.add(dat);
                     break;
                 }

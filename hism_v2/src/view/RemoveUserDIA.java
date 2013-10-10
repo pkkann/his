@@ -5,8 +5,13 @@
 package view;
 
 import control.UserHandler;
+import entity.User;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.table.DefaultTableModel;
+import view.message.DialogMessage;
 
 /**
  *
@@ -15,16 +20,46 @@ import javax.swing.table.DefaultTableModel;
 public class RemoveUserDIA extends javax.swing.JDialog {
 
     private UserHandler usH;
-    
+    private int userToDelete;
+
     public RemoveUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
         initComponents();
+        initTableListener();
         this.usH = usH;
     }
-    
+
+    private void initTableListener() {
+        users_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selRow = users_Table.getSelectedRow();
+                    Object selIDObject = users_Table.getModel().getValueAt(selRow, 0);
+                    int selID = Integer.valueOf(String.valueOf(selIDObject));
+                    setUser(selID);
+                }
+            }
+        });
+    }
+
+    private void setUser(int id) {
+        userToDelete = id;
+        delete_Button.setEnabled(true);
+    }
+
     private void clean() {
         search_TextField.setText("");
         delete_Button.setEnabled(false);
+        DefaultTableModel dtm = TableTool.generateEmtpyUserTableModel();
+        System.out.println(users_Table.getSelectedRowCount());
+        //users_Table.setModel(dtm);
+    }
+
+    public void search() {
+        ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
+        DefaultTableModel dtm = TableTool.generateUserTableModel(data);
+        users_Table.setModel(dtm);
     }
 
     /**
@@ -88,22 +123,20 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 "ID", "Navn", "Brugernavn", "Administrator", "Reserve"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         users_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        users_Table.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                users_TableVetoableChange(evt);
+            }
+        });
         users_ScrollPane.setViewportView(users_Table);
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -145,6 +178,11 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         delete_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         delete_Button.setText("Slet den valgte bruger");
         delete_Button.setEnabled(false);
+        delete_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
@@ -231,12 +269,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        TableTool.cleanTableModel(users_Table.getModel());
-        ArrayList<Object[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = (DefaultTableModel) users_Table.getModel();
-        for(Object[] o : data) {
-            dtm.addRow(o);
-        }
+        search();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
@@ -247,6 +280,16 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         clean();
     }//GEN-LAST:event_formWindowClosed
 
+    private void users_TableVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_users_TableVetoableChange
+    }//GEN-LAST:event_users_TableVetoableChange
+
+    private void delete_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_ButtonActionPerformed
+        int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette den valgte person", "Sikker?");
+        if (n == 0) {
+            usH.removeUser(this.userToDelete);
+            clean();
+        }
+    }//GEN-LAST:event_delete_ButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;
     private javax.swing.JButton delete_Button;

@@ -218,9 +218,9 @@ public class CreateUserDIA extends javax.swing.JDialog {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(create_Button)
-                    .addComponent(cancel_Button))
+                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(create_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancel_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -292,6 +292,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
+ 
         String firstname = firstname_TextField.getText();
         String middlename = middlename_TextField.getText();
         String lastname = lastname_TextField.getText();
@@ -302,9 +303,9 @@ public class CreateUserDIA extends javax.swing.JDialog {
         boolean reserve = reserve_CheckBox.isSelected();
         Calendar c = Calendar.getInstance();
         String creationDate = String.valueOf(c.get(Calendar.DATE)) + String.valueOf(c.get(Calendar.MONTH)) + String.valueOf(c.get(Calendar.YEAR));
-
+        
         int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
-
+        
         DialogMessage.showMessage(this, errorCode);
         
         if(errorCode == 0) {

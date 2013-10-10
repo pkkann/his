@@ -4,16 +4,28 @@
  */
 package view;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author patrick
  */
 public class TableTool {
+    
+    public static final String[] userColumns = {"ID", "Navn", "Brugernavn", "Administrator", "Reserve"};
 
     private TableTool() {
+    }
+    
+    public static DefaultTableModel generateEmtpyUserTableModel() {
+        DefaultTableModel dtm = new DefaultTableModel();
+        
+        for(int i = 0; i<userColumns.length; i++) {
+            dtm.addColumn(userColumns[i]);
+        }
+        
+        return dtm;
     }
 
     /**
@@ -21,10 +33,19 @@ public class TableTool {
      * @param tm
      * @return dtm : DefaultTableModel
      */
-    public static DefaultTableModel cleanTableModel(TableModel tm) {
-        DefaultTableModel dtm = (DefaultTableModel) tm;
-        dtm.getDataVector().removeAllElements();
-        dtm.fireTableDataChanged();
+    public static DefaultTableModel generateUserTableModel(ArrayList<String[]> data) {
+        DefaultTableModel dtm = new DefaultTableModel();
+        
+        for(int i = 0; i<userColumns.length; i++) {
+            dtm.addColumn(userColumns[i]);
+        }
+        
+        for(String[] s : data) {
+            dtm.addRow(s);
+        }
+        
         return dtm;
     }
+
+    
 }

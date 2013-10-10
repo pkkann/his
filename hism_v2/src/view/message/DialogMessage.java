@@ -17,6 +17,11 @@ public class DialogMessage {
 
     private DialogMessage() {
     }
+    
+    public static int showQuestionMessage(JDialog j, String question, String subject) {
+        int n = JOptionPane.showConfirmDialog(j,question,subject,JOptionPane.YES_NO_OPTION);
+        return n;
+    }
 
     public static void showMessage(JDialog j, int errorCode) {
         switch (errorCode) {
