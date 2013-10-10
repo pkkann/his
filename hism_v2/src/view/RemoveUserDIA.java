@@ -5,11 +5,9 @@
 package view;
 
 import control.UserHandler;
-import entity.User;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.table.DefaultTableModel;
 import view.message.DialogMessage;
 
@@ -20,7 +18,7 @@ import view.message.DialogMessage;
 public class RemoveUserDIA extends javax.swing.JDialog {
 
     private UserHandler usH;
-    private int userToDelete;
+    private int selectedUser = -1;
 
     public RemoveUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
@@ -30,12 +28,12 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     }
 
     private void initTableListener() {
-        users_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selRow = users_Table.getSelectedRow();
-                    Object selIDObject = users_Table.getModel().getValueAt(selRow, 0);
+                if (!e.getValueIsAdjusting() && result_Table.getSelectedRowCount() != 0) {
+                    int selRow = result_Table.getSelectedRow();
+                    Object selIDObject = result_Table.getModel().getValueAt(selRow, 0);
                     int selID = Integer.valueOf(String.valueOf(selIDObject));
                     setUser(selID);
                 }
@@ -44,22 +42,29 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     }
 
     private void setUser(int id) {
-        userToDelete = id;
+        selectedUser = id;
         delete_Button.setEnabled(true);
     }
 
-    private void clean() {
+    private void cleanSearchField() {
         search_TextField.setText("");
+    }
+
+    private void cleanTable() {
+        DefaultTableModel dtm = TableTool.createEmtpyUserTableModel();
+        result_Table.setModel(dtm);
+    }
+
+    public void cleanSelectedUser() {
+        selectedUser = -1;
         delete_Button.setEnabled(false);
-        DefaultTableModel dtm = TableTool.generateEmtpyUserTableModel();
-        System.out.println(users_Table.getSelectedRowCount());
-        //users_Table.setModel(dtm);
     }
 
     public void search() {
+        cleanSelectedUser();
         ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = TableTool.generateUserTableModel(data);
-        users_Table.setModel(dtm);
+        DefaultTableModel dtm = TableTool.createUserTableModel(data);
+        result_Table.setModel(dtm);
     }
 
     /**
@@ -76,7 +81,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         users_Pane = new javax.swing.JPanel();
         users_ScrollPane = new javax.swing.JScrollPane();
-        users_Table = new javax.swing.JTable();
+        result_Table = new javax.swing.JTable();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         fields_Pane = new javax.swing.JPanel();
@@ -115,7 +120,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        users_Table.setModel(new javax.swing.table.DefaultTableModel(
+        result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -131,13 +136,15 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        users_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        users_Table.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+        result_Table.setEditingColumn(0);
+        result_Table.setEditingRow(0);
+        result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        result_Table.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
             public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                users_TableVetoableChange(evt);
+                result_TableVetoableChange(evt);
             }
         });
-        users_ScrollPane.setViewportView(users_Table);
+        users_ScrollPane.setViewportView(result_Table);
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -277,17 +284,19 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        clean();
+        cleanSearchField();
+        cleanTable();
+        cleanSelectedUser();
     }//GEN-LAST:event_formWindowClosed
 
-    private void users_TableVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_users_TableVetoableChange
-    }//GEN-LAST:event_users_TableVetoableChange
+    private void result_TableVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_result_TableVetoableChange
+    }//GEN-LAST:event_result_TableVetoableChange
 
     private void delete_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_ButtonActionPerformed
         int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette den valgte person", "Sikker?");
         if (n == 0) {
-            usH.removeUser(this.userToDelete);
-            clean();
+            usH.removeUser(this.selectedUser);
+            search();
         }
     }//GEN-LAST:event_delete_ButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -296,12 +305,12 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel main_Pane;
+    private javax.swing.JTable result_Table;
     private javax.swing.JButton search_Button;
     private javax.swing.JTextField search_TextField;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;
     private javax.swing.JPanel users_Pane;
     private javax.swing.JScrollPane users_ScrollPane;
-    private javax.swing.JTable users_Table;
     // End of variables declaration//GEN-END:variables
 }

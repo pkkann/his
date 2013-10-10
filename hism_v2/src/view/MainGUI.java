@@ -6,6 +6,7 @@ package view;
 
 import control.PersonHandler;
 import hism.Hism;
+import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +24,7 @@ public class MainGUI extends javax.swing.JFrame {
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
     
-    public MainGUI(PersonHandler peH, CreateUserDIA createUserDIA, EditUserDIA editUserDIA, RemoveUserDIA removeUserDIA) {
+    public MainGUI(PersonHandler peH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
         initComponents();
         this.peH = peH;
         this.removeUserDIA = removeUserDIA;
@@ -32,6 +33,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
         
+        search_Button.requestFocus();
     }
     
     public void updateDate(String date) {
@@ -108,6 +110,16 @@ public class MainGUI extends javax.swing.JFrame {
         inner_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setForeground(new java.awt.Color(153, 153, 153));
+        search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+        search_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                search_TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                search_TextFieldFocusLost(evt);
+            }
+        });
 
         search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_Button.setText("Søg");
@@ -175,6 +187,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         renew_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         renew_Button.setText("Forny");
+        renew_Button.setEnabled(false);
 
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
@@ -422,6 +435,20 @@ public class MainGUI extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         removeUserDIA.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void search_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusGained
+        if(search_TextField.getText().equals("Søg på en persons navn/fødselsdag/adresse")) {
+            search_TextField.setText("");
+            search_TextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_search_TextFieldFocusGained
+
+    private void search_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusLost
+        if(search_TextField.getText().isEmpty()) {
+            search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+            search_TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_search_TextFieldFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;

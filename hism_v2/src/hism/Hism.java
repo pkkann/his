@@ -17,6 +17,7 @@ import view.*;
  */
 public class Hism {
 
+    // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
     public static final String version = "2.0 Alpha";
     
@@ -31,50 +32,47 @@ public class Hism {
     private UserRegister usR;
     private EnrollmentRegister enR;
     private QuarantineRegister quR;
-    
+
     // View
-    private MainGUI mainGUI;
-    private CreatePersonDIA createPersonDIA;
-    private EditPersonDIA editPersonDIA;
-    private RemovePersonDIA removePersonDIA;
-    private EnrollPersonDIA enrollPersonDIA;
-    private QuarantinePersonDIA quarantinePersonDIA;
-    private CreateGuestDIA createGuestDIA;
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
-    private LoginUserDIA loginUserDIA;
-    private ResetPasswordUserDIA resetPasswordUserDIA;
+    private MainGUI mainGUI;
     
-
+    
     public Hism() {
         setLookAndFeel();
-        
+
         // Model
         peR = new PersonRegister();
         usR = new UserRegister();
         enR = new EnrollmentRegister();
         quR = new QuarantineRegister();
-        
+
         // Control
         peH = new PersonHandler(peR, enR);
         usH = new UserHandler(usR);
         enH = new EnrollmentHandler(enR, peR, usR);
         quH = new QuarantineHandler(quR, peR);
-        
+
         // View
-        removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
-        editUserDIA = new EditUserDIA(mainGUI, true, usH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
-        mainGUI = new MainGUI(peH, createUserDIA, editUserDIA, removeUserDIA);
-        
+        editUserDIA = new EditUserDIA(mainGUI, true, usH);
+        removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
+        mainGUI = new MainGUI(peH, removeUserDIA, editUserDIA, createUserDIA);
+
         // Start sequence
+        System.out.println("##### Hism starting #####");
+        System.out.println("##### Hism testing database connection #####");
+        
         Session s = HiberUtil.getSessionFactory().openSession();
         s.close();
         testData();
-        mainGUI.updateEnrolledCounter();
+        
         mainGUI.updateDate("");
+        mainGUI.updateEnrolledCounter();
         mainGUI.setVisible(true);
+        System.out.println("##### Hism started! #####");
     }
 
     private void setLookAndFeel() {
@@ -96,13 +94,14 @@ public class Hism {
         }
         //</editor-fold>
     }
-    
+
     private void testData() {
-        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "", "Kann", "10102013", false, false);
+        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10102013", false, false);
+        usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10102013", false, false);
     }
 
     public static void main(String[] args) {
-        
+
         Hism hism = new Hism();
 
     }

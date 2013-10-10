@@ -5,8 +5,12 @@
 package view;
 
 import control.UserHandler;
+import entity.User;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import view.message.DialogMessage;
 
 /**
  *
@@ -15,37 +19,84 @@ import javax.swing.table.DefaultTableModel;
 public class EditUserDIA extends javax.swing.JDialog {
 
     private UserHandler usH;
+    private int selectedUser = -1;
     
     public EditUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
         initComponents();
+        initTableListener();
         this.usH = usH;
     }
     
-    private void clean() {
+    private void initTableListener() {
+        result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && result_Table.getSelectedRowCount() != 0) {
+                    int selRow = result_Table.getSelectedRow();
+                    Object selIDObject = result_Table.getModel().getValueAt(selRow, 0);
+                    int selID = Integer.valueOf(String.valueOf(selIDObject));
+                    setUser(selID);
+                }
+            }
+        });
+    }
+    
+    private void setUser(int id) {
+        selectedUser = id;
+        User u = usH.getUser(id);
+        firstname_TextField.setText(u.getFirstname());
+        middlename_TextField.setText(u.getMiddlename());
+        lastname_TextField.setText(u.getLastname());
+        username_TextField.setText(u.getUsername());
+        admin_CheckBox.setSelected(u.isAdministrator());
+        reserve_CheckBox.setSelected(u.isReserve());
+        password_TextField.setText(u.getPassword());
+        
+        firstname_TextField.setEnabled(true);
+        middlename_TextField.setEnabled(true);
+        lastname_TextField.setEnabled(true);
+        username_TextField.setEnabled(true);
+        admin_CheckBox.setEnabled(true);
+        reserve_CheckBox.setEnabled(true);
+        password_TextField.setEnabled(true);
+        save_Button.setEnabled(true);
+    }
+    
+    public void cleanSelectedUser() {
+        selectedUser = -1;
         firstname_TextField.setText("");
         middlename_TextField.setText("");
         lastname_TextField.setText("");
         username_TextField.setText("");
-        search_TextField.setText("");
+        admin_CheckBox.setSelected(false);
+        reserve_CheckBox.setSelected(false);
+        password_TextField.setText("");
         
         firstname_TextField.setEnabled(false);
         middlename_TextField.setEnabled(false);
         lastname_TextField.setEnabled(false);
         username_TextField.setEnabled(false);
-        changePassword_Button.setEnabled(false);
         admin_CheckBox.setEnabled(false);
         reserve_CheckBox.setEnabled(false);
+        password_TextField.setEnabled(false);
         save_Button.setEnabled(false);
-        
+    }
+    
+    private void cleanSearchField() {
+        search_TextField.setText("");
+    }
+    
+    private void cleanTable() {
+        DefaultTableModel dtm = TableTool.createEmtpyUserTableModel();
+        result_Table.setModel(dtm);
     }
     
     public void search() {
+        cleanSelectedUser();
         ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = (DefaultTableModel) users_Table.getModel();
-        for (String[] s : data) {
-            dtm.addRow(s);
-        }
+        DefaultTableModel dtm = TableTool.createUserTableModel(data);
+        result_Table.setModel(dtm);
     }
 
     /**
@@ -60,7 +111,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         main_Pane = new javax.swing.JPanel();
         users_Pane = new javax.swing.JPanel();
         users_ScrollPane = new javax.swing.JScrollPane();
-        users_Table = new javax.swing.JTable();
+        result_Table = new javax.swing.JTable();
         search_TextField = new javax.swing.JTextField();
         search_Button = new javax.swing.JButton();
         fields_Pane = new javax.swing.JPanel();
@@ -73,11 +124,11 @@ public class EditUserDIA extends javax.swing.JDialog {
         lastname_TextField = new javax.swing.JTextField();
         username_TextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        changePassword_Button = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         admin_CheckBox = new javax.swing.JCheckBox();
         reserve_CheckBox = new javax.swing.JCheckBox();
         save_Button = new javax.swing.JButton();
+        password_TextField = new javax.swing.JTextField();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
         title_Pane = new javax.swing.JPanel();
@@ -94,7 +145,7 @@ public class EditUserDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
-        users_Table.setModel(new javax.swing.table.DefaultTableModel(
+        result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -117,8 +168,8 @@ public class EditUserDIA extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        users_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        users_ScrollPane.setViewportView(users_Table);
+        result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        users_ScrollPane.setViewportView(result_Table);
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -183,10 +234,6 @@ public class EditUserDIA extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Kode:");
 
-        changePassword_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        changePassword_Button.setText("Skift");
-        changePassword_Button.setEnabled(false);
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Rettigheder:");
 
@@ -201,6 +248,14 @@ public class EditUserDIA extends javax.swing.JDialog {
         save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         save_Button.setText("Gem bruger");
         save_Button.setEnabled(false);
+        save_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_ButtonActionPerformed(evt);
+            }
+        });
+
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.setEnabled(false);
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
@@ -216,17 +271,16 @@ public class EditUserDIA extends javax.swing.JDialog {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(firstname_TextField)
-                        .addComponent(middlename_TextField)
-                        .addComponent(lastname_TextField)
-                        .addComponent(username_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                    .addComponent(changePassword_Button)
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(firstname_TextField)
+                    .addComponent(middlename_TextField)
+                    .addComponent(lastname_TextField)
+                    .addComponent(username_TextField)
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addComponent(admin_CheckBox)
                         .addGap(18, 18, 18)
-                        .addComponent(reserve_CheckBox)))
+                        .addComponent(reserve_CheckBox))
+                    .addComponent(password_TextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -255,7 +309,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(changePassword_Button))
+                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -335,7 +389,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -362,8 +416,29 @@ public class EditUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        clean();
+        cleanSelectedUser();
+        cleanSearchField();
+        cleanTable();
     }//GEN-LAST:event_formWindowClosed
+
+    private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_ButtonActionPerformed
+        String firstname = firstname_TextField.getText();
+        String middlename = middlename_TextField.getText();
+        String lastname = lastname_TextField.getText();
+        String username = username_TextField.getText();
+        String password = password_TextField.getText();
+        boolean admin = admin_CheckBox.isSelected();
+        boolean reserve = reserve_CheckBox.isSelected();
+        
+        int errorCode = usH.saveUser(selectedUser, username, password, firstname, middlename, lastname, reserve, admin);
+        
+        DialogMessage.showMessage(this, errorCode);
+        
+        if(errorCode == 0) {
+            search();
+            cleanSelectedUser();
+        }
+    }//GEN-LAST:event_save_ButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -408,7 +483,6 @@ public class EditUserDIA extends javax.swing.JDialog {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox admin_CheckBox;
-    private javax.swing.JButton changePassword_Button;
     private javax.swing.JButton close_Button;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTextField firstname_TextField;
@@ -422,7 +496,9 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
+    private javax.swing.JTextField password_TextField;
     private javax.swing.JCheckBox reserve_CheckBox;
+    private javax.swing.JTable result_Table;
     private javax.swing.JButton save_Button;
     private javax.swing.JButton search_Button;
     private javax.swing.JTextField search_TextField;
@@ -431,6 +507,5 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JTextField username_TextField;
     private javax.swing.JPanel users_Pane;
     private javax.swing.JScrollPane users_ScrollPane;
-    private javax.swing.JTable users_Table;
     // End of variables declaration//GEN-END:variables
 }

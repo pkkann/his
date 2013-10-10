@@ -12,7 +12,7 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class UserHandler implements HismHandler{
+public class UserHandler implements HismHandler {
 
     private UserRegister usR;
 
@@ -51,7 +51,7 @@ public class UserHandler implements HismHandler{
         if (password.length() < 10) {
             return PASSWORD_NOT_LONG_ENOUGH_ERROR;
         }
-        
+
         // Check if passwords are the same
         if (!password.equals(passwordAgain)) {
             return PASSWORDS_DO_NOT_MATCH;
@@ -68,6 +68,7 @@ public class UserHandler implements HismHandler{
 
     /**
      * Save a user
+     *
      * @param userID
      * @param username
      * @param password
@@ -111,7 +112,7 @@ public class UserHandler implements HismHandler{
             u.setPassword(password);
             u.setReserve(reserve);
             u.setUsername(username);
-            
+
             // Save user
             usR.saveUser(u);
         } else {
@@ -120,57 +121,93 @@ public class UserHandler implements HismHandler{
 
         return NO_ERROR;
     }
-    
+
     /**
      * Remove a user
+     *
      * @param userID
      * @return Error code : Integer
      */
     public int removeUser(int userID) {
-        
+
         // Get user
         User u = usR.getUser(userID);
-        
-        if(u != null) {
+
+        if (u != null) {
             usR.deleteUser(u);
         } else {
             return GET_ERROR;
         }
-        
+
         return NO_ERROR;
     }
-    
+
     /**
      * Returns a result based on a string
+     *
      * @param search
      * @return data : ArrayList<Object[]>
      */
     public ArrayList<String[]> searchUser(String search) {
         // Create collection
         ArrayList<String[]> data = new ArrayList<>();
-        
+
         // Split the string into words
         String[] sSplit = search.split(" ");
-        
+
         // Do search
-        for(User u : usR.getUsers()) {
-            for(String s : sSplit) {
-                if(u.getFirstname().equalsIgnoreCase(s) || u.getMiddlename().equalsIgnoreCase(s) || u.getLastname().equalsIgnoreCase(s) || u.getUsername().equalsIgnoreCase(s)) {
-                    String admin = "Nej";
-                    if(u.isAdministrator()) {
-                        admin = "Ja";
+        if (search.isEmpty()) {
+            for (User u : usR.getUsers()) {
+                String admin = "Nej";
+                if (u.isAdministrator()) {
+                    admin = "Ja";
+                }
+                String reserve = "Nej";
+                if (u.isReserve()) {
+                    reserve = "Ja";
+                }
+                String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
+                data.add(dat);
+            }
+        } else {
+            for (User u : usR.getUsers()) {
+                for (String s : sSplit) {
+                    if (u.getFirstname().equalsIgnoreCase(s) || u.getMiddlename().equalsIgnoreCase(s) || u.getLastname().equalsIgnoreCase(s) || u.getUsername().equalsIgnoreCase(s)) {
+                        String admin = "Nej";
+                        if (u.isAdministrator()) {
+                            admin = "Ja";
+                        }
+                        String reserve = "Nej";
+                        if (u.isReserve()) {
+                            reserve = "Ja";
+                        }
+                        String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
+                        data.add(dat);
+                        break;
                     }
-                    String reserve = "Nej";
-                    if(u.isReserve()) {
-                        reserve = "Ja";
-                    }
-                    String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
-                    data.add(dat);
-                    break;
                 }
             }
         }
-        
+
         return data;
+    }
+
+    /**
+     * Returns a user based on an Integer
+     *
+     * @param id
+     * @return u : User
+     */
+    public User getUser(int id) {
+        User u = null;
+
+        for (User uu : usR.getUsers()) {
+            if (uu.getIduser() == id) {
+                u = uu;
+                break;
+            }
+        }
+
+        return u;
     }
 }
