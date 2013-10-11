@@ -61,14 +61,14 @@ public class QuarantineRegister {
     
     /**
      * Returns a quarantine
-     * @param quarantineID
+     * @param idPerson
      * @return Quarantine
      */
-    public Quarantine getQuarantine(int quarantineID) {
+    public Quarantine getQuarantine(int idPerson) {
         System.out.println("Getting quarantine...");
         
         for(Quarantine q : quarantines) {
-            if(q.getIdQuarantine() == quarantineID) {
+            if(q.getPerson().getIdPerson() == idPerson) {
                 System.out.println("Found quarantine\nGet complete!");
                 return q;
             }

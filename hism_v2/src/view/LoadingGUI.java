@@ -6,7 +6,6 @@ package view;
 
 import hism.Hism;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +22,18 @@ public class LoadingGUI extends javax.swing.JFrame {
      */
     public LoadingGUI() {
         initComponents();
+        setIcon();
         title_Label.setText(Hism.title + " " + Hism.version);
+    }
+    
+    private void setIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/logo_loading.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setIconImage(icon);
     }
 
     /**

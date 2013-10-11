@@ -22,8 +22,10 @@ public class PicturePane extends javax.swing.JPanel {
 
     @Override
     public void paint(Graphics g) {
+        System.out.println("PAINTING");
         g.clearRect(0, 0, this.getWidth(), this.getHeight());
         if (img != null) {
+            System.out.println("IMG NOT NULL");
             g.drawImage(img, 0, 0, null);
         } else {
             g.setColor(new Color(51, 51, 51));
@@ -38,7 +40,10 @@ public class PicturePane extends javax.swing.JPanel {
      */
     public void setPicture(Image img) {
         if (img != null) {
-            img = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
+            this.img = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
+            repaint();
+        } else {
+            this.img = null;
             repaint();
         }
     }

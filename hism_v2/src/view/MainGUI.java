@@ -6,7 +6,9 @@ package view;
 
 import control.EnrollmentHandler;
 import control.PersonHandler;
+import control.QuarantineHandler;
 import entity.Person;
+import entity.Quarantine;
 import hism.Hism;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -33,6 +35,7 @@ public class MainGUI extends javax.swing.JFrame {
     // Control
     private PersonHandler peH;
     private EnrollmentHandler enH;
+    private QuarantineHandler quH;
     // View
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
@@ -40,12 +43,13 @@ public class MainGUI extends javax.swing.JFrame {
     // Model
     private int selectedPerson = -1;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
         initComponents();
         initTableListener();
         setIcon();
         this.peH = peH;
         this.enH = enH;
+        this.quH = quH;
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
@@ -93,8 +97,16 @@ public class MainGUI extends javax.swing.JFrame {
             status_Pane.setBackground(new Color(51, 51, 51));
         }
 
+
+
         if (p.getPicturePath().equals("N")) {
-            System.out.println("NO PICTURE");
+            Image icon = null;
+            try {
+                icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/billedid.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            picturePane_PicturePane.setPicture(icon);
         } else {
             try {
                 Image img = ImageIO.read(new File(p.getPicturePath()));
@@ -102,6 +114,21 @@ public class MainGUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+
+        if (quH.isQuarantined(id)) {
+            Quarantine q = quH.getQuarantine(id);
+            if (q.getQuarantineExpireDate().isEmpty()) {
+                status_Label.setText("Personen har karantæne på ubestemt tid");
+            } else {
+                status_Label.setText("Personen har karantæne til " + q.getQuarantineExpireDate());
+            }
+            status_Label.setForeground(Color.white);
+            status_Pane.setBackground(Color.red);
+            enroll_Button.setEnabled(false);
+            renew_Button.setEnabled(false);
+        } else {
+            enroll_Button.setEnabled(true);
         }
     }
 

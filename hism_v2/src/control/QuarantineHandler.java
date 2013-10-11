@@ -15,11 +15,11 @@ import model.QuarantineRegister;
  */
 public class QuarantineHandler implements HismHandler{
     
-    private QuarantineRegister qaR;
+    private QuarantineRegister quR;
     private PersonRegister peR;
     
     public QuarantineHandler(QuarantineRegister qaR, PersonRegister peR) {
-        this.qaR = qaR;
+        this.quR = qaR;
         this.peR = peR;
     }
     
@@ -52,13 +52,13 @@ public class QuarantineHandler implements HismHandler{
                 q = new Quarantine(quarantineExpireDate, p);
                 
                 // Register quarantine
-                qaR.registerQuarantine(q);
+                quR.registerQuarantine(q);
             } else {
                 // Create quarantine
-                q = new Quarantine(p);
+                q = new Quarantine("", p);
                 
                 // Register quarantine
-                qaR.registerQuarantine(q);
+                quR.registerQuarantine(q);
             }
         } else {
             return GET_ERROR;
@@ -76,7 +76,7 @@ public class QuarantineHandler implements HismHandler{
     public int saveQuarantine(int quarantineID, String quarantineExpireDate) {
         
         // Get quarantine
-        Quarantine q = qaR.getQuarantine(quarantineID);
+        Quarantine q = quR.getQuarantine(quarantineID);
         
         if(q != null) {
             // Check expireDate is there
@@ -94,10 +94,10 @@ public class QuarantineHandler implements HismHandler{
                 q.setQuarantineExpireDate(quarantineExpireDate);
                 
                 // Save quarantine
-                qaR.saveQuarantine(q);
+                quR.saveQuarantine(q);
             } else {
                 // Save quarantine (Nothing is changed... xD)
-                qaR.saveQuarantine(q);
+                quR.saveQuarantine(q);
             }
         } else {
             return GET_ERROR;
@@ -114,16 +114,39 @@ public class QuarantineHandler implements HismHandler{
     public int removeQuarantine(int quarantineID) {
         
         // Get quarantine
-        Quarantine q = qaR.getQuarantine(quarantineID);
+        Quarantine q = quR.getQuarantine(quarantineID);
         
         if(q != null) {
             // Remove quarantine
-            qaR.deleteQuarantine(q);
+            quR.deleteQuarantine(q);
         } else {
             return GET_ERROR;
         }
         
         return NO_ERROR;
+    }
+    
+    /**
+     * Return a quarantine
+     * @param idPerson
+     * @return qa : Quarantine
+     */
+    public Quarantine getQuarantine(int idPerson) {
+        return quR.getQuarantine(idPerson);
+    }
+    
+    /**
+     * Returns wether a person is quarantined or not
+     * @param idPerson
+     * @return boolean
+     */
+    public boolean isQuarantined(int idPerson) {
+        Quarantine q = quR.getQuarantine(idPerson);
+        if(q == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
 }
