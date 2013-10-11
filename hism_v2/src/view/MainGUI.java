@@ -5,9 +5,19 @@
 package view;
 
 import control.PersonHandler;
+import entity.Person;
 import hism.Hism;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,38 +28,101 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Control
     private PersonHandler peH;
-    
     // View
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
-    
+    // Model
+    private int selectedPerson = -1;
+
     public MainGUI(PersonHandler peH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
         initComponents();
+        initTableListener();
         this.peH = peH;
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
-        
+
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
-        
+
         search_Button.requestFocus();
     }
     
+    private void initTableListener() {
+        result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && result_Table.getSelectedRowCount() != 0) {
+                    int selRow = result_Table.getSelectedRow();
+                    Object selIDObject = result_Table.getModel().getValueAt(selRow, 0);
+                    int selID = Integer.valueOf(String.valueOf(selIDObject));
+                    setPerson(selID);
+                }
+            }
+        });
+    }
+    
+    private void setPerson(int id) {
+        selectedPerson = id;
+        Person p = peH.getPerson(id);
+        
+        if(p.getPicturePath().equals("N")) {
+            System.out.println("NO PICTURE");
+        } else {
+            try {
+                Image img = ImageIO.read(new File(p.getPicturePath()));
+                picturePane_PicturePane.setPicture(img);
+            } catch (IOException ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public void updateDate(String date) {
         String d = "";
-        
-        if(date.isEmpty()) {
+
+        if (date.isEmpty()) {
             Calendar c = Calendar.getInstance();
             d = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
         }
-        
+
         date_Label.setText(d);
     }
-    
+
     public void updateEnrolledCounter() {
         int count = peH.getEnrolledCount();
         enrolled_Label.setText(String.valueOf(count));
+    }
+
+    private void cleanSelectedPerson() {
+        selectedPerson = -1;
+        picturePane_PicturePane.setPicture(null);
+        enroll_Button.setEnabled(false);
+        renew_Button.setEnabled(false);
+        status_Label.setText("Ingen person valgt");
+        status_Label.setForeground(Color.white);
+        status_Pane.setBackground(new Color(51, 51, 51));
+    }
+
+    private void cleanTable() {
+        DefaultTableModel dtm = TableTool.createEmptyPersonTableModel();
+        result_Table.setModel(dtm);
+    }
+
+    private void cleanSearch() {
+        search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+        search_TextField.setForeground(new Color(153, 153, 153));
+    }
+
+    public void search() {
+        cleanSelectedPerson();
+        String searchString = search_TextField.getText();
+        if (searchString.equals("Søg på en persons navn/fødselsdag/adresse")) {
+            searchString = "";
+        }
+        ArrayList<String[]> data = peH.searchPerson(searchString);
+        DefaultTableModel dtm = TableTool.createPersonTableModel(data);
+        result_Table.setModel(dtm);
     }
 
     /**
@@ -123,6 +196,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_Button.setText("Søg");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -153,12 +231,13 @@ public class MainGUI extends javax.swing.JFrame {
 
         enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enroll_Button.setText("Indskriv");
+        enroll_Button.setEnabled(false);
 
         status_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         status_Label.setForeground(new java.awt.Color(255, 255, 255));
         status_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        status_Label.setText("STATUS");
+        status_Label.setText("Ingen person valgt");
 
         javax.swing.GroupLayout status_PaneLayout = new javax.swing.GroupLayout(status_Pane);
         status_Pane.setLayout(status_PaneLayout);
@@ -393,6 +472,11 @@ public class MainGUI extends javax.swing.JFrame {
         personer_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenuItem4.setText("Opret person");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         personer_Menu.add(jMenuItem4);
 
         jMenuItem5.setText("Rediger person");
@@ -437,19 +521,28 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void search_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusGained
-        if(search_TextField.getText().equals("Søg på en persons navn/fødselsdag/adresse")) {
+        if (search_TextField.getText().equals("Søg på en persons navn/fødselsdag/adresse")) {
             search_TextField.setText("");
             search_TextField.setForeground(Color.black);
         }
     }//GEN-LAST:event_search_TextFieldFocusGained
 
     private void search_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusLost
-        if(search_TextField.getText().isEmpty()) {
+        if (search_TextField.getText().isEmpty()) {
             search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
-            search_TextField.setForeground(new Color(153,153,153));
+            search_TextField.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_search_TextFieldFocusLost
 
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        search();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        cleanSelectedPerson();
+        cleanTable();
+        cleanSearch();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;

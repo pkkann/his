@@ -98,6 +98,8 @@ public class Hism {
     private void testData() {
         usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10102013", false, false);
         usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10102013", false, false);
+        
+        peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2013", "11102013", false, false, false, "N");
     }
 
     public static void main(String[] args) {

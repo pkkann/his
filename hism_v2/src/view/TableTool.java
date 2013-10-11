@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class TableTool {
     
     public static final String[] userColumns = {"ID", "Navn", "Brugernavn", "Administrator", "Reserve"};
-    public static final String[] personColumns = {};
+    public static final String[] personColumns = {"ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"};
     public static final String[] guestColumns = {};
 
     private TableTool() {

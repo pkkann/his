@@ -28,7 +28,7 @@ public class UserHandler implements HismHandler {
      * @param firstname
      * @param middlename
      * @param lastname
-     * @param creationDate
+     * @param creationDate (DDMMYYYY)
      * @param reserve
      * @param administrator
      * @return Error code : Integer
@@ -134,6 +134,7 @@ public class UserHandler implements HismHandler {
         User u = usR.getUser(userID);
 
         if (u != null) {
+            // Delete user
             usR.deleteUser(u);
         } else {
             return GET_ERROR;
@@ -152,7 +153,7 @@ public class UserHandler implements HismHandler {
         // Create collection
         ArrayList<String[]> data = new ArrayList<>();
 
-        // Split the string into words
+        // Split string into words
         String[] sSplit = search.split(" ");
 
         // Do search
@@ -194,7 +195,7 @@ public class UserHandler implements HismHandler {
 
     /**
      * Returns a user based on an Integer
-     *
+     * 
      * @param id
      * @return u : User
      */
