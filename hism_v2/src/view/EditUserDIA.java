@@ -4,9 +4,15 @@
  */
 package view;
 
+import model.TableTool;
 import control.UserHandler;
 import entity.User;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -24,8 +30,19 @@ public class EditUserDIA extends javax.swing.JDialog {
     public EditUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
         initComponents();
+        setTitleIcon();
         initTableListener();
         this.usH = usH;
+    }
+    
+    private void setTitleIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/editUser.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        titleIcon_PicturePane.setPicture(icon, false);
     }
     
     private void initTableListener() {
@@ -133,6 +150,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         close_Button = new javax.swing.JButton();
         title_Pane = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        titleIcon_PicturePane = new view.image.PicturePane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -143,7 +161,7 @@ public class EditUserDIA extends javax.swing.JDialog {
             }
         });
 
-        main_Pane.setBackground(new java.awt.Color(153, 51, 0));
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         result_Table.setAutoCreateRowSorter(true);
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -316,7 +334,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(admin_CheckBox)
                     .addComponent(reserve_CheckBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(save_Button)
                 .addContainerGap())
         );
@@ -349,20 +367,37 @@ public class EditUserDIA extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Rediger en bruger");
 
+        javax.swing.GroupLayout titleIcon_PicturePaneLayout = new javax.swing.GroupLayout(titleIcon_PicturePane);
+        titleIcon_PicturePane.setLayout(titleIcon_PicturePaneLayout);
+        titleIcon_PicturePaneLayout.setHorizontalGroup(
+            titleIcon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+        );
+        titleIcon_PicturePaneLayout.setVerticalGroup(
+            titleIcon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
         title_Pane.setLayout(title_PaneLayout);
         title_PaneLayout.setHorizontalGroup(
             title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleIcon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         title_PaneLayout.setVerticalGroup(
             title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGroup(title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(title_PaneLayout.createSequentialGroup()
+                        .addComponent(titleIcon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -390,7 +425,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -503,6 +538,7 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JButton save_Button;
     private javax.swing.JButton search_Button;
     private javax.swing.JTextField search_TextField;
+    private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;
     private javax.swing.JTextField username_TextField;

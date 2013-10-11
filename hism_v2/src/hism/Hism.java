@@ -34,14 +34,20 @@ public class Hism {
     private EnrollmentRegister enR;
     private QuarantineRegister quR;
     // View
+    private CreatePersonDIA createPersonDIA;
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
+    private SettingsDIA settingsDIA;
 
     public Hism() {
         setLookAndFeel();
+        
+        // view - loading pane
+        loadingGUI = new LoadingGUI();
+        loadingGUI.setVisible(true);
 
         // Model
         peR = new PersonRegister();
@@ -56,14 +62,17 @@ public class Hism {
         quH = new QuarantineHandler(quR, peR);
 
         // View
+        createPersonDIA = new CreatePersonDIA(mainGUI, true, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
-        mainGUI = new MainGUI(peH, enH, quH, removeUserDIA, editUserDIA, createUserDIA);
-        loadingGUI = new LoadingGUI();
+        
+        settingsDIA = new SettingsDIA(mainGUI, true);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA);
+        
 
         // Start sequence
-        loadingGUI.setVisible(true);
+        
         System.out.println("##### Hism starting #####");
         System.out.println("##### Hism testing database connection #####");
 
@@ -104,7 +113,8 @@ public class Hism {
         usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10102013", false, false);
         usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10102013", false, false);
 
-        peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2013", "11102013", false, false, false, "N");
+        peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2015", "11102013", false, false, false, "N");
+        quH.createQuarantine(1, "01/2015");
     }
 
     public static void main(String[] args) {

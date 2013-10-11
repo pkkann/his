@@ -4,6 +4,7 @@
  */
 package view;
 
+import model.TableTool;
 import control.EnrollmentHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
@@ -36,19 +37,23 @@ public class MainGUI extends javax.swing.JFrame {
     private EnrollmentHandler enH;
     private QuarantineHandler quH;
     // View
+    private CreatePersonDIA createPersonDIA;
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
+    private SettingsDIA settingsDIA;
     // Model
     private int selectedPerson = -1;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
         initComponents();
         initTableListener();
         setIcon();
         this.peH = peH;
         this.enH = enH;
         this.quH = quH;
+        this.settingsDIA = settingsDIA;
+        this.createPersonDIA = createPersonDIA;
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
@@ -105,11 +110,11 @@ public class MainGUI extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            picturePane_PicturePane.setPicture(icon);
+            picturePane_PicturePane.setPicture(icon, true);
         } else {
             try {
                 Image img = ImageIO.read(new File(p.getPicturePath()));
-                picturePane_PicturePane.setPicture(img);
+                picturePane_PicturePane.setPicture(img, true);
             } catch (IOException ex) {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -118,7 +123,7 @@ public class MainGUI extends javax.swing.JFrame {
         if (quH.isQuarantined(id)) {
             Quarantine q = quH.getQuarantine(id);
             if (q.getQuarantineExpireDate().isEmpty()) {
-                status_Label.setText("Personen har karantæne på ubestemt tid");
+                status_Label.setText("Personen har karantæne");
             } else {
                 status_Label.setText("Personen har karantæne til " + q.getQuarantineExpireDate());
             }
@@ -149,7 +154,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void cleanSelectedPerson() {
         selectedPerson = -1;
-        picturePane_PicturePane.setPicture(null);
+        picturePane_PicturePane.setPicture(null, true);
         enroll_Button.setEnabled(false);
         renew_Button.setEnabled(false);
         status_Label.setText("Ingen person valgt");
@@ -305,7 +310,7 @@ public class MainGUI extends javax.swing.JFrame {
             status_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(status_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(status_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(status_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addContainerGap())
         );
         status_PaneLayout.setVerticalGroup(
@@ -321,7 +326,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         picturePane_PicturePaneLayout.setVerticalGroup(
             picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 250, Short.MAX_VALUE)
         );
 
         renew_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -340,13 +345,13 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search_Button))
                     .addGroup(inner_PaneLayout.createSequentialGroup()
-                        .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
+                        .addComponent(result_ScrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(enroll_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(status_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(renew_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(enroll_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         inner_PaneLayout.setVerticalGroup(
@@ -374,7 +379,7 @@ public class MainGUI extends javax.swing.JFrame {
         main_Pane.setLayout(main_PaneLayout);
         main_PaneLayout.setHorizontalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+            .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(inner_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -437,7 +442,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 627, Short.MAX_VALUE)
                 .addComponent(editProfile_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoff_Button)
@@ -495,6 +500,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         indstillinger_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/settings.png"))); // NOI18N
         indstillinger_MenuItem.setText("Indstillinger");
+        indstillinger_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                indstillinger_MenuItemActionPerformed(evt);
+            }
+        });
         filer_Menu.add(indstillinger_MenuItem);
         filer_Menu.add(jSeparator2);
 
@@ -633,6 +643,7 @@ public class MainGUI extends javax.swing.JFrame {
         cleanSelectedPerson();
         cleanTable();
         cleanSearch();
+        createPersonDIA.setVisible(true);
     }//GEN-LAST:event_createPerson_MenuItemActionPerformed
 
     private void luk_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luk_MenuItemActionPerformed
@@ -649,6 +660,11 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_troll_MenuItemActionPerformed
+
+    private void indstillinger_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indstillinger_MenuItemActionPerformed
+        settingsDIA.setVisible(true);
+    }//GEN-LAST:event_indstillinger_MenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
     private javax.swing.JPanel bottom_Pane;

@@ -4,9 +4,11 @@
  */
 package control;
 
+import static control.HismHandler.FIELDS_NOT_FILLED_ERROR;
 import entity.Enrollment;
 import entity.Person;
 import java.util.ArrayList;
+import java.util.Calendar;
 import model.EnrollmentRegister;
 import model.PersonRegister;
 
@@ -43,8 +45,14 @@ public class PersonHandler implements HismHandler {
     public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
 
         // Check fields are filled
-        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
-            return FIELDS_NOT_FILLED_ERROR;
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
         }
 
         // Check birthday is written correctly
@@ -58,17 +66,30 @@ public class PersonHandler implements HismHandler {
         }
 
         // Check expiration is written correctly
-        String[] expire_Split = expirationDate.split("/");
-        String expire_Month = expire_Split[0];
-        String expire_Year = expire_Split[1];
+        if (!hoene && !reserve && !oneOne) {
+            String[] expire_Split = expirationDate.split("/");
+            String expire_Month = expire_Split[0];
+            String expire_Year = expire_Split[1];
 
-        if (expire_Month.length() != 2 || expire_Year.length() != 4) {
-            return EXPIRATION_FORMAT_ERROR;
+            if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+            
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.MONTH, today.get(Calendar.MONTH) + 1);
+            Calendar expire = Calendar.getInstance();
+            expire.set(Calendar.MONTH, Integer.valueOf(expire_Month));
+            expire.set(Calendar.YEAR, Integer.valueOf(expire_Year));
+            if(expire.before(today) || expire.equals(today)) {
+                return EXPIRATION_DATE_ERROR;
+            }
         }
 
         // Check picturepath
         if (picturePath.isEmpty()) {
             return PICTUREPATH_EMPTY_ERROR;
+        } else if (!picturePath.equals("N")) {
+            System.out.println("Picture found, NOTHING TO DO YET");
         }
 
         // Create person
@@ -187,6 +208,7 @@ public class PersonHandler implements HismHandler {
 
     /**
      * Returns a result based on a string
+     *
      * @param search
      * @return data : ArrayList<String[]>
      */

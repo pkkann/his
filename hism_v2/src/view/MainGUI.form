@@ -74,6 +74,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Indstillinger"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="indstillinger_MenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
             </MenuItem>
@@ -244,7 +247,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="inner_Pane" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -283,13 +286,13 @@
                               <Component id="search_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="result_ScrollPane" pref="990" max="32767" attributes="0"/>
+                              <Component id="result_ScrollPane" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="enroll_Button" alignment="1" pref="260" max="32767" attributes="0"/>
                                   <Component id="status_Pane" max="32767" attributes="0"/>
                                   <Component id="renew_Button" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="picturePane_PicturePane" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="enroll_Button" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="picturePane_PicturePane" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -456,7 +459,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="status_Label" max="32767" attributes="0"/>
+                          <Component id="status_Label" pref="226" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -489,7 +492,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="240" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="250" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -530,7 +533,7 @@
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="enrolled_Label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="627" max="32767" attributes="0"/>
                   <Component id="editProfile_Button" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="logoff_Button" min="-2" max="-2" attributes="0"/>

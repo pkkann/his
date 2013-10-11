@@ -35,7 +35,7 @@ public class DialogMessage {
                 JOptionPane.showMessageDialog(j, "Fødselsdags dato formatet er skrevet forkert\n- dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.EXPIRATION_FORMAT_ERROR:
-                JOptionPane.showMessageDialog(j, "Udløbsdato formatet er skrevet forkert\n- dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(j, "Udløbsdato formatet er skrevet forkert\n- mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.EXPIRATION_DATE_ERROR:
                 JOptionPane.showMessageDialog(j, "Udløbsdatoen kan ikke være før, eller lig den nuværende dato", "Fejl", JOptionPane.ERROR_MESSAGE);

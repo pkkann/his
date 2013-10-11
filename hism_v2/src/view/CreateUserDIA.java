@@ -5,7 +5,12 @@
 package view;
 
 import control.UserHandler;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import view.message.DialogMessage;
 
 /**
@@ -19,7 +24,18 @@ public class CreateUserDIA extends javax.swing.JDialog {
     public CreateUserDIA(java.awt.Frame parent, boolean modal, UserHandler usH) {
         super(parent, modal);
         initComponents();
+        setTitleIcon();
         this.usH = usH;
+    }
+    
+    private void setTitleIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/createUser.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        titleIcon_PicturePane.setPicture(icon, false);
     }
 
     private void clean() {
@@ -65,6 +81,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
         cancel_Button = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        titleIcon_PicturePane = new view.image.PicturePane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -75,7 +92,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
             }
         });
 
-        main_Pane.setBackground(new java.awt.Color(153, 51, 0));
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Fornavn:");
@@ -227,20 +244,37 @@ public class CreateUserDIA extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Opret en bruger");
 
+        javax.swing.GroupLayout titleIcon_PicturePaneLayout = new javax.swing.GroupLayout(titleIcon_PicturePane);
+        titleIcon_PicturePane.setLayout(titleIcon_PicturePaneLayout);
+        titleIcon_PicturePaneLayout.setHorizontalGroup(
+            titleIcon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+        );
+        titleIcon_PicturePaneLayout.setVerticalGroup(
+            titleIcon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleIcon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(titleIcon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -376,6 +410,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
     private javax.swing.JTextField passwordAgain_TextField;
     private javax.swing.JTextField password_TextField;
     private javax.swing.JCheckBox reserve_CheckBox;
+    private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel tools_Pane;
     private javax.swing.JTextField username_TextField;
     // End of variables declaration//GEN-END:variables

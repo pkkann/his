@@ -15,6 +15,7 @@ import java.awt.Image;
 public class PicturePane extends javax.swing.JPanel {
 
     private Image img;
+    private boolean clear;
 
     public PicturePane() {
         initComponents();
@@ -22,7 +23,9 @@ public class PicturePane extends javax.swing.JPanel {
 
     @Override
     public void paint(Graphics g) {
-        g.clearRect(0, 0, this.getWidth(), this.getHeight());
+        if (this.clear) {
+            g.clearRect(0, 0, this.getWidth(), this.getHeight());
+        }
         if (img != null) {
             g.drawImage(img, 0, 0, null);
         } else {
@@ -36,7 +39,8 @@ public class PicturePane extends javax.swing.JPanel {
      *
      * @param img
      */
-    public void setPicture(Image img) {
+    public void setPicture(Image img, boolean clear) {
+        this.clear = clear;
         if (img != null) {
             this.img = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT);
             repaint();
