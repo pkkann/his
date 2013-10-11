@@ -147,7 +147,7 @@ public class UserHandler implements HismHandler {
      * Returns a result based on a string
      *
      * @param search
-     * @return data : ArrayList<Object[]>
+     * @return data : ArrayList<String[]>
      */
     public ArrayList<String[]> searchUser(String search) {
         // Create collection

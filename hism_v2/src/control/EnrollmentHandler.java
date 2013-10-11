@@ -34,13 +34,13 @@ public class EnrollmentHandler implements HismHandler{
      * @param userID
      * @return Error code : Integer
      */
-    public int createEnrollment(int personID, int userID) {
+    public int createEnrollment(int idPerson, int idUser) {
 
         // Get person
-        Person p = peR.getPerson(personID);
+        Person p = peR.getPerson(idPerson);
 
         // Get user
-        User u = usR.getUser(userID);
+        User u = usR.getUser(idUser);
 
         if (p != null && u != null) {
             // Create enrollment
@@ -66,13 +66,13 @@ public class EnrollmentHandler implements HismHandler{
      * @param creationDate
      * @return Error code : Integer
      */
-    public int createGuest(int enrollmentID, int personID, String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
+    public int createGuest(int idEnrollment, int idPerson, String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
 
         // Get enrollment
-        Enrollment en = enR.getEnrollment(enrollmentID);
+        Enrollment en = enR.getEnrollment(idEnrollment);
 
         // Get person
-        Person p = peR.getPerson(personID);
+        Person p = peR.getPerson(idPerson);
 
         if (en != null && p != null) {
             // Check fields are filled
@@ -111,17 +111,17 @@ public class EnrollmentHandler implements HismHandler{
     
     /**
      * Remove a guest
-     * @param enrollmentID
-     * @param guestID
+     * @param idEnrollment
+     * @param idGuest
      * @return Error code : Integer
      */
-    public int removeGuest(int enrollmentID, int guestID) {
+    public int removeGuest(int idEnrollment, int idGuest) {
         
         // Get enrollment
-        Enrollment en = enR.getEnrollment(enrollmentID);
+        Enrollment en = enR.getEnrollment(idEnrollment);
         
         // Get guest
-        Guest g = enR.getGuest(en, guestID);
+        Guest g = enR.getGuest(en, idGuest);
         
         if(g != null) {
             enR.DeleteGuest(en, g);
@@ -134,13 +134,13 @@ public class EnrollmentHandler implements HismHandler{
 
     /**
      * Remove an enrollment
-     * @param enrollmentID
+     * @param idPerson
      * @return Error code : Integer
      */
-    public int removeEnrollment(int enrollmentID) {
+    public int removeEnrollment(int idPerson) {
 
         // Get enrollment
-        Enrollment en = enR.getEnrollment(enrollmentID);
+        Enrollment en = getEnrollment(idPerson);
 
         if (en != null) {
             // Remove enrollment
@@ -150,5 +150,28 @@ public class EnrollmentHandler implements HismHandler{
         }
 
         return NO_ERROR;
+    }
+    
+    /**
+     * Return an enrollment
+     * @param idPerson
+     * @return en : Enrollment
+     */
+    public Enrollment getEnrollment(int idPerson) {
+        return enR.getEnrollment(idPerson);
+    }
+    
+    /**
+     * Returns wether a person is enrolled or not
+     * @param idPerson
+     * @return boolean
+     */
+    public boolean isEnrolled(int idPerson) {
+        Enrollment en = enR.getEnrollment(idPerson);
+        if(en == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

@@ -185,6 +185,11 @@ public class PersonHandler implements HismHandler {
         return count;
     }
 
+    /**
+     * Returns a result based on a string
+     * @param search
+     * @return data : ArrayList<String[]>
+     */
     public ArrayList<String[]> searchPerson(String search) {
         // Create collection
         ArrayList<String[]> data = new ArrayList<>();

@@ -4,13 +4,17 @@
  */
 package view;
 
+import control.EnrollmentHandler;
 import control.PersonHandler;
 import entity.Person;
 import hism.Hism;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -28,6 +32,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Control
     private PersonHandler peH;
+    private EnrollmentHandler enH;
     // View
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
@@ -35,10 +40,12 @@ public class MainGUI extends javax.swing.JFrame {
     // Model
     private int selectedPerson = -1;
 
-    public MainGUI(PersonHandler peH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
         initComponents();
         initTableListener();
+        setIcon();
         this.peH = peH;
+        this.enH = enH;
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
@@ -47,7 +54,17 @@ public class MainGUI extends javax.swing.JFrame {
 
         search_Button.requestFocus();
     }
-    
+
+    private void setIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/logo.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setIconImage(icon);
+    }
+
     private void initTableListener() {
         result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -61,12 +78,22 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void setPerson(int id) {
         selectedPerson = id;
         Person p = peH.getPerson(id);
-        
-        if(p.getPicturePath().equals("N")) {
+
+        if (enH.isEnrolled(id)) {
+            status_Label.setText("Personen er indskrevet");
+            status_Label.setForeground(Color.black);
+            status_Pane.setBackground(new Color(153, 204, 0));
+        } else {
+            status_Label.setText("Personen er ikke indskrevet");
+            status_Label.setForeground(Color.white);
+            status_Pane.setBackground(new Color(51, 51, 51));
+        }
+
+        if (p.getPicturePath().equals("N")) {
             System.out.println("NO PICTURE");
         } else {
             try {
@@ -134,6 +161,7 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         main_Pane = new javax.swing.JPanel();
         inner_Pane = new javax.swing.JPanel();
         search_TextField = new javax.swing.JTextField();
@@ -168,13 +196,17 @@ public class MainGUI extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         luk_MenuItem = new javax.swing.JMenuItem();
         brugere_Menu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        createUser_MenuItem = new javax.swing.JMenuItem();
+        editUser_MenuItem = new javax.swing.JMenuItem();
+        deleteUser_MenuItem = new javax.swing.JMenuItem();
         personer_Menu = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        createPerson_MenuItem = new javax.swing.JMenuItem();
+        editPerson_MenuItem = new javax.swing.JMenuItem();
+        deletePerson_MenuItem = new javax.swing.JMenuItem();
+        help_Menu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Hism.title + " - " + Hism.version);
@@ -202,6 +234,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        result_Table.setAutoCreateRowSorter(true);
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -230,7 +263,7 @@ public class MainGUI extends javax.swing.JFrame {
         result_ScrollPane.setViewportView(result_Table);
 
         enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        enroll_Button.setText("Indskriv");
+        enroll_Button.setText("Indskrivning");
         enroll_Button.setEnabled(false);
 
         status_Pane.setBackground(new java.awt.Color(51, 51, 51));
@@ -406,6 +439,7 @@ public class MainGUI extends javax.swing.JFrame {
         filer_Menu.setText("Filer");
         filer_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        rapport_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/report.png"))); // NOI18N
         rapport_Menu.setText("Rapport");
 
         gemRapportIndskrevne_MenuItem.setText("Gem rapport med alle indskrevne");
@@ -422,19 +456,27 @@ public class MainGUI extends javax.swing.JFrame {
 
         filer_Menu.add(rapport_Menu);
 
+        vagtAfslutning_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/shitEnd.png"))); // NOI18N
         vagtAfslutning_Menu.setText("Vagt afslutning");
 
+        nulstil_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/reset.png"))); // NOI18N
         nulstil_MenuItem.setText("Nulstil systemet og gem rapport med alle indskrevne (PAS PÅ!)");
         vagtAfslutning_Menu.add(nulstil_MenuItem);
 
         filer_Menu.add(vagtAfslutning_Menu);
         filer_Menu.add(jSeparator1);
 
+        indstillinger_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/settings.png"))); // NOI18N
         indstillinger_MenuItem.setText("Indstillinger");
         filer_Menu.add(indstillinger_MenuItem);
         filer_Menu.add(jSeparator2);
 
         luk_MenuItem.setText("Luk");
+        luk_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                luk_MenuItemActionPerformed(evt);
+            }
+        });
         filer_Menu.add(luk_MenuItem);
 
         menuBar_MenuBar.add(filer_Menu);
@@ -442,50 +484,69 @@ public class MainGUI extends javax.swing.JFrame {
         brugere_Menu.setText("Brugere");
         brugere_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem1.setText("Opret bruger");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        createUser_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/createUser.png"))); // NOI18N
+        createUser_MenuItem.setText("Opret en bruger");
+        createUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                createUser_MenuItemActionPerformed(evt);
             }
         });
-        brugere_Menu.add(jMenuItem1);
+        brugere_Menu.add(createUser_MenuItem);
 
-        jMenuItem2.setText("Rediger bruger");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        editUser_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/editUser.png"))); // NOI18N
+        editUser_MenuItem.setText("Rediger brugere");
+        editUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                editUser_MenuItemActionPerformed(evt);
             }
         });
-        brugere_Menu.add(jMenuItem2);
+        brugere_Menu.add(editUser_MenuItem);
 
-        jMenuItem3.setText("Slet bruger");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        deleteUser_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/deleteUser.png"))); // NOI18N
+        deleteUser_MenuItem.setText("Slet brugere");
+        deleteUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                deleteUser_MenuItemActionPerformed(evt);
             }
         });
-        brugere_Menu.add(jMenuItem3);
+        brugere_Menu.add(deleteUser_MenuItem);
 
         menuBar_MenuBar.add(brugere_Menu);
 
         personer_Menu.setText("Personer");
         personer_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem4.setText("Opret person");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        createPerson_MenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        createPerson_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/createPerson.png"))); // NOI18N
+        createPerson_MenuItem.setText("Opret person");
+        createPerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                createPerson_MenuItemActionPerformed(evt);
             }
         });
-        personer_Menu.add(jMenuItem4);
+        personer_Menu.add(createPerson_MenuItem);
 
-        jMenuItem5.setText("Rediger person");
-        personer_Menu.add(jMenuItem5);
+        editPerson_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/editPerson.png"))); // NOI18N
+        editPerson_MenuItem.setText("Rediger person");
+        personer_Menu.add(editPerson_MenuItem);
 
-        jMenuItem6.setText("Slet person");
-        personer_Menu.add(jMenuItem6);
+        deletePerson_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/deletePerson.png"))); // NOI18N
+        deletePerson_MenuItem.setText("Slet person");
+        personer_Menu.add(deletePerson_MenuItem);
 
         menuBar_MenuBar.add(personer_Menu);
+
+        help_Menu.setText("Hjælp");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/trollface.png"))); // NOI18N
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        help_Menu.add(jMenuItem1);
+
+        menuBar_MenuBar.add(help_Menu);
 
         setJMenuBar(menuBar_MenuBar);
 
@@ -508,17 +569,17 @@ public class MainGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void createUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUser_MenuItemActionPerformed
         createUserDIA.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_createUser_MenuItemActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
         editUserDIA.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_editUser_MenuItemActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void deleteUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUser_MenuItemActionPerformed
         removeUserDIA.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_deleteUser_MenuItemActionPerformed
 
     private void search_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusGained
         if (search_TextField.getText().equals("Søg på en persons navn/fødselsdag/adresse")) {
@@ -538,16 +599,37 @@ public class MainGUI extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void createPerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPerson_MenuItemActionPerformed
         cleanSelectedPerson();
         cleanTable();
         cleanSearch();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_createPerson_MenuItemActionPerformed
+
+    private void luk_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luk_MenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_luk_MenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(new URI("http://www.youtube.com/watch?v=o1eHKf-dMwo"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
+    private javax.swing.JMenuItem createPerson_MenuItem;
+    private javax.swing.JMenuItem createUser_MenuItem;
     private javax.swing.JLabel date_Label;
+    private javax.swing.JMenuItem deletePerson_MenuItem;
+    private javax.swing.JMenuItem deleteUser_MenuItem;
+    private javax.swing.JMenuItem editPerson_MenuItem;
     private javax.swing.JButton editProfile_Button;
+    private javax.swing.JMenuItem editUser_MenuItem;
     private javax.swing.JButton enroll_Button;
     private javax.swing.JLabel enrolled_Label;
     private javax.swing.JMenu filer_Menu;
@@ -555,17 +637,14 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem gemRapportBrugere_MenuItem;
     private javax.swing.JMenuItem gemRapportIndskrevne_MenuItem;
     private javax.swing.JMenuItem gemRapportPersoner_MenuItem;
+    private javax.swing.JMenu help_Menu;
     private javax.swing.JMenuItem indstillinger_MenuItem;
     private javax.swing.JPanel inner_Pane;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JButton logoff_Button;

@@ -108,9 +108,9 @@ public class EnrollmentRegister {
      * @param idEnrollment
      * @return Enrollment
      */
-    public Enrollment getEnrollment(int idEnrollment) {
+    public Enrollment getEnrollment(int idPerson) {
         for(Enrollment en : enrollments) {
-            if(en.getIdEnrollment() == idEnrollment) {
+            if(en.getEnrolledPerson().getIdPerson() == idPerson) {
                 return en;
             }
         }

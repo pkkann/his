@@ -98,7 +98,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             }
         });
 
-        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+        main_Pane.setBackground(new java.awt.Color(153, 51, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Slet en bruger");
@@ -120,6 +120,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        result_Table.setAutoCreateRowSorter(true);
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
