@@ -13,7 +13,6 @@ import hism.Hism;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -230,6 +229,7 @@ public class MainGUI extends javax.swing.JFrame {
         createPerson_MenuItem = new javax.swing.JMenuItem();
         editPerson_MenuItem = new javax.swing.JMenuItem();
         deletePerson_MenuItem = new javax.swing.JMenuItem();
+        administrateQuarantines_MenuItem = new javax.swing.JMenuItem();
         help_Menu = new javax.swing.JMenu();
         troll_MenuItem = new javax.swing.JMenuItem();
 
@@ -561,6 +561,9 @@ public class MainGUI extends javax.swing.JFrame {
         deletePerson_MenuItem.setText("Slet person");
         personer_Menu.add(deletePerson_MenuItem);
 
+        administrateQuarantines_MenuItem.setText("Administrer karantæner");
+        personer_Menu.add(administrateQuarantines_MenuItem);
+
         menuBar_MenuBar.add(personer_Menu);
 
         help_Menu.setText("Hjælp");
@@ -647,6 +650,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_troll_MenuItemActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem administrateQuarantines_MenuItem;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
     private javax.swing.JMenuItem createPerson_MenuItem;

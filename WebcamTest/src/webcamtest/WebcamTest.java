@@ -11,11 +11,20 @@ import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamPicker;
 import com.github.sarxos.webcam.WebcamResolution;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -29,6 +38,7 @@ public class WebcamTest extends JFrame implements Runnable, WebcamListener, Wind
     private Webcam webcam = null;
     private WebcamPanel panel = null;
     private WebcamPicker picker = null;
+    private JButton b = null;
 
     @Override
     public void run() {
@@ -54,8 +64,29 @@ public class WebcamTest extends JFrame implements Runnable, WebcamListener, Wind
 
         panel = new WebcamPanel(webcam, false);
         panel.setFPSDisplayed(true);
+        
+        b = new JButton("KNAP");
+        b.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BufferedImage img = null;
+                img = webcam.getImage();
+                if(img != null) {
+                    System.out.println("snap");
+                    try {
+                        ImageIO.write(img, "png", new File("test.png"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(WebcamTest.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    System.out.println("NULL");
+                }
+            }
+        });
 
         add(picker, BorderLayout.NORTH);
+        add(b, BorderLayout.SOUTH);
         add(panel, BorderLayout.CENTER);
 
         pack();

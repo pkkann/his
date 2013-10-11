@@ -168,6 +168,11 @@
                 <Property name="text" type="java.lang.String" value="Slet person"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="administrateQuarantines_MenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Administrer karant&#xe6;ner"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="help_Menu">
