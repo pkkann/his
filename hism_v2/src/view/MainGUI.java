@@ -231,7 +231,7 @@ public class MainGUI extends javax.swing.JFrame {
         editPerson_MenuItem = new javax.swing.JMenuItem();
         deletePerson_MenuItem = new javax.swing.JMenuItem();
         help_Menu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        troll_MenuItem = new javax.swing.JMenuItem();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -565,13 +565,13 @@ public class MainGUI extends javax.swing.JFrame {
 
         help_Menu.setText("Hjælp");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/trollface.png"))); // NOI18N
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        troll_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/trollface.png"))); // NOI18N
+        troll_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                troll_MenuItemActionPerformed(evt);
             }
         });
-        help_Menu.add(jMenuItem1);
+        help_Menu.add(troll_MenuItem);
 
         menuBar_MenuBar.add(help_Menu);
 
@@ -636,7 +636,7 @@ public class MainGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_luk_MenuItemActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void troll_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_troll_MenuItemActionPerformed
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
@@ -645,7 +645,7 @@ public class MainGUI extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_troll_MenuItemActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
@@ -671,7 +671,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JButton logoff_Button;
@@ -689,6 +688,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel status_Label;
     private javax.swing.JPanel status_Pane;
+    private javax.swing.JMenuItem troll_MenuItem;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu vagtAfslutning_Menu;
     // End of variables declaration//GEN-END:variables

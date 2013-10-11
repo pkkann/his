@@ -72,6 +72,7 @@ public class LoadingGUI extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setText("X");
+        jButton1.setToolTipText("Brug mig hvis skidtet ikke virker");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
