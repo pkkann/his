@@ -28,6 +28,7 @@ public class Hism {
     private UserHandler usH;
     private EnrollmentHandler enH;
     private QuarantineHandler quH;
+    private LoginHandler loH;
     // Model
     private PersonRegister peR;
     private UserRegister usR;
@@ -38,6 +39,7 @@ public class Hism {
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
+    private EditProfileDIA editProfileDIA;
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
@@ -45,7 +47,7 @@ public class Hism {
     public Hism() {
         setLookAndFeel();
         
-        // view - loading pane
+        // View - loading pane
         loadingGUI = new LoadingGUI();
         loadingGUI.setVisible(true);
 
@@ -60,16 +62,19 @@ public class Hism {
         usH = new UserHandler(usR);
         enH = new EnrollmentHandler(enR, peR, usR);
         quH = new QuarantineHandler(quR, peR);
+        
 
         // View
         createPersonDIA = new CreatePersonDIA(mainGUI, true, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
-        
         settingsDIA = new SettingsDIA(mainGUI, true);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA);
+        editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA);
         
+        // Control - login
+        loH = new LoginHandler(usR, mainGUI);
 
         // Start sequence
         
@@ -82,11 +87,9 @@ public class Hism {
         s.close();
 
         testData();
-        mainGUI.updateDate("");
-        mainGUI.updateEnrolledCounter();
         System.out.println("##### Hism started! #####");
         loadingGUI.setVisible(false);
-        mainGUI.setVisible(true);
+        loH.requestLogin();
     }
 
     private void setLookAndFeel() {
@@ -110,10 +113,11 @@ public class Hism {
     }
 
     private void testData() {
-        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10102013", false, false);
-        usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10102013", false, false);
+        System.out.println("OPRETTER TESTDATA");
+        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
+        usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10/10/2013", false, false);
 
-        peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2015", "11102013", false, false, false, "N");
+        peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2015", "11/10/2013", false, false, false, "N");
         quH.createQuarantine(1, "01/2015");
     }
 

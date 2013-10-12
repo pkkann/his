@@ -23,6 +23,7 @@ public class LoadingGUI extends javax.swing.JFrame {
     public LoadingGUI() {
         initComponents();
         setIcon();
+        setTitle(hism.Hism.title + " " + hism.Hism.version);
         title_Label.setText(Hism.title + " " + Hism.version);
     }
     

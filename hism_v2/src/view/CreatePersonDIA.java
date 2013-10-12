@@ -505,7 +505,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             expiration = "";
         }
         Calendar c = Calendar.getInstance();
-        String creationDate = String.valueOf(c.get(Calendar.DATE)) + String.valueOf(c.get(Calendar.MONTH)) + String.valueOf(c.get(Calendar.YEAR));
+        String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH)) + "/" + String.valueOf(c.get(Calendar.YEAR));
         
         int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
         DialogMessage.showMessage(this, errorCode);

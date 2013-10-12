@@ -6,10 +6,12 @@ package view;
 
 import model.TableTool;
 import control.EnrollmentHandler;
+import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
 import entity.Person;
 import entity.Quarantine;
+import entity.User;
 import hism.Hism;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -22,9 +24,11 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import view.message.DialogMessage;
 
 /**
  *
@@ -36,16 +40,19 @@ public class MainGUI extends javax.swing.JFrame {
     private PersonHandler peH;
     private EnrollmentHandler enH;
     private QuarantineHandler quH;
+    private LoginHandler loH;
     // View
     private CreatePersonDIA createPersonDIA;
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
     private SettingsDIA settingsDIA;
+    private EditProfileDIA editProfileDIA;
     // Model
     private int selectedPerson = -1;
+    private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -57,10 +64,29 @@ public class MainGUI extends javax.swing.JFrame {
         this.removeUserDIA = removeUserDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
+        this.editProfileDIA = editProfileDIA;
 
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
 
         search_Button.requestFocus();
+        
+    }
+    
+    public void setLoginHandler(LoginHandler loH) {
+        this.loH = loH;
+    }
+    
+    public void setloggedInUser() {
+        this.loggedIn = LoginHandler.loggedIn;
+        user_Label.setText(loggedIn.getFirstname() + " " + loggedIn.getLastname());
+        
+        // Set rights
+        if(!loggedIn.isAdministrator()) {
+            brugere_Menu.setEnabled(false);
+            deletePerson_MenuItem.setEnabled(false);
+            administrateQuarantines_MenuItem.setEnabled(false);
+            indstillinger_MenuItem.setEnabled(false);
+        }
     }
 
     private void setIcon() {
@@ -240,9 +266,14 @@ public class MainGUI extends javax.swing.JFrame {
 
         jCheckBox1.setText("jCheckBox1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(Hism.title + " - " + Hism.version);
         setMinimumSize(new java.awt.Dimension(1300, 550));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         inner_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -413,6 +444,11 @@ public class MainGUI extends javax.swing.JFrame {
         editProfile_Button.setBackground(new java.awt.Color(51, 51, 51));
         editProfile_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         editProfile_Button.setText("Rediger profil");
+        editProfile_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProfile_ButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -424,6 +460,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         logoff_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         logoff_Button.setText("Log af");
+        logoff_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoff_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bottom_PaneLayout = new javax.swing.GroupLayout(bottom_Pane);
         bottom_Pane.setLayout(bottom_PaneLayout);
@@ -647,7 +688,10 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createPerson_MenuItemActionPerformed
 
     private void luk_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luk_MenuItemActionPerformed
-        System.exit(0);
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil lukke programmet?", "Sikker?");
+        if (n == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_luk_MenuItemActionPerformed
 
     private void troll_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_troll_MenuItemActionPerformed
@@ -664,6 +708,27 @@ public class MainGUI extends javax.swing.JFrame {
     private void indstillinger_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indstillinger_MenuItemActionPerformed
         settingsDIA.setVisible(true);
     }//GEN-LAST:event_indstillinger_MenuItemActionPerformed
+
+    private void logoff_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoff_ButtonActionPerformed
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil logge af?", "Sikker?");
+        if (n == 0) {
+            dispose();
+            loH.requestLogin();
+        }
+    }//GEN-LAST:event_logoff_ButtonActionPerformed
+
+    private void editProfile_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfile_ButtonActionPerformed
+        editProfileDIA.setUser(loggedIn);
+        editProfileDIA.setVisible(true);
+        setloggedInUser();
+    }//GEN-LAST:event_editProfile_ButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil lukke programmet?", "Sikker?");
+        if (n == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;

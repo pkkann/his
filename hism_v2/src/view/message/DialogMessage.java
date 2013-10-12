@@ -64,6 +64,9 @@ public class DialogMessage {
             case HismHandler.PASSWORDS_DO_NOT_MATCH:
                 JOptionPane.showMessageDialog(j, "Koderne er ikke ens", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
+            case HismHandler.LOGIN_FAILED:
+                JOptionPane.showMessageDialog(j, "Brugernavn eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -107,6 +110,9 @@ public class DialogMessage {
                 break;
             case HismHandler.PASSWORDS_DO_NOT_MATCH:
                 JOptionPane.showMessageDialog(j, "Koderne er ikke ens", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
+            case HismHandler.LOGIN_FAILED:
+                JOptionPane.showMessageDialog(j, "Brugernavn eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }

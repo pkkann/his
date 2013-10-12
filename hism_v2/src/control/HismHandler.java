@@ -63,4 +63,9 @@ public interface HismHandler {
      * Will be send if the passwords do not match
      */
     public static final int PASSWORDS_DO_NOT_MATCH = 12;
+    
+    /**
+     * Will be send if username or password is wrong
+     */
+    public static final int LOGIN_FAILED = 13;
 }

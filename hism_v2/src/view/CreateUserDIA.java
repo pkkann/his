@@ -336,7 +336,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
         boolean admin = admin_CheckBox.isSelected();
         boolean reserve = reserve_CheckBox.isSelected();
         Calendar c = Calendar.getInstance();
-        String creationDate = String.valueOf(c.get(Calendar.DATE)) + String.valueOf(c.get(Calendar.MONTH)) + String.valueOf(c.get(Calendar.YEAR));
+        String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH)) + "/" + String.valueOf(c.get(Calendar.YEAR));
         
         int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
         
