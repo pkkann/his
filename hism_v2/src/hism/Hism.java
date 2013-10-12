@@ -77,13 +77,10 @@ public class Hism {
         loH = new LoginHandler(usR, mainGUI);
 
         // Start sequence
-        
         System.out.println("##### Hism starting #####");
         System.out.println("##### Hism testing database connection #####");
-
         
         Session s = HiberUtil.getSessionFactory().openSession();
-        
         s.close();
 
         testData();
@@ -113,7 +110,7 @@ public class Hism {
     }
 
     private void testData() {
-        System.out.println("OPRETTER TESTDATA");
+        System.out.println("##### OPRETTER TESTDATA #####");
         usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
         usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10/10/2013", false, false);
 
@@ -122,8 +119,6 @@ public class Hism {
     }
 
     public static void main(String[] args) {
-
         Hism hism = new Hism();
-
     }
 }

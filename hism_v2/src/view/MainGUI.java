@@ -439,7 +439,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         user_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         user_Label.setForeground(new java.awt.Color(153, 204, 0));
-        user_Label.setText("USER.NAME");
+        user_Label.setText("USER");
 
         editProfile_Button.setBackground(new java.awt.Color(51, 51, 51));
         editProfile_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -483,7 +483,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 627, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 666, Short.MAX_VALUE)
                 .addComponent(editProfile_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoff_Button)
