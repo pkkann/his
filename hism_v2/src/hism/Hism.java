@@ -40,6 +40,7 @@ public class Hism {
     private EditUserDIA editUserDIA;
     private RemoveUserDIA removeUserDIA;
     private EditProfileDIA editProfileDIA;
+    private EnrollPersonDIA enrollPersonDIA;
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
@@ -71,7 +72,8 @@ public class Hism {
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA);
         
         // Control - login
         loH = new LoginHandler(usR, mainGUI);
@@ -115,7 +117,7 @@ public class Hism {
         usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10/10/2013", false, false);
 
         peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2015", "11/10/2013", false, false, false, "N");
-        quH.createQuarantine(1, "01/2015");
+        //quH.createQuarantine(1, "01/2015");
     }
 
     public static void main(String[] args) {

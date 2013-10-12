@@ -15,7 +15,7 @@ public class TableTool {
 
     public static final String[] userColumns = {"ID", "Navn", "Brugernavn", "Administrator", "Reserve"};
     public static final String[] personColumns = {"ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"};
-    public static final String[] guestColumns = {};
+    public static final String[] guestColumns = {"ID", "Navn", "fødselsdag", "Oprettelsesdato"};
 
     private TableTool() {
     }
@@ -33,6 +33,7 @@ public class TableTool {
                 return false;
             }
         };
+        
 
         for (int i = 0; i < userColumns.length; i++) {
             dtm.addColumn(userColumns[i]);

@@ -449,6 +449,9 @@
                 <Property name="text" type="java.lang.String" value="Indskrivning"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enroll_ButtonActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="status_Pane">
               <Properties>

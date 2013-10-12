@@ -4,18 +4,115 @@
  */
 package view;
 
+import control.EnrollmentHandler;
+import control.LoginHandler;
+import entity.Enrollment;
+import entity.Guest;
+import entity.Person;
+import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+import model.TableTool;
+
 /**
  *
  * @author patrick
  */
 public class EnrollPersonDIA extends javax.swing.JDialog {
 
-    /**
-     * Creates new form EnrollmentDIA
-     */
-    public EnrollPersonDIA(java.awt.Frame parent, boolean modal) {
+    private Person selectedPerson;
+    private EnrollmentHandler enH;
+
+    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH) {
         super(parent, modal);
         initComponents();
+        this.enH = enH;
+    }
+
+    public void setPerson(Person p) {
+        this.selectedPerson = p;
+        int guestMax = 0;
+
+        if (p.isHoene()) {
+            info_Label.setText("Denne person kan få 5 gæster ind");
+            guestMax = 5;
+        } else {
+            info_Label.setText("Denne person kan få 3 gæster ind");
+            guestMax = 3;
+        }
+
+        if (enH.isEnrolled(p.getIdPerson())) {
+            Enrollment en = enH.getEnrollment(p.getIdPerson());
+
+            // Get guests
+            ArrayList<String[]> data = new ArrayList<>();
+            Set<Guest> guests = en.getGuests();
+            for (Guest g : guests) {
+                String[] ss = {String.valueOf(g.getIdGuest()), g.getFirstname() + " " + g.getMiddlename() + " " + g.getLastname(), g.getBirthdayDate(), g.getCreationDate()};
+                data.add(ss);
+            }
+            DefaultTableModel dtm = TableTool.createGuestTableModel(data);
+            guests_Table.setModel(dtm);
+
+            if (dtm.getRowCount() > 0) {
+                deleteGuest_Button.setEnabled(true);
+            } else {
+                deleteGuest_Button.setEnabled(false);
+            }
+
+            if (dtm.getRowCount() >= guestMax) {
+                addGuest_Button.setEnabled(false);
+            } else {
+                addGuest_Button.setEnabled(true);
+            }
+
+            enroll_Button.setText("Slet indskrivning");
+        } else {
+            enroll_Button.setText("Indskriv");
+            addGuest_Button.setEnabled(false);
+            deleteGuest_Button.setEnabled(false);
+        }
+    }
+
+    private void setButtons() {
+        int guestMax = 0;
+
+        if (selectedPerson.isHoene()) {
+            guestMax = 5;
+        } else {
+            guestMax = 3;
+        }
+        
+        if (guests_Table.getModel().getRowCount() > 0) {
+            deleteGuest_Button.setEnabled(true);
+        } else {
+            deleteGuest_Button.setEnabled(false);
+        }
+
+        if (guests_Table.getModel().getRowCount() >= guestMax) {
+            addGuest_Button.setEnabled(false);
+        } else {
+            addGuest_Button.setEnabled(true);
+        }
+    }
+
+    private void clean() {
+        DefaultTableModel dtm = TableTool.createEmptyGuestTableModel();
+        guests_Table.setModel(dtm);
+
+        deleteGuest_Button.setEnabled(false);
+        addGuest_Button.setEnabled(true);
+        enroll_Button.setText("Indskriv");
+        info_Label.setText("INFO");
+        picture_PicturePane.setPicture(null, true);
+    }
+    
+    private void cleanGuests() {
+        DefaultTableModel dtm = TableTool.createEmptyGuestTableModel();
+        guests_Table.setModel(dtm);
+
+        deleteGuest_Button.setEnabled(false);
+        addGuest_Button.setEnabled(false);
     }
 
     /**
@@ -27,22 +124,261 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        main_Pane = new javax.swing.JPanel();
+        title_Pane = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        fields_Pane = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        guests_Table = new javax.swing.JTable();
+        addGuest_Button = new javax.swing.JButton();
+        deleteGuest_Button = new javax.swing.JButton();
+        picture_PicturePane = new view.image.PicturePane();
+        jPanel5 = new javax.swing.JPanel();
+        info_Label = new javax.swing.JLabel();
+        tools_Pane = new javax.swing.JPanel();
+        cancel_Button = new javax.swing.JButton();
+        enroll_Button = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Indskrivning");
+
+        javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
+        title_Pane.setLayout(title_PaneLayout);
+        title_PaneLayout.setHorizontalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        title_PaneLayout.setVerticalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        guests_Table.setAutoCreateRowSorter(true);
+        guests_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        guests_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Navn", "Fødselsdag", "Oprettelsesdato"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(guests_Table);
+
+        addGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        addGuest_Button.setText("Tilføj gæst");
+        addGuest_Button.setEnabled(false);
+
+        deleteGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        deleteGuest_Button.setText("Slet gæst");
+        deleteGuest_Button.setEnabled(false);
+
+        javax.swing.GroupLayout picture_PicturePaneLayout = new javax.swing.GroupLayout(picture_PicturePane);
+        picture_PicturePane.setLayout(picture_PicturePaneLayout);
+        picture_PicturePaneLayout.setHorizontalGroup(
+            picture_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        picture_PicturePaneLayout.setVerticalGroup(
+            picture_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+
+        info_Label.setForeground(new java.awt.Color(153, 204, 0));
+        info_Label.setText("INFO");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
+        fields_Pane.setLayout(fields_PaneLayout);
+        fields_PaneLayout.setHorizontalGroup(
+            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fields_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fields_PaneLayout.createSequentialGroup()
+                        .addComponent(addGuest_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteGuest_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        fields_PaneLayout.setVerticalGroup(
+            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fields_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fields_PaneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(deleteGuest_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addGuest_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancel_Button.setText("Annuller");
+        cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_ButtonActionPerformed(evt);
+            }
+        });
+
+        enroll_Button.setText("Indskriv");
+        enroll_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enroll_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
+        tools_Pane.setLayout(tools_PaneLayout);
+        tools_PaneLayout.setHorizontalGroup(
+            tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancel_Button)
+                .addGap(5, 5, 5)
+                .addComponent(enroll_Button)
+                .addContainerGap())
+        );
+        tools_PaneLayout.setVerticalGroup(
+            tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancel_Button)
+                    .addComponent(enroll_Button))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
+        main_Pane.setLayout(main_PaneLayout);
+        main_PaneLayout.setHorizontalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tools_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        main_PaneLayout.setVerticalGroup(
+            main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(main_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancel_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
+        if(enH.isEnrolled(selectedPerson.getIdPerson())) {
+            enroll_Button.setText("Indskriv");
+            enH.removeEnrollment(selectedPerson.getIdPerson());
+            cleanGuests();
+        } else {
+            enroll_Button.setText("Slet indskrivning");
+            enH.createEnrollment(selectedPerson.getIdPerson(), LoginHandler.loggedIn.getIduser());
+            setButtons();
+        }
+    }//GEN-LAST:event_enroll_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addGuest_Button;
+    private javax.swing.JButton cancel_Button;
+    private javax.swing.JButton deleteGuest_Button;
+    private javax.swing.JButton enroll_Button;
+    private javax.swing.JPanel fields_Pane;
+    private javax.swing.JTable guests_Table;
+    private javax.swing.JLabel info_Label;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel main_Pane;
+    private view.image.PicturePane picture_PicturePane;
+    private javax.swing.JPanel title_Pane;
+    private javax.swing.JPanel tools_Pane;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,11 +48,12 @@ public class MainGUI extends javax.swing.JFrame {
     private CreateUserDIA createUserDIA;
     private SettingsDIA settingsDIA;
     private EditProfileDIA editProfileDIA;
+    private EnrollPersonDIA enrollPersonDIA;
     // Model
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -65,6 +66,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
         this.editProfileDIA = editProfileDIA;
+        this.enrollPersonDIA = enrollPersonDIA;
 
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
 
@@ -328,6 +330,11 @@ public class MainGUI extends javax.swing.JFrame {
         enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enroll_Button.setText("Indskrivning");
         enroll_Button.setEnabled(false);
+        enroll_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enroll_ButtonActionPerformed(evt);
+            }
+        });
 
         status_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -729,6 +736,14 @@ public class MainGUI extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
+        if(selectedPerson != -1) {
+            enrollPersonDIA.setPerson(peH.getPerson(selectedPerson));
+            enrollPersonDIA.setVisible(true);
+            setPerson(selectedPerson);
+        }
+    }//GEN-LAST:event_enroll_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
