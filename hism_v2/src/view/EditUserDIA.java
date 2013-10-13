@@ -81,6 +81,8 @@ public class EditUserDIA extends javax.swing.JDialog {
             reserve_CheckBox.setEnabled(true);
             password_TextField.setEnabled(true);
             save_Button.setEnabled(true);
+        } else {
+            info_Label.setText("Du skal redigere dig selv ved at klikke på \"Rediger profil\" knappen");
         }
     }
 
@@ -102,6 +104,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         reserve_CheckBox.setEnabled(false);
         password_TextField.setEnabled(false);
         save_Button.setEnabled(false);
+        info_Label.setText("");
     }
 
     private void cleanSearchField() {
@@ -152,6 +155,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         password_TextField = new javax.swing.JPasswordField();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
+        info_Label = new javax.swing.JLabel();
         title_Pane = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         titleIcon_PicturePane = new view.image.PicturePane();
@@ -350,12 +354,17 @@ public class EditUserDIA extends javax.swing.JDialog {
             }
         });
 
+        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        info_Label.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
         tools_PaneLayout.setHorizontalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(close_Button)
                 .addContainerGap())
         );
@@ -363,7 +372,9 @@ public class EditUserDIA extends javax.swing.JDialog {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(close_Button)
+                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(close_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -525,6 +536,7 @@ public class EditUserDIA extends javax.swing.JDialog {
     private javax.swing.JButton close_Button;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTextField firstname_TextField;
+    private javax.swing.JLabel info_Label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

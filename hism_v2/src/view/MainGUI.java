@@ -272,6 +272,9 @@ public class MainGUI extends javax.swing.JFrame {
         setTitle(Hism.title + " - " + Hism.version);
         setMinimumSize(new java.awt.Dimension(1300, 550));
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -744,6 +747,12 @@ public class MainGUI extends javax.swing.JFrame {
             setPerson(selectedPerson);
         }
     }//GEN-LAST:event_enroll_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        cleanSearch();
+        cleanSelectedPerson();
+        cleanTable();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;

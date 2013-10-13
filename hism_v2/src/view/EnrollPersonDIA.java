@@ -133,10 +133,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         addGuest_Button = new javax.swing.JButton();
         deleteGuest_Button = new javax.swing.JButton();
         picture_PicturePane = new view.image.PicturePane();
-        jPanel5 = new javax.swing.JPanel();
         info_Label = new javax.swing.JLabel();
         tools_Pane = new javax.swing.JPanel();
-        cancel_Button = new javax.swing.JButton();
+        close_Button = new javax.swing.JButton();
         enroll_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -216,24 +215,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
-
-        info_Label.setForeground(new java.awt.Color(153, 204, 0));
+        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        info_Label.setForeground(new java.awt.Color(51, 153, 0));
         info_Label.setText("INFO");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
@@ -247,7 +231,8 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteGuest_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,20 +246,20 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(deleteGuest_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(addGuest_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cancel_Button.setText("Annuller");
-        cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setText("Luk");
+        close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancel_ButtonActionPerformed(evt);
+                close_ButtonActionPerformed(evt);
             }
         });
 
@@ -291,7 +276,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancel_Button)
+                .addComponent(close_Button)
                 .addGap(5, 5, 5)
                 .addComponent(enroll_Button)
                 .addContainerGap())
@@ -299,9 +284,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         tools_PaneLayout.setVerticalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancel_Button)
+                    .addComponent(close_Button)
                     .addComponent(enroll_Button))
                 .addContainerGap())
         );
@@ -327,7 +312,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,9 +330,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
+    private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_cancel_ButtonActionPerformed
+    }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         clean();
@@ -367,14 +352,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;
-    private javax.swing.JButton cancel_Button;
+    private javax.swing.JButton close_Button;
     private javax.swing.JButton deleteGuest_Button;
     private javax.swing.JButton enroll_Button;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTable guests_Table;
     private javax.swing.JLabel info_Label;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_Pane;
     private view.image.PicturePane picture_PicturePane;
