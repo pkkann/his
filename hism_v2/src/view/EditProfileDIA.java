@@ -80,7 +80,10 @@ public class EditProfileDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
+        title_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Rediger din profil");
 
         javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import model.TableTool;
+import view.message.DialogMessage;
 
 /**
  *
@@ -22,11 +23,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
     private Person selectedPerson;
     private EnrollmentHandler enH;
+    private CreateGuestDIA createGuestDIA;
 
-    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH) {
+    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA) {
         super(parent, modal);
         initComponents();
         this.enH = enH;
+        this.createGuestDIA = createGuestDIA;
     }
 
     public void setPerson(Person p) {
@@ -149,7 +152,10 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
+        title_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Indskrivning");
 
         javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
@@ -199,10 +205,20 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         addGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addGuest_Button.setText("Tilføj gæst");
         addGuest_Button.setEnabled(false);
+        addGuest_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addGuest_ButtonActionPerformed(evt);
+            }
+        });
 
         deleteGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         deleteGuest_Button.setText("Slet gæst");
         deleteGuest_Button.setEnabled(false);
+        deleteGuest_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteGuest_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout picture_PicturePaneLayout = new javax.swing.GroupLayout(picture_PicturePane);
         picture_PicturePane.setLayout(picture_PicturePaneLayout);
@@ -263,6 +279,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             }
         });
 
+        enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         enroll_Button.setText("Indskriv");
         enroll_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +329,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -349,6 +366,19 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             setButtons();
         }
     }//GEN-LAST:event_enroll_ButtonActionPerformed
+
+    private void addGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGuest_ButtonActionPerformed
+        Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
+        createGuestDIA.setIdEnrollment(en.getIdEnrollment());
+        createGuestDIA.setIdPerson(selectedPerson.getIdPerson());
+        createGuestDIA.setVisible(true);
+        setPerson(selectedPerson);
+        setButtons();
+    }//GEN-LAST:event_addGuest_ButtonActionPerformed
+
+    private void deleteGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteGuest_ButtonActionPerformed
+        
+    }//GEN-LAST:event_deleteGuest_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;

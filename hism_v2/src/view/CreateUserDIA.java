@@ -241,7 +241,10 @@ public class CreateUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Opret en bruger");
 
         javax.swing.GroupLayout titleIcon_PicturePaneLayout = new javax.swing.GroupLayout(titleIcon_PicturePane);
@@ -336,7 +339,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
         boolean admin = admin_CheckBox.isSelected();
         boolean reserve = reserve_CheckBox.isSelected();
         Calendar c = Calendar.getInstance();
-        String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH)) + "/" + String.valueOf(c.get(Calendar.YEAR));
+        String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
         
         int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
         

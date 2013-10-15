@@ -378,7 +378,10 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        title_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Rediger en bruger");
 
         javax.swing.GroupLayout titleIcon_PicturePaneLayout = new javax.swing.GroupLayout(titleIcon_PicturePane);

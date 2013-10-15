@@ -468,6 +468,7 @@ public class MainGUI extends javax.swing.JFrame {
         enrolled_Label.setForeground(new java.awt.Color(153, 204, 0));
         enrolled_Label.setText("ENROLLED");
 
+        logoff_Button.setBackground(new java.awt.Color(51, 51, 51));
         logoff_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         logoff_Button.setText("Log af");
         logoff_Button.addActionListener(new java.awt.event.ActionListener() {

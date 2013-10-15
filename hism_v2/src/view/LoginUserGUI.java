@@ -5,6 +5,7 @@
 package view;
 
 import control.LoginHandler;
+import hism.Hism;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,9 +24,18 @@ public class LoginUserGUI extends javax.swing.JFrame {
     public LoginUserGUI(LoginHandler loH) {
         initComponents();
         setIcon();
-        setTitle(hism.Hism.title + " " + hism.Hism.version);
-        title_Label.setText(hism.Hism.title);
+        setTitle();
+        setXButton();
         this.loH = loH;
+    }
+    
+    private void setTitle() {
+        setTitle(hism.Hism.title + " " + hism.Hism.version);
+        title_Label.setText(Hism.title);
+    }
+
+    private void setXButton() {
+        close_Button.setContentAreaFilled(false);
     }
     
     private void setIcon() {
@@ -55,7 +65,6 @@ public class LoginUserGUI extends javax.swing.JFrame {
         main_Pane = new javax.swing.JPanel();
         title_Pane = new javax.swing.JPanel();
         title_Label = new javax.swing.JLabel();
-        close_Button = new javax.swing.JButton();
         fields_Pane = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,6 +72,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
         password_TextField = new javax.swing.JPasswordField();
         tools_Pane = new javax.swing.JPanel();
         login_Button = new javax.swing.JButton();
+        close_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -85,35 +95,6 @@ public class LoginUserGUI extends javax.swing.JFrame {
         title_Label.setForeground(new java.awt.Color(255, 255, 255));
         title_Label.setText("TITLE");
 
-        close_Button.setBackground(new java.awt.Color(51, 51, 51));
-        close_Button.setText("X");
-        close_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                close_ButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
-        title_Pane.setLayout(title_PaneLayout);
-        title_PaneLayout.setHorizontalGroup(
-            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(title_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
-                .addComponent(close_Button))
-        );
-        title_PaneLayout.setVerticalGroup(
-            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(title_PaneLayout.createSequentialGroup()
-                .addGroup(title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(title_PaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(close_Button))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Brugernavn:");
 
@@ -135,7 +116,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(username_TextField)
+                    .addComponent(username_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                     .addComponent(password_TextField))
                 .addContainerGap())
         );
@@ -153,6 +134,25 @@ public class LoginUserGUI extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
+        title_Pane.setLayout(title_PaneLayout);
+        title_PaneLayout.setHorizontalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title_Label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(fields_Pane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        title_PaneLayout.setVerticalGroup(
+            title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(title_PaneLayout.createSequentialGroup()
+                .addComponent(title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         login_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         login_Button.setText("Login");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +167,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tools_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tools_PaneLayout.setVerticalGroup(
@@ -178,25 +178,35 @@ public class LoginUserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        close_Button.setBackground(new java.awt.Color(51, 51, 51));
+        close_Button.setForeground(new java.awt.Color(255, 255, 255));
+        close_Button.setText("X");
+        close_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                close_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
         main_PaneLayout.setHorizontalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(close_Button))
             .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(title_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tools_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         main_PaneLayout.setVerticalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_PaneLayout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(close_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

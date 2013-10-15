@@ -35,6 +35,7 @@ public class Hism {
     private EnrollmentRegister enR;
     private QuarantineRegister quR;
     // View
+    private CreateGuestDIA createGuestDIA;
     private CreatePersonDIA createPersonDIA;
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
@@ -66,13 +67,14 @@ public class Hism {
         
 
         // View
+        createGuestDIA = new CreateGuestDIA(mainGUI, true, enH);
         createPersonDIA = new CreatePersonDIA(mainGUI, true, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
-        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA);
         
         // Control - login
