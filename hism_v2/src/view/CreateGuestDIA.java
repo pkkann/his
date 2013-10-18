@@ -31,6 +31,17 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
     }
+    
+    private void clean() {
+        firstname_TextField.setText("");
+        middlename_TextField.setText("");
+        lastname_TextField.setText("");
+        birthday_day_TextField.setText("");
+        birthday_month_TextField.setText("");
+        birthday_year_TextField.setText("");
+        idEnrollment = -1;
+        idPerson = -1;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +81,11 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -266,6 +282,11 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
         cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cancel_Button.setText("Annuller");
+        cancel_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
@@ -348,6 +369,15 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_createGuest_ButtonActionPerformed
+
+    private void cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancel_ButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        clean();
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthday_day_TextField;
     private javax.swing.JTextField birthday_month_TextField;
