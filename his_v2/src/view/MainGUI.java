@@ -12,7 +12,7 @@ import control.QuarantineHandler;
 import entity.Person;
 import entity.Quarantine;
 import entity.User;
-import hism.Hism;
+import his.His;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -269,7 +269,7 @@ public class MainGUI extends javax.swing.JFrame {
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle(Hism.title + " - " + Hism.version);
+        setTitle(His.title + " - " + His.version);
         setMinimumSize(new java.awt.Dimension(1300, 550));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {

@@ -5,7 +5,7 @@
 package view;
 
 import control.LoginHandler;
-import hism.Hism;
+import his.His;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,8 +30,8 @@ public class LoginUserGUI extends javax.swing.JFrame {
     }
     
     private void setTitle() {
-        setTitle(hism.Hism.title + " " + hism.Hism.version);
-        title_Label.setText(Hism.title);
+        setTitle(his.His.title + " " + his.His.version);
+        title_Label.setText(His.title);
     }
 
     private void setXButton() {

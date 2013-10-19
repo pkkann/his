@@ -4,7 +4,7 @@
  */
 package view;
 
-import hism.Hism;
+import his.His;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -28,8 +28,8 @@ public class LoadingGUI extends javax.swing.JFrame {
     }
 
     private void setTitle() {
-        setTitle(hism.Hism.title + " " + hism.Hism.version);
-        title_Label.setText(Hism.title + " " + Hism.version);
+        setTitle(his.His.title + " " + his.His.version);
+        title_Label.setText(His.title + " " + His.version);
     }
 
     private void setXButton() {

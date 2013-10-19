@@ -18,8 +18,6 @@ public class FileTool {
 
     private static FileInputStream in;
     private static FileOutputStream out;
-    public static final String picDir = "pictures";
-    public static final String reportDir = "reports";
     
     private FileTool() {}
 
@@ -27,7 +25,6 @@ public class FileTool {
         try {
             in = new FileInputStream(fIn);
             out = new FileOutputStream(fOut);
-
 
             byte[] buf = new byte[1024];
             int len;
@@ -50,8 +47,8 @@ public class FileTool {
     }
     
     public static void createFolders() {
-        File dir = new File(picDir);
-        File dir2 = new File(reportDir);
+        File dir = new File(his.His.picDir);
+        File dir2 = new File(his.His.reportDir);
         dir.mkdir();
         dir2.mkdir();
     }

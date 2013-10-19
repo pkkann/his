@@ -7,6 +7,7 @@ package view;
 import control.PersonHandler;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -509,12 +510,31 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         }
         Calendar c = Calendar.getInstance();
         String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-        
-        int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
-        DialogMessage.showMessage(this, errorCode);
-        
-        if(errorCode == 0) {
-            dispose();
+
+        ArrayList<String[]> result = peH.searchPersonLon(firstname, middlename, lastname, address, birthday);
+
+        if (result.isEmpty()) {
+            int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
+            DialogMessage.showMessage(this, errorCode);
+
+            if (errorCode == 0) {
+                dispose();
+            }
+        } else {
+            String persons = "";
+            for (String[] ss : result) {
+                persons = persons + " - Navn: " + ss[0] + " || Adresse: " + ss[1] + " || Fødselsdag: " + ss[2] + "\n";
+            }
+
+            int n = DialogMessage.showQuestionMessage(this, "Denne person er måske allerede i systemet. Er du sikker på du vil oprette alligevel?\n\nPersoner fundet er:\n" + persons, "Sikker?");
+            if (n == 0) {
+                int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
+                DialogMessage.showMessage(this, errorCode);
+
+                if (errorCode == 0) {
+                    dispose();
+                }
+            }
         }
     }//GEN-LAST:event_create_ButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

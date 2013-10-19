@@ -2,15 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package hism;
+package his;
 
 import control.*;
+import file.FileTool;
 import hibernate.HiberUtil;
-import java.rmi.ConnectException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import model.*;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import view.*;
 
@@ -18,11 +15,13 @@ import view.*;
  *
  * @author patrick
  */
-public class Hism {
+public class His {
 
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "2.0 Alpha";
+    public static final String version = "1.1 Alpha";
+    public static final String picDir = "pictures";
+    public static final String reportDir = "reports";
     // Control
     private PersonHandler peH;
     private UserHandler usH;
@@ -46,7 +45,7 @@ public class Hism {
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
 
-    public Hism() {
+    public His() {
         setLookAndFeel();
         
         // View - loading pane
@@ -81,16 +80,20 @@ public class Hism {
         loH = new LoginHandler(usR, mainGUI);
 
         // Start sequence
-        System.out.println("##### Hism starting #####");
-        System.out.println("##### Hism testing database connection #####");
+        System.out.println("##### His starting... #####");
+        System.out.println("##### Testing database connection... #####");
         
         Session s = HiberUtil.getSessionFactory().openSession();
         s.close();
+        
+        System.out.println("##### Creating directories... #####");
+        FileTool.createFolders();
 
         testData();
-        System.out.println("##### Hism started! #####");
+        
         loadingGUI.setVisible(false);
         loH.requestLogin();
+        System.out.println("##### His started! #####");
     }
 
     private void setLookAndFeel() {
@@ -114,7 +117,7 @@ public class Hism {
     }
 
     private void testData() {
-        System.out.println("##### OPRETTER TESTDATA #####");
+        System.out.println("##### Creating Test Data... #####");
         usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
         usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10/10/2013", false, false);
 
@@ -123,6 +126,6 @@ public class Hism {
     }
 
     public static void main(String[] args) {
-        Hism hism = new Hism();
+        His hism = new His();
     }
 }

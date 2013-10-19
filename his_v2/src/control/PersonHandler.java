@@ -205,6 +205,32 @@ public class PersonHandler implements HismHandler {
         }
         return count;
     }
+    
+    /**
+     * Returns a result based on name, address and birthday
+     * @param firstname
+     * @param middlename
+     * @param lastname
+     * @param address
+     * @param birthdayDate
+     * @return data : ArrayList<String[]>
+     */
+    public ArrayList<String[]> searchPersonLon(String firstname, String middlename, String lastname, String address, String birthdayDate) {
+        // Create collection
+        ArrayList<String[]> data = new ArrayList<>();
+        
+        // Make full name
+        String name = firstname + " " + middlename + " " + lastname;
+        
+        for(Person p : peR.getPersons()) {
+            if((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equals(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
+                String[] dat = {p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate()};
+                data.add(dat);
+            }
+        }
+        
+        return data;
+    }
 
     /**
      * Returns a result based on a string
