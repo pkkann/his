@@ -25,6 +25,19 @@ public class LoginDIA extends javax.swing.JDialog {
         email_TextField.setText("");
         password_TextField.setText("");
     }
+    
+    private void login() {
+        if (!email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
+            if (loginHandler.checkUser(email_TextField.getText(), password_TextField.getText())) {
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
+                password_TextField.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,6 +111,12 @@ public class LoginDIA extends javax.swing.JDialog {
         login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_ButtonActionPerformed(evt);
+            }
+        });
+
+        password_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password_TextFieldActionPerformed(evt);
             }
         });
 
@@ -181,7 +200,7 @@ public class LoginDIA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void email_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_TextFieldActionPerformed
-        // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_email_TextFieldActionPerformed
 
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
@@ -189,21 +208,16 @@ public class LoginDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        if (!email_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
-            if (loginHandler.checkUser(email_TextField.getText(), password_TextField.getText())) {
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Email eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
-                password_TextField.setText("");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
-        }
+        login();
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         clean();
     }//GEN-LAST:event_formWindowClosed
+
+    private void password_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_TextFieldActionPerformed
+        login();
+    }//GEN-LAST:event_password_TextFieldActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

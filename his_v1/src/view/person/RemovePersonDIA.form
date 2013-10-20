@@ -110,6 +110,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="search_TextField">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_TextFieldActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="search_Button">
               <Properties>
@@ -137,7 +140,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="result_ScrollPane" pref="388" max="32767" attributes="0"/>
+                      <Component id="result_ScrollPane" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

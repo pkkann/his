@@ -145,12 +145,14 @@ public class PersonHandler {
     public ArrayList<Person> search(String s) {
         if (!s.isEmpty()) {
             ArrayList<Person> result = new ArrayList<>();
+            
+            String[] sSplit = s.split(" ");
 
             for (Person p : personRegister.getPersons()) {
-                if (p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equalsIgnoreCase(s) || (p.getFirstname() + " " + p.getLastname()).equalsIgnoreCase(s)) {
-                    result.add(p);
-                } else if (p.getBirthdayDate().equals(s)) {
-                    result.add(p);
+                for(String ss : sSplit) {
+                    if(p.getFirstname().equalsIgnoreCase(ss) || p.getMiddlename().equalsIgnoreCase(ss) || p.getLastname().equalsIgnoreCase(ss) || p.getAddress().equalsIgnoreCase(ss) || ADate.formatADate(p.getBirthdayDate(), "").equalsIgnoreCase(ss) || ADate.formatADate(p.getBirthdayDate(), "/").equalsIgnoreCase(ss)|| ADate.formatADate(p.getBirthdayDate(), "-").equalsIgnoreCase(ss)) {
+                        result.add(p);
+                    }
                 }
             }
             return result;

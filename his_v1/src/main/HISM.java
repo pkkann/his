@@ -37,7 +37,7 @@ import view.user.ResetUserPasswordDIA;
 public class HISM {
 
     public static final String title = "Den våde høne - Indskrivnings system";
-    public static final String version = "v1.0";
+    public static final String version = "v1.1";
     private DateChangeDetecter dch;
     private UserRegister userRegister;
     private UserHandler userHandler;
@@ -97,7 +97,7 @@ public class HISM {
             hism.personHandler.populatePersonsFromDB();
             hism.dch.start();
             hism.firstStart();
-            JOptionPane.showMessageDialog(loginDIA, "LÆS, HVIS DU IKKE HAR LÆST.\nDa dette program er i beta test, kan der forekomme fejl.\nI tilfælde af fejl, eller der intet sker nå man trykker på en knap,\nskriv da dato og tidspunkt ned på et stykke papir og aflever til Patrick Kann i høne gruppen.", "Udgivelses info", JOptionPane.PLAIN_MESSAGE);
+            //JOptionPane.showMessageDialog(loginDIA, "LÆS, HVIS DU IKKE HAR LÆST.\nDa dette program er i beta test, kan der forekomme fejl.\nI tilfælde af fejl, eller der intet sker nå man trykker på en knap,\nskriv da dato og tidspunkt ned på et stykke papir og aflever til Patrick Kann i høne gruppen.", "Udgivelses info", JOptionPane.PLAIN_MESSAGE);
             hism.loginHandler.requestLoginView();
             mainGUI.setUser();
             mainGUI.setVisible(true);

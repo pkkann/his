@@ -7,6 +7,7 @@ package view;
 import control.person.PersonHandler;
 import date.ADate;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -192,6 +193,19 @@ public class MainGUI extends javax.swing.JFrame {
             reserve_Label.setText("Nej");
         }
     }
+    
+    private void search() {
+        clearResult();
+        clearPerson();
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
+        }
+
+        result_List.setModel(dlm);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -264,6 +278,14 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         result_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultat"));
 
@@ -496,6 +518,12 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(renew_Button))
                 .addContainerGap())
         );
+
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
 
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -745,16 +773,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createUser_MenuItemActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        clearResult();
-        clearPerson();
-        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
-        DefaultListModel dlm = new DefaultListModel();
-
-        for (Person p : persons) {
-            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
-        }
-
-        result_List.setModel(dlm);
+        search();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
@@ -843,6 +862,18 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_reset_MenuItemActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        
+    }//GEN-LAST:event_formKeyReleased
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+    }//GEN-LAST:event_formKeyPressed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

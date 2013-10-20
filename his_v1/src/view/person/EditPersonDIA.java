@@ -116,6 +116,19 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         pictureChanged = false;
     }
+    
+    private void search() {
+        cleanResult();
+        cleanPerson();
+        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
+        DefaultListModel dlm = new DefaultListModel();
+
+        for (Person p : persons) {
+            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
+        }
+
+        result_List.setModel(dlm);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,6 +182,12 @@ public class EditPersonDIA extends javax.swing.JDialog {
         });
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
+
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
 
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -480,16 +499,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_close_ButtonActionPerformed
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        cleanResult();
-        cleanPerson();
-        ArrayList<Person> persons = personHandler.search(search_TextField.getText());
-        DefaultListModel dlm = new DefaultListModel();
-
-        for (Person p : persons) {
-            dlm.addElement(p.getId() + ":" + p.getFirstname() + " " + p.getLastname());
-        }
-
-        result_List.setModel(dlm);
+        search();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void result_ListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_result_ListValueChanged
@@ -566,6 +576,10 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_choose_ButtonActionPerformed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

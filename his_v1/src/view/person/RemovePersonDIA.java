@@ -133,6 +133,12 @@ public class RemovePersonDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
+
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +188,7 @@ public class RemovePersonDIA extends javax.swing.JDialog {
             result_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(result_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(result_ScrollPane)
                 .addContainerGap())
         );
 
@@ -398,6 +404,10 @@ public class RemovePersonDIA extends javax.swing.JDialog {
             search();
         }
     }//GEN-LAST:event_delete_ButtonActionPerformed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
