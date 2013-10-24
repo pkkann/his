@@ -112,9 +112,9 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         search_Button = new javax.swing.JButton();
         fields_Pane = new javax.swing.JPanel();
         delete_Button = new javax.swing.JButton();
+        info_Label = new javax.swing.JLabel();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
-        info_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -244,12 +244,17 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             }
         });
 
+        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        info_Label.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
         fields_PaneLayout.setHorizontalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(delete_Button)
                 .addContainerGap())
         );
@@ -257,7 +262,9 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(delete_Button)
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delete_Button, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -269,17 +276,12 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             }
         });
 
-        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        info_Label.setForeground(new java.awt.Color(204, 0, 0));
-
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
         tools_PaneLayout.setHorizontalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(close_Button)
                 .addContainerGap())
         );
@@ -287,9 +289,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(close_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(close_Button)
                 .addContainerGap())
         );
 
@@ -353,7 +353,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_result_TableVetoableChange
 
     private void delete_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_ButtonActionPerformed
-        int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette den valgte person", "Sikker?");
+        int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette den valgte bruger", "Sikker?");
         if (n == 0) {
             usH.removeUser(this.selectedUser);
             search();

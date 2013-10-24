@@ -5,7 +5,14 @@
 package view;
 
 import control.EnrollmentHandler;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import view.message.DialogMessage;
 
 /**
@@ -17,6 +24,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private int idEnrollment = -1;
     private int idPerson = -1;
     private EnrollmentHandler enH;
+    private String picturePath = "";
 
     public CreateGuestDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH) {
         super(parent, modal);
@@ -44,6 +52,12 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         idEnrollment = -1;
         idPerson = -1;
     }
+    
+    private void cleanPicture() {
+        picturePane_PicturePane.setPicture(null, true);
+        noPicture_CheckBox.setSelected(false);
+        picturePath = "";
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +68,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
         main_Pane = new javax.swing.JPanel();
         title_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -71,7 +86,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         birthday_year_TextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         picture_Pane = new javax.swing.JPanel();
-        picture_PicturePane = new view.image.PicturePane();
+        picturePane_PicturePane = new view.image.PicturePane();
         choosePicture_Button = new javax.swing.JButton();
         capturePicture_Button = new javax.swing.JButton();
         noPicture_CheckBox = new javax.swing.JCheckBox();
@@ -211,19 +226,24 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout picture_PicturePaneLayout = new javax.swing.GroupLayout(picture_PicturePane);
-        picture_PicturePane.setLayout(picture_PicturePaneLayout);
-        picture_PicturePaneLayout.setHorizontalGroup(
-            picture_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
+        picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
+        picturePane_PicturePaneLayout.setHorizontalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
-        picture_PicturePaneLayout.setVerticalGroup(
-            picture_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        picturePane_PicturePaneLayout.setVerticalGroup(
+            picturePane_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
         choosePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         choosePicture_Button.setText("Vælg billed");
+        choosePicture_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choosePicture_ButtonActionPerformed(evt);
+            }
+        });
 
         capturePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         capturePicture_Button.setText("Tag billed");
@@ -231,6 +251,11 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noPicture_CheckBoxActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("For bedst resultat, skal billedet være 250x250");
@@ -241,7 +266,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(picture_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(picture_PaneLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,7 +295,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                         .addComponent(noPicture_CheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7))
-                    .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -363,7 +388,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             Calendar c = Calendar.getInstance();
             String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
 
-            int errorCode = enH.createGuest(idEnrollment, idPerson, firstname, middlename, lastname, birthday, creationDate, "N");
+            int errorCode = enH.createGuest(idEnrollment, idPerson, firstname, middlename, lastname, birthday, creationDate, picturePath);
 
             DialogMessage.showMessage(this, errorCode);
 
@@ -379,7 +404,34 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         clean();
+        cleanPicture();
     }//GEN-LAST:event_formWindowClosed
+
+    private void choosePicture_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePicture_ButtonActionPerformed
+        noPicture_CheckBox.setSelected(false);
+        picturePath = "";
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            picturePath = fileChooser_FileChooser.getSelectedFile().toString();
+            File f = new File(picturePath);
+            Image img = null;
+            try {
+                img = ImageIO.read(f);
+            } catch (IOException ex) {
+                Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            picturePane_PicturePane.setPicture(img, true);
+        }
+    }//GEN-LAST:event_choosePicture_ButtonActionPerformed
+
+    private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
+        if(noPicture_CheckBox.isSelected()) {
+            picturePath = "N";
+            picturePane_PicturePane.setPicture(null, true);
+        } else {
+            picturePath = "";
+        }
+    }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthday_day_TextField;
@@ -390,6 +442,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private javax.swing.JButton choosePicture_Button;
     private javax.swing.JButton createGuest_Button;
     private javax.swing.JPanel fields_Pane;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -402,8 +455,8 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
     private javax.swing.JCheckBox noPicture_CheckBox;
+    private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JPanel picture_Pane;
-    private view.image.PicturePane picture_PicturePane;
     private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;

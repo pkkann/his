@@ -41,7 +41,7 @@ public class DialogMessage {
                 JOptionPane.showMessageDialog(j, "Udløbsdatoen kan ikke være før, eller lig den nuværende dato", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.PICTUREPATH_EMPTY_ERROR:
-                JOptionPane.showMessageDialog(j, "Billedet blev ikke fundet\nKontakt en administrator for support", "Fejl", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(j, "Billedet blev ikke fundet", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.GET_ERROR:
                 JOptionPane.showMessageDialog(j, "Der skete en fejl da programmet forsøgte at hente et objekt\nKontakt en administrator for support", "Fejl", JOptionPane.ERROR_MESSAGE);
@@ -88,7 +88,7 @@ public class DialogMessage {
                 JOptionPane.showMessageDialog(j, "Udløbsdatoen kan ikke være før, eller lig den nuværende dato", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.PICTUREPATH_EMPTY_ERROR:
-                JOptionPane.showMessageDialog(j, "Billedet blev ikke fundet\nKontakt en administrator for support", "Fejl", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(j, "Billedet blev ikke fundet", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
             case HismHandler.GET_ERROR:
                 JOptionPane.showMessageDialog(j, "Der skete en fejl da programmet forsøgte at hente et objekt\nKontakt en administrator for support", "Fejl", JOptionPane.ERROR_MESSAGE);

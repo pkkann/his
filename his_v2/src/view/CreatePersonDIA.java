@@ -22,7 +22,6 @@ import view.message.DialogMessage;
  */
 public class CreatePersonDIA extends javax.swing.JDialog {
 
-    private Image picture = null;
     private PersonHandler peH;
     private String picturePath = "";
 
@@ -62,8 +61,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }
 
     private void cleanPicture() {
-        picture = null;
-        picturePane_PicturePane.setPicture(picture, true);
+        picturePane_PicturePane.setPicture(null, true);
         noPicture_CheckBox.setSelected(false);
         picturePath = "";
     }

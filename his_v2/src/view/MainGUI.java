@@ -43,6 +43,7 @@ public class MainGUI extends javax.swing.JFrame {
     private LoginHandler loH;
     // View
     private CreatePersonDIA createPersonDIA;
+    private RemovePersonDIA removePersonDIA;
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
@@ -53,7 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -64,6 +65,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.settingsDIA = settingsDIA;
         this.createPersonDIA = createPersonDIA;
         this.removeUserDIA = removeUserDIA;
+        this.removePersonDIA = removePersonDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
         this.editProfileDIA = editProfileDIA;
@@ -211,7 +213,7 @@ public class MainGUI extends javax.swing.JFrame {
         if (searchString.equals("Søg på en persons navn/fødselsdag/adresse")) {
             searchString = "";
         }
-        ArrayList<String[]> data = peH.searchPerson(searchString);
+        ArrayList<String[]> data = peH.searchPerson(searchString, enrolled_CheckBox.isSelected());
         DefaultTableModel dtm = TableTool.createPersonTableModel(data);
         result_Table.setModel(dtm);
     }
@@ -237,6 +239,7 @@ public class MainGUI extends javax.swing.JFrame {
         status_Label = new javax.swing.JLabel();
         picturePane_PicturePane = new view.image.PicturePane();
         renew_Button = new javax.swing.JButton();
+        enrolled_CheckBox = new javax.swing.JCheckBox();
         bottom_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -384,6 +387,9 @@ public class MainGUI extends javax.swing.JFrame {
         renew_Button.setText("Forny");
         renew_Button.setEnabled(false);
 
+        enrolled_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        enrolled_CheckBox.setText("Indskrevne");
+
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
         inner_PaneLayout.setHorizontalGroup(
@@ -393,10 +399,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inner_PaneLayout.createSequentialGroup()
                         .addComponent(search_TextField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(enrolled_CheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(search_Button))
                     .addGroup(inner_PaneLayout.createSequentialGroup()
-                        .addComponent(result_ScrollPane)
+                        .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(status_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -411,7 +419,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search_Button))
+                    .addComponent(search_Button)
+                    .addComponent(enrolled_CheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inner_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inner_PaneLayout.createSequentialGroup()
@@ -420,7 +429,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addComponent(renew_Button))
                     .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
                 .addContainerGap())
@@ -636,6 +645,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         deletePerson_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/deletePerson.png"))); // NOI18N
         deletePerson_MenuItem.setText("Slet person");
+        deletePerson_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePerson_MenuItemActionPerformed(evt);
+            }
+        });
         personer_Menu.add(deletePerson_MenuItem);
 
         administrateQuarantines_MenuItem.setText("Administrer karantæner");
@@ -791,6 +805,13 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nulstil_MenuItemActionPerformed
 
+    private void deletePerson_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_MenuItemActionPerformed
+        cleanSelectedPerson();
+        cleanTable();
+        cleanSearch();
+        removePersonDIA.setVisible(true);
+    }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
     private javax.swing.JPanel bottom_Pane;
@@ -804,6 +825,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton editProfile_Button;
     private javax.swing.JMenuItem editUser_MenuItem;
     private javax.swing.JButton enroll_Button;
+    private javax.swing.JCheckBox enrolled_CheckBox;
     private javax.swing.JLabel enrolled_Label;
     private javax.swing.JMenu filer_Menu;
     private javax.swing.JMenuItem gemKarantæner_MenuItem;

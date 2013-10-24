@@ -206,6 +206,7 @@ public class PersonHandler implements HismHandler {
             return GET_ERROR;
         } else {
             peR.deletePerson(p);
+            FileTool.deleteFile(new File(p.getPicturePath()));
         }
 
         return NO_ERROR;
@@ -262,7 +263,7 @@ public class PersonHandler implements HismHandler {
      * @param search
      * @return data : ArrayList<String[]>
      */
-    public ArrayList<String[]> searchPerson(String search) {
+    public ArrayList<String[]> searchPerson(String search, boolean onlyEnrolled) {
         // Create collection
         ArrayList<String[]> data = new ArrayList<>();
 
@@ -284,8 +285,17 @@ public class PersonHandler implements HismHandler {
                 if (p.isReserve()) {
                     reserve = "Ja";
                 }
-                String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                data.add(dat);
+                if (onlyEnrolled) {
+                    Enrollment en = enR.getEnrollment(p.getIdPerson());
+                    if (en != null) {
+                        String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+                        data.add(dat);
+                    }
+                } else {
+                    String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+                    data.add(dat);
+                }
+
             }
         } else {
             for (Person p : peR.getPersons()) {
@@ -305,8 +315,16 @@ public class PersonHandler implements HismHandler {
                 }
                 for (String s : sSplit) {
                     if (p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || p.getAddress().equalsIgnoreCase(s) || p.getBirthdayDate().equalsIgnoreCase(s) || p.getExpirationDate().equalsIgnoreCase(s) || birthday.equalsIgnoreCase(s) || expiration.equalsIgnoreCase(s)) {
-                        String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                        data.add(dat);
+                        if (onlyEnrolled) {
+                            Enrollment en = enR.getEnrollment(p.getIdPerson());
+                            if (en != null) {
+                                String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+                                data.add(dat);
+                            }
+                        } else {
+                            String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+                            data.add(dat);
+                        }
                         break;
                     }
                 }
@@ -334,5 +352,20 @@ public class PersonHandler implements HismHandler {
 
         return p;
 
+    }
+
+    /**
+     * Returns wether a person is enrolled or not
+     *
+     * @param idPerson
+     * @return boolean
+     */
+    public boolean isEnrolled(int idPerson) {
+        Enrollment en = enR.getEnrollment(idPerson);
+        if (en == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

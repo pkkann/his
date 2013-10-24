@@ -121,10 +121,10 @@ public class EnrollmentHandler implements HismHandler {
                     // Copy picture
                     if (copyPic) {
                         String oldPicturePath = picturePath;
-                        String newPicturePath = his.His.picDir + "/" + (Integer) sz + "_guest/" + "face.jpg";
+                        String newPicturePath = his.His.picDir + "/guests/" + (Integer) sz + "/" + "face.jpg";
                         FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
-                        p.setPicturePath(newPicturePath);
-                        peR.savePerson(p);
+                        g.setPicturePath(newPicturePath);
+                        enR.saveEnrollment(en);
                     }
                 } else {
                     return TOO_MANY_GUESTS;
@@ -142,8 +142,8 @@ public class EnrollmentHandler implements HismHandler {
                         String oldPicturePath = picturePath;
                         String newPicturePath = his.His.picDir + "/guests/" + (Integer) sz + "/" + "face.jpg";
                         FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
-                        p.setPicturePath(newPicturePath);
-                        peR.savePerson(p);
+                        g.setPicturePath(newPicturePath);
+                        enR.saveEnrollment(en);
                     }
                 } else {
                     return TOO_MANY_GUESTS;
@@ -163,10 +163,10 @@ public class EnrollmentHandler implements HismHandler {
      * @param idGuest
      * @return Error code : Integer
      */
-    public int removeGuest(int idEnrollment, int idGuest) {
+    public int removeGuest(int idPerson, int idGuest) {
 
         // Get enrollment
-        Enrollment en = enR.getEnrollment(idEnrollment);
+        Enrollment en = enR.getEnrollment(idPerson);
 
         // Get guest
         Guest g = enR.getGuest(en, idGuest);
@@ -178,6 +178,23 @@ public class EnrollmentHandler implements HismHandler {
         }
 
         return NO_ERROR;
+    }
+    
+    /**
+     * Return a guest
+     * @param idPerson
+     * @param idGuest
+     * @return g : Guest
+     */
+    public Guest getGuest(int idPerson, int idGuest) {
+        
+        // Get enrollment
+        Enrollment en = enR.getEnrollment(idPerson);
+        
+        // Get guest
+        Guest g = enR.getGuest(en, idGuest);
+        
+        return g;
     }
 
     /**

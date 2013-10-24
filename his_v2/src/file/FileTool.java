@@ -47,6 +47,10 @@ public class FileTool {
         }
     }
     
+    public static void deleteFile(File f) {
+        f.delete();
+    }
+    
     public static void createFolders() {
         File picDir = new File(his.His.picDir);
         File personsPicDir = new File(his.His.picDir + "/persons");

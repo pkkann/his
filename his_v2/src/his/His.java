@@ -39,6 +39,7 @@ public class His {
     private CreatePersonDIA createPersonDIA;
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
+    private RemovePersonDIA removePersonDIA;
     private RemoveUserDIA removeUserDIA;
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
@@ -71,11 +72,12 @@ public class His {
         createPersonDIA = new CreatePersonDIA(mainGUI, true, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
+        removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA);
         
         // Control - login
         loH = new LoginHandler(usR, mainGUI);
@@ -96,7 +98,7 @@ public class His {
         quR.loadQuarantinesFromDB();
         enR.loadEnrollmentsFromDB();
         
-        testData();
+        //testData();
         
         loadingGUI.setVisible(false);
         loH.requestLogin();
