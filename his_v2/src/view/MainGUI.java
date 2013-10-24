@@ -57,6 +57,7 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         initTableListener();
         setIcon();
+        setTitle();
         this.peH = peH;
         this.enH = enH;
         this.quH = quH;
@@ -99,6 +100,10 @@ public class MainGUI extends javax.swing.JFrame {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setIconImage(icon);
+    }
+    
+    private void setTitle() {
+        setTitle(his.His.title + " - " + his.His.version);
     }
 
     private void initTableListener() {
@@ -269,7 +274,7 @@ public class MainGUI extends javax.swing.JFrame {
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle(His.title + " - " + His.version);
+        setTitle(his.His.title + " - " + his.His.version);
         setMinimumSize(new java.awt.Dimension(1300, 550));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -285,6 +290,11 @@ public class MainGUI extends javax.swing.JFrame {
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_TextField.setForeground(new java.awt.Color(153, 153, 153));
         search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
         search_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 search_TextFieldFocusGained(evt);
@@ -746,6 +756,7 @@ public class MainGUI extends javax.swing.JFrame {
             enrollPersonDIA.setPerson(peH.getPerson(selectedPerson));
             enrollPersonDIA.setVisible(true);
             setPerson(selectedPerson);
+            updateEnrolledCounter();
         }
     }//GEN-LAST:event_enroll_ButtonActionPerformed
 
@@ -754,6 +765,10 @@ public class MainGUI extends javax.swing.JFrame {
         cleanSelectedPerson();
         cleanTable();
     }//GEN-LAST:event_formWindowClosed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;

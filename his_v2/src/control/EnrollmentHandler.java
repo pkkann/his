@@ -69,8 +69,8 @@ public class EnrollmentHandler implements HismHandler{
     public int createGuest(int idEnrollment, int idPerson, String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
 
         // Get enrollment
-        Enrollment en = enR.getEnrollment(idEnrollment);
-
+        Enrollment en = enR.getEnrollment(idPerson);
+        
         // Get person
         Person p = peR.getPerson(idPerson);
 

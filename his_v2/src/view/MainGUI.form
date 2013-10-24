@@ -342,6 +342,7 @@
                 <Property name="text" type="java.lang.String" value="S&#xf8;g p&#xe5; en persons navn/f&#xf8;dselsdag/adresse"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_TextFieldActionPerformed"/>
                 <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="search_TextFieldFocusGained"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="search_TextFieldFocusLost"/>
               </Events>

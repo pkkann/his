@@ -52,6 +52,19 @@ public class LoginUserGUI extends javax.swing.JFrame {
         username_TextField.setText("");
         password_TextField.setText("");
     }
+    
+    private void login() {
+        if (!username_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
+            int errorCode = loH.login(username_TextField.getText(), password_TextField.getText());
+            if (errorCode != 0) {
+                DialogMessage.showMessage(this, errorCode);
+            }
+
+            if (errorCode == 0) {
+                dispose();
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,8 +115,18 @@ public class LoginUserGUI extends javax.swing.JFrame {
         jLabel4.setText("Kode:");
 
         username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                username_TextFieldActionPerformed(evt);
+            }
+        });
 
         password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password_TextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
@@ -228,16 +251,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_ButtonActionPerformed
-        if (!username_TextField.getText().isEmpty() && !password_TextField.getText().isEmpty()) {
-            int errorCode = loH.login(username_TextField.getText(), password_TextField.getText());
-            if (errorCode != 0) {
-                DialogMessage.showMessage(this, errorCode);
-            }
-
-            if (errorCode == 0) {
-                dispose();
-            }
-        }
+        login();
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
@@ -251,6 +265,14 @@ public class LoginUserGUI extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         clean();
     }//GEN-LAST:event_formWindowClosed
+
+    private void username_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_TextFieldActionPerformed
+        login();
+    }//GEN-LAST:event_username_TextFieldActionPerformed
+
+    private void password_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_TextFieldActionPerformed
+        login();
+    }//GEN-LAST:event_password_TextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;

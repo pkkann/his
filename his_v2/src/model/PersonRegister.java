@@ -8,6 +8,8 @@ import entity.Person;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,7 +28,7 @@ public class PersonRegister {
      * Registers a person
      * @param p 
      */
-    public void registerPerson(Person p) {
+    public Serializable registerPerson(Person p) {
         System.out.println("Registering person...");
         
         persons.add(p);
@@ -40,6 +42,7 @@ public class PersonRegister {
         tx.commit();
         s.close();
         System.out.println("Registration complete!");
+        return sz;
     }
     
     /**
@@ -113,6 +116,26 @@ public class PersonRegister {
         System.out.println("Setting all persons...");
         this.persons = persons;
         System.out.println("Set complete!");
+    }
+    
+    /**
+     * Loads all persons from database to register
+     */
+    public void loadPersonsFromDB() {
+        System.out.println("Loading persons from db...");
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        Criteria c = s.createCriteria(Person.class);
+        List l = c.list();
+        for(Object o : l) {
+            Person p = (Person)o;
+            persons.add(p);
+        }
+        
+        tx.commit();
+        s.close();
+        System.out.println("Load complete!");
     }
     
 }

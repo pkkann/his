@@ -4,6 +4,7 @@
  */
 package view;
 
+import control.LoginHandler;
 import model.TableTool;
 import control.UserHandler;
 import java.awt.Image;
@@ -33,7 +34,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         initTableListener();
         this.usH = usH;
     }
-    
+
     private void setTitleIcon() {
         Image icon = null;
         try {
@@ -60,7 +61,13 @@ public class RemoveUserDIA extends javax.swing.JDialog {
 
     private void setUser(int id) {
         selectedUser = id;
-        delete_Button.setEnabled(true);
+        if (LoginHandler.loggedIn.getIduser() != id) {
+            delete_Button.setEnabled(true);
+            info_Label.setText("");
+        } else {
+            info_Label.setText("Du kan ikke slette dig selv");
+            delete_Button.setEnabled(false);
+        }
     }
 
     private void cleanSearchField() {
@@ -75,6 +82,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
     public void cleanSelectedUser() {
         selectedUser = -1;
         delete_Button.setEnabled(false);
+        info_Label.setText("");
     }
 
     public void search() {
@@ -106,6 +114,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         delete_Button = new javax.swing.JButton();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
+        info_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -186,6 +195,11 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         users_ScrollPane.setViewportView(result_Table);
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
 
         search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_Button.setText("Søg");
@@ -255,12 +269,17 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             }
         });
 
+        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        info_Label.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
         tools_PaneLayout.setHorizontalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(close_Button)
                 .addContainerGap())
         );
@@ -268,7 +287,9 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(close_Button)
+                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(close_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -338,10 +359,15 @@ public class RemoveUserDIA extends javax.swing.JDialog {
             search();
         }
     }//GEN-LAST:event_delete_ButtonActionPerformed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;
     private javax.swing.JButton delete_Button;
     private javax.swing.JPanel fields_Pane;
+    private javax.swing.JLabel info_Label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTable result_Table;

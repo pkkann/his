@@ -23,6 +23,7 @@ public class FileTool {
 
     public static boolean copyFile(File fIn, File fOut) {
         try {
+            new File(fOut.getParent()).mkdir();
             in = new FileInputStream(fIn);
             out = new FileOutputStream(fOut);
 

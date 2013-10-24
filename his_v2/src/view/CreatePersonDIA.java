@@ -6,12 +6,14 @@ package view;
 
 import control.PersonHandler;
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import view.message.DialogMessage;
 
 /**
@@ -22,6 +24,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
     private Image picture = null;
     private PersonHandler peH;
+    private String picturePath = "";
 
     public CreatePersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH) {
         super(parent, modal);
@@ -62,6 +65,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         picture = null;
         picturePane_PicturePane.setPicture(picture, true);
         noPicture_CheckBox.setSelected(false);
+        picturePath = "";
     }
 
     public boolean shouldExpireDateBeEnabled() {
@@ -81,6 +85,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
         main_Pane = new javax.swing.JPanel();
         title_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -339,9 +344,19 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         choose_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         choose_Button.setText("Vælg billed");
+        choose_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choose_ButtonActionPerformed(evt);
+            }
+        });
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noPicture_CheckBoxActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("For bedst resultat, skal billedet være 250x250");
@@ -508,13 +523,16 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         } else {
             expiration = "";
         }
+        if(noPicture_CheckBox.isSelected()) {
+            picturePath = "N";
+        }
         Calendar c = Calendar.getInstance();
         String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
 
         ArrayList<String[]> result = peH.searchPersonLon(firstname, middlename, lastname, address, birthday);
 
         if (result.isEmpty()) {
-            int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
+            int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
             DialogMessage.showMessage(this, errorCode);
 
             if (errorCode == 0) {
@@ -528,7 +546,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
             int n = DialogMessage.showQuestionMessage(this, "Denne person er måske allerede i systemet. Er du sikker på du vil oprette alligevel?\n\nPersoner fundet er:\n" + persons, "Sikker?");
             if (n == 0) {
-                int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, "N");
+                System.out.println(picturePath);
+                int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
                 DialogMessage.showMessage(this, errorCode);
 
                 if (errorCode == 0) {
@@ -537,6 +556,33 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_create_ButtonActionPerformed
+
+    private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        noPicture_CheckBox.setSelected(false);
+        picturePath = "";
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            picturePath = fileChooser_FileChooser.getSelectedFile().toString();
+            File f = new File(picturePath);
+            Image img = null;
+            try {
+                img = ImageIO.read(f);
+            } catch (IOException ex) {
+                Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            picturePane_PicturePane.setPicture(img, true);
+        }
+    }//GEN-LAST:event_choose_ButtonActionPerformed
+
+    private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
+        if(noPicture_CheckBox.isSelected()) {
+            picturePath = "N";
+            picturePane_PicturePane.setPicture(null, true);
+        } else {
+            picturePath = "";
+        }
+    }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
     private javax.swing.JTextField birthday_day_TextField;
@@ -549,6 +595,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JTextField expiration_month_TextField;
     private javax.swing.JTextField expiration_year_TextField;
     private javax.swing.JPanel fields_Pane;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JCheckBox hoene_CheckBox;
     private javax.swing.JLabel jLabel1;

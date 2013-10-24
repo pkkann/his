@@ -7,6 +7,9 @@ package control;
 import static control.HismHandler.FIELDS_NOT_FILLED_ERROR;
 import entity.Enrollment;
 import entity.Person;
+import file.FileTool;
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import model.EnrollmentRegister;
@@ -46,11 +49,11 @@ public class PersonHandler implements HismHandler {
 
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
-            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty()) {
                 return FIELDS_NOT_FILLED_ERROR;
             }
         } else {
-            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || creationDate.isEmpty() || picturePath.isEmpty()) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || creationDate.isEmpty()) {
                 return FIELDS_NOT_FILLED_ERROR;
             }
         }
@@ -86,17 +89,27 @@ public class PersonHandler implements HismHandler {
         }
 
         // Check picturepath
+        boolean copyPic = false;
         if (picturePath.isEmpty()) {
             return PICTUREPATH_EMPTY_ERROR;
         } else if (!picturePath.equals("N")) {
-            System.out.println("Picture found, NOTHING TO DO YET");
+            copyPic = true;
         }
 
         // Create person
         Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
 
         // Register person
-        peR.registerPerson(p);
+        Serializable sz = peR.registerPerson(p);
+        
+        // Copy picture
+        if(copyPic) {
+            String oldPicturePath = picturePath;
+            String newPicturePath = his.His.picDir + "/" + (Integer)sz + "/" + "face.jpg";
+            FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+            p.setPicturePath(newPicturePath);
+            peR.savePerson(p);
+        }
 
         return NO_ERROR;
     }

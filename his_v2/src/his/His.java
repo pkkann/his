@@ -5,6 +5,7 @@
 package his;
 
 import control.*;
+import entity.Enrollment;
 import file.FileTool;
 import hibernate.HiberUtil;
 import model.*;
@@ -19,7 +20,7 @@ public class His {
 
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "1.1 Alpha";
+    public static final String version = "2.0 Beta";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
     // Control
@@ -89,7 +90,13 @@ public class His {
         System.out.println("##### Creating directories... #####");
         FileTool.createFolders();
 
-        testData();
+        //testData();
+        
+        System.out.println("##### Loading tables... #####");
+        peR.loadPersonsFromDB();
+        usR.loadUsersFromDB();
+        quR.loadQuarantinesFromDB();
+        enR.loadEnrollmentsFromDB();
         
         loadingGUI.setVisible(false);
         loH.requestLogin();
@@ -119,10 +126,9 @@ public class His {
     private void testData() {
         System.out.println("##### Creating Test Data... #####");
         usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
-        usH.createUser("pkkann2", "rollercoaster2", "rollercoaster2", "Patrick2", "", "Kann2", "10/10/2013", false, false);
 
         peH.createPerson("Patrick", "", "Kann", "8-56", "21/04/1989", "10/2015", "11/10/2013", false, false, false, "N");
-        //quH.createQuarantine(1, "01/2015");
+        quH.createQuarantine(1, "01/2015");
     }
 
     public static void main(String[] args) {

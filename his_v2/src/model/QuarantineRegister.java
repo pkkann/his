@@ -4,10 +4,13 @@
  */
 package model;
 
+import entity.Person;
 import entity.Quarantine;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -114,6 +117,26 @@ public class QuarantineRegister {
         System.out.println("Setting all quarantines...");
         System.out.println("Set complete!");
         this.quarantines = quarantines;
+    }
+    
+    /**
+     * Loads all quarantines from database to register
+     */
+    public void loadQuarantinesFromDB() {
+        System.out.println("Loading quarantines from db...");
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        Criteria c = s.createCriteria(Quarantine.class);
+        List l = c.list();
+        for(Object o : l) {
+            Quarantine q = (Quarantine)o;
+            quarantines.add(q);
+        }
+        
+        tx.commit();
+        s.close();
+        System.out.println("Load complete!");
     }
     
     

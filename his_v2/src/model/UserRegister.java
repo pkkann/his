@@ -4,10 +4,13 @@
  */
 package model;
 
+import entity.Person;
 import entity.User;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -113,6 +116,26 @@ public class UserRegister {
         System.out.println("Setting all users...");
         System.out.println("Set complete!");
         this.users = users;
+    }
+    
+    /**
+     * Loads all users from database to register
+     */
+    public void loadUsersFromDB() {
+        System.out.println("Loading users from db...");
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        Criteria c = s.createCriteria(User.class);
+        List l = c.list();
+        for(Object o : l) {
+            User u = (User)o;
+            users.add(u);
+        }
+        
+        tx.commit();
+        s.close();
+        System.out.println("Load complete!");
     }
     
     

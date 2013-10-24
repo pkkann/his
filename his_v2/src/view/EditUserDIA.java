@@ -199,6 +199,11 @@ public class EditUserDIA extends javax.swing.JDialog {
         users_ScrollPane.setViewportView(result_Table);
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_TextFieldActionPerformed(evt);
+            }
+        });
 
         search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         search_Button.setText("Søg");
@@ -492,6 +497,10 @@ public class EditUserDIA extends javax.swing.JDialog {
             cleanSelectedUser();
         }
     }//GEN-LAST:event_save_ButtonActionPerformed
+
+    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
+        search();
+    }//GEN-LAST:event_search_TextFieldActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

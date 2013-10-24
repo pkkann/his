@@ -6,9 +6,12 @@ package model;
 
 import entity.Enrollment;
 import entity.Guest;
+import entity.Person;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
@@ -171,6 +174,27 @@ public class EnrollmentRegister {
         System.out.println("Setting all enrollments...");
         System.out.println("Set complete!");
         this.enrollments = enrollments;
+    }
+    
+    /**
+     * Loads all enrollments from database to register
+     */
+    public void loadEnrollmentsFromDB() {
+        System.out.println("Loading enrollments from db...");
+        org.hibernate.Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        Criteria c = s.createCriteria(Enrollment.class);
+        List l = c.list();
+        for(Object o : l) {
+            Enrollment en = (Enrollment)o;
+            enrollments.add(en);
+            for(Guest g : en.getGuests()) {} // This is needed!!
+        }
+        
+        tx.commit();
+        s.close();
+        System.out.println("Load complete!");
     }
     
 }

@@ -25,10 +25,12 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     }
 
     public void setIdEnrollment(int idEnrollment) {
+        System.out.println("Enrollment set");
         this.idEnrollment = idEnrollment;
     }
 
     public void setIdPerson(int idPerson) {
+        System.out.println("Person set");
         this.idPerson = idPerson;
     }
     
@@ -352,6 +354,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGuest_ButtonActionPerformed
+        
         if (idPerson != -1 && idEnrollment != -1) {
             String firstname = firstname_TextField.getText();
             String middlename = middlename_TextField.getText();
