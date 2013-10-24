@@ -39,16 +39,20 @@ public class Guest implements Serializable {
     
     @Column(name = "creationdate")
     private String creationDate;
+    
+    @Column(name = "picturepath")
+    private String picturePath;
 
     public Guest() {
     }
 
-    public Guest(String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
+    public Guest(String firstname, String middlename, String lastname, String birthdayDate, String creationDate, String picturePath) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
         this.birthdayDate = birthdayDate;
         this.creationDate = creationDate;
+        this.picturePath = picturePath;
     }
 
     public int getIdGuest() {
@@ -97,6 +101,14 @@ public class Guest implements Serializable {
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
     
     

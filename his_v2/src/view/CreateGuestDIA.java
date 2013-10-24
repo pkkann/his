@@ -363,7 +363,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             Calendar c = Calendar.getInstance();
             String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
 
-            int errorCode = enH.createGuest(idEnrollment, idPerson, firstname, middlename, lastname, birthday, creationDate);
+            int errorCode = enH.createGuest(idEnrollment, idPerson, firstname, middlename, lastname, birthday, creationDate, "N");
 
             DialogMessage.showMessage(this, errorCode);
 

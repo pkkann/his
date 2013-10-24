@@ -48,9 +48,13 @@ public class FileTool {
     }
     
     public static void createFolders() {
-        File dir = new File(his.His.picDir);
-        File dir2 = new File(his.His.reportDir);
-        dir.mkdir();
-        dir2.mkdir();
+        File picDir = new File(his.His.picDir);
+        File personsPicDir = new File(his.His.picDir + "/persons");
+        File guestsPicDir = new File(his.His.picDir + "/guests");
+        File reportDir = new File(his.His.reportDir);
+        picDir.mkdir();
+        personsPicDir.mkdir();
+        guestsPicDir.mkdir();
+        reportDir.mkdir();
     }
 }

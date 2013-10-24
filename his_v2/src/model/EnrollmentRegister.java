@@ -51,7 +51,7 @@ public class EnrollmentRegister {
      * @param en
      * @param g 
      */
-    public void registerGuest(Enrollment en, Guest g) {
+    public Serializable registerGuest(Enrollment en, Guest g) {
         System.out.println("Registering guest...");
         
         en.getGuests().add(g);
@@ -67,6 +67,7 @@ public class EnrollmentRegister {
         tx.commit();
         s.close();
         System.out.println("Registration complete!");
+        return sz;
     }
     
     /**
@@ -180,8 +181,8 @@ public class EnrollmentRegister {
      * Loads all enrollments from database to register
      */
     public void loadEnrollmentsFromDB() {
-        System.out.println("Loading enrollments from db...");
-        org.hibernate.Session s = HiberUtil.getSessionFactory().openSession();
+        System.out.println("Loading enrollments from db to register...");
+        Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
         
         Criteria c = s.createCriteria(Enrollment.class);
@@ -195,6 +196,25 @@ public class EnrollmentRegister {
         tx.commit();
         s.close();
         System.out.println("Load complete!");
+    }
+    
+    /**
+     * Removes all enrollments
+     */
+    public void removeAllEnrollments() {
+        System.out.println("Removing all enrollments...");
+        Session s = HiberUtil.getSessionFactory().openSession();
+        Transaction tx = s.beginTransaction();
+        
+        for(Enrollment en : enrollments) {
+            s.delete(en);
+        }
+        
+        tx.commit();
+        s.close();
+        
+        enrollments = new HashSet(0);
+        System.out.println("Remove complete!");
     }
     
 }

@@ -4,10 +4,15 @@
  */
 package control;
 
+import static control.HismHandler.BIRTHDAY_FORMAT_ERROR;
+import static control.HismHandler.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
 import entity.Guest;
 import entity.Person;
 import entity.User;
+import file.FileTool;
+import java.io.File;
+import java.io.Serializable;
 import model.EnrollmentRegister;
 import model.PersonRegister;
 import model.UserRegister;
@@ -16,7 +21,7 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class EnrollmentHandler implements HismHandler{
+public class EnrollmentHandler implements HismHandler {
 
     private EnrollmentRegister enR;
     private PersonRegister peR;
@@ -30,6 +35,7 @@ public class EnrollmentHandler implements HismHandler{
 
     /**
      * Create an enrollment
+     *
      * @param personID
      * @param userID
      * @return Error code : Integer
@@ -57,6 +63,7 @@ public class EnrollmentHandler implements HismHandler{
 
     /**
      * Create a guest
+     *
      * @param enrollmentID
      * @param personID
      * @param firstname
@@ -66,11 +73,11 @@ public class EnrollmentHandler implements HismHandler{
      * @param creationDate
      * @return Error code : Integer
      */
-    public int createGuest(int idEnrollment, int idPerson, String firstname, String middlename, String lastname, String birthdayDate, String creationDate) {
+    public int createGuest(int idEnrollment, int idPerson, String firstname, String middlename, String lastname, String birthdayDate, String creationDate, String picturePath) {
 
         // Get enrollment
         Enrollment en = enR.getEnrollment(idPerson);
-        
+
         // Get person
         Person p = peR.getPerson(idPerson);
 
@@ -80,24 +87,64 @@ public class EnrollmentHandler implements HismHandler{
                 return FIELDS_NOT_FILLED_ERROR;
             }
 
+            // Check birthday is written correctly
+            try {
+                String[] birth_Split = birthdayDate.split("/");
+                String birth_Day = birth_Split[0];
+                String birth_Month = birth_Split[1];
+                String birth_Year = birth_Split[2];
+
+                if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                    return BIRTHDAY_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+
+            // Check picturepath
+            boolean copyPic = false;
+            if (picturePath.isEmpty()) {
+                return PICTUREPATH_EMPTY_ERROR;
+            } else if (!picturePath.equals("N")) {
+                copyPic = true;
+            }
+
             // Check number of guests allowed
             if (p.isHoene()) {
                 if (en.getGuests().size() < 5) {
                     // Create guest
-                    Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate);
+                    Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
 
                     // Register guest
-                    enR.registerGuest(en, g);
+                    Serializable sz = enR.registerGuest(en, g);
+
+                    // Copy picture
+                    if (copyPic) {
+                        String oldPicturePath = picturePath;
+                        String newPicturePath = his.His.picDir + "/" + (Integer) sz + "_guest/" + "face.jpg";
+                        FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+                        p.setPicturePath(newPicturePath);
+                        peR.savePerson(p);
+                    }
                 } else {
                     return TOO_MANY_GUESTS;
                 }
             } else {
                 if (en.getGuests().size() < 3) {
                     // Create guest
-                    Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate);
+                    Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
 
                     // Register guest
-                    enR.registerGuest(en, g);
+                    Serializable sz = enR.registerGuest(en, g);
+
+                    // Copy picture
+                    if (copyPic) {
+                        String oldPicturePath = picturePath;
+                        String newPicturePath = his.His.picDir + "/guests/" + (Integer) sz + "/" + "face.jpg";
+                        FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+                        p.setPicturePath(newPicturePath);
+                        peR.savePerson(p);
+                    }
                 } else {
                     return TOO_MANY_GUESTS;
                 }
@@ -108,32 +155,34 @@ public class EnrollmentHandler implements HismHandler{
 
         return NO_ERROR;
     }
-    
+
     /**
      * Remove a guest
+     *
      * @param idEnrollment
      * @param idGuest
      * @return Error code : Integer
      */
     public int removeGuest(int idEnrollment, int idGuest) {
-        
+
         // Get enrollment
         Enrollment en = enR.getEnrollment(idEnrollment);
-        
+
         // Get guest
         Guest g = enR.getGuest(en, idGuest);
-        
-        if(g != null) {
+
+        if (g != null) {
             enR.DeleteGuest(en, g);
         } else {
             return GET_ERROR;
         }
-        
+
         return NO_ERROR;
     }
 
     /**
      * Remove an enrollment
+     *
      * @param idPerson
      * @return Error code : Integer
      */
@@ -151,27 +200,38 @@ public class EnrollmentHandler implements HismHandler{
 
         return NO_ERROR;
     }
-    
+
     /**
      * Return an enrollment
+     *
      * @param idPerson
      * @return en : Enrollment
      */
     public Enrollment getEnrollment(int idPerson) {
         return enR.getEnrollment(idPerson);
     }
-    
+
     /**
      * Returns wether a person is enrolled or not
+     *
      * @param idPerson
      * @return boolean
      */
     public boolean isEnrolled(int idPerson) {
         Enrollment en = enR.getEnrollment(idPerson);
-        if(en == null) {
+        if (en == null) {
             return false;
         } else {
             return true;
         }
+    }
+    
+    /**
+     * Removes all enrollments
+     * @return Error code : Integer
+     */
+    public int removeAllEnrollments() {
+        enR.removeAllEnrollments();
+        return NO_ERROR;
     }
 }

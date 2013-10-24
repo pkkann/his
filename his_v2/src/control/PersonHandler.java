@@ -59,31 +59,41 @@ public class PersonHandler implements HismHandler {
         }
 
         // Check birthday is written correctly
-        String[] birth_Split = birthdayDate.split("/");
-        String birth_Day = birth_Split[0];
-        String birth_Month = birth_Split[1];
-        String birth_Year = birth_Split[2];
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
 
-        if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
             return BIRTHDAY_FORMAT_ERROR;
         }
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
-            String[] expire_Split = expirationDate.split("/");
-            String expire_Month = expire_Split[0];
-            String expire_Year = expire_Split[1];
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
 
-            if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 return EXPIRATION_FORMAT_ERROR;
             }
-            
+
             Calendar today = Calendar.getInstance();
             today.set(Calendar.MONTH, today.get(Calendar.MONTH) + 1);
             Calendar expire = Calendar.getInstance();
             expire.set(Calendar.MONTH, Integer.valueOf(expire_Month));
             expire.set(Calendar.YEAR, Integer.valueOf(expire_Year));
-            if(expire.before(today) || expire.equals(today)) {
+            if (expire.before(today) || expire.equals(today)) {
                 return EXPIRATION_DATE_ERROR;
             }
         }
@@ -101,11 +111,11 @@ public class PersonHandler implements HismHandler {
 
         // Register person
         Serializable sz = peR.registerPerson(p);
-        
+
         // Copy picture
-        if(copyPic) {
+        if (copyPic) {
             String oldPicturePath = picturePath;
-            String newPicturePath = his.His.picDir + "/" + (Integer)sz + "/" + "face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) sz + "/" + "face.jpg";
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
             peR.savePerson(p);
@@ -218,9 +228,10 @@ public class PersonHandler implements HismHandler {
         }
         return count;
     }
-    
+
     /**
      * Returns a result based on name, address and birthday
+     *
      * @param firstname
      * @param middlename
      * @param lastname
@@ -231,17 +242,17 @@ public class PersonHandler implements HismHandler {
     public ArrayList<String[]> searchPersonLon(String firstname, String middlename, String lastname, String address, String birthdayDate) {
         // Create collection
         ArrayList<String[]> data = new ArrayList<>();
-        
+
         // Make full name
         String name = firstname + " " + middlename + " " + lastname;
-        
-        for(Person p : peR.getPersons()) {
-            if((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equals(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
+
+        for (Person p : peR.getPersons()) {
+            if ((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equals(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
                 String[] dat = {p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate()};
                 data.add(dat);
             }
         }
-        
+
         return data;
     }
 

@@ -26,7 +26,7 @@ public class DialogMessage {
     public static void showMessage(JDialog j, int errorCode) {
         switch (errorCode) {
             case HismHandler.NO_ERROR:
-                JOptionPane.showMessageDialog(j, "Handling blev udført korrekt");
+                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
                 break;
             case HismHandler.FIELDS_NOT_FILLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
@@ -73,7 +73,7 @@ public class DialogMessage {
     public static void showMessage(JFrame j, int errorCode) {
         switch (errorCode) {
             case HismHandler.NO_ERROR:
-                JOptionPane.showMessageDialog(j, "Handling blev udført korrekt");
+                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
                 break;
             case HismHandler.FIELDS_NOT_FILLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);

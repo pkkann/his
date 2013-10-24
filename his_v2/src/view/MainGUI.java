@@ -555,6 +555,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         nulstil_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/reset.png"))); // NOI18N
         nulstil_MenuItem.setText("Nulstil systemet og gem rapport med alle indskrevne (PAS PÅ!)");
+        nulstil_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nulstil_MenuItemActionPerformed(evt);
+            }
+        });
         vagtAfslutning_Menu.add(nulstil_MenuItem);
 
         filer_Menu.add(vagtAfslutning_Menu);
@@ -769,6 +774,22 @@ public class MainGUI extends javax.swing.JFrame {
     private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
         search();
     }//GEN-LAST:event_search_TextFieldActionPerformed
+
+    private void nulstil_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nulstil_MenuItemActionPerformed
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Sikker?");
+        if (n == 0) {
+            int errorCode = enH.removeAllEnrollments();
+            DialogMessage.showMessage(this, errorCode);
+            
+            if(errorCode == 0) {
+                dispose();
+                cleanSearch();
+                cleanSelectedPerson();
+                cleanTable();
+                loH.requestLogin();
+            }
+        }
+    }//GEN-LAST:event_nulstil_MenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
