@@ -392,6 +392,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         enrolled_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         enrolled_CheckBox.setText("Indskrevne");
+        enrolled_CheckBox.setToolTipText("Søg kun på indskrevne");
 
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
@@ -541,6 +542,8 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(enrolled_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
+
+        menuBar_MenuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         filer_Menu.setText("Filer");
         filer_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

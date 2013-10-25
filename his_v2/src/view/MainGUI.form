@@ -8,6 +8,13 @@
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar_MenuBar">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
+          </Border>
+        </Property>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="filer_Menu">
           <Properties>
@@ -536,6 +543,7 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Indskrevne"/>
+                <Property name="toolTipText" type="java.lang.String" value="S&#xf8;g kun p&#xe5; indskrevne"/>
               </Properties>
             </Component>
           </SubComponents>
