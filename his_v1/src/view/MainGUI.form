@@ -29,18 +29,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="changeUser_MenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Login som anden bruger"/>
+                <Property name="text" type="java.lang.String" value="Log af"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeUser_MenuItemActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="releaseNotes_MenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Release Notes"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

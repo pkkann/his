@@ -262,8 +262,6 @@ public class MainGUI extends javax.swing.JFrame {
         reset_MenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         changeUser_MenuItem = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        releaseNotes_MenuItem = new javax.swing.JMenuItem();
         administration_Menu = new javax.swing.JMenu();
         persons_Menu = new javax.swing.JMenu();
         createPerson_MenuItem = new javax.swing.JMenuItem();
@@ -651,17 +649,13 @@ public class MainGUI extends javax.swing.JFrame {
         file_Menu.add(reset_MenuItem);
         file_Menu.add(jSeparator1);
 
-        changeUser_MenuItem.setText("Login som anden bruger");
+        changeUser_MenuItem.setText("Log af");
         changeUser_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeUser_MenuItemActionPerformed(evt);
             }
         });
         file_Menu.add(changeUser_MenuItem);
-        file_Menu.add(jSeparator3);
-
-        releaseNotes_MenuItem.setText("Release Notes");
-        file_Menu.add(releaseNotes_MenuItem);
 
         menuBar_MenuBar.add(file_Menu);
 
@@ -841,7 +835,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void report_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_MenuItemActionPerformed
         personHandler.generateReport(false);
-        JOptionPane.showMessageDialog(this, "Rapport blev oprettet. Du finder den i report mappen.\nDa dette er en beta version, er rapporten eksporteret som en .csv fil, og skal derfor åbnes i excel.\nPDF kommer senere...", "Rapport", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "En rapport blev oprettet. Du finder den i report mappen", "Rapport", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_report_MenuItemActionPerformed
 
     private void reset_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_MenuItemActionPerformed
@@ -851,7 +845,7 @@ public class MainGUI extends javax.swing.JFrame {
             if (n2 == 0) {
                 personHandler.generateReport(true);
                 personHandler.resetSystem();
-                JOptionPane.showMessageDialog(this, "Systemet blev nulstillet, og en rapport blev oprettet og gemt i report mappen\nDa dette er en beta version, er rapporten eksporteret som en .csv fil, og skal derfor åbnes i excel.\nPDF kommer senere...", "Nulstil", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Systemet blev nulstillet, og en rapport blev oprettet og gemt i report mappen\nDu bliver nu logget af...", "Nulstil", JOptionPane.PLAIN_MESSAGE);
 
                 setVisible(false);
                 clearPerson();
@@ -939,7 +933,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel honeInfo_Label;
     private javax.swing.JTextField hone_TextField;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JButton kick_Button;
     private javax.swing.JPanel lamp_Pane;
     private javax.swing.JLabel lastnameInfo_Label;
@@ -952,7 +945,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField oneOne_TextField;
     private javax.swing.JMenu persons_Menu;
     private view.image.PicturePane picturePane_PicturePane;
-    private javax.swing.JMenuItem releaseNotes_MenuItem;
     private javax.swing.JButton renew_Button;
     private javax.swing.JMenuItem report_MenuItem;
     private javax.swing.JButton requestQuarantine_Button;

@@ -55,7 +55,7 @@ public class UserRegister {
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
         
-        s.save(u);
+        s.saveOrUpdate(u);
         
         tx.commit();
         s.close();
