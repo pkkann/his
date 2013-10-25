@@ -133,7 +133,12 @@ public class His {
 
         for(int i=1; i<600; i++) {
             peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
-            enH.createEnrollment(i, 1);
+            if(i > 50 && i < 150) {
+                enH.createEnrollment(i, 1);
+            }
+            if(i > 200 && i < 300) {
+                quH.createQuarantine(i, "");
+            }
         }
     }
 
