@@ -50,11 +50,12 @@ public class MainGUI extends javax.swing.JFrame {
     private SettingsDIA settingsDIA;
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
+    private AboutDIA aboutDIA;
     // Model
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, AboutDIA aboutDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -70,6 +71,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.createUserDIA = createUserDIA;
         this.editProfileDIA = editProfileDIA;
         this.enrollPersonDIA = enrollPersonDIA;
+        this.aboutDIA = aboutDIA;
 
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
 
@@ -272,7 +274,7 @@ public class MainGUI extends javax.swing.JFrame {
         deletePerson_MenuItem = new javax.swing.JMenuItem();
         administrateQuarantines_MenuItem = new javax.swing.JMenuItem();
         help_Menu = new javax.swing.JMenu();
-        troll_MenuItem = new javax.swing.JMenuItem();
+        about_MenuItem = new javax.swing.JMenuItem();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -354,6 +356,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         status_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
+        status_Label.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         status_Label.setForeground(new java.awt.Color(255, 255, 255));
         status_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status_Label.setText("Ingen person valgt");
@@ -429,7 +432,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(renew_Button))
                     .addComponent(result_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
                 .addContainerGap())
@@ -652,6 +655,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         personer_Menu.add(deletePerson_MenuItem);
 
+        administrateQuarantines_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/quarantinePerson.png"))); // NOI18N
         administrateQuarantines_MenuItem.setText("Administrer karantæner");
         personer_Menu.add(administrateQuarantines_MenuItem);
 
@@ -659,13 +663,14 @@ public class MainGUI extends javax.swing.JFrame {
 
         help_Menu.setText("Hjælp");
 
-        troll_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/trollface.png"))); // NOI18N
-        troll_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+        about_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/help.png"))); // NOI18N
+        about_MenuItem.setText("Om og Hjælp");
+        about_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                troll_MenuItemActionPerformed(evt);
+                about_MenuItemActionPerformed(evt);
             }
         });
-        help_Menu.add(troll_MenuItem);
+        help_Menu.add(about_MenuItem);
 
         menuBar_MenuBar.add(help_Menu);
 
@@ -734,17 +739,6 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_luk_MenuItemActionPerformed
 
-    private void troll_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_troll_MenuItemActionPerformed
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse(new URI("http://www.youtube.com/watch?v=o1eHKf-dMwo"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }//GEN-LAST:event_troll_MenuItemActionPerformed
-
     private void indstillinger_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indstillinger_MenuItemActionPerformed
         settingsDIA.setVisible(true);
     }//GEN-LAST:event_indstillinger_MenuItemActionPerformed
@@ -812,7 +806,12 @@ public class MainGUI extends javax.swing.JFrame {
         removePersonDIA.setVisible(true);
     }//GEN-LAST:event_deletePerson_MenuItemActionPerformed
 
+    private void about_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_MenuItemActionPerformed
+        aboutDIA.setVisible(true);
+    }//GEN-LAST:event_about_MenuItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem about_MenuItem;
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
@@ -856,7 +855,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel status_Label;
     private javax.swing.JPanel status_Pane;
-    private javax.swing.JMenuItem troll_MenuItem;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu vagtAfslutning_Menu;
     // End of variables declaration//GEN-END:variables

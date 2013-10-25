@@ -37,7 +37,7 @@ import view.user.ResetUserPasswordDIA;
 public class HISM {
 
     public static final String title = "Den våde høne - Indskrivnings system";
-    public static final String version = "v1.1B - LORT";
+    public static final String version = "v1.1C - The world is one big pile of cheese... Think about that for a second";
     private DateChangeDetecter dch;
     private UserRegister userRegister;
     private UserHandler userHandler;

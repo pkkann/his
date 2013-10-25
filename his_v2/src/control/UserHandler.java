@@ -4,6 +4,7 @@
  */
 package control;
 
+import entity.Person;
 import entity.User;
 import java.util.ArrayList;
 import model.UserRegister;
@@ -141,6 +142,29 @@ public class UserHandler implements HismHandler {
         }
 
         return NO_ERROR;
+    }
+    /**
+     * Returns a result based on firstname, middlename and lastname
+     * @param firstname
+     * @param middlename
+     * @param lastname
+     * @return data : ArrayList<String[]>
+     */
+    public ArrayList<String[]> searchUserLon(String firstname, String middlename, String lastname) {
+        // Create collection
+        ArrayList<String[]> data = new ArrayList<>();
+
+        // Make full name
+        String name = firstname + " " + middlename + " " + lastname;
+        
+        for (User u : usR.getUsers()) {
+            if ((u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname()).equals(name)) {
+                String[] dat = {u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname()};
+                data.add(dat);
+            }
+        }
+        
+        return data;
     }
 
     /**

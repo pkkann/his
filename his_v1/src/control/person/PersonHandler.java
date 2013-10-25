@@ -298,7 +298,6 @@ public class PersonHandler {
         ArrayList<Person> persons = personRegister.getPersons();
         int count = 0;
         for (Person p : persons) {
-            System.out.println("HANDLING PERSON: " + p.getFirstname() + " " + p.getLastname());
             count++;
             System.out.println("count: " + count);
             for (Guest g : p.getGuests()) {
@@ -307,9 +306,8 @@ public class PersonHandler {
                 } catch (SQLException ex) {
                     Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                p.getGuests().remove(g);
-                System.out.println("GUEST REMOVED");
             }
+            p.setGuests(new ArrayList<Guest>());
             p.setEnrolled(false);
             try {
                 personDAO.savePerson(p);

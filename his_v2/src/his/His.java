@@ -43,6 +43,7 @@ public class His {
     private RemoveUserDIA removeUserDIA;
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
+    private AboutDIA aboutDIA;
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
@@ -77,7 +78,8 @@ public class His {
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA);
+        aboutDIA = new AboutDIA(mainGUI, true);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA);
         
         // Control - login
         loH = new LoginHandler(usR, mainGUI);

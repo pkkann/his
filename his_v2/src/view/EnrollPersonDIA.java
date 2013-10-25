@@ -411,9 +411,12 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
         if (enH.isEnrolled(selectedPerson.getIdPerson())) {
-            enroll_Button.setText("Indskriv");
-            enH.removeEnrollment(selectedPerson.getIdPerson());
-            cleanGuests();
+            int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette indskrivningen?\nDette anses ikke for en normal handling, og bør undgås på en vagt!", "Sikker?");
+            if (n == 0) {
+                enroll_Button.setText("Indskriv");
+                enH.removeEnrollment(selectedPerson.getIdPerson());
+                cleanGuests();
+            }
         } else {
             enroll_Button.setText("Slet indskrivning");
             enH.createEnrollment(selectedPerson.getIdPerson(), LoginHandler.loggedIn.getIduser());
@@ -439,7 +442,6 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             setButtons();
         }
     }//GEN-LAST:event_deleteGuest_ButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;
     private javax.swing.JButton close_Button;

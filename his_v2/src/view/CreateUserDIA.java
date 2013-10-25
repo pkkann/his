@@ -7,6 +7,7 @@ package view;
 import control.UserHandler;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
         setTitleIcon();
         this.usH = usH;
     }
-    
+
     private void setTitleIcon() {
         Image icon = null;
         try {
@@ -329,7 +330,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
- 
+
         String firstname = firstname_TextField.getText();
         String middlename = middlename_TextField.getText();
         String lastname = lastname_TextField.getText();
@@ -340,13 +341,33 @@ public class CreateUserDIA extends javax.swing.JDialog {
         boolean reserve = reserve_CheckBox.isSelected();
         Calendar c = Calendar.getInstance();
         String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
-        
-        int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
-        
-        DialogMessage.showMessage(this, errorCode);
-        
-        if(errorCode == 0) {
-            dispose();
+
+        ArrayList<String[]> result = usH.searchUserLon(firstname, middlename, lastname);
+
+        if (result.isEmpty()) {
+            int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
+
+            DialogMessage.showMessage(this, errorCode);
+
+            if (errorCode == 0) {
+                dispose();
+            }
+        } else {
+            String users = "";
+            for (String[] ss : result) {
+                users = users + " - Navn: " + ss[0] + "\n";
+            }
+
+            int n = DialogMessage.showQuestionMessage(this, "Denne bruger er måske allerede i systemet. Vil du oprette alligevel?\n\nBrugere fundet er:\n" + users, "Sikker?");
+            if (n == 0) {
+                int errorCode = usH.createUser(username, password, passwordAgain, firstname, middlename, lastname, creationDate, reserve, admin);
+
+                DialogMessage.showMessage(this, errorCode);
+
+                if (errorCode == 0) {
+                    dispose();
+                }
+            }
         }
     }//GEN-LAST:event_create_ButtonActionPerformed
 //
