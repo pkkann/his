@@ -58,7 +58,6 @@ public class SettingsDIA extends javax.swing.JDialog {
         tabs_Pane = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         general_TabPane = new javax.swing.JPanel();
-        database_TabPane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -156,21 +155,6 @@ public class SettingsDIA extends javax.swing.JDialog {
 
         jTabbedPane2.addTab("Generalt", general_TabPane);
 
-        database_TabPane.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout database_TabPaneLayout = new javax.swing.GroupLayout(database_TabPane);
-        database_TabPane.setLayout(database_TabPaneLayout);
-        database_TabPaneLayout.setHorizontalGroup(
-            database_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
-        );
-        database_TabPaneLayout.setVerticalGroup(
-            database_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Database", database_TabPane);
-
         javax.swing.GroupLayout tabs_PaneLayout = new javax.swing.GroupLayout(tabs_Pane);
         tabs_Pane.setLayout(tabs_PaneLayout);
         tabs_PaneLayout.setHorizontalGroup(
@@ -237,7 +221,6 @@ public class SettingsDIA extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;
-    private javax.swing.JPanel database_TabPane;
     private javax.swing.JPanel general_TabPane;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTabbedPane jTabbedPane2;

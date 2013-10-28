@@ -5,16 +5,12 @@
 package his;
 
 import control.*;
-import entity.Enrollment;
 import file.FileTool;
 import hibernate.HiberUtil;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import junit.framework.Assert;
 import model.*;
-import org.hibernate.JDBCException;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import view.*;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
@@ -51,6 +47,7 @@ public class His {
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
     private RemovePersonDIA removePersonDIA;
+    private EditPersonDIA editPersonDIA;
     private RemoveUserDIA removeUserDIA;
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
@@ -85,12 +82,13 @@ public class His {
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
+        editPersonDIA = new EditPersonDIA(mainGUI, true);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA);
 
         // Control - login
         loH = new LoginHandler(usR, mainGUI);
