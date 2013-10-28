@@ -787,7 +787,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_search_TextFieldActionPerformed
 
     private void nulstil_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nulstil_MenuItemActionPerformed
-        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Sikker?");
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?\nDu vil blive logget af bag efter", "Sikker?");
         if (n == 0) {
             int errorCode = enH.removeAllEnrollments();
             DialogMessage.showMessage(this, errorCode);

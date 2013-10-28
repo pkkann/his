@@ -181,7 +181,7 @@ public class EnrollmentRegister {
      * Loads all enrollments from database to register
      */
     public void loadEnrollmentsFromDB() {
-        System.out.println("Loading enrollments from db to register...");
+        System.out.println("Loading enrollments from db...");
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
         

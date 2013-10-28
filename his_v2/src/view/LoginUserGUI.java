@@ -25,17 +25,23 @@ public class LoginUserGUI extends javax.swing.JFrame {
         initComponents();
         setIcon();
         setTitle();
-        setXButton();
+        setTitleIcon();
         this.loH = loH;
+    }
+    
+    private void setTitleIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/login.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        icon_PicturePane.setPicture(icon, false);
     }
     
     private void setTitle() {
         setTitle(his.His.title + " " + his.His.version);
         title_Label.setText(His.title);
-    }
-
-    private void setXButton() {
-        close_Button.setContentAreaFilled(false);
     }
     
     private void setIcon() {
@@ -78,12 +84,10 @@ public class LoginUserGUI extends javax.swing.JFrame {
         main_Pane = new javax.swing.JPanel();
         title_Pane = new javax.swing.JPanel();
         title_Label = new javax.swing.JLabel();
+        icon_PicturePane = new view.image.PicturePane();
         fields_Pane = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         username_TextField = new javax.swing.JTextField();
         password_TextField = new javax.swing.JPasswordField();
-        tools_Pane = new javax.swing.JPanel();
         login_Button = new javax.swing.JButton();
         close_Button = new javax.swing.JButton();
 
@@ -108,53 +112,15 @@ public class LoginUserGUI extends javax.swing.JFrame {
         title_Label.setForeground(new java.awt.Color(255, 255, 255));
         title_Label.setText("TITLE");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Brugernavn:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Kode:");
-
-        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        username_TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username_TextFieldActionPerformed(evt);
-            }
-        });
-
-        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        password_TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password_TextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
-        fields_Pane.setLayout(fields_PaneLayout);
-        fields_PaneLayout.setHorizontalGroup(
-            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fields_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(username_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-                    .addComponent(password_TextField))
-                .addContainerGap())
+        javax.swing.GroupLayout icon_PicturePaneLayout = new javax.swing.GroupLayout(icon_PicturePane);
+        icon_PicturePane.setLayout(icon_PicturePaneLayout);
+        icon_PicturePaneLayout.setHorizontalGroup(
+            icon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
         );
-        fields_PaneLayout.setVerticalGroup(
-            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fields_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(username_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+        icon_PicturePaneLayout.setVerticalGroup(
+            icon_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout title_PaneLayout = new javax.swing.GroupLayout(title_Pane);
@@ -164,74 +130,100 @@ public class LoginUserGUI extends javax.swing.JFrame {
             .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(title_Label)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(fields_Pane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(icon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         title_PaneLayout.setVerticalGroup(
             title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(title_PaneLayout.createSequentialGroup()
-                .addComponent(title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(title_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(icon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username_TextField.setToolTipText("Brugernavn");
+        username_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                username_TextFieldActionPerformed(evt);
+            }
+        });
+
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.setToolTipText("Kodeord");
+        password_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password_TextFieldActionPerformed(evt);
+            }
+        });
 
         login_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         login_Button.setText("Login");
+        login_Button.setToolTipText("Test");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_ButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
-        tools_Pane.setLayout(tools_PaneLayout);
-        tools_PaneLayout.setHorizontalGroup(
-            tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tools_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        tools_PaneLayout.setVerticalGroup(
-            tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tools_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(login_Button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        close_Button.setBackground(new java.awt.Color(51, 51, 51));
-        close_Button.setForeground(new java.awt.Color(255, 255, 255));
-        close_Button.setText("X");
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close_ButtonActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
+        fields_Pane.setLayout(fields_PaneLayout);
+        fields_PaneLayout.setHorizontalGroup(
+            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fields_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fields_PaneLayout.createSequentialGroup()
+                        .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(close_Button))
+                    .addComponent(password_TextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(username_TextField, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        fields_PaneLayout.setVerticalGroup(
+            fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fields_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(username_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(password_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(close_Button))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
         main_PaneLayout.setHorizontalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_PaneLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(close_Button))
             .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tools_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(title_Pane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         main_PaneLayout.setVerticalGroup(
             main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_PaneLayout.createSequentialGroup()
-                .addComponent(close_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(title_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,10 +246,6 @@ public class LoginUserGUI extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_login_ButtonActionPerformed
 
-    private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_close_ButtonActionPerformed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         username_TextField.requestFocus();
     }//GEN-LAST:event_formWindowActivated
@@ -274,17 +262,19 @@ public class LoginUserGUI extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_password_TextFieldActionPerformed
 
+    private void close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_ButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_close_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;
     private javax.swing.JPanel fields_Pane;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private view.image.PicturePane icon_PicturePane;
     private javax.swing.JButton login_Button;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JPasswordField password_TextField;
     private javax.swing.JLabel title_Label;
     private javax.swing.JPanel title_Pane;
-    private javax.swing.JPanel tools_Pane;
     private javax.swing.JTextField username_TextField;
     // End of variables declaration//GEN-END:variables
 }

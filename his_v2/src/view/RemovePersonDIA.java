@@ -187,6 +187,7 @@ public class RemovePersonDIA extends javax.swing.JDialog {
                 "ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
             }
         ));
+        result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(result_Table);
 
         javax.swing.GroupLayout persons_PaneLayout = new javax.swing.GroupLayout(persons_Pane);

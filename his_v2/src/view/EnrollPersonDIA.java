@@ -335,6 +335,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
         enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         enroll_Button.setText("Indskriv");
+        enroll_Button.setToolTipText("");
         enroll_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enroll_ButtonActionPerformed(evt);
@@ -409,21 +410,6 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         clean();
     }//GEN-LAST:event_formWindowClosed
 
-    private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
-        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
-            int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette indskrivningen?\nDette anses ikke for en normal handling, og bør undgås på en vagt!", "Sikker?");
-            if (n == 0) {
-                enroll_Button.setText("Indskriv");
-                enH.removeEnrollment(selectedPerson.getIdPerson());
-                cleanGuests();
-            }
-        } else {
-            enroll_Button.setText("Slet indskrivning");
-            enH.createEnrollment(selectedPerson.getIdPerson(), LoginHandler.loggedIn.getIduser());
-            setButtons();
-        }
-    }//GEN-LAST:event_enroll_ButtonActionPerformed
-
     private void addGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGuest_ButtonActionPerformed
         Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
         createGuestDIA.setIdEnrollment(en.getIdEnrollment());
@@ -442,6 +428,22 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             setButtons();
         }
     }//GEN-LAST:event_deleteGuest_ButtonActionPerformed
+
+    private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
+        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
+            int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette indskrivningen?\nDette anses ikke for en normal handling, og bør undgås på en vagt!", "Sikker?");
+            if (n == 0) {
+                enroll_Button.setText("Indskriv");
+                enH.removeEnrollment(selectedPerson.getIdPerson());
+                cleanGuests();
+            }
+        } else {
+            enroll_Button.setText("Slet indskrivning");
+            enH.createEnrollment(selectedPerson.getIdPerson(), LoginHandler.loggedIn.getIduser());
+            setButtons();
+        }
+    }//GEN-LAST:event_enroll_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;
     private javax.swing.JButton close_Button;

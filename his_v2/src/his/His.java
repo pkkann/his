@@ -8,9 +8,20 @@ import control.*;
 import entity.Enrollment;
 import file.FileTool;
 import hibernate.HiberUtil;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import junit.framework.Assert;
 import model.*;
+import org.hibernate.JDBCException;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import view.*;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -50,7 +61,7 @@ public class His {
 
     public His() {
         setLookAndFeel();
-        
+
         // View - loading pane
         loadingGUI = new LoadingGUI();
         loadingGUI.setVisible(true);
@@ -66,7 +77,7 @@ public class His {
         usH = new UserHandler(usR);
         enH = new EnrollmentHandler(enR, peR, usR);
         quH = new QuarantineHandler(quR, peR);
-        
+
 
         // View
         createGuestDIA = new CreateGuestDIA(mainGUI, true, enH);
@@ -80,28 +91,33 @@ public class His {
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
         mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA);
-        
+
         // Control - login
         loH = new LoginHandler(usR, mainGUI);
 
         // Start sequence
         System.out.println("##### His starting... #####");
         System.out.println("##### Testing database connection... #####");
-        
-        Session s = HiberUtil.getSessionFactory().openSession();
-        s.close();
-        
+
+        try {
+            Session s = HiberUtil.getSessionFactory().openSession();
+            Assert.assertFalse(s.connection().isReadOnly());
+        } catch (Throwable ex) {
+            JOptionPane.showMessageDialog(new JDialog(), "Der kunne ikke oprettes forbindelse til databasen", "Fejl", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+
         System.out.println("##### Creating directories... #####");
         FileTool.createFolders();
-        
+
         System.out.println("##### Loading tables... #####");
         peR.loadPersonsFromDB();
         usR.loadUsersFromDB();
         quR.loadQuarantinesFromDB();
         enR.loadEnrollmentsFromDB();
-        
+
         //testData();
-        
+
         loadingGUI.setVisible(false);
         loH.requestLogin();
         System.out.println("##### His started! #####");
@@ -112,18 +128,15 @@ public class His {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            try {
+                UIManager.setLookAndFeel(new WindowsLookAndFeel());
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(His.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-        } catch (InstantiationException ex) {
-        } catch (IllegalAccessException ex) {
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
         }
+
         //</editor-fold>
     }
 
@@ -131,14 +144,9 @@ public class His {
         System.out.println("##### Creating Test Data... #####");
         //usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
 
-        for(int i=1; i<600; i++) {
+        for (int i = 1; i < 600; i++) {
             peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
-            if(i > 50 && i < 150) {
-                enH.createEnrollment(i, 1);
-            }
-            if(i > 200 && i < 300) {
-                quH.createQuarantine(i, "");
-            }
+            enH.createEnrollment(i, 4);
         }
     }
 

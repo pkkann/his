@@ -172,6 +172,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         result_Table.setAutoCreateRowSorter(true);
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -235,8 +236,8 @@ public class EditUserDIA extends javax.swing.JDialog {
                     .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search_Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(users_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(users_ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -303,7 +304,6 @@ public class EditUserDIA extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(firstname_TextField)
                     .addComponent(middlename_TextField)
                     .addComponent(lastname_TextField)
                     .addComponent(username_TextField)
@@ -311,8 +311,9 @@ public class EditUserDIA extends javax.swing.JDialog {
                         .addComponent(admin_CheckBox)
                         .addGap(18, 18, 18)
                         .addComponent(reserve_CheckBox))
-                    .addComponent(password_TextField))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(password_TextField)
+                    .addComponent(firstname_TextField))
+                .addContainerGap(210, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_Button)
