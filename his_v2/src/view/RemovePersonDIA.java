@@ -76,14 +76,14 @@ public class RemovePersonDIA extends javax.swing.JDialog {
         result_Table.setModel(dtm);
     }
 
-    public void cleanSelectedUser() {
+    public void cleanSelectedPerson() {
         selectedPerson = -1;
         delete_Button.setEnabled(false);
         info_Label.setText("");
     }
 
     public void search() {
-        cleanSelectedUser();
+        cleanSelectedPerson();
         ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
         DefaultTableModel dtm = TableTool.createPersonTableModel(data);
         result_Table.setModel(dtm);
@@ -338,7 +338,7 @@ public class RemovePersonDIA extends javax.swing.JDialog {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         cleanSearchField();
-        cleanSelectedUser();
+        cleanSelectedPerson();
         cleanTable();
     }//GEN-LAST:event_formWindowClosed
     // Variables declaration - do not modify//GEN-BEGIN:variables

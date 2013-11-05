@@ -18,8 +18,9 @@ public class FileTool {
 
     private static FileInputStream in;
     private static FileOutputStream out;
-    
-    private FileTool() {}
+
+    private FileTool() {
+    }
 
     public static boolean copyFile(File fIn, File fOut) {
         try {
@@ -36,21 +37,19 @@ public class FileTool {
 
             in.close();
             out.close();
-            
+
             return true;
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
             return false;
-        } catch(IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException ex) {
             return false;
         }
     }
-    
+
     public static void deleteFile(File f) {
         f.delete();
     }
-    
+
     public static void createFolders() {
         File picDir = new File(his.His.picDir);
         File personsPicDir = new File(his.His.picDir + "/persons");

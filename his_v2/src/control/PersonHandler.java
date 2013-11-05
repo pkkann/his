@@ -5,6 +5,7 @@
 package control;
 
 import static control.HismHandler.FIELDS_NOT_FILLED_ERROR;
+import static control.HismHandler.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
 import entity.Person;
 import file.FileTool;
@@ -133,16 +134,15 @@ public class PersonHandler implements HismHandler {
      * @param lastname
      * @param address
      * @param birthdayDate (DD/MM/YYYY)
-     * @param expirationDate (MM/YYYY)
      * @param reserve
      * @param hoene
      * @param oneOne
      * @param picturePath
      * @return Error code : Integer
      */
-    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         // Check fields are filled
-        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
+        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
         }
 
@@ -156,18 +156,12 @@ public class PersonHandler implements HismHandler {
             return BIRTHDAY_FORMAT_ERROR;
         }
 
-        // Check expiration is written correctly
-        String[] expire_Split = expirationDate.split("/");
-        String expire_Month = expire_Split[0];
-        String expire_Year = expire_Split[1];
-
-        if (expire_Month.length() != 2 || expire_Year.length() != 4) {
-            return EXPIRATION_FORMAT_ERROR;
-        }
-
         // Check picturepath
+        boolean copyPic = false;
         if (picturePath.isEmpty()) {
             return PICTUREPATH_EMPTY_ERROR;
+        } else if (!picturePath.equals("N")) {
+            copyPic = true;
         }
 
         // Set person
@@ -180,11 +174,22 @@ public class PersonHandler implements HismHandler {
             p.setLastname(lastname);
             p.setAddress(address);
             p.setBirthdayDate(birthdayDate);
-            p.setExpirationDate(expirationDate);
             p.setHoene(hoene);
             p.setReserve(reserve);
             p.setOneOne(oneOne);
             p.setPicturePath(picturePath);
+        }
+        
+        // Copy picture
+        if (copyPic) {
+            String oldPicturePath = picturePath;
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
+            FileTool.deleteFile(new File(newPicturePath));
+            FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+            p.setPicturePath(newPicturePath);
+        } else {
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
+            FileTool.deleteFile(new File(newPicturePath));
         }
 
         // Register person
@@ -205,8 +210,8 @@ public class PersonHandler implements HismHandler {
         if (p == null) {
             return GET_ERROR;
         } else {
-            peR.deletePerson(p);
             FileTool.deleteFile(new File(p.getPicturePath()));
+            peR.deletePerson(p);
         }
 
         return NO_ERROR;

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Guest;
@@ -145,16 +146,22 @@ public class PersonHandler {
     public ArrayList<Person> search(String s) {
         if (!s.isEmpty()) {
             ArrayList<Person> result = new ArrayList<>();
-            
+
             String[] sSplit = s.split(" ");
+            for (String sl : sSplit) {
+                System.out.println(sl);
+            }
 
             for (Person p : personRegister.getPersons()) {
                 for(String ss : sSplit) {
+                    System.out.println("Checking: " + ss);
                     if(p.getFirstname().equalsIgnoreCase(ss) || p.getMiddlename().equalsIgnoreCase(ss) || p.getLastname().equalsIgnoreCase(ss) || p.getAddress().equalsIgnoreCase(ss) || ADate.formatADate(p.getBirthdayDate(), "").equalsIgnoreCase(ss) || ADate.formatADate(p.getBirthdayDate(), "/").equalsIgnoreCase(ss)|| ADate.formatADate(p.getBirthdayDate(), "-").equalsIgnoreCase(ss)) {
+                        System.out.println("found: " + ss);
                         result.add(p);
                     }
                 }
             }
+
             return result;
         } else {
             return personRegister.getPersons();
@@ -188,36 +195,36 @@ public class PersonHandler {
         }
 
         ArrayList<String[]> data = new ArrayList<>();
-        
-        if(resetReport) {
+
+        if (resetReport) {
             String[] f = {"RESET REPORT"};
             data.add(f);
         }
-        
+
         String[] f = {"Total: " + enrolled.size()};
         data.add(f);
-        
+
         Calendar c = Calendar.getInstance();
         ADate date = new ADate();
-        String hoursS = String.valueOf(c.get(Calendar.HOUR_OF_DAY)) ;
+        String hoursS = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
         String minutesS = String.valueOf(c.get(Calendar.MINUTE));
-        
-        if(hoursS.length() != 2) {
+
+        if (hoursS.length() != 2) {
             hoursS = "0" + hoursS;
         }
-        if(minutesS.length() != 2) {
+        if (minutesS.length() != 2) {
             minutesS = "0" + minutesS;
         }
         int hours = Integer.valueOf(hoursS);
         int minutes = Integer.valueOf(minutesS);
-        
+
         String time = "" + hours + minutes;
         String[] ftime = {"Date: " + ADate.formatADate(date, "/") + " Time: " + time};
         data.add(ftime);
-        
+
         String[] columns = {"Navn", "Fødselsdag", "Gæst1", "Gæst2", "Gæst3", "Gæst4", "Gæst5"};
         data.add(columns);
-        
+
         for (Person p : enrolled) {
             System.out.println("FOUND ONE");
             String hone = "Nej";
@@ -272,7 +279,7 @@ public class PersonHandler {
 
         }
 
-        
+
         if (resetReport) {
             try {
                 CSVTool.generateReport(data, FileTool.reportDir + "/report_" + ADate.formatADate(date, "") + "_" + time + "_resetReport");
