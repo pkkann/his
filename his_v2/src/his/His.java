@@ -82,7 +82,7 @@ public class His {
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
-        editPersonDIA = new EditPersonDIA(mainGUI, true, peH);
+        editPersonDIA = new EditPersonDIA(mainGUI, true, peH, enH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);

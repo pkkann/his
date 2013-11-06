@@ -4,13 +4,17 @@
  */
 package view;
 
+import control.EnrollmentHandler;
 import control.PersonHandler;
+import entity.Person;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.TableTool;
 
@@ -22,12 +26,81 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
     private int selectedPerson = -1;
     private PersonHandler peH;
+    private EnrollmentHandler enH;
     
-    public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH) {
+    public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH, EnrollmentHandler enH) {
         super(parent, modal);
         initComponents();
+        initTableListener();
         setTitleIcon();
         this.peH = peH;
+        this.enH = enH;
+    }
+    
+    private void initTableListener() {
+        result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && result_Table.getSelectedRowCount() != 0) {
+                    int selRow = result_Table.getSelectedRow();
+                    Object selIDObject = result_Table.getModel().getValueAt(selRow, 0);
+                    int selID = Integer.valueOf(String.valueOf(selIDObject));
+                    setSelectedPerson(selID);
+                }
+            }
+        });
+    }
+    
+    private void setSelectedPerson(int idPerson) {
+        cleanSelectedPerson();
+        selectedPerson = idPerson;
+        
+        Person p = peH.getPerson(idPerson);
+        
+        if(p != null) {
+            if(!enH.isEnrolled(idPerson)) {
+                firstname_TextField.setText(p.getFirstname());
+                firstname_TextField.setEnabled(true);
+                
+                middlename_TextField.setText(p.getMiddlename());
+                middlename_TextField.setEnabled(true);
+                
+                lastname_TextField.setText(p.getLastname());
+                lastname_TextField.setEnabled(true);
+                
+                address_TextField.setText(p.getAddress());
+                address_TextField.setEnabled(true);
+                
+                hoene_CheckBox.setSelected(p.isHoene());
+                hoene_CheckBox.setEnabled(true);
+                
+                reserve_CheckBox.setSelected(p.isReserve());
+                reserve_CheckBox.setEnabled(true);
+                
+                oneOne_CheckBox.setSelected(p.isOneOne());
+                oneOne_CheckBox.setEnabled(true);
+                
+                String[] birthSplit = p.getBirthdayDate().split("/");
+                birthday_day_TextField.setText(birthSplit[0]);
+                birthday_day_TextField.setEnabled(true);
+                birthday_month_TextField.setText(birthSplit[1]);
+                birthday_month_TextField.setEnabled(true);
+                birthday_year_TextField.setText(birthSplit[2]);
+                birthday_year_TextField.setEnabled(true);
+                
+                if(!p.isHoene() && !p.isReserve() && !p.isOneOne()) {
+                    String[] expireSplit = p.getExpirationDate().split("/");
+                    expiration_month_TextField.setText(expireSplit[0]);
+                    expiration_month_TextField.setEnabled(true);
+                    expiration_year_TextField.setText(expireSplit[1]);
+                    expiration_year_TextField.setEnabled(true);
+                }
+                
+                save_Button.setEnabled(true);
+            } else {
+                info_Label.setText("Personen er indskrevet, og kan ikke redigeres");
+            }
+        }
     }
     
     private void setTitleIcon() {
@@ -40,10 +113,52 @@ public class EditPersonDIA extends javax.swing.JDialog {
         titleIcon_PicturePane.setPicture(icon, false);
     }
     
+    private void cleanSearchField() {
+        search_TextField.setText("");
+    }
+
+    private void cleanTable() {
+        DefaultTableModel dtm = TableTool.createEmptyPersonTableModel();
+        result_Table.setModel(dtm);
+    }
+    
     public void cleanSelectedPerson() {
         selectedPerson = -1;
         save_Button.setEnabled(false);
         info_Label.setText("");
+        
+        firstname_TextField.setText("");
+        firstname_TextField.setEnabled(false);
+        
+        middlename_TextField.setText("");
+        middlename_TextField.setEnabled(false);
+        
+        lastname_TextField.setText("");
+        lastname_TextField.setEnabled(false);
+        
+        address_TextField.setText("");
+        address_TextField.setEnabled(false);
+        
+        birthday_day_TextField.setText("");
+        birthday_day_TextField.setEnabled(false);
+        birthday_month_TextField.setText("");
+        birthday_month_TextField.setEnabled(false);
+        birthday_year_TextField.setText("");
+        birthday_year_TextField.setEnabled(false);
+        
+        expiration_month_TextField.setText("");
+        expiration_month_TextField.setEnabled(false);
+        expiration_year_TextField.setText("");
+        expiration_year_TextField.setEnabled(false);
+        
+        hoene_CheckBox.setSelected(false);
+        hoene_CheckBox.setEnabled(false);
+        
+        reserve_CheckBox.setSelected(false);
+        reserve_CheckBox.setEnabled(false);
+        
+        oneOne_CheckBox.setSelected(false);
+        oneOne_CheckBox.setEnabled(false);
     }
     
     public void search() {
@@ -98,12 +213,21 @@ public class EditPersonDIA extends javax.swing.JDialog {
         oneOne_CheckBox = new javax.swing.JCheckBox();
         save_Button = new javax.swing.JButton();
         info_Label = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        expiration_month_TextField = new javax.swing.JTextField();
+        expiration_year_TextField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -313,7 +437,18 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         info_Label.setForeground(new java.awt.Color(204, 0, 0));
-        info_Label.setText("Test");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Udløbsdato:");
+
+        expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_month_TextField.setEnabled(false);
+
+        expiration_year_TextField.setEnabled(false);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("mm/yyyy");
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
@@ -323,13 +458,22 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fields_PaneLayout.createSequentialGroup()
-                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(save_Button))
+                    .addGroup(fields_PaneLayout.createSequentialGroup()
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(fields_PaneLayout.createSequentialGroup()
@@ -344,29 +488,28 @@ public class EditPersonDIA extends javax.swing.JDialog {
                                 .addComponent(lastname_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(address_TextField, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGroup(fields_PaneLayout.createSequentialGroup()
-                                .addComponent(birthday_day_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(expiration_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(fields_PaneLayout.createSequentialGroup()
+                                        .addComponent(birthday_day_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(birthday_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(birthday_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(birthday_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(birthday_year_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                                    .addComponent(expiration_year_TextField))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(fields_PaneLayout.createSequentialGroup()
-                        .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(save_Button)))
+                                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel11))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         fields_PaneLayout.setVerticalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fields_PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -385,6 +528,12 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             .addComponent(address_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(expiration_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(expiration_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(birthday_day_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(birthday_month_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,14 +545,16 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             .addComponent(hoene_CheckBox)
                             .addComponent(reserve_CheckBox)
                             .addComponent(oneOne_CheckBox))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(info_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(save_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(info_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(save_Button, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
 
         close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -484,6 +635,12 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
         search();
     }//GEN-LAST:event_search_TextFieldActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        cleanSelectedPerson();
+        cleanSearchField();
+        cleanTable();
+    }//GEN-LAST:event_formWindowClosed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
@@ -493,11 +650,15 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JButton capturePic_Button;
     private javax.swing.JButton choosePic_Button;
     private javax.swing.JButton close_Button;
+    private javax.swing.JTextField expiration_month_TextField;
+    private javax.swing.JTextField expiration_year_TextField;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JCheckBox hoene_CheckBox;
     private javax.swing.JLabel info_Label;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

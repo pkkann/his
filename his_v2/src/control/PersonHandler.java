@@ -4,6 +4,9 @@
  */
 package control;
 
+import static control.HismHandler.BIRTHDAY_FORMAT_ERROR;
+import static control.HismHandler.EXPIRATION_DATE_ERROR;
+import static control.HismHandler.EXPIRATION_FORMAT_ERROR;
 import static control.HismHandler.FIELDS_NOT_FILLED_ERROR;
 import static control.HismHandler.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
@@ -140,20 +143,42 @@ public class PersonHandler implements HismHandler {
      * @param picturePath
      * @return Error code : Integer
      */
-    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+        
         // Check fields are filled
-        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || picturePath.isEmpty()) {
+        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
         }
 
         // Check birthday is written correctly
-        String[] birth_Split = birthdayDate.split("/");
-        String birth_Day = birth_Split[0];
-        String birth_Month = birth_Split[1];
-        String birth_Year = birth_Split[2];
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
 
-        if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
             return BIRTHDAY_FORMAT_ERROR;
+        }
+        
+        // Check expiration is written correctly
+        if (!hoene && !reserve && !oneOne) {
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
+
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
         }
 
         // Check picturepath
@@ -174,6 +199,7 @@ public class PersonHandler implements HismHandler {
             p.setLastname(lastname);
             p.setAddress(address);
             p.setBirthdayDate(birthdayDate);
+            p.setExpirationDate(expirationDate);
             p.setHoene(hoene);
             p.setReserve(reserve);
             p.setOneOne(oneOne);
