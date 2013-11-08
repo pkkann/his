@@ -249,6 +249,7 @@ public class MainGUI extends javax.swing.JFrame {
         picturePane_PicturePane = new view.image.PicturePane();
         renew_Button = new javax.swing.JButton();
         enrolled_CheckBox = new javax.swing.JCheckBox();
+        kick_Button = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         createPerson_Button = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
@@ -401,6 +402,10 @@ public class MainGUI extends javax.swing.JFrame {
         enrolled_CheckBox.setText("Indskrevne");
         enrolled_CheckBox.setToolTipText("Søg kun på indskrevne");
 
+        kick_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        kick_Button.setText("Smid ud");
+        kick_Button.setEnabled(false);
+
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
         inner_PaneLayout.setHorizontalGroup(
@@ -421,7 +426,8 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(status_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(renew_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(enroll_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(kick_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         inner_PaneLayout.setVerticalGroup(
@@ -440,7 +446,9 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(kick_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(renew_Button))
                     .addComponent(result_ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -857,6 +865,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton kick_Button;
     private javax.swing.JButton logoff_Button;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JMenuBar menuBar_MenuBar;

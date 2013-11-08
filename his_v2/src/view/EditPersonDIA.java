@@ -8,11 +8,13 @@ import control.EnrollmentHandler;
 import control.PersonHandler;
 import entity.Person;
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +29,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private int selectedPerson = -1;
     private PersonHandler peH;
     private EnrollmentHandler enH;
-    
+    private String newPicturePath = "";
+    private boolean canEdit = false;
+
     public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH, EnrollmentHandler enH) {
         super(parent, modal);
         initComponents();
@@ -36,7 +40,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         this.peH = peH;
         this.enH = enH;
     }
-    
+
     private void initTableListener() {
         result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -50,36 +54,42 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void setSelectedPerson(int idPerson) {
         cleanSelectedPerson();
         selectedPerson = idPerson;
-        
+
         Person p = peH.getPerson(idPerson);
-        
-        if(p != null) {
-            if(!enH.isEnrolled(idPerson)) {
+
+        if (enH.isEnrolled(idPerson)) {
+            canEdit = false;
+        } else {
+            canEdit = true;
+        }
+
+        if (p != null) {
+            if (canEdit) {
                 firstname_TextField.setText(p.getFirstname());
                 firstname_TextField.setEnabled(true);
-                
+
                 middlename_TextField.setText(p.getMiddlename());
                 middlename_TextField.setEnabled(true);
-                
+
                 lastname_TextField.setText(p.getLastname());
                 lastname_TextField.setEnabled(true);
-                
+
                 address_TextField.setText(p.getAddress());
                 address_TextField.setEnabled(true);
-                
+
                 hoene_CheckBox.setSelected(p.isHoene());
                 hoene_CheckBox.setEnabled(true);
-                
+
                 reserve_CheckBox.setSelected(p.isReserve());
                 reserve_CheckBox.setEnabled(true);
-                
+
                 oneOne_CheckBox.setSelected(p.isOneOne());
                 oneOne_CheckBox.setEnabled(true);
-                
+
                 String[] birthSplit = p.getBirthdayDate().split("/");
                 birthday_day_TextField.setText(birthSplit[0]);
                 birthday_day_TextField.setEnabled(true);
@@ -87,22 +97,36 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 birthday_month_TextField.setEnabled(true);
                 birthday_year_TextField.setText(birthSplit[2]);
                 birthday_year_TextField.setEnabled(true);
-                
-                if(!p.isHoene() && !p.isReserve() && !p.isOneOne()) {
+
+                if (!p.isHoene() && !p.isReserve() && !p.isOneOne()) {
                     String[] expireSplit = p.getExpirationDate().split("/");
                     expiration_month_TextField.setText(expireSplit[0]);
                     expiration_month_TextField.setEnabled(true);
                     expiration_year_TextField.setText(expireSplit[1]);
                     expiration_year_TextField.setEnabled(true);
                 }
-                
+
+                noPicture_CheckBox.setEnabled(true);
+                if (p.getPicturePath().equals("N")) {
+                    noPicture_CheckBox.setSelected(true);
+                } else {
+                    noPicture_CheckBox.setSelected(false);
+                    choosePic_Button.setEnabled(true);
+                    try {
+                        Image img = ImageIO.read(new File(p.getPicturePath()));
+                        picturePane_PicturePane.setPicture(img, true);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
                 save_Button.setEnabled(true);
             } else {
                 info_Label.setText("Personen er indskrevet, og kan ikke redigeres");
             }
         }
     }
-    
+
     private void setTitleIcon() {
         Image icon = null;
         try {
@@ -112,7 +136,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         }
         titleIcon_PicturePane.setPicture(icon, false);
     }
-    
+
     private void cleanSearchField() {
         search_TextField.setText("");
     }
@@ -121,53 +145,58 @@ public class EditPersonDIA extends javax.swing.JDialog {
         DefaultTableModel dtm = TableTool.createEmptyPersonTableModel();
         result_Table.setModel(dtm);
     }
-    
+
     public void cleanSelectedPerson() {
         selectedPerson = -1;
         save_Button.setEnabled(false);
         info_Label.setText("");
-        
+
         firstname_TextField.setText("");
         firstname_TextField.setEnabled(false);
-        
+
         middlename_TextField.setText("");
         middlename_TextField.setEnabled(false);
-        
+
         lastname_TextField.setText("");
         lastname_TextField.setEnabled(false);
-        
+
         address_TextField.setText("");
         address_TextField.setEnabled(false);
-        
+
         birthday_day_TextField.setText("");
         birthday_day_TextField.setEnabled(false);
         birthday_month_TextField.setText("");
         birthday_month_TextField.setEnabled(false);
         birthday_year_TextField.setText("");
         birthday_year_TextField.setEnabled(false);
-        
+
         expiration_month_TextField.setText("");
         expiration_month_TextField.setEnabled(false);
         expiration_year_TextField.setText("");
         expiration_year_TextField.setEnabled(false);
-        
+
         hoene_CheckBox.setSelected(false);
         hoene_CheckBox.setEnabled(false);
-        
+
         reserve_CheckBox.setSelected(false);
         reserve_CheckBox.setEnabled(false);
-        
+
         oneOne_CheckBox.setSelected(false);
         oneOne_CheckBox.setEnabled(false);
+
+        noPicture_CheckBox.setSelected(false);
+        noPicture_CheckBox.setEnabled(false);
+        picturePane_PicturePane.setPicture(null, true);
+        choosePic_Button.setEnabled(false);
+
     }
-    
+
     public void search() {
         cleanSelectedPerson();
         ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
         DefaultTableModel dtm = TableTool.createPersonTableModel(data);
         result_Table.setModel(dtm);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,6 +207,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser_FileChooser = new javax.swing.JFileChooser();
         main_Pane = new javax.swing.JPanel();
         title_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -367,6 +397,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         choosePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         choosePic_Button.setText("Vælg nyt billed");
         choosePic_Button.setEnabled(false);
+        choosePic_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choosePic_ButtonActionPerformed(evt);
+            }
+        });
 
         capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         capturePic_Button.setText("Tag nyt billed");
@@ -375,6 +410,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
         noPicture_CheckBox.setEnabled(false);
+        noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                noPicture_CheckBoxItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("For bedst resultat, skal billedet være 250x250");
@@ -422,18 +462,38 @@ public class EditPersonDIA extends javax.swing.JDialog {
         hoene_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hoene_CheckBox.setText("Høne");
         hoene_CheckBox.setEnabled(false);
+        hoene_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                hoene_CheckBoxItemStateChanged(evt);
+            }
+        });
 
         reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         reserve_CheckBox.setText("Reserve");
         reserve_CheckBox.setEnabled(false);
+        reserve_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                reserve_CheckBoxItemStateChanged(evt);
+            }
+        });
 
         oneOne_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         oneOne_CheckBox.setText("1-1");
         oneOne_CheckBox.setEnabled(false);
+        oneOne_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                oneOne_CheckBoxItemStateChanged(evt);
+            }
+        });
 
         save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         save_Button.setText("Gem person");
         save_Button.setEnabled(false);
+        save_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_ButtonActionPerformed(evt);
+            }
+        });
 
         info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         info_Label.setForeground(new java.awt.Color(204, 0, 0));
@@ -641,7 +701,49 @@ public class EditPersonDIA extends javax.swing.JDialog {
         cleanSearchField();
         cleanTable();
     }//GEN-LAST:event_formWindowClosed
-    
+
+    private void hoene_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_hoene_CheckBoxItemStateChanged
+        //as
+    }//GEN-LAST:event_hoene_CheckBoxItemStateChanged
+
+    private void reserve_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_reserve_CheckBoxItemStateChanged
+        //as
+    }//GEN-LAST:event_reserve_CheckBoxItemStateChanged
+
+    private void oneOne_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_oneOne_CheckBoxItemStateChanged
+        //as
+    }//GEN-LAST:event_oneOne_CheckBoxItemStateChanged
+
+    private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
+        if (noPicture_CheckBox.isSelected()) {
+            choosePic_Button.setEnabled(false);
+            picturePane_PicturePane.setPicture(null, true);
+            newPicturePath = "N";
+        } else {
+            choosePic_Button.setEnabled(true);
+            newPicturePath = "";
+        }
+    }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
+
+    private void choosePic_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePic_ButtonActionPerformed
+        newPicturePath = "";
+        int returnVal = fileChooser_FileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            newPicturePath = fileChooser_FileChooser.getSelectedFile().toString();
+            File f = new File(newPicturePath);
+            Image img = null;
+            try {
+                img = ImageIO.read(f);
+            } catch (IOException ex) {
+                Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            picturePane_PicturePane.setPicture(img, true);
+        }
+    }//GEN-LAST:event_choosePic_ButtonActionPerformed
+
+    private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_save_ButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
     private javax.swing.JTextField birthday_day_TextField;
@@ -653,6 +755,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JTextField expiration_month_TextField;
     private javax.swing.JTextField expiration_year_TextField;
     private javax.swing.JPanel fields_Pane;
+    private javax.swing.JFileChooser fileChooser_FileChooser;
     private javax.swing.JTextField firstname_TextField;
     private javax.swing.JCheckBox hoene_CheckBox;
     private javax.swing.JLabel info_Label;
