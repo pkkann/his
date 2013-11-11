@@ -169,12 +169,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         birthday_month_TextField.setEnabled(false);
         birthday_year_TextField.setText("");
         birthday_year_TextField.setEnabled(false);
-
-        expiration_month_TextField.setText("");
-        expiration_month_TextField.setEnabled(false);
-        expiration_year_TextField.setText("");
-        expiration_year_TextField.setEnabled(false);
-
+        
         hoene_CheckBox.setSelected(false);
         hoene_CheckBox.setEnabled(false);
 
@@ -183,6 +178,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         oneOne_CheckBox.setSelected(false);
         oneOne_CheckBox.setEnabled(false);
+
+        expiration_month_TextField.setText("");
+        expiration_month_TextField.setEnabled(false);
+        expiration_year_TextField.setText("");
+        expiration_year_TextField.setEnabled(false);
 
         noPicture_CheckBox.setSelected(false);
         noPicture_CheckBox.setEnabled(false);
@@ -196,6 +196,14 @@ public class EditPersonDIA extends javax.swing.JDialog {
         ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
         DefaultTableModel dtm = TableTool.createPersonTableModel(data);
         result_Table.setModel(dtm);
+    }
+    
+    public boolean shouldExpireDateBeEnabled() {
+        if (hoene_CheckBox.isSelected() || reserve_CheckBox.isSelected() || oneOne_CheckBox.isSelected()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -325,6 +333,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 "ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
             }
         ));
+        result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(result_Table);
 
         javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
@@ -703,15 +712,21 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void hoene_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_hoene_CheckBoxItemStateChanged
-        //as
+        boolean b = shouldExpireDateBeEnabled();
+        expiration_month_TextField.setEnabled(b);
+        expiration_year_TextField.setEnabled(b);
     }//GEN-LAST:event_hoene_CheckBoxItemStateChanged
 
     private void reserve_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_reserve_CheckBoxItemStateChanged
-        //as
+        boolean b = shouldExpireDateBeEnabled();
+        expiration_month_TextField.setEnabled(b);
+        expiration_year_TextField.setEnabled(b);
     }//GEN-LAST:event_reserve_CheckBoxItemStateChanged
 
     private void oneOne_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_oneOne_CheckBoxItemStateChanged
-        //as
+        boolean b = shouldExpireDateBeEnabled();
+        expiration_month_TextField.setEnabled(b);
+        expiration_year_TextField.setEnabled(b);
     }//GEN-LAST:event_oneOne_CheckBoxItemStateChanged
 
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged

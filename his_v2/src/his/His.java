@@ -114,7 +114,7 @@ public class His {
         quR.loadQuarantinesFromDB();
         enR.loadEnrollmentsFromDB();
 
-        testData();
+        //testData();
 
         loadingGUI.setVisible(false);
         loH.requestLogin();
@@ -130,9 +130,7 @@ public class His {
         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
             try {
                 UIManager.setLookAndFeel(new WindowsLookAndFeel());
-            } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(His.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (UnsupportedLookAndFeelException ex) {}
         }
 
         //</editor-fold>

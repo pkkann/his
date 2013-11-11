@@ -359,6 +359,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                noPicture_CheckBoxItemStateChanged(evt);
+            }
+        });
         noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noPicture_CheckBoxActionPerformed(evt);
@@ -585,10 +590,16 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         if(noPicture_CheckBox.isSelected()) {
             picturePath = "N";
             picturePane_PicturePane.setPicture(null, true);
+            choose_Button.setEnabled(false);
         } else {
             picturePath = "";
+            choose_Button.setEnabled(true);
         }
     }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
+
+    private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
+        //
+    }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
