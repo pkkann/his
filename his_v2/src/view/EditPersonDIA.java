@@ -757,7 +757,20 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_choosePic_ButtonActionPerformed
 
     private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_ButtonActionPerformed
-        // TODO add your handling code here:
+        boolean hoene = hoene_CheckBox.isSelected();
+        boolean reserve = reserve_CheckBox.isSelected();
+        boolean oneOne = oneOne_CheckBox.isSelected();
+        String firstname = firstname_TextField.getText();
+        String middlename = middlename_TextField.getText();
+        String lastname = lastname_TextField.getText();
+        String address = address_TextField.getText();
+        String expiration = "";
+        
+        if (!hoene && !reserve && !oneOne) {
+            expiration = expiration_month_TextField.getText() + "/" + expiration_year_TextField.getText();
+        }
+        
+        
     }//GEN-LAST:event_save_ButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
