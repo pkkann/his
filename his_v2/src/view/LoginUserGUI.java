@@ -68,6 +68,8 @@ public class LoginUserGUI extends javax.swing.JFrame {
 
             if (errorCode == 0) {
                 dispose();
+            } else {
+                password_TextField.setText("");
             }
         }
     }
