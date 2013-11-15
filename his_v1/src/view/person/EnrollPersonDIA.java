@@ -40,9 +40,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             enroll_Button.setText("Fjern indskrivning");
             countGuests();
             if(p.isHone()) {
-                info_Label.setText("Denne person kan i alt få 5 gæster med ind");
+                info_Label.setText("Denne person kan i alt få 10 gæster med ind");
             } else {
-                info_Label.setText("Denne person kan i alt få 3 gæster med ind");
+                info_Label.setText("Denne person kan i alt få 10 gæster med ind");
             }
         } else {
             enroll_Button.setText("Indskriv");
@@ -60,13 +60,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         int count = guests_List.getModel().getSize();
         if (count != 0) {
             if (selectedPerson.isHone()) {
-                if (count >= 5) { 
+                if (count >= 10) { 
                     addGuest_Button.setEnabled(false);
                 } else {
                     addGuest_Button.setEnabled(true);
                 }
             } else {
-                if (count >= 3) {
+                if (count >= 10) {
                     addGuest_Button.setEnabled(false);
                 } else {
                     addGuest_Button.setEnabled(true);
