@@ -19,6 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.TableTool;
+import view.message.DialogMessage;
 
 /**
  *
@@ -31,6 +32,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private EnrollmentHandler enH;
     private String newPicturePath = "";
     private boolean canEdit = false;
+    private boolean pictureChanged = false;
 
     public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH, EnrollmentHandler enH) {
         super(parent, modal);
@@ -188,6 +190,8 @@ public class EditPersonDIA extends javax.swing.JDialog {
         noPicture_CheckBox.setEnabled(false);
         picturePane_PicturePane.setPicture(null, true);
         choosePic_Button.setEnabled(false);
+        
+        pictureChanged = false;
 
     }
 
@@ -753,6 +757,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
             }
             picturePane_PicturePane.setPicture(img, true);
+            pictureChanged = true;
         }
     }//GEN-LAST:event_choosePic_ButtonActionPerformed
 
@@ -768,6 +773,23 @@ public class EditPersonDIA extends javax.swing.JDialog {
         
         if (!hoene && !reserve && !oneOne) {
             expiration = expiration_month_TextField.getText() + "/" + expiration_year_TextField.getText();
+        }
+        
+        String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
+        
+        int errorCode = 0;
+        
+        if(pictureChanged) {
+            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne, newPicturePath);
+        } else {
+            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne);
+        }
+        
+        DialogMessage.showMessage(this, errorCode);
+        
+        if(errorCode == 0) {
+            cleanSelectedPerson();
+            search();
         }
         
         

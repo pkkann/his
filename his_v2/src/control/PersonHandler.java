@@ -146,7 +146,11 @@ public class PersonHandler implements HismHandler {
     public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         
         // Check fields are filled
-        if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || picturePath.isEmpty()) {
             return FIELDS_NOT_FILLED_ERROR;
         }
 
@@ -216,6 +220,84 @@ public class PersonHandler implements HismHandler {
         } else {
             String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
             FileTool.deleteFile(new File(newPicturePath));
+        }
+
+        // Register person
+        peR.savePerson(p);
+
+        return NO_ERROR;
+    }
+    
+    /**
+     * Save a person
+     *
+     * @param personID
+     * @param firstname
+     * @param middlename
+     * @param lastname
+     * @param address
+     * @param birthdayDate (DD/MM/YYYY)
+     * @param reserve
+     * @param hoene
+     * @param oneOne
+     * @return Error code : Integer
+     */
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
+        
+        // Check fields are filled
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty()) {
+            return FIELDS_NOT_FILLED_ERROR;
+        }
+
+        // Check birthday is written correctly
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
+
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return BIRTHDAY_FORMAT_ERROR;
+        }
+        
+        // Check expiration is written correctly
+        if (!hoene && !reserve && !oneOne) {
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
+
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+        }
+
+        // Set person
+        Person p = peR.getPerson(personID);
+        if (p == null) {
+            return GET_ERROR;
+        } else {
+            p.setFirstname(firstname);
+            p.setMiddlename(middlename);
+            p.setLastname(lastname);
+            p.setAddress(address);
+            p.setBirthdayDate(birthdayDate);
+            p.setExpirationDate(expirationDate);
+            p.setHoene(hoene);
+            p.setReserve(reserve);
+            p.setOneOne(oneOne);
         }
 
         // Register person
