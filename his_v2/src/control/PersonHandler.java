@@ -4,11 +4,11 @@
  */
 package control;
 
-import static control.HismHandler.BIRTHDAY_FORMAT_ERROR;
-import static control.HismHandler.EXPIRATION_DATE_ERROR;
-import static control.HismHandler.EXPIRATION_FORMAT_ERROR;
-import static control.HismHandler.FIELDS_NOT_FILLED_ERROR;
-import static control.HismHandler.PICTUREPATH_EMPTY_ERROR;
+import static control.HismHandlerIF.BIRTHDAY_FORMAT_ERROR;
+import static control.HismHandlerIF.EXPIRATION_DATE_ERROR;
+import static control.HismHandlerIF.EXPIRATION_FORMAT_ERROR;
+import static control.HismHandlerIF.FIELDS_NOT_FILLED_ERROR;
+import static control.HismHandlerIF.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
 import entity.Person;
 import file.FileTool;
@@ -23,7 +23,7 @@ import model.PersonRegister;
  *
  * @author patrick
  */
-public class PersonHandler implements HismHandler {
+public class PersonHandler implements HismHandlerIF {
 
     private PersonRegister peR;
     private EnrollmentRegister enR;

@@ -13,7 +13,7 @@ import model.QuarantineRegister;
  *
  * @author patrick
  */
-public class QuarantineHandler implements HismHandler{
+public class QuarantineHandler implements HismHandlerIF{
     
     private QuarantineRegister quR;
     private PersonRegister peR;

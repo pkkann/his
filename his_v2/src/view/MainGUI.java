@@ -236,7 +236,6 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
         main_Pane = new javax.swing.JPanel();
         inner_Pane = new javax.swing.JPanel();
         search_TextField = new javax.swing.JTextField();
@@ -283,8 +282,6 @@ public class MainGUI extends javax.swing.JFrame {
         indstillinger_MenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         about_MenuItem = new javax.swing.JMenuItem();
-
-        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(his.His.title + " - " + his.His.version);
@@ -610,6 +607,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         rapport_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/report.png"))); // NOI18N
         rapport_Menu.setText("Rapport");
+        rapport_Menu.setEnabled(false);
 
         gemRapportIndskrevne_MenuItem.setText("Gem rapport med alle indskrevne");
         rapport_Menu.add(gemRapportIndskrevne_MenuItem);
@@ -627,6 +625,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         vagtAfslutning_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/shitEnd.png"))); // NOI18N
         vagtAfslutning_Menu.setText("Vagt afslutning");
+        vagtAfslutning_Menu.setEnabled(false);
 
         nulstil_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/reset.png"))); // NOI18N
         nulstil_MenuItem.setText("Nulstil systemet og gem rapport med alle indskrevne (PAS PÅ!)");
@@ -674,10 +673,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         administrateQuarantines_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/quarantinePerson.png"))); // NOI18N
         administrateQuarantines_MenuItem.setText("Administrer karantæner");
+        administrateQuarantines_MenuItem.setEnabled(false);
         filer_Menu.add(administrateQuarantines_MenuItem);
 
         indstillinger_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/settings.png"))); // NOI18N
         indstillinger_MenuItem.setText("Indstillinger");
+        indstillinger_MenuItem.setEnabled(false);
         indstillinger_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 indstillinger_MenuItemActionPerformed(evt);
@@ -858,7 +859,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem gemRapportPersoner_MenuItem;
     private javax.swing.JMenuItem indstillinger_MenuItem;
     private javax.swing.JPanel inner_Pane;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

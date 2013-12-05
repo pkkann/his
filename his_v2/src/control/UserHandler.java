@@ -13,7 +13,7 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class UserHandler implements HismHandler {
+public class UserHandler implements HismHandlerIF {
 
     private UserRegister usR;
 

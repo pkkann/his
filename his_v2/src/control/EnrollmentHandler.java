@@ -4,8 +4,8 @@
  */
 package control;
 
-import static control.HismHandler.BIRTHDAY_FORMAT_ERROR;
-import static control.HismHandler.PICTUREPATH_EMPTY_ERROR;
+import static control.HismHandlerIF.BIRTHDAY_FORMAT_ERROR;
+import static control.HismHandlerIF.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
 import entity.Guest;
 import entity.Person;
@@ -21,7 +21,7 @@ import model.UserRegister;
  *
  * @author patrick
  */
-public class EnrollmentHandler implements HismHandler {
+public class EnrollmentHandler implements HismHandlerIF {
 
     private EnrollmentRegister enR;
     private PersonRegister peR;

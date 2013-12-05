@@ -2,11 +2,6 @@
 
 <Form version="1.6" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
-      </Properties>
-    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar_MenuBar">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -30,6 +25,7 @@
                   <Image iconType="3" name="/res/report.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rapport"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="gemRapportIndskrevne_MenuItem">
@@ -60,6 +56,7 @@
                   <Image iconType="3" name="/res/shitEnd.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Vagt afslutning"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="nulstil_MenuItem">
@@ -126,6 +123,7 @@
                   <Image iconType="3" name="/res/quarantinePerson.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Administrer karant&#xe6;ner"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="indstillinger_MenuItem">
@@ -134,6 +132,7 @@
                   <Image iconType="3" name="/res/settings.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Indstillinger"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="indstillinger_MenuItemActionPerformed"/>

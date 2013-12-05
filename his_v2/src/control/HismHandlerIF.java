@@ -8,7 +8,7 @@ package control;
  *
  * @author patrick
  */
-public interface HismHandler {
+public interface HismHandlerIF {
 
     /**
      * No Error

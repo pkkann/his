@@ -738,9 +738,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
             choosePic_Button.setEnabled(false);
             picturePane_PicturePane.setPicture(null, true);
             newPicturePath = "N";
+            pictureChanged = true;
         } else {
             choosePic_Button.setEnabled(true);
             newPicturePath = "";
+            pictureChanged = true;
         }
     }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 

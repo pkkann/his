@@ -13,7 +13,7 @@ import view.MainGUI;
  *
  * @author patrick
  */
-public class LoginHandler implements HismHandler {
+public class LoginHandler implements HismHandlerIF {
 
     public static User loggedIn;
     private LoginUserGUI loginUserGUI;
