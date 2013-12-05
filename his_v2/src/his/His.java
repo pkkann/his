@@ -14,8 +14,6 @@ import model.*;
 import org.hibernate.classic.Session;
 import view.*;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
