@@ -4,7 +4,6 @@
  */
 package entity;
 
-import java.awt.Image;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,42 +19,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
-    
+
     @Id
     @Column(name = "idperson")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idPerson;
-    
+
     @Column(name = "firstname")
     private String firstname;
-    
+
     @Column(name = "middlename")
     private String middlename;
-    
+
     @Column(name = "lastname")
     private String lastname;
-    
+
     @Column(name = "address")
     private String address;
-    
+
     @Column(name = "birthdaydate")
     private String birthdayDate;
-    
+
     @Column(name = "expirationdate")
     private String expirationDate;
-    
+
     @Column(name = "creationdate")
     private String creationDate;
-    
+
     @Column(name = "picturepath")
     private String picturePath;
-    
+
     @Column(name = "hoene")
     private boolean hoene;
-    
+
     @Column(name = "reserve")
     private boolean reserve;
-    
+
     @Column(name = "oneone")
     private boolean oneOne;
 
@@ -63,28 +62,28 @@ public class Person implements Serializable {
     }
 
     public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) {
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.address = address;
-        this.birthdayDate = birthdayDate;
-        this.expirationDate = expirationDate;
-        this.creationDate = creationDate;
-        this.oneOne = oneOne;
+        setOneOne(oneOne);
+        setFirstname(firstname);
+        setMiddlename(middlename);
+        setLastname(lastname);
+        setAddress(address);
+        setBirthdayDate(birthdayDate);
+        setExpirationDate(expirationDate);
+        setCreationDate(creationDate);
     }
 
     public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.address = address;
-        this.birthdayDate = birthdayDate;
-        this.expirationDate = expirationDate;
-        this.creationDate = creationDate;
-        this.hoene = hoene;
-        this.reserve = reserve;
-        this.oneOne = oneOne;
-        this.picturePath = picturePath;
+        setHoene(hoene);
+        setReserve(reserve);
+        setOneOne(oneOne);
+        setFirstname(firstname);
+        setMiddlename(middlename);
+        setLastname(lastname);
+        setAddress(address);
+        setBirthdayDate(birthdayDate);
+        setExpirationDate(expirationDate);
+        setCreationDate(creationDate);
+        setPicturePath(picturePath);
     }
 
     public int getIdPerson() {
@@ -100,7 +99,11 @@ public class Person implements Serializable {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        if (firstname == null || firstname.isEmpty()) {
+            throw new IllegalArgumentException("Firstname can not be null or empty");
+        } else {
+            this.firstname = firstname;
+        }
     }
 
     public String getMiddlename() {
@@ -108,7 +111,11 @@ public class Person implements Serializable {
     }
 
     public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+        if (middlename == null) {
+            throw new IllegalArgumentException("Middlename can not be null");
+        } else {
+            this.middlename = middlename;
+        }
     }
 
     public String getLastname() {
@@ -116,7 +123,11 @@ public class Person implements Serializable {
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        if (lastname == null || lastname.isEmpty()) {
+            throw new IllegalArgumentException("Lastname can not be null or empty");
+        } else {
+            this.lastname = lastname;
+        }
     }
 
     public String getAddress() {
@@ -124,7 +135,11 @@ public class Person implements Serializable {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if (address == null || address.isEmpty()) {
+            throw new IllegalArgumentException("Address can not be null or empty");
+        } else {
+            this.address = address;
+        }
     }
 
     public String getBirthdayDate() {
@@ -132,7 +147,20 @@ public class Person implements Serializable {
     }
 
     public void setBirthdayDate(String birthdayDate) {
-        this.birthdayDate = birthdayDate;
+        if (birthdayDate == null || birthdayDate.isEmpty()) {
+            throw new IllegalArgumentException("BirthdayDate can not be null or empty");
+        } else {
+            String[] split = birthdayDate.split("/");
+            if (split.length != 3) {
+                throw new IllegalArgumentException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
+            } else {
+                if (split[0].length() != 2 || split[1].length() != 2 || split[2].length() != 4) {
+                    throw new IllegalArgumentException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
+                } else {
+                    this.birthdayDate = birthdayDate;
+                }
+            }
+        }
     }
 
     public String getExpirationDate() {
@@ -140,7 +168,24 @@ public class Person implements Serializable {
     }
 
     public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
+        if (!this.hoene && !this.oneOne && !this.reserve) {
+            if (expirationDate == null || expirationDate.isEmpty()) {
+                throw new IllegalArgumentException("ExpirationDate can not be null or empty");
+            } else {
+                String[] split = expirationDate.split("/");
+                if (split.length != 2) {
+                    throw new IllegalArgumentException("ExpirationDate is in the wrong format. Should be mm/yyyy");
+                } else {
+                    if (split[0].length() != 2 || split[1].length() != 4) {
+                        throw new IllegalArgumentException("ExpirationDate is in the wrong format. Should be mm/yyyy");
+                    } else {
+                        this.expirationDate = expirationDate;
+                    }
+                }
+            }
+        } else {
+            this.expirationDate = expirationDate;
+        }
     }
 
     public String getCreationDate() {
@@ -148,7 +193,20 @@ public class Person implements Serializable {
     }
 
     public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+        if (creationDate == null || creationDate.isEmpty()) {
+            throw new IllegalArgumentException("CreationDate can not be null or empty");
+        } else {
+            String[] split = creationDate.split("/");
+            if (split.length != 3) {
+                throw new IllegalArgumentException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
+            } else {
+                if (split[0].length() != 2 || split[1].length() != 2 || split[2].length() != 4) {
+                    throw new IllegalArgumentException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
+                } else {
+                    this.creationDate = creationDate;
+                }
+            }
+        }
     }
 
     public String getPicturePath() {
@@ -156,7 +214,11 @@ public class Person implements Serializable {
     }
 
     public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+        if (picturePath == null || picturePath.isEmpty()) {
+            throw new IllegalArgumentException("PicturePath can not be null or empty");
+        } else {
+            this.picturePath = picturePath;
+        }
     }
 
     public boolean isHoene() {
@@ -182,7 +244,5 @@ public class Person implements Serializable {
     public void setOneOne(boolean oneOne) {
         this.oneOne = oneOne;
     }
-    
-    
-    
+
 }
