@@ -1,4 +1,4 @@
-Høne indskrivnings system (HISM)
+﻿Høne indskrivnings system (HISM)
 ================================
 Version 2.0
 
@@ -9,6 +9,7 @@ Mangler
 - Udsmidning
 - Forny
 - Dato tjekning
+- Webcam integration
 - Indstillinger
 - Vagt afslutning
 - Rapporter

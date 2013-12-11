@@ -4,7 +4,6 @@
  */
 package model;
 
-import entity.Person;
 import entity.Quarantine;
 import hibernate.HiberUtil;
 import java.io.Serializable;
