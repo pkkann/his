@@ -400,10 +400,10 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(this, "Der findes kun 12 måneder", "Fejl", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Udløbs dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fødselsdags dato formatet er forkert. Skal være dd/mm/yyyy", "Fejl", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
