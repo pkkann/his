@@ -12,13 +12,9 @@ import entity.Enrollment;
 import entity.Person;
 import file.FileTool;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.logging.Level;
-import java.util.logging.Logger;
-=======
 import java.util.Calendar;
->>>>>>> parent of da014d8... a
 import model.EnrollmentRegister;
 import model.PersonRegister;
 
