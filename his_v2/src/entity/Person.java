@@ -4,13 +4,7 @@
  */
 package entity;
 
-import exception.BirthdayFormatException;
-import exception.CreationFormatException;
-import exception.ExpirationDateException;
-import exception.ExpirationFormatException;
-import exception.FieldEmptyException;
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,7 +61,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) throws FieldEmptyException, BirthdayFormatException, ExpirationFormatException, CreationFormatException, ExpirationDateException {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) {
         setOneOne(oneOne);
         setFirstname(firstname);
         setMiddlename(middlename);
@@ -78,7 +72,7 @@ public class Person implements Serializable {
         setCreationDate(creationDate);
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) throws FieldEmptyException, BirthdayFormatException, ExpirationFormatException, CreationFormatException, ExpirationDateException {
+    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         setHoene(hoene);
         setReserve(reserve);
         setOneOne(oneOne);
@@ -104,9 +98,9 @@ public class Person implements Serializable {
         return firstname;
     }
 
-    public void setFirstname(String firstname) throws FieldEmptyException {
+    public void setFirstname(String firstname) {
         if (firstname == null || firstname.isEmpty()) {
-            throw new FieldEmptyException("Firstname can not be null or empty");
+            throw new IllegalArgumentException("Firstname can not be null or empty");
         } else {
             this.firstname = firstname;
         }
@@ -116,9 +110,9 @@ public class Person implements Serializable {
         return middlename;
     }
 
-    public void setMiddlename(String middlename) throws FieldEmptyException {
+    public void setMiddlename(String middlename) {
         if (middlename == null) {
-            throw new FieldEmptyException("Middlename can not be null");
+            throw new IllegalArgumentException("Middlename can not be null");
         } else {
             this.middlename = middlename;
         }
@@ -128,9 +122,9 @@ public class Person implements Serializable {
         return lastname;
     }
 
-    public void setLastname(String lastname) throws FieldEmptyException {
+    public void setLastname(String lastname) {
         if (lastname == null || lastname.isEmpty()) {
-            throw new FieldEmptyException("Lastname can not be null or empty");
+            throw new IllegalArgumentException("Lastname can not be null or empty");
         } else {
             this.lastname = lastname;
         }
@@ -140,9 +134,9 @@ public class Person implements Serializable {
         return address;
     }
 
-    public void setAddress(String address) throws FieldEmptyException {
+    public void setAddress(String address) {
         if (address == null || address.isEmpty()) {
-            throw new FieldEmptyException("Address can not be null or empty");
+            throw new IllegalArgumentException("Address can not be null or empty");
         } else {
             this.address = address;
         }
@@ -152,16 +146,16 @@ public class Person implements Serializable {
         return birthdayDate;
     }
 
-    public void setBirthdayDate(String birthdayDate) throws FieldEmptyException, BirthdayFormatException {
+    public void setBirthdayDate(String birthdayDate) {
         if (birthdayDate == null || birthdayDate.isEmpty()) {
-            throw new FieldEmptyException("BirthdayDate can not be null or empty");
+            throw new IllegalArgumentException("BirthdayDate can not be null or empty");
         } else {
             String[] split = birthdayDate.split("/");
             if (split.length != 3) {
-                throw new BirthdayFormatException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
+                throw new IllegalArgumentException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
             } else {
                 if (split[0].length() != 2 || split[1].length() != 2 || split[2].length() != 4) {
-                    throw new BirthdayFormatException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
+                    throw new IllegalArgumentException("BirthdayDate is in the wrong format. Should be dd/mm/yyyy");
                 } else {
                     this.birthdayDate = birthdayDate;
                 }
@@ -173,28 +167,19 @@ public class Person implements Serializable {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) throws FieldEmptyException, ExpirationFormatException, ExpirationDateException {
+    public void setExpirationDate(String expirationDate) {
         if (!this.hoene && !this.oneOne && !this.reserve) {
             if (expirationDate == null || expirationDate.isEmpty()) {
-                throw new FieldEmptyException("ExpirationDate can not be null or empty");
+                throw new IllegalArgumentException("ExpirationDate can not be null or empty");
             } else {
                 String[] split = expirationDate.split("/");
                 if (split.length != 2) {
-                    throw new ExpirationFormatException("ExpirationDate is in the wrong format. Should be mm/yyyy");
+                    throw new IllegalArgumentException("ExpirationDate is in the wrong format. Should be mm/yyyy");
                 } else {
                     if (split[0].length() != 2 || split[1].length() != 4) {
-                        throw new ExpirationFormatException("ExpirationDate is in the wrong format. Should be mm/yyyy");
+                        throw new IllegalArgumentException("ExpirationDate is in the wrong format. Should be mm/yyyy");
                     } else {
-                        Calendar today = Calendar.getInstance();
-                        today.set(Calendar.MONTH, today.get(Calendar.MONTH) + 1);
-                        Calendar expire = Calendar.getInstance();
-                        expire.set(Calendar.MONTH, Integer.valueOf(split[0]));
-                        expire.set(Calendar.YEAR, Integer.valueOf(split[1]));
-                        if (expire.before(today) || expire.equals(today)) {
-                            throw new ExpirationDateException("ExpirationDate can not be the current or before the current date");
-                        } else {
-                            this.expirationDate = expirationDate;
-                        }
+                        this.expirationDate = expirationDate;
                     }
                 }
             }
@@ -207,16 +192,16 @@ public class Person implements Serializable {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) throws FieldEmptyException, CreationFormatException {
+    public void setCreationDate(String creationDate) {
         if (creationDate == null || creationDate.isEmpty()) {
-            throw new FieldEmptyException("CreationDate can not be null or empty");
+            throw new IllegalArgumentException("CreationDate can not be null or empty");
         } else {
             String[] split = creationDate.split("/");
             if (split.length != 3) {
-                throw new CreationFormatException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
+                throw new IllegalArgumentException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
             } else {
                 if (split[0].length() != 2 || split[1].length() != 2 || split[2].length() != 4) {
-                    throw new CreationFormatException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
+                    throw new IllegalArgumentException("CreationDate is in the wrong format. Should be dd/mm/yyyy");
                 } else {
                     this.creationDate = creationDate;
                 }
@@ -228,9 +213,9 @@ public class Person implements Serializable {
         return picturePath;
     }
 
-    public void setPicturePath(String picturePath) throws FieldEmptyException {
+    public void setPicturePath(String picturePath) {
         if (picturePath == null || picturePath.isEmpty()) {
-            throw new FieldEmptyException("PicturePath can not be null or empty");
+            throw new IllegalArgumentException("PicturePath can not be null or empty");
         } else {
             this.picturePath = picturePath;
         }

@@ -10,16 +10,15 @@ import static control.HismHandlerIF.EXPIRATION_FORMAT_ERROR;
 import static control.HismHandlerIF.FIELDS_NOT_FILLED_ERROR;
 import entity.Enrollment;
 import entity.Person;
-import exception.BirthdayFormatException;
-import exception.CreationFormatException;
-import exception.ExpirationDateException;
-import exception.ExpirationFormatException;
-import exception.FieldEmptyException;
 import file.FileTool;
 import java.io.File;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import java.util.Calendar;
+>>>>>>> parent of da014d8... a
 import model.EnrollmentRegister;
 import model.PersonRegister;
 
@@ -54,23 +53,81 @@ public class PersonHandler implements HismHandlerIF {
      * @return Error code : Integer
      */
     public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
-        Person p = null;
-        try {
-            p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
-        } catch (FieldEmptyException ex) {
-            return FIELDS_NOT_FILLED_ERROR;
-        } catch (BirthdayFormatException ex) {
-            return BIRTHDAY_FORMAT_ERROR;
-        } catch (ExpirationFormatException ex) {
-            return EXPIRATION_FORMAT_ERROR;
-        } catch (CreationFormatException ex) {
-            Logger.getLogger(PersonHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExpirationDateException ex) {
-            return EXPIRATION_DATE_ERROR;
+
+        // Check fields are filled
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || creationDate.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || creationDate.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
         }
-        
-        peR.registerPerson(p);
-        
+
+        // Check birthday is written correctly
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
+
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return BIRTHDAY_FORMAT_ERROR;
+        }
+
+        // Check expiration is written correctly
+        if (!hoene && !reserve && !oneOne) {
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
+
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.MONTH, today.get(Calendar.MONTH) + 1);
+            Calendar expire = Calendar.getInstance();
+            expire.set(Calendar.MONTH, Integer.valueOf(expire_Month));
+            expire.set(Calendar.YEAR, Integer.valueOf(expire_Year));
+            if (expire.before(today) || expire.equals(today)) {
+                return EXPIRATION_DATE_ERROR;
+            }
+        }
+
+        // Check picturepath
+        boolean copyPic = false;
+        if (picturePath.isEmpty()) {
+            return PICTUREPATH_EMPTY_ERROR;
+        } else if (!picturePath.equals("N")) {
+            copyPic = true;
+        }
+
+        // Create person
+        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
+
+        // Register person
+        Serializable sz = peR.registerPerson(p);
+
+        // Copy picture
+        if (copyPic) {
+            String oldPicturePath = picturePath;
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) sz + "/" + "face.jpg";
+            FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+            p.setPicturePath(newPicturePath);
+            peR.savePerson(p);
+        }
+
         return NO_ERROR;
     }
 
@@ -89,90 +146,90 @@ public class PersonHandler implements HismHandlerIF {
      * @param picturePath
      * @return Error code : Integer
      */
-//    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
-//        
-//        // Check fields are filled
-//        if (!hoene && !reserve && !oneOne) {
-//            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
-//                return FIELDS_NOT_FILLED_ERROR;
-//            }
-//        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || picturePath.isEmpty()) {
-//            return FIELDS_NOT_FILLED_ERROR;
-//        }
-//
-//        // Check birthday is written correctly
-//        try {
-//            String[] birth_Split = birthdayDate.split("/");
-//            String birth_Day = birth_Split[0];
-//            String birth_Month = birth_Split[1];
-//            String birth_Year = birth_Split[2];
-//
-//            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
-//                return BIRTHDAY_FORMAT_ERROR;
-//            }
-//        } catch (ArrayIndexOutOfBoundsException ex) {
-//            return BIRTHDAY_FORMAT_ERROR;
-//        }
-//        
-//        // Check expiration is written correctly
-//        if (!hoene && !reserve && !oneOne) {
-//            String expire_Month;
-//            String expire_Year;
-//            try {
-//                String[] expire_Split = expirationDate.split("/");
-//                expire_Month = expire_Split[0];
-//                expire_Year = expire_Split[1];
-//
-//                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
-//                    return EXPIRATION_FORMAT_ERROR;
-//                }
-//            } catch (ArrayIndexOutOfBoundsException ex) {
-//                return EXPIRATION_FORMAT_ERROR;
-//            }
-//        }
-//
-//        // Check picturepath
-//        boolean copyPic = false;
-//        if (picturePath.isEmpty()) {
-//            return PICTUREPATH_EMPTY_ERROR;
-//        } else if (!picturePath.equals("N")) {
-//            copyPic = true;
-//        }
-//
-//        // Set person
-//        Person p = peR.getPerson(personID);
-//        if (p == null) {
-//            return GET_ERROR;
-//        } else {
-//            p.setFirstname(firstname);
-//            p.setMiddlename(middlename);
-//            p.setLastname(lastname);
-//            p.setAddress(address);
-//            p.setBirthdayDate(birthdayDate);
-//            p.setExpirationDate(expirationDate);
-//            p.setHoene(hoene);
-//            p.setReserve(reserve);
-//            p.setOneOne(oneOne);
-//            p.setPicturePath(picturePath);
-//        }
-//        
-//        // Copy picture
-//        if (copyPic) {
-//            String oldPicturePath = picturePath;
-//            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
-//            FileTool.deleteFile(new File(newPicturePath));
-//            FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
-//            p.setPicturePath(newPicturePath);
-//        } else {
-//            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
-//            FileTool.deleteFile(new File(newPicturePath));
-//        }
-//
-//        // Register person
-//        peR.savePerson(p);
-//
-//        return NO_ERROR;
-//    }
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+        
+        // Check fields are filled
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || picturePath.isEmpty()) {
+            return FIELDS_NOT_FILLED_ERROR;
+        }
+
+        // Check birthday is written correctly
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
+
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return BIRTHDAY_FORMAT_ERROR;
+        }
+        
+        // Check expiration is written correctly
+        if (!hoene && !reserve && !oneOne) {
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
+
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+        }
+
+        // Check picturepath
+        boolean copyPic = false;
+        if (picturePath.isEmpty()) {
+            return PICTUREPATH_EMPTY_ERROR;
+        } else if (!picturePath.equals("N")) {
+            copyPic = true;
+        }
+
+        // Set person
+        Person p = peR.getPerson(personID);
+        if (p == null) {
+            return GET_ERROR;
+        } else {
+            p.setFirstname(firstname);
+            p.setMiddlename(middlename);
+            p.setLastname(lastname);
+            p.setAddress(address);
+            p.setBirthdayDate(birthdayDate);
+            p.setExpirationDate(expirationDate);
+            p.setHoene(hoene);
+            p.setReserve(reserve);
+            p.setOneOne(oneOne);
+            p.setPicturePath(picturePath);
+        }
+        
+        // Copy picture
+        if (copyPic) {
+            String oldPicturePath = picturePath;
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
+            FileTool.deleteFile(new File(newPicturePath));
+            FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
+            p.setPicturePath(newPicturePath);
+        } else {
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
+            FileTool.deleteFile(new File(newPicturePath));
+        }
+
+        // Register person
+        peR.savePerson(p);
+
+        return NO_ERROR;
+    }
     
     /**
      * Save a person
@@ -188,69 +245,69 @@ public class PersonHandler implements HismHandlerIF {
      * @param oneOne
      * @return Error code : Integer
      */
-//    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
-//        
-//        // Check fields are filled
-//        if (!hoene && !reserve && !oneOne) {
-//            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty()) {
-//                return FIELDS_NOT_FILLED_ERROR;
-//            }
-//        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty()) {
-//            return FIELDS_NOT_FILLED_ERROR;
-//        }
-//
-//        // Check birthday is written correctly
-//        try {
-//            String[] birth_Split = birthdayDate.split("/");
-//            String birth_Day = birth_Split[0];
-//            String birth_Month = birth_Split[1];
-//            String birth_Year = birth_Split[2];
-//
-//            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
-//                return BIRTHDAY_FORMAT_ERROR;
-//            }
-//        } catch (ArrayIndexOutOfBoundsException ex) {
-//            return BIRTHDAY_FORMAT_ERROR;
-//        }
-//        
-//        // Check expiration is written correctly
-//        if (!hoene && !reserve && !oneOne) {
-//            String expire_Month;
-//            String expire_Year;
-//            try {
-//                String[] expire_Split = expirationDate.split("/");
-//                expire_Month = expire_Split[0];
-//                expire_Year = expire_Split[1];
-//
-//                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
-//                    return EXPIRATION_FORMAT_ERROR;
-//                }
-//            } catch (ArrayIndexOutOfBoundsException ex) {
-//                return EXPIRATION_FORMAT_ERROR;
-//            }
-//        }
-//
-//        // Set person
-//        Person p = peR.getPerson(personID);
-//        if (p == null) {
-//            return GET_ERROR;
-//        } else {
-//            p.setFirstname(firstname);
-//            p.setMiddlename(middlename);
-//            p.setLastname(lastname);
-//            p.setAddress(address);
-//            p.setBirthdayDate(birthdayDate);
-//            p.setExpirationDate(expirationDate);
-//            p.setHoene(hoene);
-//            p.setReserve(reserve);
-//            p.setOneOne(oneOne);
-//        }
-//
-//        // Register person
-//        peR.savePerson(p);
-//
-//        return NO_ERROR;
-//    }
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
+        
+        // Check fields are filled
+        if (!hoene && !reserve && !oneOne) {
+            if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty()) {
+                return FIELDS_NOT_FILLED_ERROR;
+            }
+        } else if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty()) {
+            return FIELDS_NOT_FILLED_ERROR;
+        }
+
+        // Check birthday is written correctly
+        try {
+            String[] birth_Split = birthdayDate.split("/");
+            String birth_Day = birth_Split[0];
+            String birth_Month = birth_Split[1];
+            String birth_Year = birth_Split[2];
+
+            if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return BIRTHDAY_FORMAT_ERROR;
+        }
+        
+        // Check expiration is written correctly
+        if (!hoene && !reserve && !oneOne) {
+            String expire_Month;
+            String expire_Year;
+            try {
+                String[] expire_Split = expirationDate.split("/");
+                expire_Month = expire_Split[0];
+                expire_Year = expire_Split[1];
+
+                if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+        }
+
+        // Set person
+        Person p = peR.getPerson(personID);
+        if (p == null) {
+            return GET_ERROR;
+        } else {
+            p.setFirstname(firstname);
+            p.setMiddlename(middlename);
+            p.setLastname(lastname);
+            p.setAddress(address);
+            p.setBirthdayDate(birthdayDate);
+            p.setExpirationDate(expirationDate);
+            p.setHoene(hoene);
+            p.setReserve(reserve);
+            p.setOneOne(oneOne);
+        }
+
+        // Register person
+        peR.savePerson(p);
+
+        return NO_ERROR;
+    }
 
     /**
      * Remove a person
