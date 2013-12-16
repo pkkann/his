@@ -42,6 +42,7 @@ public class MainGUI extends javax.swing.JFrame {
     private CreatePersonDIA createPersonDIA;
     private RemovePersonDIA removePersonDIA;
     private EditPersonDIA editPersonDIA;
+    private QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
     private RemoveUserDIA removeUserDIA;
     private EditUserDIA editUserDIA;
     private CreateUserDIA createUserDIA;
@@ -49,11 +50,12 @@ public class MainGUI extends javax.swing.JFrame {
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
     private AboutDIA aboutDIA;
+    
     // Model
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, AboutDIA aboutDIA, EditPersonDIA editPersonDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, AboutDIA aboutDIA, EditPersonDIA editPersonDIA, QuarantinePersonManagementDIA quarantinePersonManagemenDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -71,6 +73,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editProfileDIA = editProfileDIA;
         this.enrollPersonDIA = enrollPersonDIA;
         this.aboutDIA = aboutDIA;
+        this.quarantinePersonManagemenDIA = quarantinePersonManagemenDIA;
 
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
 
@@ -607,7 +610,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         rapport_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/report.png"))); // NOI18N
         rapport_Menu.setText("Rapport");
-        rapport_Menu.setEnabled(false);
 
         gemRapportIndskrevne_MenuItem.setText("Gem rapport med alle indskrevne");
         rapport_Menu.add(gemRapportIndskrevne_MenuItem);
@@ -625,7 +627,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         vagtAfslutning_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/shitEnd.png"))); // NOI18N
         vagtAfslutning_Menu.setText("Vagt afslutning");
-        vagtAfslutning_Menu.setEnabled(false);
 
         nulstil_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/reset.png"))); // NOI18N
         nulstil_MenuItem.setText("Nulstil systemet og gem rapport med alle indskrevne (PAS PÅ!)");
@@ -673,12 +674,15 @@ public class MainGUI extends javax.swing.JFrame {
 
         administrateQuarantines_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/quarantinePerson.png"))); // NOI18N
         administrateQuarantines_MenuItem.setText("Administrer karantæner");
-        administrateQuarantines_MenuItem.setEnabled(false);
+        administrateQuarantines_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                administrateQuarantines_MenuItemActionPerformed(evt);
+            }
+        });
         filer_Menu.add(administrateQuarantines_MenuItem);
 
         indstillinger_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/settings.png"))); // NOI18N
         indstillinger_MenuItem.setText("Indstillinger");
-        indstillinger_MenuItem.setEnabled(false);
         indstillinger_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 indstillinger_MenuItemActionPerformed(evt);
@@ -833,6 +837,10 @@ public class MainGUI extends javax.swing.JFrame {
         cleanSearch();
         removePersonDIA.setVisible(true);
     }//GEN-LAST:event_deletePerson_ButtonActionPerformed
+
+    private void administrateQuarantines_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrateQuarantines_MenuItemActionPerformed
+        quarantinePersonManagemenDIA.setVisible(true);
+    }//GEN-LAST:event_administrateQuarantines_MenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;

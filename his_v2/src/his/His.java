@@ -46,6 +46,7 @@ public class His {
     private EditUserDIA editUserDIA;
     private RemovePersonDIA removePersonDIA;
     private EditPersonDIA editPersonDIA;
+    private QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
     private RemoveUserDIA removeUserDIA;
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
@@ -81,12 +82,13 @@ public class His {
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
         editPersonDIA = new EditPersonDIA(mainGUI, true, peH, enH);
+        quarantinePersonManagemenDIA = new QuarantinePersonManagementDIA(mainGUI, true);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA, quarantinePersonManagemenDIA);
 
         // Control - login
         loH = new LoginHandler(usR, mainGUI);

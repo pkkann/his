@@ -25,7 +25,6 @@
                   <Image iconType="3" name="/res/report.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Rapport"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="gemRapportIndskrevne_MenuItem">
@@ -56,7 +55,6 @@
                   <Image iconType="3" name="/res/shitEnd.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Vagt afslutning"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="nulstil_MenuItem">
@@ -123,8 +121,10 @@
                   <Image iconType="3" name="/res/quarantinePerson.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Administrer karant&#xe6;ner"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="administrateQuarantines_MenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="indstillinger_MenuItem">
               <Properties>
@@ -132,7 +132,6 @@
                   <Image iconType="3" name="/res/settings.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Indstillinger"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="indstillinger_MenuItemActionPerformed"/>
