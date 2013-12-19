@@ -67,6 +67,9 @@ public class DialogMessage {
             case HismHandlerIF.LOGIN_FAILED:
                 JOptionPane.showMessageDialog(j, "Brugernavn eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
+            case HismHandlerIF.ENROLLED_ERROR:
+                JOptionPane.showMessageDialog(j, "Denne handling kan ikke udføres, da personen er indskrevet", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -113,6 +116,9 @@ public class DialogMessage {
                 break;
             case HismHandlerIF.LOGIN_FAILED:
                 JOptionPane.showMessageDialog(j, "Brugernavn eller kode er forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
+            case HismHandlerIF.ENROLLED_ERROR:
+                JOptionPane.showMessageDialog(j, "Denne handling kan ikke udføres, da personen er indskrevet", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }

@@ -839,6 +839,9 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deletePerson_ButtonActionPerformed
 
     private void administrateQuarantines_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrateQuarantines_MenuItemActionPerformed
+        cleanSelectedPerson();
+        cleanTable();
+        cleanSearch();
         quarantinePersonManagemenDIA.setVisible(true);
     }//GEN-LAST:event_administrateQuarantines_MenuItemActionPerformed
 

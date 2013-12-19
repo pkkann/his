@@ -72,7 +72,7 @@ public class His {
         peH = new PersonHandler(peR, enR);
         usH = new UserHandler(usR);
         enH = new EnrollmentHandler(enR, peR, usR);
-        quH = new QuarantineHandler(quR, peR);
+        quH = new QuarantineHandler(quR, peR, enH);
 
 
         // View
@@ -82,7 +82,7 @@ public class His {
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
         editPersonDIA = new EditPersonDIA(mainGUI, true, peH, enH);
-        quarantinePersonManagemenDIA = new QuarantinePersonManagementDIA(mainGUI, true);
+        quarantinePersonManagemenDIA = new QuarantinePersonManagementDIA(mainGUI, true, peH, quH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, true);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);

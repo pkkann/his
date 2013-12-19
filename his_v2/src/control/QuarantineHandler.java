@@ -13,86 +13,101 @@ import model.QuarantineRegister;
  *
  * @author patrick
  */
-public class QuarantineHandler implements HismHandlerIF{
-    
+public class QuarantineHandler implements HismHandlerIF {
+
     private QuarantineRegister quR;
     private PersonRegister peR;
-    
-    public QuarantineHandler(QuarantineRegister qaR, PersonRegister peR) {
+    private EnrollmentHandler enH;
+
+    public QuarantineHandler(QuarantineRegister qaR, PersonRegister peR, EnrollmentHandler enH) {
         this.quR = qaR;
         this.peR = peR;
+        this.enH = enH;
     }
-    
+
     /**
      * Create a quarantine
+     *
      * @param personID
      * @param quarantineExpireDate
      * @return Error code : Integer
      */
     public int createQuarantine(int personID, String quarantineExpireDate) {
-        
-        // Get person
-        Person p = peR.getPerson(personID);
-        
-        Quarantine q;
-        
-        if(p != null) {
-            // Check expireDate is there
-            if(!quarantineExpireDate.isEmpty()) {
-                // Check expireDate is valid
-                String[] quarantineExpireDate_Split = quarantineExpireDate.split("/");
-                String quaran_Month = quarantineExpireDate_Split[0];
-                String quaran_Year = quarantineExpireDate_Split[1];
-                
-                if(quaran_Month.length() != 2 || quaran_Year.length() != 4) {
-                    return QUARANTINE_FORMAT_ERROR;
+
+        if (!enH.isEnrolled(personID)) {
+
+            // Get person
+            Person p = peR.getPerson(personID);
+
+            Quarantine q;
+
+            if (p != null) {
+                // Check expireDate is there
+                if (!quarantineExpireDate.isEmpty()) {
+                    // Check expireDate is valid
+                    String quaran_Month = "";
+                    String quaran_Year = "";
+                    try {
+                        String[] quarantineExpireDate_Split = quarantineExpireDate.split("/");
+                        quaran_Month = quarantineExpireDate_Split[0];
+                        quaran_Year = quarantineExpireDate_Split[1];
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        return FIELDS_NOT_FILLED_ERROR;
+                    }
+
+                    if (quaran_Month.length() != 2 || quaran_Year.length() != 4) {
+                        return QUARANTINE_FORMAT_ERROR;
+                    }
+
+                    // Create quarantine
+                    q = new Quarantine(quarantineExpireDate, p);
+
+                    // Register quarantine
+                    quR.registerQuarantine(q);
+                } else {
+                    // Create quarantine
+                    q = new Quarantine("", p);
+
+                    // Register quarantine
+                    quR.registerQuarantine(q);
                 }
-                
-                // Create quarantine
-                q = new Quarantine(quarantineExpireDate, p);
-                
-                // Register quarantine
-                quR.registerQuarantine(q);
             } else {
-                // Create quarantine
-                q = new Quarantine("", p);
-                
-                // Register quarantine
-                quR.registerQuarantine(q);
+                return GET_ERROR;
             }
         } else {
-            return GET_ERROR;
+            return ENROLLED_ERROR;
         }
-        
+
         return NO_ERROR;
     }
-    
+
     /**
      * Save a quarantine
+     *
      * @param quarantineID
      * @param quarantineExpireDate
      * @return Error code : Integer
      */
     public int saveQuarantine(int quarantineID, String quarantineExpireDate) {
-        
+
         // Get quarantine
         Quarantine q = quR.getQuarantine(quarantineID);
-        
-        if(q != null) {
+
+        if (q != null) {
             // Check expireDate is there
-            if(!quarantineExpireDate.isEmpty()) {
+            if (!quarantineExpireDate.isEmpty()) {
                 // Check expireDate is valid
                 String[] quarantineExpireDate_Split = quarantineExpireDate.split("/");
                 String quaran_Month = quarantineExpireDate_Split[0];
                 String quaran_Year = quarantineExpireDate_Split[1];
-                
-                if(quaran_Month.length() != 2 || quaran_Year.length() != 4) {
+
+                if (quaran_Month.length() != 2 || quaran_Year.length() != 4) {
                     return QUARANTINE_FORMAT_ERROR;
                 }
-                
+
                 // Set quarantine
                 q.setQuarantineExpireDate(quarantineExpireDate);
-                
+
                 // Save quarantine
                 quR.saveQuarantine(q);
             } else {
@@ -102,51 +117,54 @@ public class QuarantineHandler implements HismHandlerIF{
         } else {
             return GET_ERROR;
         }
-        
+
         return NO_ERROR;
     }
-    
+
     /**
      * Remove a quarantine
+     *
      * @param quarantineID
      * @return Error code : Integer
      */
-    public int removeQuarantine(int quarantineID) {
-        
+    public int removeQuarantine(int idPerson) {
+
         // Get quarantine
-        Quarantine q = quR.getQuarantine(quarantineID);
-        
-        if(q != null) {
+        Quarantine q = quR.getQuarantine(idPerson);
+
+        if (q != null) {
             // Remove quarantine
             quR.deleteQuarantine(q);
         } else {
             return GET_ERROR;
         }
-        
+
         return NO_ERROR;
     }
-    
+
     /**
      * Return a quarantine
+     *
      * @param idPerson
      * @return qa : Quarantine
      */
     public Quarantine getQuarantine(int idPerson) {
         return quR.getQuarantine(idPerson);
     }
-    
+
     /**
      * Returns wether a person is quarantined or not
+     *
      * @param idPerson
      * @return boolean
      */
     public boolean isQuarantined(int idPerson) {
         Quarantine q = quR.getQuarantine(idPerson);
-        if(q == null) {
+        if (q == null) {
             return false;
         } else {
             return true;
         }
     }
-    
+
 }
