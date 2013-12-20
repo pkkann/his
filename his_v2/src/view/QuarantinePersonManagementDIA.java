@@ -30,7 +30,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
     private PersonHandler peH;
     private QuarantineHandler quH;
     private int selectedPerson = -1;
-    
+
     public QuarantinePersonManagementDIA(java.awt.Frame parent, boolean modal, PersonHandler peH, QuarantineHandler quH) {
         super(parent, modal);
         this.peH = peH;
@@ -39,7 +39,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
         initTableListener();
         setTitleIcon();
     }
-    
+
     private void setTitleIcon() {
         Image icon = null;
         try {
@@ -49,7 +49,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
         }
         titleIcon_PicturePane.setPicture(icon, false);
     }
-    
+
     private void initTableListener() {
         result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -63,47 +63,40 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
             }
         });
     }
-    
+
     private void setSelectedPerson(int idPerson) {
         cleanSelectedPerson();
         selectedPerson = idPerson;
-        
-        if(quH.isQuarantined(idPerson)) {
+
+        if (quH.isQuarantined(idPerson)) {
             Quarantine qu = quH.getQuarantine(idPerson);
             quarantine_Label.setText("Ja");
-            if(qu.getQuarantineExpireDate().isEmpty()) {
-                expirationdate_Label.setText("-");
-            } else {
-                expirationdate_Label.setText(qu.getQuarantineExpireDate());
-            }
             quarantine_Button.setText("Slet karantæne");
             quarantine_Button.setEnabled(true);
         } else {
             quarantine_Label.setText("Nej");
-            expirationdate_Label.setText("-");
             quarantine_Button.setText("Opret karantæne");
             quarantine_Button.setEnabled(true);
         }
-        
+
     }
-    
+
     private void cleanSearch() {
         search_TextField.setText("");
     }
-    
+
     private void cleanTable() {
         DefaultTableModel dtm = TableTool.createEmptyPersonTableModel();
         result_Table.setModel(dtm);
     }
-    
+
     private void cleanSelectedPerson() {
         selectedPerson = -1;
         quarantine_Label.setText("-");
-        expirationdate_Label.setText("-");
         quarantine_Button.setText("Opret karantæne");
         quarantine_Button.setEnabled(false);
     }
-    
+
     public void search() {
         cleanSelectedPerson();
         ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
@@ -133,10 +126,8 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
         close_Button = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         quarantine_Button = new javax.swing.JButton();
         quarantine_Label = new javax.swing.JLabel();
-        expirationdate_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -263,9 +254,6 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Karantæne:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Udløber:");
-
         quarantine_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         quarantine_Button.setText("Opret Karantæne");
         quarantine_Button.setEnabled(false);
@@ -278,9 +266,6 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
         quarantine_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         quarantine_Label.setText("-");
 
-        expirationdate_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        expirationdate_Label.setText("-");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -289,33 +274,25 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 835, Short.MAX_VALUE)
                         .addComponent(quarantine_Button))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(quarantine_Label)
-                            .addComponent(expirationdate_Label))
+                        .addComponent(quarantine_Label)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(quarantine_Label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(expirationdate_Label))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(quarantine_Button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -376,29 +353,29 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_search_TextFieldActionPerformed
 
     private void quarantine_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quarantine_ButtonActionPerformed
-        if(quH.isQuarantined(selectedPerson)) {
+        if (quH.isQuarantined(selectedPerson)) {
             int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette karantænen?", "Sikker?");
             if (n == 0) {
                 int errorCode = quH.removeQuarantine(selectedPerson);
                 DialogMessage.showMessage(this, errorCode);
-                if(errorCode == 0) {
+                if (errorCode == 0) {
                     setSelectedPerson(selectedPerson);
                 }
             }
         } else {
-            CreateQuarantineDIA crQ = new CreateQuarantineDIA(new JFrame(), true, quH);
-            crQ.setSelectedPerson(selectedPerson);
-            crQ.setVisible(true);
-            setSelectedPerson(selectedPerson);
+            int errorCode = quH.createQuarantine(selectedPerson);
+            DialogMessage.showMessage(this, errorCode);
+
+            if (errorCode == 0) {
+                setSelectedPerson(selectedPerson);
+            }
         }
     }//GEN-LAST:event_quarantine_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close_Button;
-    private javax.swing.JLabel expirationdate_Label;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

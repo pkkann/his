@@ -47,7 +47,6 @@ public class DateChangeDetector implements Runnable {
         
         // Do start stuff
         peH.checkExpirationDates();
-        quH.checkExpirationDates();
         mainGUI.updateDate("");
         /////////////////
         
@@ -65,7 +64,6 @@ public class DateChangeDetector implements Runnable {
                     //Do stuff on detect
                     System.out.println("##### Date Changed! #####");
                     peH.checkExpirationDates();
-                    quH.checkExpirationDates();
                     mainGUI.updateDate("");
                     ////////////////////
                 }

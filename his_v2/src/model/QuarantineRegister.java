@@ -86,7 +86,7 @@ public class QuarantineRegister {
     public void deleteQuarantine(Quarantine q) {
         System.out.println("Deleting quarantine...");
         
-        quarantines.remove(q);
+        
         
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
@@ -95,6 +95,9 @@ public class QuarantineRegister {
         
         tx.commit();
         s.close();
+        
+        quarantines.remove(q);
+        
         System.out.println("Deletion complete!");
     }
 

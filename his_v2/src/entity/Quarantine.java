@@ -29,9 +29,6 @@ public class Quarantine implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idQuarantine;
     
-    @Column(name = "quarantineexpiredate")
-    private String quarantineExpireDate;
-    
     @OneToOne
     @JoinColumn(name = "idperson")
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -44,25 +41,12 @@ public class Quarantine implements Serializable {
         this.person = person;
     }
 
-    public Quarantine(String quarantineExpireDate, Person person) {
-        this.quarantineExpireDate = quarantineExpireDate;
-        this.person = person;
-    }
-
     public int getIdQuarantine() {
         return idQuarantine;
     }
 
     public void setIdQuarantine(int idQuarantine) {
         this.idQuarantine = idQuarantine;
-    }
-
-    public String getQuarantineExpireDate() {
-        return quarantineExpireDate;
-    }
-
-    public void setQuarantineExpireDate(String quarantineExpireDate) {
-        this.quarantineExpireDate = quarantineExpireDate;
     }
 
     public Person getPerson() {
