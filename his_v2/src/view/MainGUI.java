@@ -9,6 +9,7 @@ import control.EnrollmentHandler;
 import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
+import entity.Enrollment;
 import entity.Person;
 import entity.Quarantine;
 import entity.User;
@@ -22,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -50,7 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
     private AboutDIA aboutDIA;
-    
+
     // Model
     private int selectedPerson = -1;
     private User loggedIn;
@@ -78,20 +80,20 @@ public class MainGUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
 
         search_Button.requestFocus();
-        
+
     }
-    
+
     public void setLoginHandler(LoginHandler loH) {
         this.loH = loH;
     }
-    
+
     public void setloggedInUser() {
         System.out.println("SETTING LOGGEDIN USER");
         this.loggedIn = LoginHandler.loggedIn;
         user_Label.setText(loggedIn.getFirstname() + " " + loggedIn.getLastname());
-        
+
         // Set rights
-        if(!loggedIn.isAdministrator()) {
+        if (!loggedIn.isAdministrator()) {
             brugere_Menu.setEnabled(false);
             deletePerson_Button.setEnabled(false);
             deletePerson_Button.setToolTipText("Du skal være administrator for at benytte denne funktion");
@@ -115,7 +117,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
         this.setIconImage(icon);
     }
-    
+
     private void setTitle() {
         setTitle(his.His.title + " - " + his.His.version);
     }
@@ -136,21 +138,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void setPerson(int id) {
         selectedPerson = id;
-        Person p = peH.getPerson(id);
-
-        if (enH.isEnrolled(id)) {
-            status_Label.setText("Personen er indskrevet");
-            status_Label.setForeground(Color.black);
-            status_Pane.setBackground(new Color(153, 204, 0));
-        } else {
-            status_Label.setText("Personen er ikke indskrevet");
-            status_Label.setForeground(Color.white);
-            status_Pane.setBackground(new Color(51, 51, 51));
-        }
-
-
-
-        if (p.getPicturePath().equals("N")) {
+        
+        if(peH.getPerson(id).getPicturePath().equals("N")) {
             Image icon = null;
             try {
                 icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/billedid.png"));
@@ -160,7 +149,7 @@ public class MainGUI extends javax.swing.JFrame {
             picturePane_PicturePane.setPicture(icon, true);
         } else {
             try {
-                Image img = ImageIO.read(new File(p.getPicturePath()));
+                Image img = ImageIO.read(new File(peH.getPerson(id).getPicturePath()));
                 picturePane_PicturePane.setPicture(img, true);
             } catch (IOException ex) {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,18 +157,33 @@ public class MainGUI extends javax.swing.JFrame {
         }
 
         if (quH.isQuarantined(id)) {
-            Quarantine q = quH.getQuarantine(id);
-            if (q.getQuarantineExpireDate().isEmpty()) {
-                status_Label.setText("Personen har karantæne");
-            } else {
-                status_Label.setText("Personen har karantæne til " + q.getQuarantineExpireDate());
-            }
+            status_Label.setText("Personen har karantæne");
             status_Label.setForeground(Color.white);
             status_Pane.setBackground(Color.red);
             enroll_Button.setEnabled(false);
-            renew_Button.setEnabled(false);
+            return;
+        }
+
+        if (enH.isEnrolled(id)) {
+            if (enH.getEnrollment(id).isKicked()) {
+                status_Label.setForeground(Color.white);
+                status_Label.setText("Personen er smidt ud");
+                status_Pane.setBackground(Color.red);
+                enroll_Button.setEnabled(false);
+                kick_Button.setEnabled(false);
+            } else {
+                status_Label.setForeground(Color.black);
+                status_Label.setText("Personen er indskrevet");
+                status_Pane.setBackground(new Color(153, 204, 0));
+                enroll_Button.setEnabled(true);
+                kick_Button.setEnabled(true);
+            }
         } else {
+            status_Label.setForeground(Color.white);
+            status_Label.setText("Personen er ikke indskrevet");
+            status_Pane.setBackground(new Color(51, 51, 51));
             enroll_Button.setEnabled(true);
+            kick_Button.setEnabled(false);
         }
     }
 
@@ -204,6 +208,7 @@ public class MainGUI extends javax.swing.JFrame {
         picturePane_PicturePane.setPicture(null, true);
         enroll_Button.setEnabled(false);
         renew_Button.setEnabled(false);
+        kick_Button.setEnabled(false);
         status_Label.setText("Ingen person valgt");
         status_Label.setForeground(Color.white);
         status_Pane.setBackground(new Color(51, 51, 51));
@@ -405,6 +410,11 @@ public class MainGUI extends javax.swing.JFrame {
         kick_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         kick_Button.setText("Smid ud");
         kick_Button.setEnabled(false);
+        kick_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kick_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout inner_PaneLayout = new javax.swing.GroupLayout(inner_Pane);
         inner_Pane.setLayout(inner_PaneLayout);
@@ -779,7 +789,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
-        if(selectedPerson != -1) {
+        if (selectedPerson != -1) {
             enrollPersonDIA.setPerson(peH.getPerson(selectedPerson));
             enrollPersonDIA.setVisible(true);
             setPerson(selectedPerson);
@@ -802,8 +812,8 @@ public class MainGUI extends javax.swing.JFrame {
         if (n == 0) {
             int errorCode = enH.removeAllEnrollments();
             DialogMessage.showMessage(this, errorCode);
-            
-            if(errorCode == 0) {
+
+            if (errorCode == 0) {
                 dispose();
                 cleanSearch();
                 cleanSelectedPerson();
@@ -844,6 +854,15 @@ public class MainGUI extends javax.swing.JFrame {
         cleanSearch();
         quarantinePersonManagemenDIA.setVisible(true);
     }//GEN-LAST:event_administrateQuarantines_MenuItemActionPerformed
+
+    private void kick_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kick_ButtonActionPerformed
+        int n = DialogMessage.showQuestionMessage(new JFrame(), "Er du sikker på du vil smide denne person ud?", "Sikker?");
+            if (n == 0) {
+                int errorCode = enH.kickEnrollment(selectedPerson);
+                DialogMessage.showMessage(this, errorCode);
+                setPerson(selectedPerson);
+            }
+    }//GEN-LAST:event_kick_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;

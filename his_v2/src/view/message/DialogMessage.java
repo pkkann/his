@@ -22,6 +22,11 @@ public class DialogMessage {
         int n = JOptionPane.showConfirmDialog(j,question,subject,JOptionPane.YES_NO_OPTION);
         return n;
     }
+    
+    public static int showQuestionMessage(JFrame f, String question, String subject) {
+        int n = JOptionPane.showConfirmDialog(f,question,subject,JOptionPane.YES_NO_OPTION);
+        return n;
+    }
 
     public static void showMessage(JDialog j, int errorCode) {
         switch (errorCode) {

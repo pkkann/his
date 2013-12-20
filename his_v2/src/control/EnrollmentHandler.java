@@ -251,4 +251,21 @@ public class EnrollmentHandler implements HismHandlerIF {
         enR.removeAllEnrollments();
         return NO_ERROR;
     }
+    
+    /**
+     * Kicks an enrollment (really kicks a person)
+     * @param idPerson
+     * @return Error code : Integer
+     */
+    public int kickEnrollment(int idPerson) {
+        Enrollment en = enR.getEnrollment(idPerson);
+        if(en == null) {
+            return GET_ERROR;
+        }
+        
+        en.setKicked(true);
+        
+        enR.saveEnrollment(en);
+        return NO_ERROR;
+    }
 }

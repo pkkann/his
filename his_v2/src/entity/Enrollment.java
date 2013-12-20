@@ -32,6 +32,9 @@ public class Enrollment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idEnrollment;
     
+    @Column(name = "kicked")
+    private boolean kicked;
+    
     @OneToOne
     @JoinColumn(name = "idperson")
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -85,6 +88,15 @@ public class Enrollment implements Serializable {
     public void setGuests(Set<Guest> guests) {
         this.guests = guests;
     }
+
+    public boolean isKicked() {
+        return kicked;
+    }
+
+    public void setKicked(boolean kicked) {
+        this.kicked = kicked;
+    }
+    
     
     
 }
