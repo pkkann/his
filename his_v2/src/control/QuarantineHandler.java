@@ -6,6 +6,10 @@ package control;
 
 import entity.Person;
 import entity.Quarantine;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Locale;
 import model.PersonRegister;
 import model.QuarantineRegister;
 
@@ -165,6 +169,30 @@ public class QuarantineHandler implements HismHandlerIF {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Checks expiration dates, and takes appropriate action
+     */
+    public void checkExpirationDates() {
+        Calendar currentDate = Calendar.getInstance();
+
+        for (Quarantine qu : quR.getQuarantines()) {
+            if (!qu.getQuarantineExpireDate().isEmpty()) {
+                String expireSplit[] = qu.getQuarantineExpireDate().split("/");
+
+                Calendar quDate = Calendar.getInstance();
+                quDate.set(Calendar.MONTH, Integer.valueOf(expireSplit[0]) - 1);
+                quDate.set(Calendar.YEAR, Integer.valueOf(expireSplit[1]));
+                quDate.set(Calendar.DATE, 01);
+
+                if (currentDate.after(quDate) || currentDate.equals(quDate)) {
+                    System.out.println("##### " + qu.getPerson().getFirstname() + " " + qu.getPerson().getLastname() + " is no longer having quarantine! #####");
+                    
+                }
+            }
+        }
+
     }
 
 }

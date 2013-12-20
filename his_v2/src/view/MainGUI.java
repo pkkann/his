@@ -138,8 +138,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void setPerson(int id) {
         selectedPerson = id;
-        
-        if(peH.getPerson(id).getPicturePath().equals("N")) {
+
+        if (peH.getPerson(id).getPicturePath().equals("N")) {
             Image icon = null;
             try {
                 icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/billedid.png"));
@@ -171,19 +171,31 @@ public class MainGUI extends javax.swing.JFrame {
                 status_Pane.setBackground(Color.red);
                 enroll_Button.setEnabled(false);
                 kick_Button.setEnabled(false);
+                return;
             } else {
                 status_Label.setForeground(Color.black);
                 status_Label.setText("Personen er indskrevet");
                 status_Pane.setBackground(new Color(153, 204, 0));
                 enroll_Button.setEnabled(true);
                 kick_Button.setEnabled(true);
+                return;
             }
         } else {
-            status_Label.setForeground(Color.white);
-            status_Label.setText("Personen er ikke indskrevet");
-            status_Pane.setBackground(new Color(51, 51, 51));
-            enroll_Button.setEnabled(true);
-            kick_Button.setEnabled(false);
+            if (!peH.getPerson(id).isExpired()) {
+                status_Label.setForeground(Color.white);
+                status_Label.setText("Personen er ikke indskrevet");
+                status_Pane.setBackground(new Color(51, 51, 51));
+                enroll_Button.setEnabled(true);
+                kick_Button.setEnabled(false);
+                return;
+            } else {
+                status_Label.setForeground(Color.white);
+                status_Label.setText("Personen er udløbet");
+                status_Pane.setBackground(Color.red);
+                enroll_Button.setEnabled(false);
+                kick_Button.setEnabled(false);
+                renew_Button.setEnabled(true);
+            }
         }
     }
 
@@ -857,11 +869,11 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void kick_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kick_ButtonActionPerformed
         int n = DialogMessage.showQuestionMessage(new JFrame(), "Er du sikker på du vil smide denne person ud?", "Sikker?");
-            if (n == 0) {
-                int errorCode = enH.kickEnrollment(selectedPerson);
-                DialogMessage.showMessage(this, errorCode);
-                setPerson(selectedPerson);
-            }
+        if (n == 0) {
+            int errorCode = enH.kickEnrollment(selectedPerson);
+            DialogMessage.showMessage(this, errorCode);
+            setPerson(selectedPerson);
+        }
     }//GEN-LAST:event_kick_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -143,7 +143,7 @@ public class PersonHandler implements HismHandlerIF {
      * @return Error code : Integer
      */
     public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
-        
+
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
             if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty() || picturePath.isEmpty()) {
@@ -166,7 +166,7 @@ public class PersonHandler implements HismHandlerIF {
         } catch (ArrayIndexOutOfBoundsException ex) {
             return BIRTHDAY_FORMAT_ERROR;
         }
-        
+
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
             String expire_Month;
@@ -208,7 +208,7 @@ public class PersonHandler implements HismHandlerIF {
             p.setOneOne(oneOne);
             p.setPicturePath(picturePath);
         }
-        
+
         // Copy picture
         if (copyPic) {
             String oldPicturePath = picturePath;
@@ -226,7 +226,7 @@ public class PersonHandler implements HismHandlerIF {
 
         return NO_ERROR;
     }
-    
+
     /**
      * Save a person
      *
@@ -242,7 +242,7 @@ public class PersonHandler implements HismHandlerIF {
      * @return Error code : Integer
      */
     public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
-        
+
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
             if (firstname.isEmpty() || lastname.isEmpty() || address.isEmpty() || birthdayDate.isEmpty() || expirationDate.isEmpty()) {
@@ -265,7 +265,7 @@ public class PersonHandler implements HismHandlerIF {
         } catch (ArrayIndexOutOfBoundsException ex) {
             return BIRTHDAY_FORMAT_ERROR;
         }
-        
+
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
             String expire_Month;
@@ -478,6 +478,31 @@ public class PersonHandler implements HismHandlerIF {
             return false;
         } else {
             return true;
+        }
+    }
+
+    /**
+     * Checks expiration dates, and takes appropriate action
+     */
+    public void checkExpirationDates() {
+        Calendar currentDate = Calendar.getInstance();
+
+        for (Person p : peR.getPersons()) {
+            if (!p.getExpirationDate().isEmpty()) {
+                String expireSplit[] = p.getExpirationDate().split("/");
+                
+                Calendar pDate = Calendar.getInstance();
+                pDate.set(Calendar.MONTH, Integer.valueOf(expireSplit[0]) - 1);
+                pDate.set(Calendar.YEAR, Integer.valueOf(expireSplit[1]));
+                pDate.set(Calendar.DATE, 01);
+                
+                if(currentDate.after(pDate) || currentDate.equals(pDate)) {
+                    System.out.println("##### " + p.getFirstname() + " " + p.getLastname() + " has expired! #####");
+                    p.setExpired(true);
+                } else {
+                    p.setExpired(false);
+                }
+            }
         }
     }
 }

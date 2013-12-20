@@ -14,6 +14,7 @@ import model.*;
 import org.hibernate.classic.Session;
 import view.*;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import date.DateChangeDetector;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -54,6 +55,8 @@ public class His {
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
+    // Listener
+    DateChangeDetector dcd;
 
     public His() {
         setLookAndFeel();
@@ -115,8 +118,10 @@ public class His {
         enR.loadEnrollmentsFromDB();
 
         //testData();
-
+        
         loadingGUI.setVisible(false);
+        dcd = new DateChangeDetector(mainGUI, peH, quH);
+        dcd.start();
         loH.requestLogin();
         System.out.println("##### His started! #####");
     }
