@@ -181,21 +181,12 @@ public class MainGUI extends javax.swing.JFrame {
                 return;
             }
         } else {
-            if (!peH.getPerson(id).isExpired()) {
-                status_Label.setForeground(Color.white);
-                status_Label.setText("Personen er ikke indskrevet");
-                status_Pane.setBackground(new Color(51, 51, 51));
-                enroll_Button.setEnabled(true);
-                kick_Button.setEnabled(false);
-                return;
-            } else {
-                status_Label.setForeground(Color.white);
-                status_Label.setText("Personen er udløbet");
-                status_Pane.setBackground(Color.red);
-                enroll_Button.setEnabled(false);
-                kick_Button.setEnabled(false);
-                renew_Button.setEnabled(true);
-            }
+            status_Label.setForeground(Color.white);
+            status_Label.setText("Personen er ikke indskrevet");
+            status_Pane.setBackground(new Color(51, 51, 51));
+            enroll_Button.setEnabled(true);
+            kick_Button.setEnabled(false);
+            return;
         }
     }
 

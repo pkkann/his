@@ -42,8 +42,6 @@ public class Person implements Serializable {
 
     @Column(name = "expirationdate")
     private String expirationDate;
-    
-    private boolean expired;
 
     @Column(name = "creationdate")
     private String creationDate;
@@ -184,14 +182,6 @@ public class Person implements Serializable {
 
     public void setOneOne(boolean oneOne) {
         this.oneOne = oneOne;
-    }
-
-    public boolean isExpired() {
-        return expired;
-    }
-
-    public void setExpired(boolean expired) {
-        this.expired = expired;
     }
     
     

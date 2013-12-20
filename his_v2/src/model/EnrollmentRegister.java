@@ -6,7 +6,6 @@ package model;
 
 import entity.Enrollment;
 import entity.Guest;
-import entity.Person;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -77,7 +76,7 @@ public class EnrollmentRegister {
      */
     public void DeleteGuest(Enrollment en, Guest g) {
         System.out.println("Deleting guest...");
-        en.getGuests().remove(g);
+        
         
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
@@ -86,6 +85,7 @@ public class EnrollmentRegister {
         
         tx.commit();
         s.close();
+        en.getGuests().remove(g);
         System.out.println("Delete complete!");
     }
     
@@ -128,7 +128,7 @@ public class EnrollmentRegister {
     public void deleteEnrollment(Enrollment en) {
         System.out.println("Deleting enrollment...");
         
-        enrollments.remove(en);
+        
         
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
@@ -137,6 +137,7 @@ public class EnrollmentRegister {
         
         tx.commit();
         s.close();
+        enrollments.remove(en);
         System.out.println("Deletion complete!");
     }
     

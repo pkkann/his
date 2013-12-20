@@ -136,6 +136,7 @@ public class PersonHandler implements HismHandlerIF {
      * @param lastname
      * @param address
      * @param birthdayDate (DD/MM/YYYY)
+     * @param expirationDate
      * @param reserve
      * @param hoene
      * @param oneOne
@@ -236,6 +237,7 @@ public class PersonHandler implements HismHandlerIF {
      * @param lastname
      * @param address
      * @param birthdayDate (DD/MM/YYYY)
+     * @param expirationDate
      * @param reserve
      * @param hoene
      * @param oneOne
@@ -373,6 +375,7 @@ public class PersonHandler implements HismHandlerIF {
      * Returns a result based on a string
      *
      * @param search
+     * @param onlyEnrolled
      * @return data : ArrayList<String[]>
      */
     public ArrayList<String[]> searchPerson(String search, boolean onlyEnrolled) {
@@ -467,7 +470,7 @@ public class PersonHandler implements HismHandlerIF {
     }
 
     /**
-     * Returns wether a person is enrolled or not
+     * Returns whether a person is enrolled or not
      *
      * @param idPerson
      * @return boolean
@@ -478,31 +481,6 @@ public class PersonHandler implements HismHandlerIF {
             return false;
         } else {
             return true;
-        }
-    }
-
-    /**
-     * Checks expiration dates, and takes appropriate action
-     */
-    public void checkExpirationDates() {
-        Calendar currentDate = Calendar.getInstance();
-
-        for (Person p : peR.getPersons()) {
-            if (!p.getExpirationDate().isEmpty()) {
-                String expireSplit[] = p.getExpirationDate().split("/");
-                
-                Calendar pDate = Calendar.getInstance();
-                pDate.set(Calendar.MONTH, Integer.valueOf(expireSplit[0]) - 1);
-                pDate.set(Calendar.YEAR, Integer.valueOf(expireSplit[1]));
-                pDate.set(Calendar.DATE, 01);
-                
-                if(currentDate.after(pDate) || currentDate.equals(pDate)) {
-                    System.out.println("##### " + p.getFirstname() + " " + p.getLastname() + " has expired! #####");
-                    p.setExpired(true);
-                } else {
-                    p.setExpired(false);
-                }
-            }
         }
     }
 }
