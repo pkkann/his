@@ -57,6 +57,8 @@ public class Person implements Serializable {
 
     @Column(name = "oneone")
     private boolean oneOne;
+    
+    private boolean expired;
 
     public Person() {
     }
@@ -72,6 +74,7 @@ public class Person implements Serializable {
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
+        this.expired = false;
     }
 
     public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
@@ -86,6 +89,7 @@ public class Person implements Serializable {
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
         this.picturePath = picturePath;
+        this.expired = false;
     }
 
     public int getIdPerson() {
@@ -182,6 +186,14 @@ public class Person implements Serializable {
 
     public void setOneOne(boolean oneOne) {
         this.oneOne = oneOne;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
     
     

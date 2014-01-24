@@ -9,12 +9,14 @@ import static control.HismHandlerIF.EXPIRATION_DATE_ERROR;
 import static control.HismHandlerIF.EXPIRATION_FORMAT_ERROR;
 import static control.HismHandlerIF.FIELDS_NOT_FILLED_ERROR;
 import entity.Enrollment;
+import entity.Guest;
 import entity.Person;
 import file.FileTool;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import model.EnrollmentRegister;
 import model.PersonRegister;
 
@@ -335,12 +337,12 @@ public class PersonHandler implements HismHandlerIF {
         int count = 0;
 
         for (Enrollment en : enR.getEnrollments()) {
-            for (Person p : peR.getPersons()) {
-                if (en.getEnrolledPerson().equals(p)) {
-                    count++;
-                }
+            count++;
+            for (Guest g : en.getGuests()) {
+                count++;
             }
         }
+
         return count;
     }
 
@@ -361,7 +363,12 @@ public class PersonHandler implements HismHandlerIF {
         // Make full name
         String name = firstname + " " + middlename + " " + lastname;
 
-        for (Person p : peR.getPersons()) {
+        // Make iterator
+        Iterator<Person> i = peR.getPersons().iterator();
+
+        // Loop through and search
+        while (i.hasNext()) {
+            Person p = i.next();
             if ((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equals(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
                 String[] dat = {p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate()};
                 data.add(dat);
@@ -413,7 +420,11 @@ public class PersonHandler implements HismHandlerIF {
 
             }
         } else {
-            for (Person p : peR.getPersons()) {
+            Iterator<Person> i = peR.getPersons().iterator();
+
+            while (i.hasNext()) {
+                Person p = i.next();
+
                 String birthday = p.getBirthdayDate().replaceAll("/", "");
                 String expiration = p.getExpirationDate().replaceAll("/", "");
                 String hoene = "Nej";
@@ -456,17 +467,14 @@ public class PersonHandler implements HismHandlerIF {
      * @return p : Person
      */
     public Person getPerson(int id) {
-        Person p = null;
-
-        for (Person pp : peR.getPersons()) {
-            if (pp.getIdPerson() == id) {
-                p = pp;
-                break;
+        Iterator<Person> i = peR.getPersons().iterator();
+        while (i.hasNext()) {
+            Person p = i.next();
+            if (p.getIdPerson() == id) {
+                return p;
             }
         }
-
-        return p;
-
+        return null;
     }
 
     /**
@@ -482,5 +490,41 @@ public class PersonHandler implements HismHandlerIF {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Checks all persons expiration dates, and sets there expired status
+     * accordingly
+     */
+    public void checkExpirationDates() {
+        Calendar current = Calendar.getInstance();
+
+        Iterator<Person> i = peR.getPersons().iterator();
+
+        while (i.hasNext()) {
+            System.out.println("EN TIL");
+            Person p = i.next();
+            if (!p.getExpirationDate().isEmpty()) {
+                String[] expireString = p.getExpirationDate().split("/");
+                String month = expireString[0];
+                String year = expireString[1];
+
+                Calendar expiration = Calendar.getInstance();
+                expiration.set(Calendar.MONTH, (Integer.valueOf(month) - 1));
+                expiration.set(Calendar.YEAR, Integer.valueOf(year));
+                expiration.set(Calendar.DATE, expiration.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+                if (current.after(expiration)) {
+                    if (!this.isEnrolled(p.getIdPerson())) {
+                        p.setExpired(true);
+                    }
+                } else {
+                    if (!this.isEnrolled(p.getIdPerson())) {
+                        p.setExpired(false);
+                    }
+                }
+            }
+        }
+        System.out.println("FÆRDIG");
     }
 }

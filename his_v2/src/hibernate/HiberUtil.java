@@ -4,6 +4,7 @@
  */
 package hibernate;
 
+import org.hibernate.HibernateException;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -32,4 +33,5 @@ public class HiberUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
 }

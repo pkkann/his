@@ -14,6 +14,8 @@ import model.*;
 import org.hibernate.classic.Session;
 import view.*;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import date.DateChecker;
+import control.DateHandler;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -34,6 +36,7 @@ public class His {
     private EnrollmentHandler enH;
     private QuarantineHandler quH;
     private LoginHandler loH;
+    private DateHandler dah;
     // Model
     private PersonRegister peR;
     private UserRegister usR;
@@ -73,6 +76,7 @@ public class His {
         usH = new UserHandler(usR);
         enH = new EnrollmentHandler(enR, peR, usR);
         quH = new QuarantineHandler(quR, peR, enH);
+        dah = new DateHandler(new DateChecker(), peH);
 
 
         // View

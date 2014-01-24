@@ -155,6 +155,15 @@ public class MainGUI extends javax.swing.JFrame {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        if (peH.getPerson(id).isExpired()) {
+            status_Label.setText("Personen er udløbet");
+            status_Label.setForeground(Color.white);
+            status_Pane.setBackground(Color.red);
+            enroll_Button.setEnabled(false);
+            renew_Button.setEnabled(true);
+            return;
+        }
 
         if (quH.isQuarantined(id)) {
             status_Label.setText("Personen har karantæne");
