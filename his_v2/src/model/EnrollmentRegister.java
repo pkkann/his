@@ -9,6 +9,7 @@ import entity.Guest;
 import hibernate.HiberUtil;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
@@ -213,9 +214,11 @@ public class EnrollmentRegister {
         System.out.println("Removing all enrollments...");
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
-
-        for (Enrollment en : enrollments) {
-            s.delete(en);
+        
+        Iterator<Enrollment> i = enrollments.iterator();
+        
+        while(i.hasNext()) {
+            enrollments.remove(i.next());
         }
 
         tx.commit();

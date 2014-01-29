@@ -8,8 +8,8 @@ Opgaver
 X Karantæne
 X Udsmidning
 - Forny
-- Dato tjekning
+X Dato tjekning
 - Webcam integration
 - Indstillinger
-- Vagt afslutning
+- Vagt afslutning (Mangler rapport)
 - Rapporter

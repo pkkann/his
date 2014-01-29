@@ -9,9 +9,6 @@ import control.EnrollmentHandler;
 import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
-import entity.Enrollment;
-import entity.Person;
-import entity.Quarantine;
 import entity.User;
 import java.awt.Color;
 import java.awt.Image;
@@ -414,6 +411,11 @@ public class MainGUI extends javax.swing.JFrame {
         renew_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         renew_Button.setText("Forny");
         renew_Button.setEnabled(false);
+        renew_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                renew_ButtonActionPerformed(evt);
+            }
+        });
 
         enrolled_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         enrolled_CheckBox.setText("Indskrevne");
@@ -875,6 +877,10 @@ public class MainGUI extends javax.swing.JFrame {
             setPerson(selectedPerson);
         }
     }//GEN-LAST:event_kick_ButtonActionPerformed
+
+    private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_renew_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;

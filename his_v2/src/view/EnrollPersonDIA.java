@@ -4,6 +4,7 @@
  */
 package view;
 
+import configuration.PropertiesTool;
 import control.EnrollmentHandler;
 import control.LoginHandler;
 import entity.Enrollment;
@@ -95,12 +96,11 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         int guestMax = 0;
 
         if (p.isHoene()) {
-            info_Label.setText("Denne person kan få 5 gæster ind");
-            guestMax = 5;
+            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"));
         } else {
-            info_Label.setText("Denne person kan få 3 gæster ind");
-            guestMax = 3;
+            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
         }
+        info_Label.setText("Denne person kan få "+guestMax+" gæster ind");
 
         if (enH.isEnrolled(p.getIdPerson())) {
             Enrollment en = enH.getEnrollment(p.getIdPerson());
@@ -139,9 +139,9 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         int guestMax = 0;
 
         if (selectedPerson.isHoene()) {
-            guestMax = 5;
+            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"));
         } else {
-            guestMax = 3;
+            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
         }
         deleteGuest_Button.setEnabled(false);
 

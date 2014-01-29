@@ -502,7 +502,6 @@ public class PersonHandler implements HismHandlerIF {
         Iterator<Person> i = peR.getPersons().iterator();
 
         while (i.hasNext()) {
-            System.out.println("EN TIL");
             Person p = i.next();
             if (!p.getExpirationDate().isEmpty()) {
                 String[] expireString = p.getExpirationDate().split("/");
@@ -525,6 +524,39 @@ public class PersonHandler implements HismHandlerIF {
                 }
             }
         }
-        System.out.println("FÆRDIG");
     }
+    
+    /**
+     * Renews a person, setting a new expiration date
+     * @param idPerson
+     * @param newExpirationDate
+     * @return 
+     */
+//    public int renewPerson(int idPerson, String newExpirationDate) {
+//        Person p = getPerson(idPerson);
+//        
+//        if(p == null) {
+//            return GET_ERROR;
+//        }
+//        
+//        String[] expireStr = newExpirationDate.split("/");
+//        if(expireStr[0].length() != 2 || expireStr[1].length() != 4) {
+//            return EXPIRATION_FORMAT_ERROR;
+//        }
+//        
+//        Calendar current = Calendar.getInstance();
+//        Calendar expiCal = Calendar.getInstance();
+//        
+//        expiCal.set(Calendar.MONTH, (Integer.valueOf(expireStr[0])-1));
+//        expiCal.set(Calendar.YEAR, Integer.valueOf(expireStr[1]));
+//        expiCal.set(Calendar.DATE, expiCal.getActualMaximum(Calendar.DAY_OF_MONTH));
+//        if(!expiCal.after(current)) {
+//            return EXPIRATION_DATE_ERROR;
+//        }
+//        
+//        p.setExpirationDate(newExpirationDate);
+//        peR.savePerson(p);
+//        
+//        return NO_ERROR;
+//    }
 }

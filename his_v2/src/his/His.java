@@ -117,6 +117,7 @@ public class His {
         usR.loadUsersFromDB();
         quR.loadQuarantinesFromDB();
         enR.loadEnrollmentsFromDB();
+        peH.checkExpirationDates();
 
         //testData();
         
