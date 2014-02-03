@@ -23,7 +23,7 @@ public class AboutDIA extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setTitleIcon();
-        setFunIcon();
+        setVersionLabel();
     }
     
     private void setTitleIcon() {
@@ -34,18 +34,10 @@ public class AboutDIA extends javax.swing.JDialog {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         titleIcon_PicturePane.setPicture(icon, false);
-        
     }
     
-    private void setFunIcon() {
-        Image icon = null;
-        try {
-            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/creature.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        pic_PicturePane.setPicture(icon, false);
-        
+    private void setVersionLabel() {
+        version_Label.setText(his.His.title + " - " + his.His.version);
     }
 
     /**
@@ -65,7 +57,7 @@ public class AboutDIA extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        pic_PicturePane = new view.image.PicturePane();
+        version_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -150,16 +142,9 @@ public class AboutDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout pic_PicturePaneLayout = new javax.swing.GroupLayout(pic_PicturePane);
-        pic_PicturePane.setLayout(pic_PicturePaneLayout);
-        pic_PicturePaneLayout.setHorizontalGroup(
-            pic_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 32, Short.MAX_VALUE)
-        );
-        pic_PicturePaneLayout.setVerticalGroup(
-            pic_PicturePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 32, Short.MAX_VALUE)
-        );
+        version_Label.setForeground(new java.awt.Color(153, 153, 153));
+        version_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        version_Label.setText("VERSION");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,12 +154,9 @@ public class AboutDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(version_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pic_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +165,8 @@ public class AboutDIA extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pic_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(version_Label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -215,7 +197,7 @@ public class AboutDIA extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private view.image.PicturePane pic_PicturePane;
     private view.image.PicturePane titleIcon_PicturePane;
+    private javax.swing.JLabel version_Label;
     // End of variables declaration//GEN-END:variables
 }

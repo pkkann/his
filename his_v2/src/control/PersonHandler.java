@@ -525,38 +525,46 @@ public class PersonHandler implements HismHandlerIF {
             }
         }
     }
-    
+
     /**
-     * Renews a person, setting a new expiration date
+     * Renews a person
      * @param idPerson
      * @param newExpirationDate
-     * @return 
+     * @return Error code : Integer
      */
-//    public int renewPerson(int idPerson, String newExpirationDate) {
-//        Person p = getPerson(idPerson);
-//        
-//        if(p == null) {
-//            return GET_ERROR;
-//        }
-//        
-//        String[] expireStr = newExpirationDate.split("/");
-//        if(expireStr[0].length() != 2 || expireStr[1].length() != 4) {
-//            return EXPIRATION_FORMAT_ERROR;
-//        }
-//        
-//        Calendar current = Calendar.getInstance();
-//        Calendar expiCal = Calendar.getInstance();
-//        
-//        expiCal.set(Calendar.MONTH, (Integer.valueOf(expireStr[0])-1));
-//        expiCal.set(Calendar.YEAR, Integer.valueOf(expireStr[1]));
-//        expiCal.set(Calendar.DATE, expiCal.getActualMaximum(Calendar.DAY_OF_MONTH));
-//        if(!expiCal.after(current)) {
-//            return EXPIRATION_DATE_ERROR;
-//        }
-//        
-//        p.setExpirationDate(newExpirationDate);
-//        peR.savePerson(p);
-//        
-//        return NO_ERROR;
-//    }
+    public int renew(int idPerson, String newExpirationDate) {
+        String expire_Month;
+        String expire_Year;
+        try {
+            String[] expire_Split = newExpirationDate.split("/");
+            expire_Month = expire_Split[0];
+            expire_Year = expire_Split[1];
+
+            if (expire_Month.length() != 2 || expire_Year.length() != 4) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return EXPIRATION_FORMAT_ERROR;
+        }
+
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.MONTH, today.get(Calendar.MONTH) + 1);
+        Calendar expire = Calendar.getInstance();
+        expire.set(Calendar.MONTH, Integer.valueOf(expire_Month));
+        expire.set(Calendar.YEAR, Integer.valueOf(expire_Year));
+        if (expire.before(today) || expire.equals(today)) {
+            return EXPIRATION_DATE_ERROR;
+        }
+        
+        Person p = getPerson(idPerson);
+        if(p == null) {
+            return GET_ERROR;
+        }
+        
+        p.setExpirationDate(newExpirationDate);
+        p.setExpired(false);
+        peR.savePerson(p);
+
+        return NO_ERROR;
+    }
 }

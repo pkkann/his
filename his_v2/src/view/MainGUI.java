@@ -116,7 +116,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     private void setTitle() {
-        setTitle(his.His.title + " - " + his.His.version);
+        setTitle(his.His.title);
     }
 
     private void initTableListener() {

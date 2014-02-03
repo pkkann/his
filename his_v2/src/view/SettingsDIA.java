@@ -189,8 +189,11 @@ public class SettingsDIA extends javax.swing.JDialog {
         hoeneMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         reserveMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        reserveMax_TextField.setToolTipText("");
+        reserveMax_TextField.setEnabled(false);
 
         oneOneMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        oneOneMax_TextField.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

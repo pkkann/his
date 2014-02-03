@@ -10,6 +10,6 @@ X Udsmidning
 - Forny
 X Dato tjekning
 - Webcam integration
-- Indstillinger
+X Indstillinger
 - Vagt afslutning (Mangler rapport)
 - Rapporter
