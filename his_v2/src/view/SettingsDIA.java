@@ -40,16 +40,12 @@ public class SettingsDIA extends javax.swing.JDialog {
     private void setTextfields() {
         personsMax_TextField.setText(p.getProperty("maxguests_persons"));
         hoeneMax_TextField.setText(p.getProperty("maxguests_hoene"));
-        reserveMax_TextField.setText(p.getProperty("maxguests_reserve"));
-        oneOneMax_TextField.setText(p.getProperty("maxguests_oneone"));
     }
     
     private void clean() {
         jTabbedPane2.setSelectedIndex(0);
         personsMax_TextField.setText("");
         hoeneMax_TextField.setText("");
-        reserveMax_TextField.setText("");
-        oneOneMax_TextField.setText("");
     }
 
     /**
@@ -73,12 +69,8 @@ public class SettingsDIA extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         personsMax_TextField = new javax.swing.JTextField();
         hoeneMax_TextField = new javax.swing.JTextField();
-        reserveMax_TextField = new javax.swing.JTextField();
-        oneOneMax_TextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -173,12 +165,6 @@ public class SettingsDIA extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Høner:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Reserver:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("1-1:");
-
         personsMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         personsMax_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -188,13 +174,6 @@ public class SettingsDIA extends javax.swing.JDialog {
 
         hoeneMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        reserveMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        reserveMax_TextField.setToolTipText("");
-        reserveMax_TextField.setEnabled(false);
-
-        oneOneMax_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        oneOneMax_TextField.setEnabled(false);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -203,15 +182,11 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(personsMax_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(hoeneMax_TextField)
-                    .addComponent(reserveMax_TextField)
-                    .addComponent(oneOneMax_TextField))
+                    .addComponent(hoeneMax_TextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -225,14 +200,6 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(hoeneMax_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(reserveMax_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(oneOneMax_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -250,7 +217,7 @@ public class SettingsDIA extends javax.swing.JDialog {
             .addGroup(general_TabPaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Generalt", general_TabPane);
@@ -319,8 +286,6 @@ public class SettingsDIA extends javax.swing.JDialog {
 
         p.setProperty("maxguests_persons", personsMax_TextField.getText());
         p.setProperty("maxguests_hoene", hoeneMax_TextField.getText());
-        p.setProperty("maxguests_reserve", reserveMax_TextField.getText());
-        p.setProperty("maxguests_oneone", oneOneMax_TextField.getText());
         PropertiesTool.writeProperties(p);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -344,14 +309,10 @@ public class SettingsDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel main_Pane;
-    private javax.swing.JTextField oneOneMax_TextField;
     private javax.swing.JTextField personsMax_TextField;
-    private javax.swing.JTextField reserveMax_TextField;
     private javax.swing.JPanel tabs_Pane;
     private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel title_Pane;

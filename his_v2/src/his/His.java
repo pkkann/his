@@ -57,6 +57,7 @@ public class His {
     private MainGUI mainGUI;
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
+    private RenewPersonDIA renewPersonDIA;
 
     public His() {
         setLookAndFeel();
@@ -92,7 +93,11 @@ public class His {
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
-        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA, quarantinePersonManagemenDIA);
+        renewPersonDIA = new RenewPersonDIA(mainGUI, true, peH);
+        mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, 
+                removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, 
+                enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA, 
+                quarantinePersonManagemenDIA, renewPersonDIA);
 
         // Control - login
         loH = new LoginHandler(usR, mainGUI);

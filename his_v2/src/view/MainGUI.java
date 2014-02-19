@@ -6,6 +6,7 @@ package view;
 
 import model.TableTool;
 import control.EnrollmentHandler;
+import control.HismHandlerIF;
 import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
@@ -49,12 +50,20 @@ public class MainGUI extends javax.swing.JFrame {
     private EditProfileDIA editProfileDIA;
     private EnrollPersonDIA enrollPersonDIA;
     private AboutDIA aboutDIA;
+    private RenewPersonDIA renewPersonDIA;
 
     // Model
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, AboutDIA aboutDIA, EditPersonDIA editPersonDIA, QuarantinePersonManagementDIA quarantinePersonManagemenDIA) {
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, 
+            SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, 
+            RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, 
+            CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, 
+            EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, 
+            AboutDIA aboutDIA, EditPersonDIA editPersonDIA, 
+            QuarantinePersonManagementDIA quarantinePersonManagemenDIA, 
+            RenewPersonDIA renewPersonDIA) {
         initComponents();
         initTableListener();
         setIcon();
@@ -72,6 +81,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.editProfileDIA = editProfileDIA;
         this.enrollPersonDIA = enrollPersonDIA;
         this.aboutDIA = aboutDIA;
+        this.renewPersonDIA = renewPersonDIA;
         this.quarantinePersonManagemenDIA = quarantinePersonManagemenDIA;
 
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
@@ -822,12 +832,13 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_search_TextFieldActionPerformed
 
     private void nulstil_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nulstil_MenuItemActionPerformed
-        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?\nDu vil blive logget af bag efter", "Sikker?");
+        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Nulstille?");
         if (n == 0) {
             int errorCode = enH.removeAllEnrollments();
             DialogMessage.showMessage(this, errorCode);
 
             if (errorCode == 0) {
+                DialogMessage.showMessage(this, HismHandlerIF.LOGOUT_NOTIFICATION);
                 dispose();
                 cleanSearch();
                 cleanSelectedPerson();
@@ -879,7 +890,8 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_kick_ButtonActionPerformed
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
-        // TODO add your handling code here:
+        renewPersonDIA.setPerson(selectedPerson);
+        renewPersonDIA.setVisible(true);
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

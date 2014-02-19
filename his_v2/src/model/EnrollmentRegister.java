@@ -218,7 +218,9 @@ public class EnrollmentRegister {
         Iterator<Enrollment> i = enrollments.iterator();
         
         while(i.hasNext()) {
-            enrollments.remove(i.next());
+            Enrollment en = i.next();
+            enrollments.remove(en);
+            s.delete(en);
         }
 
         tx.commit();

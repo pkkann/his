@@ -8,6 +8,7 @@ package view;
 
 import control.PersonHandler;
 import entity.Person;
+import view.message.DialogMessage;
 
 /**
  *
@@ -15,16 +16,17 @@ import entity.Person;
  */
 public class RenewPersonDIA extends javax.swing.JDialog {
 
-    private Person p;
+    private int selectedPerson;
     private PersonHandler peH;
     
     public RenewPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH) {
         super(parent, modal);
         initComponents();
+        this.peH = peH;
     }
     
-    public void setPerson(Person p) {
-        this.p = p;
+    public void setPerson(int selectedPerson) {
+        this.selectedPerson = selectedPerson;
     }
     
     private void clean() {
@@ -172,7 +174,13 @@ public class RenewPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_cancel_ButtonActionPerformed
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
+        String newExpirationDate = expiration_month_TextField.getText() + "/" + expiration_year_TextField.getText();
+        int errorCode = peH.renew(selectedPerson, newExpirationDate);
+        DialogMessage.showMessage(this, errorCode);
         
+        if(errorCode == 0) {
+            dispose();
+        }
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

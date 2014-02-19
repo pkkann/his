@@ -375,7 +375,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         capture_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         capture_Button.setText("Tag billed");
-        capture_Button.setEnabled(false);
+        capture_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capture_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout picture_PaneLayout = new javax.swing.GroupLayout(picture_Pane);
         picture_Pane.setLayout(picture_PaneLayout);
@@ -591,15 +595,21 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             picturePath = "N";
             picturePane_PicturePane.setPicture(null, true);
             choose_Button.setEnabled(false);
+            capture_Button.setEnabled(false);
         } else {
             picturePath = "";
             choose_Button.setEnabled(true);
+            capture_Button.setEnabled(true);
         }
     }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
 
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
         //
     }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
+
+    private void capture_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capture_ButtonActionPerformed
+        //
+    }//GEN-LAST:event_capture_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;

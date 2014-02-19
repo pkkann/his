@@ -73,4 +73,9 @@ public interface HismHandlerIF {
      * Will be send if an action cannot be performed because the person is enrolled
      */
     public static final int ENROLLED_ERROR = 14;
+    
+    /**
+     * Will be send if the user needs to know they will be logged out
+     */
+    public static final int LOGOUT_NOTIFICATION = 15;
 }

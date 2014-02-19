@@ -7,7 +7,7 @@ Opgaver
 
 X Karantæne
 X Udsmidning
-- Forny
+X Forny
 X Dato tjekning
 - Webcam integration
 X Indstillinger

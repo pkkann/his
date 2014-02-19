@@ -75,6 +75,9 @@ public class DialogMessage {
             case HismHandlerIF.ENROLLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Denne handling kan ikke udføres, da personen er indskrevet", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
+            case HismHandlerIF.LOGOUT_NOTIFICATION:
+                JOptionPane.showMessageDialog(j, "Du vil nu blive logget ud!", "Du bliver logget ud", JOptionPane.INFORMATION_MESSAGE);
+                break;
         }
     }
 
@@ -124,6 +127,9 @@ public class DialogMessage {
                 break;
             case HismHandlerIF.ENROLLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Denne handling kan ikke udføres, da personen er indskrevet", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
+            case HismHandlerIF.LOGOUT_NOTIFICATION:
+                JOptionPane.showMessageDialog(j, "Du vil nu blive logget ud!", "Du bliver logget ud", JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
     }
