@@ -6,6 +6,7 @@ package view;
 
 import control.PersonHandler;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import view.message.DialogMessage;
+import webcam.WebcamTool;
 
 /**
  *
@@ -40,6 +42,21 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         titleIcon_PicturePane.setPicture(icon, false);
+    }
+
+    public void setPicturePath(String path) {
+        this.picturePath = path;
+    }
+
+    public void setPicturePanel() {
+        File f = new File(picturePath);
+        Image img = null;
+        try {
+            img = ImageIO.read(f);
+        } catch (IOException ex) {
+            Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        picturePane_PicturePane.setPicture(img, true);
     }
 
     private void cleanFields() {
@@ -122,6 +139,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         cancel_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -539,7 +557,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         } else {
             expiration = "";
         }
-        if(noPicture_CheckBox.isSelected()) {
+        if (noPicture_CheckBox.isSelected()) {
             picturePath = "N";
         }
         Calendar c = Calendar.getInstance();
@@ -591,7 +609,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_choose_ButtonActionPerformed
 
     private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
-        if(noPicture_CheckBox.isSelected()) {
+        if (noPicture_CheckBox.isSelected()) {
             picturePath = "N";
             picturePane_PicturePane.setPicture(null, true);
             choose_Button.setEnabled(false);
@@ -608,7 +626,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 
     private void capture_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capture_ButtonActionPerformed
-        //
+        try {
+            WebcamTool.spawnWebcamFrame(this);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_capture_ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

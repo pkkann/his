@@ -30,6 +30,7 @@ public class His {
     public static final String version = "2.0 Beta";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
+    public static final String webcamDir = "webcam";
     // Control
     private PersonHandler peH;
     private UserHandler usH;
@@ -82,14 +83,14 @@ public class His {
 
         // View
         createGuestDIA = new CreateGuestDIA(mainGUI, true, enH);
-        createPersonDIA = new CreatePersonDIA(mainGUI, true, peH);
+        createPersonDIA = new CreatePersonDIA(mainGUI, false, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
         removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
-        editPersonDIA = new EditPersonDIA(mainGUI, true, peH, enH);
+        editPersonDIA = new EditPersonDIA(mainGUI, false, peH, enH);
         quarantinePersonManagemenDIA = new QuarantinePersonManagementDIA(mainGUI, true, peH, quH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
-        settingsDIA = new SettingsDIA(mainGUI, true);
+        settingsDIA = new SettingsDIA(mainGUI, false);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);

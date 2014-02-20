@@ -216,7 +216,7 @@ public class PersonHandler implements HismHandlerIF {
         if (copyPic) {
             String oldPicturePath = picturePath;
             String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
-            FileTool.deleteFile(new File(newPicturePath));
+            FileTool.deleteFile(new File(oldPicturePath));
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
         } else {

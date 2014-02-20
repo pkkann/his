@@ -19,12 +19,18 @@ import javax.imageio.ImageIO;
 public class SettingsDIA extends javax.swing.JDialog {
 
     private Properties p;
+    private String defaultCam;
     
     public SettingsDIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
         setTitleIcon();
         p = PropertiesTool.getInstance();
+    }
+    
+    public void setDefaultCam(String cam) {
+        this.defaultCam = cam;
     }
     
     private void setTitleIcon() {
@@ -71,8 +77,11 @@ public class SettingsDIA extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         personsMax_TextField = new javax.swing.JTextField();
         hoeneMax_TextField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        choose_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -203,6 +212,33 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Standard webcam"));
+
+        choose_Button.setText("Vælg");
+        choose_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choose_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(choose_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(choose_Button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout general_TabPaneLayout = new javax.swing.GroupLayout(general_TabPane);
         general_TabPane.setLayout(general_TabPaneLayout);
         general_TabPaneLayout.setHorizontalGroup(
@@ -210,13 +246,17 @@ public class SettingsDIA extends javax.swing.JDialog {
             .addGroup(general_TabPaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         general_TabPaneLayout.setVerticalGroup(
             general_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(general_TabPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(general_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
 
@@ -286,6 +326,7 @@ public class SettingsDIA extends javax.swing.JDialog {
 
         p.setProperty("maxguests_persons", personsMax_TextField.getText());
         p.setProperty("maxguests_hoene", hoeneMax_TextField.getText());
+        p.setProperty("defaultcam", defaultCam);
         PropertiesTool.writeProperties(p);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -302,13 +343,19 @@ public class SettingsDIA extends javax.swing.JDialog {
         //
     }//GEN-LAST:event_personsMax_TextFieldKeyPressed
 
+    private void choose_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choose_ButtonActionPerformed
+        WebcamSettingsPickerTool.spawnWebcamPicker(this);
+    }//GEN-LAST:event_choose_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton choose_Button;
     private javax.swing.JPanel general_TabPane;
     private javax.swing.JTextField hoeneMax_TextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel main_Pane;

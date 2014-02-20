@@ -9,7 +9,7 @@ X Karantæne
 X Udsmidning
 X Forny
 X Dato tjekning
-- Webcam integration
+X Webcam integration
 X Indstillinger
 - Vagt afslutning (Mangler rapport)
 - Rapporter

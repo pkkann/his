@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.TableTool;
 import view.message.DialogMessage;
+import webcam.WebcamTool;
 
 /**
  *
@@ -55,6 +56,22 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 }
             }
         });
+    }
+    
+    public void setPicturePath(String path) {
+        this.newPicturePath = path;
+        pictureChanged = true;
+    }
+
+    public void setPicturePanel() {
+        File f = new File(newPicturePath);
+        Image img = null;
+        try {
+            img = ImageIO.read(f);
+        } catch (IOException ex) {
+            Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        picturePane_PicturePane.setPicture(img, true);
     }
 
     private void setSelectedPerson(int idPerson) {
@@ -114,6 +131,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 } else {
                     noPicture_CheckBox.setSelected(false);
                     choosePic_Button.setEnabled(true);
+                    capturePic_Button.setEnabled(true);
                     try {
                         Image img = ImageIO.read(new File(p.getPicturePath()));
                         picturePane_PicturePane.setPicture(img, true);
@@ -190,6 +208,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         noPicture_CheckBox.setEnabled(false);
         picturePane_PicturePane.setPicture(null, true);
         choosePic_Button.setEnabled(false);
+        capturePic_Button.setEnabled(false);
         
         pictureChanged = false;
 
@@ -263,6 +282,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         close_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -419,6 +439,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         capturePic_Button.setText("Tag nyt billed");
         capturePic_Button.setEnabled(false);
+        capturePic_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capturePic_ButtonActionPerformed(evt);
+            }
+        });
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
@@ -426,6 +451,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 noPicture_CheckBoxItemStateChanged(evt);
+            }
+        });
+        noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noPicture_CheckBoxActionPerformed(evt);
             }
         });
 
@@ -736,11 +766,13 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
         if (noPicture_CheckBox.isSelected()) {
             choosePic_Button.setEnabled(false);
+            capturePic_Button.setEnabled(false);
             picturePane_PicturePane.setPicture(null, true);
             newPicturePath = "N";
             pictureChanged = true;
         } else {
             choosePic_Button.setEnabled(true);
+            capturePic_Button.setEnabled(true);
             newPicturePath = "";
             pictureChanged = true;
         }
@@ -780,7 +812,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
         
         int errorCode = 0;
-        
+        System.out.println(pictureChanged);
         if(pictureChanged) {
             errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne, newPicturePath);
         } else {
@@ -796,6 +828,19 @@ public class EditPersonDIA extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_save_ButtonActionPerformed
+
+    private void capturePic_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capturePic_ButtonActionPerformed
+        try {
+            WebcamTool.spawnWebcamFrame(this);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_capturePic_ButtonActionPerformed
+
+    private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;
     private javax.swing.JTextField birthday_day_TextField;
