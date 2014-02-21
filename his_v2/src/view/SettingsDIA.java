@@ -4,6 +4,7 @@
  */
 package view;
 
+import webcam.WebcamSettingsPickerTool;
 import configuration.PropertiesTool;
 import java.awt.Image;
 import java.io.IOException;

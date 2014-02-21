@@ -13,6 +13,7 @@ import control.QuarantineHandler;
 import entity.User;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,8 +84,9 @@ public class MainGUI extends javax.swing.JFrame {
         this.aboutDIA = aboutDIA;
         this.renewPersonDIA = renewPersonDIA;
         this.quarantinePersonManagemenDIA = quarantinePersonManagemenDIA;
-
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
+        
+        createPerson_Button.setMnemonic(KeyEvent.VK_R);
 
         search_Button.requestFocus();
 
@@ -942,4 +944,5 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu vagtAfslutning_Menu;
     // End of variables declaration//GEN-END:variables
+
 }
