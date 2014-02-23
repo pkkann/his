@@ -937,6 +937,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void gemRapportIndskrevne_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportIndskrevne_MenuItemActionPerformed
         try {
             reH.writeTotalEnrolledReport();
+            DialogMessage.showCustomMessage(this, "Rapport gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
         } catch (DocumentException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -947,6 +948,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void gemRapportPersoner_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportPersoner_MenuItemActionPerformed
         try {
             reH.writeTotalPersonReport();
+            DialogMessage.showCustomMessage(this, "Rapport gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
         } catch (DocumentException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -957,6 +959,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void gemRapportBrugere_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportBrugere_MenuItemActionPerformed
         try {
             reH.writeTotalUserReport();
+            DialogMessage.showCustomMessage(this, "Rapport gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
         } catch (DocumentException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -967,6 +970,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void gemKarantæner_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemKarantæner_MenuItemActionPerformed
         try {
             reH.writeTotalQuarantineReport();
+            DialogMessage.showCustomMessage(this, "Rapport gemt", "Gemt", JOptionPane.INFORMATION_MESSAGE);
         } catch (DocumentException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
