@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -176,6 +177,7 @@ public class MainGUI extends javax.swing.JFrame {
             status_Pane.setBackground(Color.red);
             enroll_Button.setEnabled(false);
             renew_Button.setEnabled(true);
+            kick_Button.setEnabled(false);
             return;
         }
 
@@ -184,6 +186,8 @@ public class MainGUI extends javax.swing.JFrame {
             status_Label.setForeground(Color.white);
             status_Pane.setBackground(Color.red);
             enroll_Button.setEnabled(false);
+            kick_Button.setEnabled(false);
+            renew_Button.setEnabled(false);
             return;
         }
 
@@ -194,6 +198,7 @@ public class MainGUI extends javax.swing.JFrame {
                 status_Pane.setBackground(Color.red);
                 enroll_Button.setEnabled(false);
                 kick_Button.setEnabled(false);
+                renew_Button.setEnabled(false);
                 return;
             } else {
                 status_Label.setForeground(Color.black);
@@ -201,6 +206,7 @@ public class MainGUI extends javax.swing.JFrame {
                 status_Pane.setBackground(new Color(153, 204, 0));
                 enroll_Button.setEnabled(true);
                 kick_Button.setEnabled(true);
+                renew_Button.setEnabled(false);
                 return;
             }
         } else {
@@ -209,6 +215,7 @@ public class MainGUI extends javax.swing.JFrame {
             status_Pane.setBackground(new Color(51, 51, 51));
             enroll_Button.setEnabled(true);
             kick_Button.setEnabled(false);
+            renew_Button.setEnabled(false);
             return;
         }
     }
@@ -861,6 +868,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void nulstil_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nulstil_MenuItemActionPerformed
         int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Nulstille?");
         if (n == 0) {
+            try {
+                reH.writeTotalEnrolledReport();
+                DialogMessage.showCustomMessage(this, "En rapport med alle indskrevne blev gemt", "Rapport gemt", JOptionPane.INFORMATION_MESSAGE);
+            } catch (DocumentException | FileNotFoundException ex) {
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             int errorCode = enH.removeAllEnrollments();
             DialogMessage.showMessage(this, errorCode);
 

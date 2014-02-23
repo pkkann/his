@@ -11,5 +11,5 @@ X Forny
 X Dato tjekning
 X Webcam integration
 X Indstillinger
-- Vagt afslutning (Mangler rapport)
-- Rapporter
+X Vagt afslutning
+X Rapporter

@@ -8,12 +8,16 @@ import entity.Enrollment;
 import entity.Guest;
 import hibernate.HiberUtil;
 import java.io.Serializable;
+import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import view.message.DialogMessage;
 
 /**
  *
@@ -136,7 +140,7 @@ public class EnrollmentRegister {
 
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
-        
+
         s.delete(en);
 
         tx.commit();
@@ -211,23 +215,25 @@ public class EnrollmentRegister {
      * Removes all enrollments
      */
     public void removeAllEnrollments() {
-        System.out.println("Removing all enrollments...");
-        Session s = HiberUtil.getSessionFactory().openSession();
-        Transaction tx = s.beginTransaction();
-        
-        Iterator<Enrollment> i = enrollments.iterator();
-        
-        while(i.hasNext()) {
-            Enrollment en = i.next();
-            enrollments.remove(en);
-            s.delete(en);
+        try {
+            System.out.println("Removing all enrollments...");
+            Session s = HiberUtil.getSessionFactory().openSession();
+            Transaction tx = s.beginTransaction();
+
+            Iterator<Enrollment> i = enrollments.iterator();
+
+            while (i.hasNext()) {
+                s.delete(i.next());
+                i.remove();
+            }
+
+            tx.commit();
+            s.close();
+
+            System.out.println("Remove complete!");
+        } catch (ConcurrentModificationException ex) {
+            DialogMessage.showCustomMessage(new JFrame(), "Fortæl din administrator, at der er sket en concurrent modification exception", "Concurrent modifiction exception!", JOptionPane.ERROR_MESSAGE);
         }
-
-        tx.commit();
-        s.close();
-
-        enrollments = new HashSet(0);
-        System.out.println("Remove complete!");
     }
 
 }
