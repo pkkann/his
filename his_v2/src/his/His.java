@@ -4,6 +4,7 @@
  */
 package his;
 
+import com.itextpdf.text.DocumentException;
 import control.*;
 import file.FileTool;
 import hibernate.HiberUtil;
@@ -16,6 +17,7 @@ import view.*;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import date.DateChecker;
 import control.DateHandler;
+import java.io.FileNotFoundException;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,6 +32,10 @@ public class His {
     public static final String version = "2.0 Beta";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
+    public static final String reportEnrolledDir = reportDir + "/enrolled";
+    public static final String reportPersonsDir = reportDir + "/persons";
+    public static final String reportUsersDir = reportDir + "/users";
+    public static final String reportQuarantinesDir = reportDir + "/quarantines";
     public static final String webcamDir = "webcam";
     // Control
     private PersonHandler peH;
@@ -38,6 +44,7 @@ public class His {
     private QuarantineHandler quH;
     private LoginHandler loH;
     private DateHandler dah;
+    private ReportHandler reH;
     // Model
     private PersonRegister peR;
     private UserRegister usR;
@@ -79,6 +86,7 @@ public class His {
         enH = new EnrollmentHandler(enR, peR, usR);
         quH = new QuarantineHandler(quR, peR, enH);
         dah = new DateHandler(new DateChecker(), peH);
+        reH = new ReportHandler(enR, peR, quR, usR);
 
 
         // View
@@ -98,7 +106,7 @@ public class His {
         mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, 
                 removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, 
                 enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA, 
-                quarantinePersonManagemenDIA, renewPersonDIA);
+                quarantinePersonManagemenDIA, renewPersonDIA, reH);
 
         // Control - login
         loH = new LoginHandler(usR, mainGUI);
@@ -148,16 +156,16 @@ public class His {
     }
 
     private void testData() {
-        System.out.println("##### Creating Test Data... #####");
-        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
+//        System.out.println("##### Creating Test Data... #####");
+//        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
 
-//        for (int i = 1; i < 600; i++) {
-//            peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
-//            enH.createEnrollment(i, 4);
-//        }
+        for (int i = 1; i < 600; i++) {
+            peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
+            enH.createEnrollment(i, 4);
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DocumentException, FileNotFoundException {
         His hism = new His();
     }
 }

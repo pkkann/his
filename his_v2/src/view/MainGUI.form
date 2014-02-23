@@ -31,21 +31,33 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gem rapport med alle indskrevne"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gemRapportIndskrevne_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="gemRapportPersoner_MenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gem rapport med alle personer"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gemRapportPersoner_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="gemRapportBrugere_MenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gem rapport med alle brugere"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gemRapportBrugere_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="gemKarant&#xe6;ner_MenuItem">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gem rapport med alle karant&#xe6;ner"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gemKarant&#xe6;ner_MenuItemActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

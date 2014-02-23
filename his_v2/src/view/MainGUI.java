@@ -4,17 +4,20 @@
  */
 package view;
 
+import com.itextpdf.text.DocumentException;
 import model.TableTool;
 import control.EnrollmentHandler;
 import control.HismHandlerIF;
 import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
+import control.ReportHandler;
 import entity.User;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +42,7 @@ public class MainGUI extends javax.swing.JFrame {
     private EnrollmentHandler enH;
     private QuarantineHandler quH;
     private LoginHandler loH;
+    private ReportHandler reH;
     // View
     private CreatePersonDIA createPersonDIA;
     private RemovePersonDIA removePersonDIA;
@@ -64,7 +68,7 @@ public class MainGUI extends javax.swing.JFrame {
             EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, 
             AboutDIA aboutDIA, EditPersonDIA editPersonDIA, 
             QuarantinePersonManagementDIA quarantinePersonManagemenDIA, 
-            RenewPersonDIA renewPersonDIA) {
+            RenewPersonDIA renewPersonDIA, ReportHandler reH) {
         initComponents();
         initTableListener();
         setIcon();
@@ -72,6 +76,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.peH = peH;
         this.enH = enH;
         this.quH = quH;
+        this.reH = reH;
         this.settingsDIA = settingsDIA;
         this.createPersonDIA = createPersonDIA;
         this.removeUserDIA = removeUserDIA;
@@ -648,15 +653,35 @@ public class MainGUI extends javax.swing.JFrame {
         rapport_Menu.setText("Rapport");
 
         gemRapportIndskrevne_MenuItem.setText("Gem rapport med alle indskrevne");
+        gemRapportIndskrevne_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gemRapportIndskrevne_MenuItemActionPerformed(evt);
+            }
+        });
         rapport_Menu.add(gemRapportIndskrevne_MenuItem);
 
         gemRapportPersoner_MenuItem.setText("Gem rapport med alle personer");
+        gemRapportPersoner_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gemRapportPersoner_MenuItemActionPerformed(evt);
+            }
+        });
         rapport_Menu.add(gemRapportPersoner_MenuItem);
 
         gemRapportBrugere_MenuItem.setText("Gem rapport med alle brugere");
+        gemRapportBrugere_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gemRapportBrugere_MenuItemActionPerformed(evt);
+            }
+        });
         rapport_Menu.add(gemRapportBrugere_MenuItem);
 
         gemKarantæner_MenuItem.setText("Gem rapport med alle karantæner");
+        gemKarantæner_MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gemKarantæner_MenuItemActionPerformed(evt);
+            }
+        });
         rapport_Menu.add(gemKarantæner_MenuItem);
 
         filer_Menu.add(rapport_Menu);
@@ -895,6 +920,46 @@ public class MainGUI extends javax.swing.JFrame {
         renewPersonDIA.setPerson(selectedPerson);
         renewPersonDIA.setVisible(true);
     }//GEN-LAST:event_renew_ButtonActionPerformed
+
+    private void gemRapportIndskrevne_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportIndskrevne_MenuItemActionPerformed
+        try {
+            reH.writeTotalEnrolledReport();
+        } catch (DocumentException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gemRapportIndskrevne_MenuItemActionPerformed
+
+    private void gemRapportPersoner_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportPersoner_MenuItemActionPerformed
+        try {
+            reH.writeTotalPersonReport();
+        } catch (DocumentException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gemRapportPersoner_MenuItemActionPerformed
+
+    private void gemRapportBrugere_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportBrugere_MenuItemActionPerformed
+        try {
+            reH.writeTotalUserReport();
+        } catch (DocumentException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gemRapportBrugere_MenuItemActionPerformed
+
+    private void gemKarantæner_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemKarantæner_MenuItemActionPerformed
+        try {
+            reH.writeTotalQuarantineReport();
+        } catch (DocumentException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gemKarantæner_MenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;

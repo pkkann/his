@@ -55,11 +55,19 @@ public class FileTool {
         File personsPicDir = new File(his.His.picDir + "/persons");
         File guestsPicDir = new File(his.His.picDir + "/guests");
         File reportDir = new File(his.His.reportDir);
+        File reportEnrolledDir = new File(his.His.reportEnrolledDir);
+        File reportPersonsDir = new File(his.His.reportPersonsDir);
+        File reportUsersDir = new File(his.His.reportUsersDir);
+        File reportQuarantinesDir = new File(his.His.reportQuarantinesDir);
         File webcamDir = new File(his.His.webcamDir);
         picDir.mkdir();
         personsPicDir.mkdir();
         guestsPicDir.mkdir();
         reportDir.mkdir();
+        reportEnrolledDir.mkdir();
+        reportPersonsDir.mkdir();
+        reportUsersDir.mkdir();
+        reportQuarantinesDir.mkdir();
         webcamDir.mkdir();
     }
 }
