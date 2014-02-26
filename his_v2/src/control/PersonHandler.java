@@ -368,7 +368,7 @@ public class PersonHandler implements HismHandlerIF {
         // Loop through and search
         while (i.hasNext()) {
             Person p = i.next();
-            if ((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equals(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
+            if ((p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname()).equalsIgnoreCase(name) || p.getAddress().equals(address) || p.getBirthdayDate().equals(birthdayDate)) {
                 String[] dat = {p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate()};
                 data.add(dat);
             }

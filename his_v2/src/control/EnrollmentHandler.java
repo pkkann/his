@@ -301,6 +301,15 @@ public class EnrollmentHandler implements HismHandlerIF {
         return NO_ERROR;
     }
     
+    /**
+     * 
+     * @param idPerson
+     * @param firstname
+     * @param middlename
+     * @param lastname
+     * @param birthdayDate
+     * @return 
+     */
     public int searchGuestLon(int idPerson, String firstname, String middlename, String lastname, String birthdayDate) {
         // Make full name
         String name = firstname + " " + middlename + " " + lastname;
@@ -312,7 +321,7 @@ public class EnrollmentHandler implements HismHandlerIF {
         // Loop through and search
         while (i.hasNext()) {
             Guest g = i.next();
-            if ((g.getFirstname() + " " + g.getMiddlename() + " " + g.getLastname()).equals(name) && g.getBirthdayDate().equals(birthdayDate)) {
+            if ((g.getFirstname() + " " + g.getMiddlename() + " " + g.getLastname()).equalsIgnoreCase(name) && g.getBirthdayDate().equals(birthdayDate)) {
                 return g.getIdGuest();
             }
         }
