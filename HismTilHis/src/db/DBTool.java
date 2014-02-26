@@ -89,8 +89,6 @@ public class DBTool {
         String dbPass = dbProp.getProperty("db1Pass"); // Gets the dbPass from the properties object
         String dbURL = dbProp.getProperty("db1URL"); // Gets the dbURL from the properies object
         
-        System.out.println(dbUser + " " + dbPass + " " + dbURL);
-        
         try {
             instanceHISM = DriverManager.getConnection(dbURL, dbUser, dbPass); // Creates and gets the MySQL connection and saves it to the instance variable
         } catch (SQLException ex) {
@@ -120,8 +118,6 @@ public class DBTool {
         String dbUser = dbProp.getProperty("db2User"); // Gets the dbUser from the properties object
         String dbPass = dbProp.getProperty("db2Pass"); // Gets the dbPass from the properties object
         String dbURL = dbProp.getProperty("db2URL"); // Gets the dbURL from the properies object
-
-        System.out.println(dbUser + " " + dbPass + " " + dbURL);
         
         try {
             instanceHIS = DriverManager.getConnection(dbURL, dbUser, dbPass); // Creates and gets the MySQL connection and saves it to the instance variable

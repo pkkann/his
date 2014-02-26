@@ -6,10 +6,10 @@
 
 package hismtilhis;
 
-import db.DBTool;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Person;
+import model.User;
 
 /**
  *
@@ -19,11 +19,16 @@ public class HismTilHis {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         HismDAO hismDAO = new HismDAO();
         ArrayList<Person> persons = hismDAO.getPersons();
-        System.out.println(persons.size());
+        ArrayList<User> users = hismDAO.getUsers();
+        
+        HisDAO hisDAO = new HisDAO();
+        hisDAO.insertPersons(persons);
+        hisDAO.insertUsers(users);
     }
     
 }

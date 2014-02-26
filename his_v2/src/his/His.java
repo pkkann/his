@@ -50,6 +50,7 @@ public class His {
     private UserRegister usR;
     private EnrollmentRegister enR;
     private QuarantineRegister quR;
+    private GuestRegister guR;
     // View
     private CreateGuestDIA createGuestDIA;
     private CreatePersonDIA createPersonDIA;
@@ -79,11 +80,12 @@ public class His {
         usR = new UserRegister();
         enR = new EnrollmentRegister();
         quR = new QuarantineRegister();
+        guR = new GuestRegister();
 
         // Control
         peH = new PersonHandler(peR, enR);
         usH = new UserHandler(usR);
-        enH = new EnrollmentHandler(enR, peR, usR);
+        enH = new EnrollmentHandler(enR, peR, usR, guR);
         quH = new QuarantineHandler(quR, peR, enH);
         dah = new DateHandler(new DateChecker(), peH);
         reH = new ReportHandler(enR, peR, quR, usR);
@@ -131,6 +133,7 @@ public class His {
         usR.loadUsersFromDB();
         quR.loadQuarantinesFromDB();
         enR.loadEnrollmentsFromDB();
+        guR.loadGuestsFromDB();
         peH.checkExpirationDates();
 
         //testData();

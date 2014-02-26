@@ -29,6 +29,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import view.CreateGuestDIA;
 import view.CreatePersonDIA;
 import view.EditPersonDIA;
 
@@ -148,6 +149,92 @@ public class WebcamTool {
     }
 
     public static void spawnWebcamFrame(final EditPersonDIA dia) throws InterruptedException {
+        //Clean
+        FileTool.deleteFile(new File(defaultCapturePath));
+
+        try {
+
+            //Init gui stuff
+            frame = new JFrame();
+            frame.setLayout(new BorderLayout());
+
+            frameButtonPanel = new JPanel();
+            frame.add(frameButtonPanel, BorderLayout.SOUTH);
+
+            cancelButton = new JButton("Annuller");
+            cancelButton.setEnabled(false);
+            frameButtonPanel.add(cancelButton);
+
+            captureButton = new JButton("Tag billed");
+            captureButton.setEnabled(false);
+            frameButtonPanel.add(captureButton);
+
+            //Add action listeners
+            cancelButton.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    webPanel.stop();
+                    webThread = null;
+                }
+            });
+
+            captureButton.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    capturedImage = webcam.getImage();
+                    try {
+                        ImageIO.write(capturedImage, "jpg", new FileOutputStream(new File(defaultCapturePath)));
+                    } catch (IOException ex) {
+                        Logger.getLogger(WebcamTool.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dia.setPicturePath(defaultCapturePath);
+                    dia.setPicturePanel();
+                    frame.dispose();
+                    webPanel.stop();
+                    webThread = null;
+                }
+            });
+
+            //Init webcam stuff
+            webcam = getDefaultWebcam();
+            webcam.setViewSize(WebcamResolution.VGA.getSize());
+
+            webPanel = new WebcamPanel(webcam, false);
+            frame.add(webPanel, BorderLayout.CENTER);
+
+            webThread = new Thread() {
+
+                @Override
+                public void run() {
+                    webPanel.start();
+                    cancelButton.setEnabled(true);
+                    captureButton.setEnabled(true);
+                }
+            };
+
+            //start
+            frame.setUndecorated(true);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+            frame.setResizable(false);
+            frame.setAlwaysOnTop(true);
+            webThread.start();
+            frame.setVisible(true);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            dia.setAlwaysOnTop(false);
+            JOptionPane.showMessageDialog(frame,
+                    "Webcamet ser ikke ud til at være tilsluttet.\nKontakt en administrator for at få hjælp",
+                    "Webcam fejl",
+                    JOptionPane.ERROR_MESSAGE);
+            dia.setAlwaysOnTop(true);
+        }
+    }
+    
+    public static void spawnWebcamFrame(final CreateGuestDIA dia) throws InterruptedException {
         //Clean
         FileTool.deleteFile(new File(defaultCapturePath));
 

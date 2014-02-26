@@ -77,6 +77,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         admin_CheckBox = new javax.swing.JCheckBox();
         reserve_CheckBox = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         tools_Pane = new javax.swing.JPanel();
         create_Button = new javax.swing.JButton();
         cancel_Button = new javax.swing.JButton();
@@ -137,6 +139,10 @@ public class CreateUserDIA extends javax.swing.JDialog {
         reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         reserve_CheckBox.setText("Reserve");
 
+        jLabel3.setText("-");
+
+        jLabel4.setText("-");
+
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
         fields_Pane.setLayout(fields_PaneLayout);
         fields_PaneLayout.setHorizontalGroup(
@@ -162,11 +168,15 @@ public class CreateUserDIA extends javax.swing.JDialog {
                             .addComponent(password_TextField)
                             .addComponent(passwordAgain_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel21))
+                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel3)))
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addComponent(admin_CheckBox)
                         .addGap(18, 18, 18)
-                        .addComponent(reserve_CheckBox)))
+                        .addComponent(reserve_CheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         fields_PaneLayout.setVerticalGroup(
@@ -179,7 +189,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(middlename_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -201,7 +212,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(admin_CheckBox)
-                    .addComponent(reserve_CheckBox))
+                    .addComponent(reserve_CheckBox)
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -427,6 +439,8 @@ public class CreateUserDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;

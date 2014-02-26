@@ -57,23 +57,19 @@ public class EnrollmentRegister {
      * @param en
      * @param g
      */
-    public Serializable registerGuest(Enrollment en, Guest g) {
-        System.out.println("Registering guest...");
+    public void addGuest(Enrollment en, Guest g) {
+        System.out.println("Adding guest...");
 
         en.getGuests().add(g);
 
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
 
-        Serializable sz = s.save(g);
-        g.setIdGuest((Integer) sz);
-
         s.saveOrUpdate(en);
 
         tx.commit();
         s.close();
-        System.out.println("Registration complete!");
-        return sz;
+        System.out.println("Adding complete!");
     }
 
     /**
@@ -82,17 +78,19 @@ public class EnrollmentRegister {
      * @param en
      * @param g
      */
-    public void DeleteGuest(Enrollment en, Guest g) {
+    public void deleteGuest(Enrollment en, Guest g) {
         System.out.println("Deleting guest...");
 
         Session s = HiberUtil.getSessionFactory().openSession();
         Transaction tx = s.beginTransaction();
+        
+        en.getGuests().remove(g);
 
         s.saveOrUpdate(en);
 
         tx.commit();
         s.close();
-        en.getGuests().remove(g);
+        
         System.out.println("Delete complete!");
     }
 

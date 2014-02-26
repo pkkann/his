@@ -13,7 +13,11 @@ import entity.User;
 import file.FileTool;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import model.EnrollmentRegister;
+import model.GuestRegister;
 import model.PersonRegister;
 import model.UserRegister;
 
@@ -26,11 +30,13 @@ public class EnrollmentHandler implements HismHandlerIF {
     private EnrollmentRegister enR;
     private PersonRegister peR;
     private UserRegister usR;
+    private GuestRegister guR;
 
-    public EnrollmentHandler(EnrollmentRegister enR, PersonRegister peR, UserRegister usR) {
+    public EnrollmentHandler(EnrollmentRegister enR, PersonRegister peR, UserRegister usR, GuestRegister guR) {
         this.enR = enR;
         this.peR = peR;
         this.usR = usR;
+        this.guR = guR;
     }
 
     /**
@@ -58,6 +64,24 @@ public class EnrollmentHandler implements HismHandlerIF {
             return GET_ERROR;
         }
 
+        return NO_ERROR;
+    }
+    
+    public int addGuest(int idPerson, int idGuest) {
+        //Get guest
+        Guest g = guR.getGuest(idGuest);
+        if(g == null) {
+            return GET_ERROR;
+        }
+        
+        //Get enrollment
+        Enrollment en = enR.getEnrollment(idPerson);
+        if(en == null) {
+            return GET_ERROR;
+        }
+        
+        en.getGuests().add(g);
+        
         return NO_ERROR;
     }
 
@@ -114,14 +138,18 @@ public class EnrollmentHandler implements HismHandlerIF {
                 if (en.getGuests().size() < 5) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
-
+                    
                     // Register guest
-                    Serializable sz = enR.registerGuest(en, g);
+                    Serializable si = guR.registerGuest(g);
+                    g.setIdGuest((Integer)si);
+                    
+                    // Add guest
+                    enR.addGuest(en, g);
 
                     // Copy picture
                     if (copyPic) {
                         String oldPicturePath = picturePath;
-                        String newPicturePath = his.His.picDir + "/guests/" + (Integer) sz + "/" + "face.jpg";
+                        String newPicturePath = his.His.picDir + "/guests/" + g.getIdGuest() + "/" + "face.jpg";
                         FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
                         g.setPicturePath(newPicturePath);
                         enR.saveEnrollment(en);
@@ -135,12 +163,16 @@ public class EnrollmentHandler implements HismHandlerIF {
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
 
                     // Register guest
-                    Serializable sz = enR.registerGuest(en, g);
+                    Serializable si = guR.registerGuest(g);
+                    g.setIdGuest((Integer)si);
+                    
+                    // Add guest
+                    enR.addGuest(en, g);
 
                     // Copy picture
                     if (copyPic) {
                         String oldPicturePath = picturePath;
-                        String newPicturePath = his.His.picDir + "/guests/" + (Integer) sz + "/" + "face.jpg";
+                        String newPicturePath = his.His.picDir + "/guests/" + g.getIdGuest() + "/" + "face.jpg";
                         FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
                         g.setPicturePath(newPicturePath);
                         enR.saveEnrollment(en);
@@ -172,7 +204,7 @@ public class EnrollmentHandler implements HismHandlerIF {
         Guest g = enR.getGuest(en, idGuest);
 
         if (g != null) {
-            enR.DeleteGuest(en, g);
+            enR.deleteGuest(en, g);
         } else {
             return GET_ERROR;
         }
@@ -267,5 +299,25 @@ public class EnrollmentHandler implements HismHandlerIF {
         
         enR.saveEnrollment(en);
         return NO_ERROR;
+    }
+    
+    public int searchGuestLon(int idPerson, String firstname, String middlename, String lastname, String birthdayDate) {
+        // Make full name
+        String name = firstname + " " + middlename + " " + lastname;
+
+        // Make iterator
+       Set<Guest> guests = guR.getGuests();
+       Iterator<Guest> i = guests.iterator();
+
+        // Loop through and search
+        while (i.hasNext()) {
+            Guest g = i.next();
+            if ((g.getFirstname() + " " + g.getMiddlename() + " " + g.getLastname()).equals(name) && g.getBirthdayDate().equals(birthdayDate)) {
+                return g.getIdGuest();
+            }
+        }
+
+        return -1;
+        
     }
 }
