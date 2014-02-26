@@ -789,18 +789,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_oneOne_CheckBoxItemStateChanged
 
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged
-        if (noPicture_CheckBox.isSelected()) {
-            choosePic_Button.setEnabled(false);
-            capturePic_Button.setEnabled(false);
-            picturePane_PicturePane.setPicture(null, true);
-            newPicturePath = "N";
-            pictureChanged = true;
-        } else {
-            choosePic_Button.setEnabled(true);
-            capturePic_Button.setEnabled(true);
-            newPicturePath = "";
-            pictureChanged = true;
-        }
+        
     }//GEN-LAST:event_noPicture_CheckBoxItemStateChanged
 
     private void choosePic_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePic_ButtonActionPerformed
@@ -837,7 +826,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
         
         int errorCode = 0;
-        System.out.println(pictureChanged);
+        System.out.println("picture changed: " + pictureChanged);
         if(pictureChanged) {
             errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne, newPicturePath);
         } else {
@@ -863,7 +852,19 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_capturePic_ButtonActionPerformed
 
     private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
-        // TODO add your handling code here:
+        System.out.println("CHANGING");
+        if (noPicture_CheckBox.isSelected()) {
+            choosePic_Button.setEnabled(false);
+            capturePic_Button.setEnabled(false);
+            picturePane_PicturePane.setPicture(null, true);
+            newPicturePath = "N";
+            pictureChanged = true;
+        } else {
+            choosePic_Button.setEnabled(true);
+            capturePic_Button.setEnabled(true);
+            newPicturePath = "";
+            pictureChanged = true;
+        }
     }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
 
     private void expiration_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_month_TextFieldKeyReleased

@@ -120,7 +120,7 @@ public class PersonHandler implements HismHandlerIF {
         // Copy picture
         if (copyPic) {
             String oldPicturePath = picturePath;
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer) sz + "/" + "face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer)sz + "/face.jpg";
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
             peR.savePerson(p);
@@ -215,12 +215,11 @@ public class PersonHandler implements HismHandlerIF {
         // Copy picture
         if (copyPic) {
             String oldPicturePath = picturePath;
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
-            FileTool.deleteFile(new File(oldPicturePath));
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer)personID + "/face.jpg";
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
         } else {
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/" + "face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer)personID + "/face.jpg";
             FileTool.deleteFile(new File(newPicturePath));
         }
 

@@ -52,8 +52,8 @@ public class FileTool {
 
     public static void createFolders() {
         File picDir = new File(his.His.picDir);
-        File personsPicDir = new File(his.His.picDir + "/personer");
-        File guestsPicDir = new File(his.His.picDir + "/gæster");
+        File personsPicDir = new File(his.His.picDir + "/persons");
+        File guestsPicDir = new File(his.His.picDir + "/guests");
         File reportDir = new File(his.His.reportDir);
         File reportEnrolledDir = new File(his.His.reportEnrolledDir);
         File reportPersonsDir = new File(his.His.reportPersonsDir);
