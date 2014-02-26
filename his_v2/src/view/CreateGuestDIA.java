@@ -185,10 +185,25 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_day_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_day_TextFieldKeyReleased(evt);
+            }
+        });
 
         birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_month_TextFieldKeyReleased(evt);
+            }
+        });
 
         birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_year_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -496,6 +511,33 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_capturePicture_ButtonActionPerformed
+
+    private void birthday_day_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_day_TextFieldKeyReleased
+        String s = birthday_day_TextField.getText();
+        if(s.length() == 2) {
+            birthday_month_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            birthday_day_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_birthday_day_TextFieldKeyReleased
+
+    private void birthday_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_month_TextFieldKeyReleased
+        String s = birthday_month_TextField.getText();
+        if(s.length() == 2) {
+            birthday_year_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            birthday_month_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_birthday_month_TextFieldKeyReleased
+
+    private void birthday_year_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_year_TextFieldKeyReleased
+        String s = birthday_year_TextField.getText();
+        if(s.length() > 4) {
+            birthday_year_TextField.setText(s.substring(0, s.length()- (s.length() - 4)));
+        }
+    }//GEN-LAST:event_birthday_year_TextFieldKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthday_day_TextField;

@@ -63,8 +63,18 @@ public class RenewPersonDIA extends javax.swing.JDialog {
         jLabel1.setText("Ny udløbsdato:");
 
         expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                expiration_month_TextFieldKeyReleased(evt);
+            }
+        });
 
         expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                expiration_year_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -116,7 +126,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancel_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(renew_Button)
@@ -182,6 +192,23 @@ public class RenewPersonDIA extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_renew_ButtonActionPerformed
+
+    private void expiration_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_month_TextFieldKeyReleased
+        String s = expiration_month_TextField.getText();
+        if(s.length() == 2) {
+            expiration_year_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            expiration_month_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_expiration_month_TextFieldKeyReleased
+
+    private void expiration_year_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_year_TextFieldKeyReleased
+        String s = expiration_year_TextField.getText();
+        if(s.length() > 4) {
+            expiration_year_TextField.setText(s.substring(0, s.length()- (s.length() - 4)));
+        }
+    }//GEN-LAST:event_expiration_year_TextFieldKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel_Button;

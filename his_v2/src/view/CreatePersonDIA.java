@@ -221,14 +221,39 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         address_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_day_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_day_TextFieldKeyReleased(evt);
+            }
+        });
 
         birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_month_TextFieldKeyReleased(evt);
+            }
+        });
 
         birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                birthday_year_TextFieldKeyReleased(evt);
+            }
+        });
 
         expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                expiration_month_TextFieldKeyReleased(evt);
+            }
+        });
 
         expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                expiration_year_TextFieldKeyReleased(evt);
+            }
+        });
 
         hoene_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hoene_CheckBox.setText("Høne");
@@ -638,6 +663,50 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             Logger.getLogger(CreatePersonDIA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_capture_ButtonActionPerformed
+
+    private void birthday_day_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_day_TextFieldKeyReleased
+        String s = birthday_day_TextField.getText();
+        if(s.length() == 2) {
+            birthday_month_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            birthday_day_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_birthday_day_TextFieldKeyReleased
+
+    private void birthday_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_month_TextFieldKeyReleased
+        String s = birthday_month_TextField.getText();
+        if(s.length() == 2) {
+            birthday_year_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            birthday_month_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_birthday_month_TextFieldKeyReleased
+
+    private void birthday_year_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_birthday_year_TextFieldKeyReleased
+        String s = birthday_year_TextField.getText();
+        if(s.length() > 4) {
+            birthday_year_TextField.setText(s.substring(0, s.length()- (s.length() - 4)));
+        }
+    }//GEN-LAST:event_birthday_year_TextFieldKeyReleased
+
+    private void expiration_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_month_TextFieldKeyReleased
+        String s = expiration_month_TextField.getText();
+        if(s.length() == 2) {
+            expiration_year_TextField.requestFocus();
+        }
+        if(s.length() > 2) {
+            expiration_month_TextField.setText(s.substring(0, s.length()- (s.length() - 2)));
+        }
+    }//GEN-LAST:event_expiration_month_TextFieldKeyReleased
+
+    private void expiration_year_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_year_TextFieldKeyReleased
+        String s = expiration_year_TextField.getText();
+        if(s.length() > 4) {
+            expiration_year_TextField.setText(s.substring(0, s.length()- (s.length() - 4)));
+        }
+    }//GEN-LAST:event_expiration_year_TextFieldKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_TextField;

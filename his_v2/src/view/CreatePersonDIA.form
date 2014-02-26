@@ -353,6 +353,9 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="birthday_day_TextFieldKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="birthday_month_TextField">
               <Properties>
@@ -360,6 +363,9 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="birthday_month_TextFieldKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="birthday_year_TextField">
               <Properties>
@@ -367,6 +373,9 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="birthday_year_TextFieldKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="expiration_month_TextField">
               <Properties>
@@ -374,6 +383,9 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="expiration_month_TextFieldKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="expiration_year_TextField">
               <Properties>
@@ -381,6 +393,9 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="expiration_year_TextFieldKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="hoene_CheckBox">
               <Properties>

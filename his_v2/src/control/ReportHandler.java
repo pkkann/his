@@ -114,6 +114,7 @@ public class ReportHandler implements HismHandlerIF {
             Set<Guest> enGs = en.getGuests();
             String totalGs = String.valueOf(enGs.size());
             totalCounter += enGs.size();
+            totalCounter_NoHoene += enGs.size();
 
             PdfPCell namePCell = new PdfPCell(new Phrase(nameP));
             PdfPCell birthPCell = new PdfPCell(new Phrase(birthP));

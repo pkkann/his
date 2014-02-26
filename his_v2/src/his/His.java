@@ -30,12 +30,12 @@ public class His {
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
     public static final String version = "2.0 Beta";
-    public static final String picDir = "pictures";
-    public static final String reportDir = "reports";
-    public static final String reportEnrolledDir = reportDir + "/enrolled";
-    public static final String reportPersonsDir = reportDir + "/persons";
-    public static final String reportUsersDir = reportDir + "/users";
-    public static final String reportQuarantinesDir = reportDir + "/quarantines";
+    public static final String picDir = "billeder";
+    public static final String reportDir = "rapporter";
+    public static final String reportEnrolledDir = reportDir + "/indskrevne";
+    public static final String reportPersonsDir = reportDir + "/personer";
+    public static final String reportUsersDir = reportDir + "/brugere";
+    public static final String reportQuarantinesDir = reportDir + "/karantæner";
     public static final String webcamDir = "webcam";
     // Control
     private PersonHandler peH;
