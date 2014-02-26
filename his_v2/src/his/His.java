@@ -92,7 +92,7 @@ public class His {
 
 
         // View
-        createGuestDIA = new CreateGuestDIA(mainGUI, true, enH);
+        createGuestDIA = new CreateGuestDIA(mainGUI, false, enH);
         createPersonDIA = new CreatePersonDIA(mainGUI, false, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
@@ -102,7 +102,7 @@ public class His {
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, false);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
-        enrollPersonDIA = new EnrollPersonDIA(mainGUI, true, enH, createGuestDIA);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, false, enH, createGuestDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, peH);
         mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, 
