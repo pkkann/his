@@ -930,8 +930,10 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_kick_ButtonActionPerformed
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
+
         renewPersonDIA.setPerson(selectedPerson);
         renewPersonDIA.setVisible(true);
+        setPerson(selectedPerson);
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
     private void gemRapportIndskrevne_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportIndskrevne_MenuItemActionPerformed

@@ -92,6 +92,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }
 
     public void setPerson(Person p) {
+        System.out.println("############Setting person");
         this.selectedPerson = p;
         int guestMax = 0;
 
@@ -195,7 +196,6 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         enroll_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {

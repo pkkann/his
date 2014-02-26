@@ -27,11 +27,16 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private int idPerson = -1;
     private EnrollmentHandler enH;
     private String picturePath = "";
+    private EnrollPersonDIA enrollPersonDIA;
 
     public CreateGuestDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH) {
         super(parent, modal);
         initComponents();
         this.enH = enH;
+    }
+    
+    public void setEnrollPersonDIA(EnrollPersonDIA enrollPersonDIA) {
+        this.enrollPersonDIA = enrollPersonDIA;
     }
     
     public void setPicturePath(String path) {
@@ -68,6 +73,8 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         birthday_year_TextField.setText("");
         idEnrollment = -1;
         idPerson = -1;
+        capturePicture_Button.setEnabled(true);
+        choosePicture_Button.setEnabled(true);
     }
 
     private void cleanPicture() {
@@ -116,7 +123,6 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -452,6 +458,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 DialogMessage.showMessage(this, errorCode);
                 
                 if(errorCode == 0) {
+                    enrollPersonDIA.setPerson(enH.getEnrollment(idPerson).getEnrolledPerson());
                     dispose();
                 }
             } else {
@@ -460,6 +467,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 DialogMessage.showMessage(this, errorCode);
 
                 if (errorCode == 0) {
+                    enrollPersonDIA.setPerson(enH.getEnrollment(idPerson).getEnrolledPerson());
                     dispose();
                 }
             }
