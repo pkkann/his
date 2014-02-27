@@ -108,6 +108,8 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 noPicture_CheckBox.setEnabled(true);
                 if (p.getPicturePath().equals("N")) {
                     noPicture_CheckBox.setSelected(true);
+                    choosePic_Button.setEnabled(false);
+                    capturePic_Button.setEnabled(false);
                 } else {
                     noPicture_CheckBox.setSelected(false);
                     choosePic_Button.setEnabled(true);
