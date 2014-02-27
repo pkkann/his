@@ -78,4 +78,14 @@ public interface HismHandlerIF {
      * Will be send if the user needs to know they will be logged out
      */
     public static final int LOGOUT_NOTIFICATION = 15;
+    
+    /**
+     * Will be send if password is not correct
+     */
+    public static final int PASSWORD_NOT_CONFIRMED = 16;
+    
+    /**
+     * Wil lbe send if password IS correct
+     */
+    public static final int PASSWORD_CORRECT = 17;
 }

@@ -296,6 +296,7 @@ public class MainGUI extends javax.swing.JFrame {
         editPerson_Button = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
         deletePerson_Button = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         bottom_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -549,6 +550,17 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(deletePerson_Button);
+
+        jButton1.setText("jButton1");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
@@ -997,6 +1009,10 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        loH.requestLoginOnlyPass("Bekræft sletning", "Bekræft", this);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
@@ -1022,6 +1038,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem gemRapportPersoner_MenuItem;
     private javax.swing.JMenuItem indstillinger_MenuItem;
     private javax.swing.JPanel inner_Pane;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

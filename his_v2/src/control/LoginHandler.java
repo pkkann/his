@@ -5,8 +5,10 @@
 package control;
 
 import entity.User;
+import javax.swing.JFrame;
 import model.UserRegister;
 import view.LoginUserGUI;
+import view.LoginUserPassOnlyDIA;
 import view.MainGUI;
 
 /**
@@ -17,6 +19,7 @@ public class LoginHandler implements HismHandlerIF {
 
     public static User loggedIn;
     private LoginUserGUI loginUserGUI;
+    private LoginUserPassOnlyDIA loginUserPassOnlyDIA;
     private UserRegister usR;
     private MainGUI mainGUI;
 
@@ -46,8 +49,26 @@ public class LoginHandler implements HismHandlerIF {
 
         return LOGIN_FAILED;
     }
+    
+    public int confirmPassword(String password) {
+        if(loggedIn != null) {
+            if(loggedIn.getPassword().equals(password)) {
+                return PASSWORD_CORRECT;
+            }
+        }
+
+        return PASSWORD_NOT_CONFIRMED;
+    }
 
     public void requestLogin() {
         loginUserGUI.setVisible(true);
+    }
+    
+    public void requestLoginOnlyPass(String title, String confirmButton, JFrame parent) {
+        loginUserPassOnlyDIA = new LoginUserPassOnlyDIA(parent, true, this, title, confirmButton);
+        
+        loginUserPassOnlyDIA.setVisible(true);
+        
+        loginUserPassOnlyDIA = null;
     }
 }

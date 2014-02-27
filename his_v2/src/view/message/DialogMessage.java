@@ -38,9 +38,9 @@ public class DialogMessage {
 
     public static void showMessage(JDialog j, int errorCode) {
         switch (errorCode) {
-            case HismHandlerIF.NO_ERROR:
-                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
-                break;
+//            case HismHandlerIF.NO_ERROR:
+//                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
+//                break;
             case HismHandlerIF.FIELDS_NOT_FILLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
@@ -86,14 +86,17 @@ public class DialogMessage {
             case HismHandlerIF.LOGOUT_NOTIFICATION:
                 JOptionPane.showMessageDialog(j, "Du vil nu blive logget ud!", "Du bliver logget ud", JOptionPane.INFORMATION_MESSAGE);
                 break;
+            case HismHandlerIF.PASSWORD_NOT_CONFIRMED:
+                JOptionPane.showMessageDialog(j, "Koden er forkert", "Forkert kode", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
     public static void showMessage(JFrame j, int errorCode) {
         switch (errorCode) {
-            case HismHandlerIF.NO_ERROR:
-                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
-                break;
+//            case HismHandlerIF.NO_ERROR:
+//                JOptionPane.showMessageDialog(j, "Handlingen blev udført");
+//                break;
             case HismHandlerIF.FIELDS_NOT_FILLED_ERROR:
                 JOptionPane.showMessageDialog(j, "Alle felter skal udfyldes", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
@@ -138,6 +141,9 @@ public class DialogMessage {
                 break;
             case HismHandlerIF.LOGOUT_NOTIFICATION:
                 JOptionPane.showMessageDialog(j, "Du vil nu blive logget ud!", "Du bliver logget ud", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case HismHandlerIF.PASSWORD_NOT_CONFIRMED:
+                JOptionPane.showMessageDialog(j, "Koden er forkert", "Forkert kode", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }
