@@ -436,6 +436,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
+        expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_year_TextFieldKeyReleased(evt);

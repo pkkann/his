@@ -991,6 +991,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_gemKarantæner_MenuItemActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+
         if (selectedPerson != -1) {
             setPerson(selectedPerson);
         }

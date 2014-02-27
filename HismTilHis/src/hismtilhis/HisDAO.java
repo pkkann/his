@@ -41,7 +41,9 @@ public class HisDAO {
             String birthdaydate = ADate.formatADate(p.getBirthdayDate(), "/");
             String expirationdate = "";
             if (!p.isOneOne() && !p.isHone()) {
-                expirationdate = p.getExpirationDate().getMonth() + "/" + p.getExpirationDate().getYear();
+                String e = ADate.formatADate(p.getExpirationDate(), "/");
+                String[] es = e.split("/");
+                expirationdate = es[1] + "/" + es[2];
             }
             String picturepath = "N";
             int hoene = 0;
