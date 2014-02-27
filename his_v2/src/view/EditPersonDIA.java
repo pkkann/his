@@ -10,15 +10,10 @@ import entity.Person;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import model.TableTool;
 import view.message.DialogMessage;
 import webcam.WebcamTool;
 
@@ -38,24 +33,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
     public EditPersonDIA(java.awt.Frame parent, boolean modal, PersonHandler peH, EnrollmentHandler enH) {
         super(parent, modal);
         initComponents();
-        initTableListener();
         setTitleIcon();
         this.peH = peH;
         this.enH = enH;
-    }
-
-    private void initTableListener() {
-        result_Table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting() && result_Table.getSelectedRowCount() != 0) {
-                    int selRow = result_Table.getSelectedRow();
-                    Object selIDObject = result_Table.getModel().getValueAt(selRow, 0);
-                    int selID = Integer.valueOf(String.valueOf(selIDObject));
-                    setSelectedPerson(selID);
-                }
-            }
-        });
     }
     
     public void setPicturePath(String path) {
@@ -74,7 +54,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         picturePane_PicturePane.setPicture(img, true);
     }
 
-    private void setSelectedPerson(int idPerson) {
+    public void setSelectedPerson(int idPerson) {
         cleanSelectedPerson();
         selectedPerson = idPerson;
 
@@ -157,68 +137,38 @@ public class EditPersonDIA extends javax.swing.JDialog {
         titleIcon_PicturePane.setPicture(icon, false);
     }
 
-    private void cleanSearchField() {
-        search_TextField.setText("");
-    }
-
-    private void cleanTable() {
-        DefaultTableModel dtm = TableTool.createEmptyPersonTableModel();
-        result_Table.setModel(dtm);
-    }
-
     public void cleanSelectedPerson() {
         selectedPerson = -1;
-        save_Button.setEnabled(false);
         info_Label.setText("");
 
         firstname_TextField.setText("");
-        firstname_TextField.setEnabled(false);
 
         middlename_TextField.setText("");
-        middlename_TextField.setEnabled(false);
 
         lastname_TextField.setText("");
-        lastname_TextField.setEnabled(false);
 
         address_TextField.setText("");
-        address_TextField.setEnabled(false);
 
         birthday_day_TextField.setText("");
-        birthday_day_TextField.setEnabled(false);
         birthday_month_TextField.setText("");
-        birthday_month_TextField.setEnabled(false);
         birthday_year_TextField.setText("");
-        birthday_year_TextField.setEnabled(false);
         
         hoene_CheckBox.setSelected(false);
-        hoene_CheckBox.setEnabled(false);
 
         reserve_CheckBox.setSelected(false);
-        reserve_CheckBox.setEnabled(false);
 
         oneOne_CheckBox.setSelected(false);
-        oneOne_CheckBox.setEnabled(false);
 
         expiration_month_TextField.setText("");
-        expiration_month_TextField.setEnabled(false);
         expiration_year_TextField.setText("");
-        expiration_year_TextField.setEnabled(false);
 
         noPicture_CheckBox.setSelected(false);
-        noPicture_CheckBox.setEnabled(false);
         picturePane_PicturePane.setPicture(null, true);
-        choosePic_Button.setEnabled(false);
-        capturePic_Button.setEnabled(false);
+        choosePic_Button.setEnabled(true);
+        capturePic_Button.setEnabled(true);
         
         pictureChanged = false;
 
-    }
-
-    public void search() {
-        cleanSelectedPerson();
-        ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
-        DefaultTableModel dtm = TableTool.createPersonTableModel(data);
-        result_Table.setModel(dtm);
     }
     
     public boolean shouldExpireDateBeEnabled() {
@@ -243,11 +193,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         title_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         titleIcon_PicturePane = new view.image.PicturePane();
-        search_Pane = new javax.swing.JPanel();
-        search_TextField = new javax.swing.JTextField();
-        search_Button = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        result_Table = new javax.swing.JTable();
         fields_Pane = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -272,7 +217,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         hoene_CheckBox = new javax.swing.JCheckBox();
         reserve_CheckBox = new javax.swing.JCheckBox();
         oneOne_CheckBox = new javax.swing.JCheckBox();
-        save_Button = new javax.swing.JButton();
         info_Label = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         expiration_month_TextField = new javax.swing.JTextField();
@@ -280,6 +224,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
+        save_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -333,59 +278,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        search_TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search_TextFieldActionPerformed(evt);
-            }
-        });
-
-        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        search_Button.setText("Søg");
-        search_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search_ButtonActionPerformed(evt);
-            }
-        });
-
-        result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        result_Table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Navn", "Adresse", "Fødselsdag", "Udløbsdato", "Oprettelsesdato", "Høne", "Reserve", "1-1"
-            }
-        ));
-        result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(result_Table);
-
-        javax.swing.GroupLayout search_PaneLayout = new javax.swing.GroupLayout(search_Pane);
-        search_Pane.setLayout(search_PaneLayout);
-        search_PaneLayout.setHorizontalGroup(
-            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(search_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(search_PaneLayout.createSequentialGroup()
-                        .addComponent(search_TextField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(search_Button)))
-                .addContainerGap())
-        );
-        search_PaneLayout.setVerticalGroup(
-            search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(search_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(search_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search_Button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Fornavn:");
 
@@ -405,16 +297,12 @@ public class EditPersonDIA extends javax.swing.JDialog {
         jLabel7.setText("Er:");
 
         firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        firstname_TextField.setEnabled(false);
 
         middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        middlename_TextField.setEnabled(false);
 
         lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lastname_TextField.setEnabled(false);
 
         address_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        address_TextField.setEnabled(false);
 
         javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
         picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
@@ -429,7 +317,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         choosePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         choosePic_Button.setText("Vælg nyt billed");
-        choosePic_Button.setEnabled(false);
         choosePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choosePic_ButtonActionPerformed(evt);
@@ -438,7 +325,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         capturePic_Button.setText("Tag nyt billed");
-        capturePic_Button.setEnabled(false);
         capturePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 capturePic_ButtonActionPerformed(evt);
@@ -447,7 +333,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
-        noPicture_CheckBox.setEnabled(false);
         noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 noPicture_CheckBoxItemStateChanged(evt);
@@ -490,7 +375,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         );
 
         birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        birthday_day_TextField.setEnabled(false);
         birthday_day_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_day_TextFieldKeyReleased(evt);
@@ -498,7 +382,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         });
 
         birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        birthday_month_TextField.setEnabled(false);
         birthday_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_month_TextFieldKeyReleased(evt);
@@ -506,7 +389,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
         });
 
         birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        birthday_year_TextField.setEnabled(false);
         birthday_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_year_TextFieldKeyReleased(evt);
@@ -519,7 +401,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         hoene_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         hoene_CheckBox.setText("Høne");
-        hoene_CheckBox.setEnabled(false);
         hoene_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 hoene_CheckBoxItemStateChanged(evt);
@@ -528,7 +409,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         reserve_CheckBox.setText("Reserve");
-        reserve_CheckBox.setEnabled(false);
         reserve_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 reserve_CheckBoxItemStateChanged(evt);
@@ -537,19 +417,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         oneOne_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         oneOne_CheckBox.setText("1-1");
-        oneOne_CheckBox.setEnabled(false);
         oneOne_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 oneOne_CheckBoxItemStateChanged(evt);
-            }
-        });
-
-        save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        save_Button.setText("Gem person");
-        save_Button.setEnabled(false);
-        save_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_ButtonActionPerformed(evt);
             }
         });
 
@@ -560,14 +430,12 @@ public class EditPersonDIA extends javax.swing.JDialog {
         jLabel10.setText("Udløbsdato:");
 
         expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        expiration_month_TextField.setEnabled(false);
         expiration_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_month_TextFieldKeyReleased(evt);
             }
         });
 
-        expiration_year_TextField.setEnabled(false);
         expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_year_TextFieldKeyReleased(evt);
@@ -591,8 +459,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(save_Button))
+                        .addGap(124, 124, 124))
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -630,8 +497,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel11))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         fields_PaneLayout.setVerticalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,9 +545,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(info_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(save_Button, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addComponent(info_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -693,6 +557,14 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
+        save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        save_Button.setText("Gem og luk");
+        save_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
         tools_PaneLayout.setHorizontalGroup(
@@ -700,14 +572,18 @@ public class EditPersonDIA extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(close_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(save_Button)
                 .addContainerGap())
         );
         tools_PaneLayout.setVerticalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(close_Button)
-                .addContainerGap())
+            .addGroup(tools_PaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(close_Button)
+                    .addComponent(save_Button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
@@ -718,7 +594,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(main_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(title_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(search_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tools_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -728,9 +603,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             .addGroup(main_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(title_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(search_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fields_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -756,18 +629,8 @@ public class EditPersonDIA extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_close_ButtonActionPerformed
 
-    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
-        search();
-    }//GEN-LAST:event_search_ButtonActionPerformed
-
-    private void search_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_TextFieldActionPerformed
-        search();
-    }//GEN-LAST:event_search_TextFieldActionPerformed
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         cleanSelectedPerson();
-        cleanSearchField();
-        cleanTable();
     }//GEN-LAST:event_formWindowClosed
 
     private void hoene_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_hoene_CheckBoxItemStateChanged
@@ -837,7 +700,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
         
         if(errorCode == 0) {
             cleanSelectedPerson();
-            search();
+            dispose();
         }
         
         
@@ -938,7 +801,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
@@ -946,11 +808,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
     private javax.swing.JCheckBox oneOne_CheckBox;
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JCheckBox reserve_CheckBox;
-    private javax.swing.JTable result_Table;
     private javax.swing.JButton save_Button;
-    private javax.swing.JButton search_Button;
-    private javax.swing.JPanel search_Pane;
-    private javax.swing.JTextField search_TextField;
     private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;

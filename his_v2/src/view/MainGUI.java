@@ -62,13 +62,13 @@ public class MainGUI extends javax.swing.JFrame {
     private int selectedPerson = -1;
     private User loggedIn;
 
-    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH, 
-            SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA, 
-            RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA, 
-            CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA, 
-            EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA, 
-            AboutDIA aboutDIA, EditPersonDIA editPersonDIA, 
-            QuarantinePersonManagementDIA quarantinePersonManagemenDIA, 
+    public MainGUI(PersonHandler peH, EnrollmentHandler enH, QuarantineHandler quH,
+            SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA,
+            RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA,
+            CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA,
+            EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA,
+            AboutDIA aboutDIA, EditPersonDIA editPersonDIA,
+            QuarantinePersonManagementDIA quarantinePersonManagemenDIA,
             RenewPersonDIA renewPersonDIA, ReportHandler reH) {
         initComponents();
         initTableListener();
@@ -91,7 +91,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.renewPersonDIA = renewPersonDIA;
         this.quarantinePersonManagemenDIA = quarantinePersonManagemenDIA;
         DefaultTableModel dtm = (DefaultTableModel) result_Table.getModel();
-        
+
         createPerson_Button.setMnemonic(KeyEvent.VK_R);
 
         search_Button.requestFocus();
@@ -170,7 +170,7 @@ public class MainGUI extends javax.swing.JFrame {
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         if (peH.getPerson(id).isExpired()) {
             status_Label.setText("Personen er udløbet");
             status_Label.setForeground(Color.white);
@@ -327,6 +327,13 @@ public class MainGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(his.His.title + " - " + his.His.version);
         setMinimumSize(new java.awt.Dimension(1300, 550));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -900,10 +907,13 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createPerson_ButtonActionPerformed
 
     private void editPerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_ButtonActionPerformed
-        cleanSelectedPerson();
-        cleanTable();
-        cleanSearch();
-        editPersonDIA.setVisible(true);
+        if (selectedPerson != -1) {
+            editPersonDIA.setSelectedPerson(selectedPerson);
+            editPersonDIA.setVisible(true);
+            setPerson(selectedPerson);
+        } else {
+            DialogMessage.showCustomMessage(this, "Du skal vælge en person for at redigere", "Vælg en person først", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editPerson_ButtonActionPerformed
 
     private void deletePerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_ButtonActionPerformed
@@ -979,6 +989,12 @@ public class MainGUI extends javax.swing.JFrame {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_gemKarantæner_MenuItemActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        if (selectedPerson != -1) {
+            setPerson(selectedPerson);
+        }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;
