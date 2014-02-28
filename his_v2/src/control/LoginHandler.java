@@ -64,11 +64,15 @@ public class LoginHandler implements HismHandlerIF {
         loginUserGUI.setVisible(true);
     }
     
-    public void requestLoginOnlyPass(String title, String confirmButton, JFrame parent) {
+    public int requestLoginOnlyPass(String title, String confirmButton, JFrame parent) {
         loginUserPassOnlyDIA = new LoginUserPassOnlyDIA(parent, true, this, title, confirmButton);
         
         loginUserPassOnlyDIA.setVisible(true);
         
+        int returnCode = loginUserPassOnlyDIA.getReturnCode();
+        
         loginUserPassOnlyDIA = null;
+        
+        return returnCode;
     }
 }

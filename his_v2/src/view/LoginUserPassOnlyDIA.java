@@ -17,6 +17,7 @@ import view.message.DialogMessage;
 public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
 
     private LoginHandler loH;
+    private int returnCode = 0;
     
     /**
      * Creates new form LoginUserPassOnlyDIA
@@ -27,6 +28,21 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
         this.loH = loH;
         title_Label.setText(title);
         confirm_Button.setText(confirmButton);
+    }
+    
+    public int getReturnCode() {
+        return returnCode;
+    }
+    
+    private void submit() {
+        int errorCode = loH.confirmPassword(password_TextField.getText());
+        
+        DialogMessage.showMessage(this, errorCode);
+        
+        if(errorCode == HismHandlerIF.PASSWORD_CORRECT) {
+            returnCode = 1;
+            dispose();
+        }
     }
 
     /**
@@ -191,24 +207,11 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_cancel_ButtonActionPerformed
 
     private void confirm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_ButtonActionPerformed
-
-        int errorCode = loH.confirmPassword(password_TextField.getText());
-        
-        DialogMessage.showMessage(this, errorCode);
-        
-        if(errorCode == HismHandlerIF.PASSWORD_CORRECT) {
-            dispose();
-        }
+        submit();
     }//GEN-LAST:event_confirm_ButtonActionPerformed
 
     private void password_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_TextFieldActionPerformed
-        int errorCode = loH.confirmPassword(password_TextField.getText());
-        
-        DialogMessage.showMessage(this, errorCode);
-        
-        if(errorCode == HismHandlerIF.PASSWORD_CORRECT) {
-            dispose();
-        }
+        submit();
     }//GEN-LAST:event_password_TextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

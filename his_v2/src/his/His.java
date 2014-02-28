@@ -29,7 +29,7 @@ public class His {
 
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "2.0 RC1";
+    public static final String version = "2.0 RC2";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
     public static final String reportEnrolledDir = reportDir + "/enrolled";
@@ -56,7 +56,6 @@ public class His {
     private CreatePersonDIA createPersonDIA;
     private CreateUserDIA createUserDIA;
     private EditUserDIA editUserDIA;
-    private RemovePersonDIA removePersonDIA;
     private EditPersonDIA editPersonDIA;
     private QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
     private RemoveUserDIA removeUserDIA;
@@ -96,7 +95,6 @@ public class His {
         createPersonDIA = new CreatePersonDIA(mainGUI, false, peH);
         createUserDIA = new CreateUserDIA(mainGUI, true, usH);
         editUserDIA = new EditUserDIA(mainGUI, true, usH);
-        removePersonDIA = new RemovePersonDIA(mainGUI, true, peH);
         editPersonDIA = new EditPersonDIA(mainGUI, false, peH, enH);
         quarantinePersonManagemenDIA = new QuarantinePersonManagementDIA(mainGUI, true, peH, quH);
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
@@ -108,7 +106,7 @@ public class His {
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, peH);
         mainGUI = new MainGUI(peH, enH, quH, settingsDIA, createPersonDIA, 
                 removeUserDIA, editUserDIA, createUserDIA, editProfileDIA, 
-                enrollPersonDIA, removePersonDIA, aboutDIA, editPersonDIA, 
+                enrollPersonDIA, aboutDIA, editPersonDIA, 
                 quarantinePersonManagemenDIA, renewPersonDIA, reH);
 
         // Control - login

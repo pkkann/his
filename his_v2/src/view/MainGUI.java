@@ -46,7 +46,6 @@ public class MainGUI extends javax.swing.JFrame {
     private ReportHandler reH;
     // View
     private CreatePersonDIA createPersonDIA;
-    private RemovePersonDIA removePersonDIA;
     private EditPersonDIA editPersonDIA;
     private QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
     private RemoveUserDIA removeUserDIA;
@@ -66,7 +65,7 @@ public class MainGUI extends javax.swing.JFrame {
             SettingsDIA settingsDIA, CreatePersonDIA createPersonDIA,
             RemoveUserDIA removeUserDIA, EditUserDIA editUserDIA,
             CreateUserDIA createUserDIA, EditProfileDIA editProfileDIA,
-            EnrollPersonDIA enrollPersonDIA, RemovePersonDIA removePersonDIA,
+            EnrollPersonDIA enrollPersonDIA,
             AboutDIA aboutDIA, EditPersonDIA editPersonDIA,
             QuarantinePersonManagementDIA quarantinePersonManagemenDIA,
             RenewPersonDIA renewPersonDIA, ReportHandler reH) {
@@ -81,7 +80,6 @@ public class MainGUI extends javax.swing.JFrame {
         this.settingsDIA = settingsDIA;
         this.createPersonDIA = createPersonDIA;
         this.removeUserDIA = removeUserDIA;
-        this.removePersonDIA = removePersonDIA;
         this.editPersonDIA = editPersonDIA;
         this.editUserDIA = editUserDIA;
         this.createUserDIA = createUserDIA;
@@ -921,10 +919,20 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_editPerson_ButtonActionPerformed
 
     private void deletePerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_ButtonActionPerformed
-        cleanSelectedPerson();
-        cleanTable();
-        cleanSearch();
-        removePersonDIA.setVisible(true);
+        if (selectedPerson != -1) {
+            if (!enH.isEnrolled(selectedPerson)) {
+                int returnCode = loH.requestLoginOnlyPass("Bekræft sletning", "Slet", this);
+
+                if (returnCode == 1) {
+                    peH.removePerson(selectedPerson);
+                    search();
+                }
+            } else {
+                DialogMessage.showMessage(this, HismHandlerIF.ENROLLED_ERROR);
+            }
+        } else {
+            DialogMessage.showCustomMessage(this, "Du skal vælge en person for at slette", "Vælg en person først", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_deletePerson_ButtonActionPerformed
 
     private void administrateQuarantines_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrateQuarantines_MenuItemActionPerformed
