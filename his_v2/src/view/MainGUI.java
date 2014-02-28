@@ -343,7 +343,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         inner_Pane.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_TextField.setForeground(new java.awt.Color(153, 153, 153));
         search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
         search_TextField.addActionListener(new java.awt.event.ActionListener() {
@@ -360,7 +360,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,7 +369,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         result_Table.setAutoCreateRowSorter(true);
-        result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -446,7 +446,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        enrolled_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        enrolled_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enrolled_CheckBox.setText("Indskrevne");
         enrolled_CheckBox.setToolTipText("Søg kun på indskrevne");
 
@@ -499,7 +499,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(kick_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(renew_Button))
@@ -659,7 +659,6 @@ public class MainGUI extends javax.swing.JFrame {
         menuBar_MenuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         filer_Menu.setText("FILER");
-        filer_Menu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         rapport_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/report.png"))); // NOI18N
         rapport_Menu.setText("Rapport");

@@ -174,46 +174,46 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Fornavn:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Mellemnavn:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Efternavn:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Fødselsdag:");
 
-        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_day_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_day_TextFieldKeyReleased(evt);
             }
         });
 
-        birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_month_TextFieldKeyReleased(evt);
             }
         });
 
-        birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_year_TextFieldKeyReleased(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("dd/mm/yyyy");
 
@@ -247,7 +247,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                         .addComponent(birthday_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jLabel6)))
-                .addContainerGap(524, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         fields_PaneLayout.setVerticalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +286,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        choosePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        choosePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         choosePicture_Button.setText("Vælg billed");
         choosePicture_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +294,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        capturePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        capturePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capturePicture_Button.setText("Tag billed");
         capturePicture_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,7 +302,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
         noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +310,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("For bedst resultat, skal billedet være 250x250");
 
         jLabel12.setText("*");
@@ -334,7 +334,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                         .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(noPicture_CheckBox)
                             .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 203, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         picture_PaneLayout.setVerticalGroup(
@@ -356,7 +356,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        createGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        createGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         createGuest_Button.setText("Opret gæst");
         createGuest_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +364,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancel_Button.setText("Annuller");
         cancel_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,7 +372,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Nå du har udfyldt navn og fødselsdag, kan du trykke opret for at se om gæsten findes i forvejen");
 
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
@@ -382,7 +382,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancel_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createGuest_Button)

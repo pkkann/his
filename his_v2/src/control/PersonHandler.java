@@ -65,6 +65,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
+            try {
+                int i = Integer.valueOf(birthdayDate);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
@@ -79,6 +84,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
+            try {
+                int i = Integer.valueOf(expirationDate);
+            } catch (NumberFormatException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
             String expire_Month;
             String expire_Year;
             try {
@@ -120,7 +130,7 @@ public class PersonHandler implements HismHandlerIF {
         // Copy picture
         if (copyPic) {
             String oldPicturePath = picturePath;
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer)sz + "/face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) sz + "/face.jpg";
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
             peR.savePerson(p);
@@ -158,6 +168,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
+            try {
+                int i = Integer.valueOf(birthdayDate);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
@@ -172,6 +187,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
+            try {
+                int i = Integer.valueOf(expirationDate);
+            } catch (NumberFormatException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
             String expire_Month;
             String expire_Year;
             try {
@@ -215,11 +235,11 @@ public class PersonHandler implements HismHandlerIF {
         // Copy picture
         if (copyPic) {
             String oldPicturePath = picturePath;
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer)personID + "/face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/face.jpg";
             FileTool.copyFile(new File(oldPicturePath), new File(newPicturePath));
             p.setPicturePath(newPicturePath);
         } else {
-            String newPicturePath = his.His.picDir + "/persons/" + (Integer)personID + "/face.jpg";
+            String newPicturePath = his.His.picDir + "/persons/" + (Integer) personID + "/face.jpg";
             FileTool.deleteFile(new File(newPicturePath));
         }
 
@@ -257,6 +277,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
+            try {
+                int i = Integer.valueOf(birthdayDate);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
@@ -271,6 +296,11 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
+            try {
+                int i = Integer.valueOf(expirationDate);
+            } catch (NumberFormatException ex) {
+                return EXPIRATION_FORMAT_ERROR;
+            }
             String expire_Month;
             String expire_Year;
             try {
@@ -439,7 +469,7 @@ public class PersonHandler implements HismHandlerIF {
                     reserve = "Ja";
                 }
                 for (String s : sSplit) {
-                    if (p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || p.getAddress().equalsIgnoreCase(s) || p.getBirthdayDate().equalsIgnoreCase(s) || p.getExpirationDate().equalsIgnoreCase(s) || birthday.equalsIgnoreCase(s) || expiration.equalsIgnoreCase(s)) {
+                    if (String.valueOf(p.getIdPerson()).equalsIgnoreCase(s) || p.getFirstname().equalsIgnoreCase(s) || p.getMiddlename().equalsIgnoreCase(s) || p.getLastname().equalsIgnoreCase(s) || p.getAddress().equalsIgnoreCase(s) || p.getBirthdayDate().equalsIgnoreCase(s) || p.getExpirationDate().equalsIgnoreCase(s) || birthday.equalsIgnoreCase(s) || expiration.equalsIgnoreCase(s)) {
                         if (onlyEnrolled) {
                             Enrollment en = enR.getEnrollment(p.getIdPerson());
                             if (en != null) {
@@ -527,6 +557,7 @@ public class PersonHandler implements HismHandlerIF {
 
     /**
      * Renews a person
+     *
      * @param idPerson
      * @param newExpirationDate
      * @return Error code : Integer
@@ -554,12 +585,12 @@ public class PersonHandler implements HismHandlerIF {
         if (expire.before(today) || expire.equals(today)) {
             return EXPIRATION_DATE_ERROR;
         }
-        
+
         Person p = getPerson(idPerson);
-        if(p == null) {
+        if (p == null) {
             return GET_ERROR;
         }
-        
+
         p.setExpirationDate(newExpirationDate);
         p.setExpired(false);
         peR.savePerson(p);

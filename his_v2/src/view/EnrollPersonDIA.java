@@ -230,7 +230,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         );
 
         guests_Table.setAutoCreateRowSorter(true);
-        guests_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        guests_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         guests_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -256,7 +256,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(guests_Table);
 
-        addGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        addGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         addGuest_Button.setText("Tilføj gæst");
         addGuest_Button.setEnabled(false);
         addGuest_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -276,11 +276,11 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        info_Label.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         info_Label.setForeground(new java.awt.Color(51, 153, 0));
         info_Label.setText("INFO");
 
-        deleteGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        deleteGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         deleteGuest_Button.setText("Slet gæst");
         deleteGuest_Button.setEnabled(false);
         deleteGuest_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +326,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,7 +334,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        enroll_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         enroll_Button.setText("Indskriv");
         enroll_Button.setToolTipText("");
         enroll_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -385,7 +385,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

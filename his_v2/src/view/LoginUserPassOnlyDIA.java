@@ -110,9 +110,10 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Kode:");
 
+        confirm_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         confirm_Button.setText("TEXT");
         confirm_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +121,7 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
             }
         });
 
+        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancel_Button.setText("Annuller");
         cancel_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +129,7 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
             }
         });
 
-        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         password_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 password_TextFieldActionPerformed(evt);
@@ -146,7 +148,7 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(password_TextField))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 156, Short.MAX_VALUE)
+                        .addGap(0, 144, Short.MAX_VALUE)
                         .addComponent(cancel_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(confirm_Button)))

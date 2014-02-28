@@ -98,46 +98,46 @@ public class CreateUserDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Fornavn:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Mellemnavn:");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Efternavn:");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Brugernavn:");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Kode:");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Kode igen:");
 
-        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        passwordAgain_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordAgain_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Mindst 10 tegn");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Rettigheder:");
 
-        admin_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        admin_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         admin_CheckBox.setText("Administrator");
 
-        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         reserve_CheckBox.setText("Reserve");
 
         jLabel3.setText("-");
@@ -178,7 +178,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
                         .addComponent(reserve_CheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         fields_PaneLayout.setVerticalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +218,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        create_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        create_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         create_Button.setText("Opret bruger");
         create_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +226,7 @@ public class CreateUserDIA extends javax.swing.JDialog {
             }
         });
 
-        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancel_Button.setText("Annuller");
         cancel_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -113,6 +113,11 @@ public class EnrollmentHandler implements HismHandlerIF {
 
             // Check birthday is written correctly
             try {
+                try {
+                int i = Integer.valueOf(BIRTHDAY_FORMAT_ERROR);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
                 String[] birth_Split = birthdayDate.split("/");
                 String birth_Day = birth_Split[0];
                 String birth_Month = birth_Split[1];

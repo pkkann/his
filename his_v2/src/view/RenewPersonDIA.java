@@ -59,24 +59,24 @@ public class RenewPersonDIA extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Ny udløbsdato:");
 
-        expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         expiration_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_month_TextFieldKeyReleased(evt);
             }
         });
 
-        expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_year_TextFieldKeyReleased(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("mm/yyyy");
 
@@ -107,6 +107,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        renew_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         renew_Button.setText("Forny");
         renew_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +115,7 @@ public class RenewPersonDIA extends javax.swing.JDialog {
             }
         });
 
+        cancel_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancel_Button.setText("Annuller");
         cancel_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -175,14 +175,14 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_TextFieldActionPerformed(evt);
             }
         });
 
-        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,6 +190,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
             }
         });
 
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -226,7 +227,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,10 +252,10 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Karantæne:");
 
-        quarantine_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        quarantine_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         quarantine_Button.setText("Opret Karantæne");
         quarantine_Button.setEnabled(false);
         quarantine_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +264,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
             }
         });
 
-        quarantine_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        quarantine_Label.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         quarantine_Label.setText("-");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -274,7 +275,7 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 835, Short.MAX_VALUE)
+                        .addGap(0, 845, Short.MAX_VALUE)
                         .addComponent(quarantine_Button))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel2)

@@ -173,7 +173,7 @@ public class EditUserDIA extends javax.swing.JDialog {
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
         result_Table.setAutoCreateRowSorter(true);
-        result_Table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -200,14 +200,14 @@ public class EditUserDIA extends javax.swing.JDialog {
         result_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         users_ScrollPane.setViewportView(result_Table);
 
-        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_TextFieldActionPerformed(evt);
             }
         });
 
-        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,45 +241,45 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Fornavn:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Mellemnavn:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Efternavn:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Brugernavn:");
 
-        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         firstname_TextField.setEnabled(false);
 
-        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         middlename_TextField.setEnabled(false);
 
-        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lastname_TextField.setEnabled(false);
 
-        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         username_TextField.setEnabled(false);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Kode:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Rettigheder:");
 
-        admin_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        admin_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         admin_CheckBox.setText("Administrator");
         admin_CheckBox.setEnabled(false);
 
-        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         reserve_CheckBox.setText("Reserve");
         reserve_CheckBox.setEnabled(false);
 
-        save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        save_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         save_Button.setText("Gem bruger");
         save_Button.setEnabled(false);
         save_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -288,6 +288,7 @@ public class EditUserDIA extends javax.swing.JDialog {
             }
         });
 
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         password_TextField.setEnabled(false);
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
@@ -314,7 +315,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                         .addComponent(reserve_CheckBox))
                     .addComponent(password_TextField)
                     .addComponent(firstname_TextField))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fields_PaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_Button)
@@ -353,7 +354,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,7 +450,7 @@ public class EditUserDIA extends javax.swing.JDialog {
                 .addComponent(fields_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tools_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -168,6 +168,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         );
 
         result_Table.setAutoCreateRowSorter(true);
+        result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -194,14 +195,14 @@ public class RemoveUserDIA extends javax.swing.JDialog {
         });
         users_ScrollPane.setViewportView(result_Table);
 
-        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_TextFieldActionPerformed(evt);
             }
         });
 
-        search_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        search_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_Button.setText("Søg");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +236,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        delete_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        delete_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         delete_Button.setText("Slet den valgte bruger");
         delete_Button.setEnabled(false);
         delete_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +269,7 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

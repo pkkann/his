@@ -265,7 +265,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             .addGroup(title_PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
                 .addComponent(titleIcon_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -281,31 +281,31 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Fornavn:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Mellemnavn:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Efternavn:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Adresse:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Fødselsdag:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Er:");
 
-        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        middlename_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastname_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        address_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        address_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
         picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
@@ -318,7 +318,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             .addGap(0, 251, Short.MAX_VALUE)
         );
 
-        choosePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        choosePic_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         choosePic_Button.setText("Vælg nyt billed");
         choosePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +326,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capturePic_Button.setText("Tag nyt billed");
         capturePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,7 +334,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         noPicture_CheckBox.setText("Intet billed");
         noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -347,7 +347,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("For bedst resultat, skal billedet være 250x250");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -377,32 +377,32 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
-        birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_day_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_day_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_day_TextFieldKeyReleased(evt);
             }
         });
 
-        birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_month_TextFieldKeyReleased(evt);
             }
         });
 
-        birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthday_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         birthday_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 birthday_year_TextFieldKeyReleased(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("dd/mm/yyyy");
 
-        hoene_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hoene_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         hoene_CheckBox.setText("Høne");
         hoene_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -410,7 +410,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        reserve_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         reserve_CheckBox.setText("Reserve");
         reserve_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -418,7 +418,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
             }
         });
 
-        oneOne_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        oneOne_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         oneOne_CheckBox.setText("1-1");
         oneOne_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -429,24 +429,24 @@ public class EditPersonDIA extends javax.swing.JDialog {
         info_Label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         info_Label.setForeground(new java.awt.Color(204, 0, 0));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Udløbsdato:");
 
-        expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_month_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         expiration_month_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_month_TextFieldKeyReleased(evt);
             }
         });
 
-        expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        expiration_year_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         expiration_year_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 expiration_year_TextFieldKeyReleased(evt);
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("mm/yyyy");
 
@@ -462,7 +462,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                        .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(124, 124, 124))
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -543,7 +543,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                             .addComponent(hoene_CheckBox)
                             .addComponent(reserve_CheckBox)
                             .addComponent(oneOne_CheckBox))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -553,15 +553,15 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        close_Button.setText("Luk");
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        close_Button.setText("Annuller");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close_ButtonActionPerformed(evt);
             }
         });
 
-        save_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        save_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         save_Button.setText("Gem og luk");
         save_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

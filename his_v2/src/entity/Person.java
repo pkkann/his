@@ -48,6 +48,12 @@ public class Person implements Serializable {
 
     @Column(name = "picturepath")
     private String picturePath;
+    
+    @Column(name = "phone")
+    private String phone;
+    
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "hoene")
     private boolean hoene;

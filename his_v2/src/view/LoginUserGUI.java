@@ -148,7 +148,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         username_TextField.setToolTipText("Brugernavn");
         username_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +156,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
             }
         });
 
-        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         password_TextField.setToolTipText("Kodeord");
         password_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +164,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
             }
         });
 
-        login_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        login_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         login_Button.setText("Login");
         login_Button.setToolTipText("Test");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +173,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
             }
         });
 
-        close_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        close_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         close_Button.setText("Luk");
         close_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,10 +181,10 @@ public class LoginUserGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Bruger:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Kode:");
 
         javax.swing.GroupLayout fields_PaneLayout = new javax.swing.GroupLayout(fields_Pane);
@@ -199,7 +199,7 @@ public class LoginUserGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fields_PaneLayout.createSequentialGroup()
-                        .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                        .addComponent(login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(close_Button))
                     .addComponent(username_TextField)
