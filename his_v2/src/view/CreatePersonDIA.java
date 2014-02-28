@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import org.hibernate.tool.hbm2x.StringUtils;
 import view.message.DialogMessage;
 import webcam.WebcamTool;
 
@@ -577,10 +578,10 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         boolean hoene = hoene_CheckBox.isSelected();
         boolean reserve = reserve_CheckBox.isSelected();
         boolean oneOne = oneOne_CheckBox.isSelected();
-        String firstname = firstname_TextField.getText();
-        String middlename = middlename_TextField.getText();
-        String lastname = lastname_TextField.getText();
-        String address = address_TextField.getText();
+        String firstname = StringUtils.capitalise(firstname_TextField.getText());
+        String middlename = StringUtils.capitalise(middlename_TextField.getText());
+        String lastname = StringUtils.capitalise(lastname_TextField.getText());
+        String address = StringUtils.capitalise(address_TextField.getText());
         String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
         String expiration;
         if (!hoene && !reserve && !oneOne) {

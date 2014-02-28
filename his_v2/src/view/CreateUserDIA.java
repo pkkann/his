@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.hibernate.tool.hbm2x.StringUtils;
 import view.message.DialogMessage;
 
 /**
@@ -343,9 +344,9 @@ public class CreateUserDIA extends javax.swing.JDialog {
 
     private void create_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_ButtonActionPerformed
 
-        String firstname = firstname_TextField.getText();
-        String middlename = middlename_TextField.getText();
-        String lastname = lastname_TextField.getText();
+        String firstname = StringUtils.capitalise(firstname_TextField.getText());
+        String middlename = StringUtils.capitalise(middlename_TextField.getText());
+        String lastname = StringUtils.capitalise(lastname_TextField.getText());
         String username = username_TextField.getText();
         String password = password_TextField.getText();
         String passwordAgain = passwordAgain_TextField.getText();

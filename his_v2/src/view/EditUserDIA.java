@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.tool.hbm2x.StringUtils;
 import view.message.DialogMessage;
 
 /**
@@ -481,9 +482,9 @@ public class EditUserDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_ButtonActionPerformed
-        String firstname = firstname_TextField.getText();
-        String middlename = middlename_TextField.getText();
-        String lastname = lastname_TextField.getText();
+        String firstname = StringUtils.capitalise(firstname_TextField.getText());
+        String middlename = StringUtils.capitalise(middlename_TextField.getText());
+        String lastname = StringUtils.capitalise(lastname_TextField.getText());
         String username = username_TextField.getText();
         String password = password_TextField.getText();
         boolean admin = admin_CheckBox.isSelected();

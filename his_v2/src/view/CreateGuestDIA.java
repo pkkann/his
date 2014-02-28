@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.hibernate.tool.hbm2x.StringUtils;
 import view.message.DialogMessage;
 import webcam.WebcamTool;
 
@@ -443,9 +444,9 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private void createGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGuest_ButtonActionPerformed
 
         if (idPerson != -1 && idEnrollment != -1) {
-            String firstname = firstname_TextField.getText();
-            String middlename = middlename_TextField.getText();
-            String lastname = lastname_TextField.getText();
+            String firstname = StringUtils.capitalise(firstname_TextField.getText());
+            String middlename = StringUtils.capitalise(middlename_TextField.getText());
+            String lastname = StringUtils.capitalise(lastname_TextField.getText());
             String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
             Calendar c = Calendar.getInstance();
             String creationDate = String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH) + 1) + "/" + String.valueOf(c.get(Calendar.YEAR));
