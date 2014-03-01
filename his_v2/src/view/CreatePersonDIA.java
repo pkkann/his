@@ -130,9 +130,9 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        email_TextField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        phone_TextField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         picture_Pane = new javax.swing.JPanel();
         picturePane_PicturePane = new view.image.PicturePane();
@@ -299,12 +299,14 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         jLabel13.setText("-");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        email_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        email_TextField.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("E-mail:");
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        phone_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        phone_TextField.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Telefon:");
@@ -335,8 +337,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                         .addComponent(oneOne_CheckBox))
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(phone_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(email_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(firstname_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(middlename_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lastname_TextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,11 +381,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
                     .addComponent(lastname_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phone_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -742,6 +744,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JButton capture_Button;
     private javax.swing.JButton choose_Button;
     private javax.swing.JButton create_Button;
+    private javax.swing.JTextField email_TextField;
     private javax.swing.JTextField expiration_month_TextField;
     private javax.swing.JTextField expiration_year_TextField;
     private javax.swing.JPanel fields_Pane;
@@ -763,13 +766,12 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
     private javax.swing.JCheckBox noPicture_CheckBox;
     private javax.swing.JCheckBox oneOne_CheckBox;
+    private javax.swing.JTextField phone_TextField;
     private view.image.PicturePane picturePane_PicturePane;
     private javax.swing.JPanel picture_Pane;
     private javax.swing.JCheckBox reserve_CheckBox;
