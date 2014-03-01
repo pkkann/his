@@ -161,10 +161,10 @@ public class His {
 //        System.out.println("##### Creating Test Data... #####");
 //        usH.createUser("pkkann", "rollercoaster", "rollercoaster", "Patrick", "Diller", "Kann", "10/10/2013", false, true);
 
-        for (int i = 1; i < 600; i++) {
-            peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
-            enH.createEnrollment(i, 4);
-        }
+//        for (int i = 1; i < 600; i++) {
+//            peH.createPerson("person" + i, "person" + i, "person" + i, "person" + i, "21/04/1989", "10/11/2013", "24/10/2013", true, false, false, "N");
+//            enH.createEnrollment(i, 4);
+//        }
     }
 
     public static void main(String[] args) throws DocumentException, FileNotFoundException {

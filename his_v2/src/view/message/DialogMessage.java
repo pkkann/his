@@ -89,6 +89,9 @@ public class DialogMessage {
             case HismHandlerIF.PASSWORD_NOT_CONFIRMED:
                 JOptionPane.showMessageDialog(j, "Koden er forkert", "Forkert kode", JOptionPane.ERROR_MESSAGE);
                 break;
+            case HismHandlerIF.PHONE_FORMAT_ERROR:
+                JOptionPane.showMessageDialog(j, "Telefon nummeret er skrevet forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 
@@ -144,6 +147,9 @@ public class DialogMessage {
                 break;
             case HismHandlerIF.PASSWORD_NOT_CONFIRMED:
                 JOptionPane.showMessageDialog(j, "Koden er forkert", "Forkert kode", JOptionPane.ERROR_MESSAGE);
+                break;
+            case HismHandlerIF.PHONE_FORMAT_ERROR:
+                JOptionPane.showMessageDialog(j, "Telefon nummeret er skrevet forkert", "Fejl", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }

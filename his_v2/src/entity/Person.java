@@ -69,7 +69,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) {
+    public Person(String firstname, String middlename, String lastname, String address, String email, String phone, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne) {
         this.oneOne = oneOne;
         this.reserve = reserve;
         this.hoene = hoene;
@@ -77,13 +77,15 @@ public class Person implements Serializable {
         this.middlename = middlename;
         this.lastname = lastname;
         this.address = address;
+        this.email = email;
+        this.phone = phone;
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
         this.expired = false;
     }
 
-    public Person(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+    public Person(String firstname, String middlename, String lastname, String address, String email, String phone, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
         this.oneOne = oneOne;
         this.reserve = reserve;
         this.hoene = hoene;
@@ -91,6 +93,8 @@ public class Person implements Serializable {
         this.middlename = middlename;
         this.lastname = lastname;
         this.address = address;
+        this.email = email;
+        this.phone = phone;
         this.birthdayDate = birthdayDate;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
@@ -136,6 +140,22 @@ public class Person implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getBirthdayDate() {
