@@ -41,6 +41,8 @@ public class PersonHandler implements HismHandlerIF {
      * @param middlename
      * @param lastname
      * @param address
+     * @param email
+     * @param phone
      * @param birthdayDate (DD/MM/YYYY)
      * @param expirationDate (MM/YYYY)
      * @param creationDate (DDMMYYYY)
@@ -50,7 +52,7 @@ public class PersonHandler implements HismHandlerIF {
      * @param picturePath
      * @return Error code : Integer
      */
-    public int createPerson(String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+    public int createPerson(String firstname, String middlename, String lastname, String address, String email, String phone, String birthdayDate, String expirationDate, String creationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
 
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
@@ -65,15 +67,17 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
-            try {
-                int i = Integer.valueOf(birthdayDate);
-            } catch (NumberFormatException ex) {
-                return BIRTHDAY_FORMAT_ERROR;
-            }
+
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
             String birth_Year = birth_Split[2];
+            try {
+                String s = birth_Day + birth_Month + birth_Year;
+                int i = Integer.valueOf(s);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
 
             if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
                 return BIRTHDAY_FORMAT_ERROR;
@@ -84,17 +88,19 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
-            try {
-                int i = Integer.valueOf(expirationDate);
-            } catch (NumberFormatException ex) {
-                return EXPIRATION_FORMAT_ERROR;
-            }
+
             String expire_Month;
             String expire_Year;
             try {
                 String[] expire_Split = expirationDate.split("/");
                 expire_Month = expire_Split[0];
                 expire_Year = expire_Split[1];
+                try {
+                    String s = expire_Month + expire_Year;
+                    int i = Integer.valueOf(s);
+                } catch (NumberFormatException ex) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
 
                 if (expire_Month.length() != 2 || expire_Year.length() != 4) {
                     return EXPIRATION_FORMAT_ERROR;
@@ -121,8 +127,17 @@ public class PersonHandler implements HismHandlerIF {
             copyPic = true;
         }
 
+        // Check phone number format
+        try {
+            if (!phone.isEmpty()) {
+                int i = Integer.valueOf(phone);
+            }
+        } catch (NumberFormatException ex) {
+            return PHONE_FORMAT_ERROR;
+        }
+
         // Create person
-        Person p = new Person(firstname, middlename, lastname, address, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
+        Person p = new Person(firstname, middlename, lastname, address, email, phone, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
 
         // Register person
         Serializable sz = peR.registerPerson(p);
@@ -147,6 +162,8 @@ public class PersonHandler implements HismHandlerIF {
      * @param middlename
      * @param lastname
      * @param address
+     * @param email
+     * @param phone
      * @param birthdayDate (DD/MM/YYYY)
      * @param expirationDate
      * @param reserve
@@ -155,7 +172,7 @@ public class PersonHandler implements HismHandlerIF {
      * @param picturePath
      * @return Error code : Integer
      */
-    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String email, String phone, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne, String picturePath) {
 
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
@@ -168,15 +185,17 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
-            try {
-                int i = Integer.valueOf(birthdayDate);
-            } catch (NumberFormatException ex) {
-                return BIRTHDAY_FORMAT_ERROR;
-            }
+
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
             String birth_Year = birth_Split[2];
+            try {
+                String s = birth_Day + birth_Month + birth_Year;
+                int i = Integer.valueOf(s);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
 
             if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
                 return BIRTHDAY_FORMAT_ERROR;
@@ -187,17 +206,19 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
-            try {
-                int i = Integer.valueOf(expirationDate);
-            } catch (NumberFormatException ex) {
-                return EXPIRATION_FORMAT_ERROR;
-            }
+
             String expire_Month;
             String expire_Year;
             try {
                 String[] expire_Split = expirationDate.split("/");
                 expire_Month = expire_Split[0];
                 expire_Year = expire_Split[1];
+                try {
+                    String s = expire_Month + expire_Year;
+                    int i = Integer.valueOf(s);
+                } catch (NumberFormatException ex) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
 
                 if (expire_Month.length() != 2 || expire_Year.length() != 4) {
                     return EXPIRATION_FORMAT_ERROR;
@@ -215,6 +236,15 @@ public class PersonHandler implements HismHandlerIF {
             copyPic = true;
         }
 
+        // Check phone number format
+        try {
+            if (!phone.isEmpty()) {
+                int i = Integer.valueOf(phone);
+            }
+        } catch (NumberFormatException ex) {
+            return PHONE_FORMAT_ERROR;
+        }
+
         // Set person
         Person p = peR.getPerson(personID);
         if (p == null) {
@@ -224,6 +254,8 @@ public class PersonHandler implements HismHandlerIF {
             p.setMiddlename(middlename);
             p.setLastname(lastname);
             p.setAddress(address);
+            p.setEmail(email);
+            p.setPhone(phone);
             p.setBirthdayDate(birthdayDate);
             p.setExpirationDate(expirationDate);
             p.setHoene(hoene);
@@ -264,7 +296,7 @@ public class PersonHandler implements HismHandlerIF {
      * @param oneOne
      * @return Error code : Integer
      */
-    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
+    public int savePerson(int personID, String firstname, String middlename, String lastname, String address, String email, String phone, String birthdayDate, String expirationDate, boolean hoene, boolean reserve, boolean oneOne) {
 
         // Check fields are filled
         if (!hoene && !reserve && !oneOne) {
@@ -277,15 +309,17 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check birthday is written correctly
         try {
-            try {
-                int i = Integer.valueOf(birthdayDate);
-            } catch (NumberFormatException ex) {
-                return BIRTHDAY_FORMAT_ERROR;
-            }
+
             String[] birth_Split = birthdayDate.split("/");
             String birth_Day = birth_Split[0];
             String birth_Month = birth_Split[1];
             String birth_Year = birth_Split[2];
+            try {
+                String s = birth_Day + birth_Month + birth_Year;
+                int i = Integer.valueOf(s);
+            } catch (NumberFormatException ex) {
+                return BIRTHDAY_FORMAT_ERROR;
+            }
 
             if (birth_Day.length() != 2 || birth_Month.length() != 2 || birth_Year.length() != 4) {
                 return BIRTHDAY_FORMAT_ERROR;
@@ -296,17 +330,19 @@ public class PersonHandler implements HismHandlerIF {
 
         // Check expiration is written correctly
         if (!hoene && !reserve && !oneOne) {
-            try {
-                int i = Integer.valueOf(expirationDate);
-            } catch (NumberFormatException ex) {
-                return EXPIRATION_FORMAT_ERROR;
-            }
+
             String expire_Month;
             String expire_Year;
             try {
                 String[] expire_Split = expirationDate.split("/");
                 expire_Month = expire_Split[0];
                 expire_Year = expire_Split[1];
+                try {
+                    String s = expire_Month + expire_Year;
+                    int i = Integer.valueOf(s);
+                } catch (NumberFormatException ex) {
+                    return EXPIRATION_FORMAT_ERROR;
+                }
 
                 if (expire_Month.length() != 2 || expire_Year.length() != 4) {
                     return EXPIRATION_FORMAT_ERROR;
@@ -314,6 +350,15 @@ public class PersonHandler implements HismHandlerIF {
             } catch (ArrayIndexOutOfBoundsException ex) {
                 return EXPIRATION_FORMAT_ERROR;
             }
+        }
+
+        // Check phone number format
+        try {
+            if (!phone.isEmpty()) {
+                int i = Integer.valueOf(phone);
+            }
+        } catch (NumberFormatException ex) {
+            return PHONE_FORMAT_ERROR;
         }
 
         // Set person
@@ -325,6 +370,8 @@ public class PersonHandler implements HismHandlerIF {
             p.setMiddlename(middlename);
             p.setLastname(lastname);
             p.setAddress(address);
+            p.setEmail(email);
+            p.setPhone(phone);
             p.setBirthdayDate(birthdayDate);
             p.setExpirationDate(expirationDate);
             p.setHoene(hoene);

@@ -300,13 +300,11 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         jLabel13.setText("-");
 
         email_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        email_TextField.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("E-mail:");
 
         phone_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        phone_TextField.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Telefon:");
@@ -608,6 +606,8 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         String middlename = StringUtils.capitalise(middlename_TextField.getText());
         String lastname = StringUtils.capitalise(lastname_TextField.getText());
         String address = StringUtils.capitalise(address_TextField.getText());
+        String email = email_TextField.getText();
+        String phone = phone_TextField.getText();
         String birthday = birthday_day_TextField.getText() + "/" + birthday_month_TextField.getText() + "/" + birthday_year_TextField.getText();
         String expiration;
         if (!hoene && !reserve && !oneOne) {
@@ -624,7 +624,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         ArrayList<String[]> result = peH.searchPersonLon(firstname, middlename, lastname, address, birthday);
 
         if (result.isEmpty()) {
-            int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
+            int errorCode = peH.createPerson(firstname, middlename, lastname, address, email, phone, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
             DialogMessage.showMessage(this, errorCode);
 
             if (errorCode == 0) {
@@ -639,7 +639,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
             int n = DialogMessage.showQuestionMessage(this, "Denne person er måske allerede i systemet. Vil du oprette alligevel?\n\nPersoner fundet er:\n" + persons, "Sikker?");
             if (n == 0) {
                 System.out.println(picturePath);
-                int errorCode = peH.createPerson(firstname, middlename, lastname, address, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
+                int errorCode = peH.createPerson(firstname, middlename, lastname, address, email, phone, birthday, expiration, creationDate, hoene, reserve, oneOne, picturePath);
                 DialogMessage.showMessage(this, errorCode);
 
                 if (errorCode == 0) {

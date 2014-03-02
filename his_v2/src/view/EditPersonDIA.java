@@ -70,33 +70,19 @@ public class EditPersonDIA extends javax.swing.JDialog {
         if (p != null) {
             if (canEdit) {
                 firstname_TextField.setText(p.getFirstname());
-                firstname_TextField.setEnabled(true);
-
                 middlename_TextField.setText(p.getMiddlename());
-                middlename_TextField.setEnabled(true);
-
                 lastname_TextField.setText(p.getLastname());
-                lastname_TextField.setEnabled(true);
-
-                address_TextField.setText(p.getAddress());
-                address_TextField.setEnabled(true);
-
+                address_TextField.setText(p.getAddress());        
+                email_TextField.setText(p.getEmail());
+                phone_TextField.setText(p.getPhone());
                 hoene_CheckBox.setSelected(p.isHoene());
-                hoene_CheckBox.setEnabled(true);
-
                 reserve_CheckBox.setSelected(p.isReserve());
-                reserve_CheckBox.setEnabled(true);
-
                 oneOne_CheckBox.setSelected(p.isOneOne());
-                oneOne_CheckBox.setEnabled(true);
 
                 String[] birthSplit = p.getBirthdayDate().split("/");
                 birthday_day_TextField.setText(birthSplit[0]);
-                birthday_day_TextField.setEnabled(true);
                 birthday_month_TextField.setText(birthSplit[1]);
-                birthday_month_TextField.setEnabled(true);
                 birthday_year_TextField.setText(birthSplit[2]);
-                birthday_year_TextField.setEnabled(true);
 
                 if (!p.isHoene() && !p.isReserve() && !p.isOneOne()) {
                     String[] expireSplit = p.getExpirationDate().split("/");
@@ -123,7 +109,6 @@ public class EditPersonDIA extends javax.swing.JDialog {
                     }
                 }
 
-                save_Button.setEnabled(true);
             } else {
                 info_Label.setText("Personen er indskrevet, og kan ikke redigeres");
             }
@@ -455,13 +440,11 @@ public class EditPersonDIA extends javax.swing.JDialog {
         jLabel11.setText("mm/yyyy");
 
         email_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        email_TextField.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("E-mail:");
 
         phone_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        phone_TextField.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Telefon:");
@@ -712,6 +695,8 @@ public class EditPersonDIA extends javax.swing.JDialog {
         String middlename = StringUtils.capitalise(middlename_TextField.getText());
         String lastname = StringUtils.capitalise(lastname_TextField.getText());
         String address = StringUtils.capitalise(address_TextField.getText());
+        String email = email_TextField.getText();
+        String phone = phone_TextField.getText();
         String expiration = "";
         
         if (!hoene && !reserve && !oneOne) {
@@ -723,9 +708,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
         int errorCode = 0;
         System.out.println("picture changed: " + pictureChanged);
         if(pictureChanged) {
-            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne, newPicturePath);
+            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, email, phone, birthday, expiration, hoene, reserve, oneOne, newPicturePath);
         } else {
-            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, birthday, expiration, hoene, reserve, oneOne);
+            errorCode = peH.savePerson(selectedPerson, firstname, middlename, lastname, address, email, phone, birthday, expiration, hoene, reserve, oneOne);
         }
         
         DialogMessage.showMessage(this, errorCode);

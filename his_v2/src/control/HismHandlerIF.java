@@ -85,7 +85,12 @@ public interface HismHandlerIF {
     public static final int PASSWORD_NOT_CONFIRMED = 16;
     
     /**
-     * Wil lbe send if password IS correct
+     * Will be send if password IS correct
      */
     public static final int PASSWORD_CORRECT = 17;
+    
+    /**
+     * Will be send if the phone format is wrong
+     */
+    public static final int PHONE_FORMAT_ERROR = 18;
 }
