@@ -28,6 +28,7 @@ public class SettingsDIA extends javax.swing.JDialog {
         
         setTitleIcon();
         p = PropertiesTool.getInstance();
+        defaultCam = p.getProperty("defaultcam");
     }
     
     public void setDefaultCam(String cam) {

@@ -908,7 +908,6 @@ public class MainGUI extends javax.swing.JFrame {
             if (!enH.isEnrolled(selectedPerson)) {
                 editPersonDIA.setSelectedPerson(selectedPerson);
                 editPersonDIA.setVisible(true);
-                setPerson(selectedPerson);
             } else {
                 DialogMessage.showMessage(this, HismHandlerIF.ENROLLED_ERROR);
             }
@@ -1004,7 +1003,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
 
         if (selectedPerson != -1) {
-            setPerson(selectedPerson);
+            search();
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
