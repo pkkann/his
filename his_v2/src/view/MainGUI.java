@@ -1004,6 +1004,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         if (selectedPerson != -1) {
             search();
+            updateEnrolledCounter();
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
