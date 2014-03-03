@@ -12,12 +12,27 @@ package view;
  */
 public class AddGuestDIA extends javax.swing.JDialog {
 
+    private CreateGuestDIA createGuestDIA;
+    private int idEnrollment = -1;
+    
     /**
      * Creates new form AddGuestDIA
+     * @param parent
+     * @param modal
+     * @param createGuestDIA
      */
-    public AddGuestDIA(java.awt.Frame parent, boolean modal) {
+    public AddGuestDIA(java.awt.Frame parent, boolean modal, CreateGuestDIA createGuestDIA) {
         super(parent, modal);
         initComponents();
+        this.createGuestDIA = createGuestDIA;
+    }
+    
+    public void setIdEnrollment(int idEnrollment) {
+        this.idEnrollment = idEnrollment;
+    }
+    
+    private void clean() {
+        idEnrollment = -1;
     }
 
     /**
@@ -134,6 +149,11 @@ public class AddGuestDIA extends javax.swing.JDialog {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton1.setText("Annuller");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -173,7 +193,7 @@ public class AddGuestDIA extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(picturePane_PicturePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addGuest_Button)
                     .addComponent(createGuest_Button)
@@ -218,6 +238,10 @@ public class AddGuestDIA extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;

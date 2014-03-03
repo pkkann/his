@@ -37,12 +37,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     private AddGuestDIA addGuestDIA;
     private int selectedGuest = -1;
 
-    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA) {
+    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA, AddGuestDIA addGuestDIA) {
         super(parent, modal);
         initComponents();
         initTableListener();
         this.enH = enH;
         this.createGuestDIA = createGuestDIA;
+        this.addGuestDIA = addGuestDIA;
     }
 
     private void initTableListener() {
@@ -102,7 +103,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         } else {
             guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
         }
-        info_Label.setText("Denne person kan få "+guestMax+" gæster ind");
+        info_Label.setText("Denne person kan få " + guestMax + " gæster ind");
 
         if (enH.isEnrolled(p.getIdPerson())) {
             Enrollment en = enH.getEnrollment(p.getIdPerson());
@@ -122,7 +123,6 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 //            } else {
 //                deleteGuest_Button.setEnabled(false);
 //            }
-
             if (dtm.getRowCount() >= guestMax) {
                 addGuest_Button.setEnabled(false);
             } else {
@@ -199,6 +199,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -413,12 +420,17 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void addGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGuest_ButtonActionPerformed
-        Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
-        createGuestDIA.setIdEnrollment(en.getIdEnrollment());
-        createGuestDIA.setIdPerson(selectedPerson.getIdPerson());
-        createGuestDIA.setVisible(true);
-        setPerson(selectedPerson);
-        setButtons();
+//        Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
+//        createGuestDIA.setIdEnrollment(en.getIdEnrollment());
+//        createGuestDIA.setIdPerson(selectedPerson.getIdPerson());
+//        createGuestDIA.setVisible(true);
+//        setPerson(selectedPerson);
+//        setButtons();
+
+        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
+            addGuestDIA.setIdEnrollment(enH.getEnrollment(selectedPerson.getIdPerson()).getIdEnrollment());
+            addGuestDIA.setVisible(true);
+        }
     }//GEN-LAST:event_addGuest_ButtonActionPerformed
 
     private void removeGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeGuest_ButtonActionPerformed
@@ -445,6 +457,11 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             setButtons();
         }
     }//GEN-LAST:event_enroll_ButtonActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        setPerson(selectedPerson);
+        setButtons();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;

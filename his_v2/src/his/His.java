@@ -66,6 +66,7 @@ public class His {
     private LoadingGUI loadingGUI;
     private SettingsDIA settingsDIA;
     private RenewPersonDIA renewPersonDIA;
+    private AddGuestDIA addGuestDIA;
 
     public His() {
         setLookAndFeel();
@@ -100,7 +101,8 @@ public class His {
         removeUserDIA = new RemoveUserDIA(mainGUI, true, usH);
         settingsDIA = new SettingsDIA(mainGUI, false);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
-        enrollPersonDIA = new EnrollPersonDIA(mainGUI, false, enH, createGuestDIA);
+        addGuestDIA = new AddGuestDIA(mainGUI, true, createGuestDIA);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, false, enH, createGuestDIA, addGuestDIA);
         createGuestDIA.setEnrollPersonDIA(enrollPersonDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, peH);
