@@ -12,6 +12,7 @@ import control.LoginHandler;
 import control.PersonHandler;
 import control.QuarantineHandler;
 import control.ReportHandler;
+import entity.Person;
 import entity.User;
 import java.awt.Color;
 import java.awt.Image;
@@ -261,8 +262,8 @@ public class MainGUI extends javax.swing.JFrame {
         if (searchString.equals("Søg på en persons navn/fødselsdag/adresse")) {
             searchString = "";
         }
-        ArrayList<String[]> data = peH.searchPerson(searchString, enrolled_CheckBox.isSelected());
-        DefaultTableModel dtm = TableTool.createPersonTableModel(data);
+        ArrayList<Person> data = peH.searchPerson(searchString, enrolled_CheckBox.isSelected());
+        DefaultTableModel dtm = TableTool.createSortedPersonTableModel(data);
         result_Table.setModel(dtm);
     }
 

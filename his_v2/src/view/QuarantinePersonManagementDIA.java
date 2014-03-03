@@ -99,8 +99,8 @@ public class QuarantinePersonManagementDIA extends javax.swing.JDialog {
 
     public void search() {
         cleanSelectedPerson();
-        ArrayList<String[]> data = peH.searchPerson(search_TextField.getText(), false);
-        DefaultTableModel dtm = TableTool.createPersonTableModel(data);
+        ArrayList<Person> data = peH.searchPerson(search_TextField.getText(), false);
+        DefaultTableModel dtm = TableTool.createSortedPersonTableModel(data);
         result_Table.setModel(dtm);
     }
 

@@ -119,8 +119,8 @@ public class EditUserDIA extends javax.swing.JDialog {
 
     public void search() {
         cleanSelectedUser();
-        ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = TableTool.createUserTableModel(data);
+        ArrayList<User> data = usH.searchUser(search_TextField.getText());
+        DefaultTableModel dtm = TableTool.createSortedUserTableModel(data);
         result_Table.setModel(dtm);
     }
 
@@ -172,7 +172,6 @@ public class EditUserDIA extends javax.swing.JDialog {
 
         main_Pane.setBackground(new java.awt.Color(51, 51, 51));
 
-        result_Table.setAutoCreateRowSorter(true);
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

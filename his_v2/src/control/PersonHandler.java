@@ -462,9 +462,10 @@ public class PersonHandler implements HismHandlerIF {
      * @param onlyEnrolled
      * @return data : ArrayList<String[]>
      */
-    public ArrayList<String[]> searchPerson(String search, boolean onlyEnrolled) {
+    public ArrayList<Person> searchPerson(String search, boolean onlyEnrolled) {
         // Create collection
-        ArrayList<String[]> data = new ArrayList<>();
+        ////ArrayList<String[]> data = new ArrayList<>();
+        ArrayList<Person> data = new ArrayList<>();
 
         // Split string into words
         String[] sSplit = search.split(" ");
@@ -487,12 +488,14 @@ public class PersonHandler implements HismHandlerIF {
                 if (onlyEnrolled) {
                     Enrollment en = enR.getEnrollment(p.getIdPerson());
                     if (en != null) {
-                        String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                        data.add(dat);
+//                        String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+//                        data.add(dat);
+                        data.add(p);
                     }
                 } else {
-                    String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                    data.add(dat);
+//                    String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+//                    data.add(dat);
+                    data.add(p);
                 }
 
             }
@@ -521,12 +524,14 @@ public class PersonHandler implements HismHandlerIF {
                         if (onlyEnrolled) {
                             Enrollment en = enR.getEnrollment(p.getIdPerson());
                             if (en != null) {
-                                String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                                data.add(dat);
+//                                String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+//                                data.add(dat);
+                                data.add(p);
                             }
                         } else {
-                            String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
-                            data.add(dat);
+//                            String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+//                            data.add(dat);
+                            data.add(p);
                         }
                         break;
                     }

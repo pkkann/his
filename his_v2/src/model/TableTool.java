@@ -4,7 +4,10 @@
  */
 package model;
 
+import entity.Person;
+import entity.User;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,7 +36,6 @@ public class TableTool {
                 return false;
             }
         };
-        
 
         for (int i = 0; i < userColumns.length; i++) {
             dtm.addColumn(userColumns[i]);
@@ -99,7 +101,6 @@ public class TableTool {
             }
         };
 
-
         for (int i = 0; i < userColumns.length; i++) {
             dtm.addColumn(userColumns[i]);
         }
@@ -109,6 +110,43 @@ public class TableTool {
         }
 
         return dtm;
+    }
+
+    /**
+     * Creates a sorted table model based on user
+     *
+     * @param data
+     * @return dtm : DefaultTableModel
+     */
+    public static DefaultTableModel createSortedUserTableModel(ArrayList<User> data) {
+        Collections.sort(data, new UserComparator());
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        for (int i = 0; i < userColumns.length; i++) {
+            dtm.addColumn(userColumns[i]);
+        }
+
+        for (User u : data) {
+            String admin = "Nej";
+            if (u.isAdministrator()) {
+                admin = "Ja";
+            }
+            String reserve = "Nej";
+            if (u.isReserve()) {
+                reserve = "Ja";
+            }
+            String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
+            dtm.addRow(dat);
+        }
+
+        return dtm;
+
     }
 
     /**
@@ -134,6 +172,45 @@ public class TableTool {
             dtm.addRow(s);
         }
 
+        return dtm;
+    }
+
+    /**
+     * Creates a sorted table model based on person
+     *
+     * @param data
+     * @return dtm : DefaultTableModel
+     */
+    public static DefaultTableModel createSortedPersonTableModel(ArrayList<Person> data) {
+        Collections.sort(data, new PersonComparator());
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        for (int i = 0; i < personColumns.length; i++) {
+            dtm.addColumn(personColumns[i]);
+        }
+
+        for (Person p : data) {
+            String hoene = "Nej";
+            if (p.isHoene()) {
+                hoene = "Ja";
+            }
+            String oneOne = "Nej";
+            if (p.isOneOne()) {
+                oneOne = "Ja";
+            }
+            String reserve = "Nej";
+            if (p.isReserve()) {
+                reserve = "Ja";
+            }
+            String[] dat = {String.valueOf(p.getIdPerson()), p.getFirstname() + " " + p.getMiddlename() + " " + p.getLastname(), p.getAddress(), p.getBirthdayDate(), p.getExpirationDate(), p.getCreationDate(), hoene, reserve, oneOne};
+            dtm.addRow(dat);
+        }
         return dtm;
     }
 

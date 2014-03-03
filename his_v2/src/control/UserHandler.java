@@ -173,9 +173,10 @@ public class UserHandler implements HismHandlerIF {
      * @param search
      * @return data : ArrayList<String[]>
      */
-    public ArrayList<String[]> searchUser(String search) {
+    public ArrayList<User> searchUser(String search) {
         // Create collection
-        ArrayList<String[]> data = new ArrayList<>();
+        ////ArrayList<String[]> data = new ArrayList<>();
+        ArrayList<User> data = new ArrayList<>();
 
         // Split string into words
         String[] sSplit = search.split(" ");
@@ -191,8 +192,9 @@ public class UserHandler implements HismHandlerIF {
                 if (u.isReserve()) {
                     reserve = "Ja";
                 }
-                String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
-                data.add(dat);
+//                String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
+//                data.add(dat);
+                data.add(u);
             }
         } else {
             for (User u : usR.getUsers()) {
@@ -206,8 +208,9 @@ public class UserHandler implements HismHandlerIF {
                         if (u.isReserve()) {
                             reserve = "Ja";
                         }
-                        String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
-                        data.add(dat);
+//                        String[] dat = {String.valueOf(u.getIduser()), u.getFirstname() + " " + u.getMiddlename() + " " + u.getLastname(), u.getUsername(), admin, reserve};
+//                        data.add(dat);
+                        data.add(u);
                         break;
                     }
                 }

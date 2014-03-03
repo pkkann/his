@@ -7,6 +7,7 @@ package view;
 import control.LoginHandler;
 import model.TableTool;
 import control.UserHandler;
+import entity.User;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,8 +88,8 @@ public class RemoveUserDIA extends javax.swing.JDialog {
 
     public void search() {
         cleanSelectedUser();
-        ArrayList<String[]> data = usH.searchUser(search_TextField.getText());
-        DefaultTableModel dtm = TableTool.createUserTableModel(data);
+        ArrayList<User> data = usH.searchUser(search_TextField.getText());
+        DefaultTableModel dtm = TableTool.createSortedUserTableModel(data);
         result_Table.setModel(dtm);
     }
 
@@ -167,7 +168,6 @@ public class RemoveUserDIA extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        result_Table.setAutoCreateRowSorter(true);
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
