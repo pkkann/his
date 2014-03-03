@@ -138,19 +138,21 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }
 
     private void setButtons() {
-        int guestMax = 0;
+        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
+            int guestMax = 0;
 
-        if (selectedPerson.isHoene()) {
-            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"));
-        } else {
-            guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
-        }
-        removeGuest_Button.setEnabled(false);
+            if (selectedPerson.isHoene()) {
+                guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"));
+            } else {
+                guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
+            }
+            removeGuest_Button.setEnabled(false);
 
-        if (guests_Table.getModel().getRowCount() >= guestMax) {
-            addGuest_Button.setEnabled(false);
-        } else {
-            addGuest_Button.setEnabled(true);
+            if (guests_Table.getModel().getRowCount() >= guestMax) {
+                addGuest_Button.setEnabled(false);
+            } else {
+                addGuest_Button.setEnabled(true);
+            }
         }
     }
 
@@ -420,17 +422,17 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void addGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGuest_ButtonActionPerformed
-//        Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
-//        createGuestDIA.setIdEnrollment(en.getIdEnrollment());
-//        createGuestDIA.setIdPerson(selectedPerson.getIdPerson());
-//        createGuestDIA.setVisible(true);
-//        setPerson(selectedPerson);
-//        setButtons();
+        Enrollment en = enH.getEnrollment(selectedPerson.getIdPerson());
+        createGuestDIA.setIdEnrollment(en.getIdEnrollment());
+        createGuestDIA.setIdPerson(selectedPerson.getIdPerson());
+        createGuestDIA.setVisible(true);
+        setPerson(selectedPerson);
+        setButtons();
 
-        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
-            addGuestDIA.setIdEnrollment(enH.getEnrollment(selectedPerson.getIdPerson()).getIdEnrollment());
-            addGuestDIA.setVisible(true);
-        }
+//        if (enH.isEnrolled(selectedPerson.getIdPerson())) {
+//            addGuestDIA.setIdEnrollment(enH.getEnrollment(selectedPerson.getIdPerson()).getIdEnrollment());
+//            addGuestDIA.setVisible(true);
+//        }
     }//GEN-LAST:event_addGuest_ButtonActionPerformed
 
     private void removeGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeGuest_ButtonActionPerformed
