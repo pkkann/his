@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Iterator;
 import model.EnrollmentRegister;
 import model.PersonRegister;
@@ -532,7 +533,7 @@ public class PersonHandler implements HismHandlerIF {
                 }
             }
         }
-
+        
         return data;
     }
 

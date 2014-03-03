@@ -368,7 +368,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        result_Table.setAutoCreateRowSorter(true);
         result_Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         result_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
