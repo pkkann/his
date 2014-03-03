@@ -6,12 +6,17 @@ package view;
 
 import webcam.WebcamSettingsPickerTool;
 import configuration.PropertiesTool;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import view.message.DialogMessage;
 
 /**
  *
@@ -21,20 +26,20 @@ public class SettingsDIA extends javax.swing.JDialog {
 
     private Properties p;
     private String defaultCam;
-    
+
     public SettingsDIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         setTitleIcon();
         p = PropertiesTool.getInstance();
         defaultCam = p.getProperty("defaultcam");
     }
-    
+
     public void setDefaultCam(String cam) {
         this.defaultCam = cam;
     }
-    
+
     private void setTitleIcon() {
         Image icon = null;
         try {
@@ -44,12 +49,12 @@ public class SettingsDIA extends javax.swing.JDialog {
         }
         titleIcon_PicturePane.setPicture(icon, false);
     }
-    
+
     private void setTextfields() {
         personsMax_TextField.setText(p.getProperty("maxguests_persons"));
         hoeneMax_TextField.setText(p.getProperty("maxguests_hoene"));
     }
-    
+
     private void clean() {
         jTabbedPane2.setSelectedIndex(0);
         personsMax_TextField.setText("");
@@ -81,6 +86,8 @@ public class SettingsDIA extends javax.swing.JDialog {
         hoeneMax_TextField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         choose_Button = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        updateWebsite_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -242,6 +249,33 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opdateringer", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+
+        updateWebsite_Button.setText("Update website");
+        updateWebsite_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateWebsite_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateWebsite_Button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateWebsite_Button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout general_TabPaneLayout = new javax.swing.GroupLayout(general_TabPane);
         general_TabPane.setLayout(general_TabPaneLayout);
         general_TabPaneLayout.setHorizontalGroup(
@@ -251,7 +285,9 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(436, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         general_TabPaneLayout.setVerticalGroup(
             general_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +295,9 @@ public class SettingsDIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(general_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(general_TabPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
 
@@ -350,6 +388,21 @@ public class SettingsDIA extends javax.swing.JDialog {
         WebcamSettingsPickerTool.spawnWebcamPicker(this);
     }//GEN-LAST:event_choose_ButtonActionPerformed
 
+    private void updateWebsite_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateWebsite_ButtonActionPerformed
+        if(Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI(his.His.updateURL));
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(SettingsDIA.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SettingsDIA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dispose();
+        } else {
+            DialogMessage.showCustomMessage(this, "Update linked kunne ikke åbnes i din default browser\nURI: " + his.His.updateURL, "Browser fejl", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_updateWebsite_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton choose_Button;
     private javax.swing.JPanel general_TabPane;
@@ -360,6 +413,7 @@ public class SettingsDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField personsMax_TextField;
@@ -367,5 +421,6 @@ public class SettingsDIA extends javax.swing.JDialog {
     private view.image.PicturePane titleIcon_PicturePane;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;
+    private javax.swing.JButton updateWebsite_Button;
     // End of variables declaration//GEN-END:variables
 }

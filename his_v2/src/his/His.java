@@ -37,6 +37,7 @@ public class His {
     public static final String reportUsersDir = reportDir + "/users";
     public static final String reportQuarantinesDir = reportDir + "/quarantines";
     public static final String webcamDir = "webcam";
+    public static final String updateURL = "https://www.dropbox.com/sh/bv0bgj69e9e2kjc/U1PVIgrLd9";
     // Control
     private PersonHandler peH;
     private UserHandler usH;
