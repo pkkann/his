@@ -34,6 +34,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     private Person selectedPerson;
     private EnrollmentHandler enH;
     private CreateGuestDIA createGuestDIA;
+    private AddGuestDIA addGuestDIA;
     private int selectedGuest = -1;
 
     public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA) {
@@ -64,7 +65,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         selectedGuest = idGuest;
         Guest g = enH.getGuest(selectedPerson.getIdPerson(), idGuest);
 
-        deleteGuest_Button.setEnabled(true);
+        removeGuest_Button.setEnabled(true);
 
         String picturePath = g.getPicturePath();
         if (picturePath.equals("N")) {
@@ -132,7 +133,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         } else {
             enroll_Button.setText("Indskriv");
             addGuest_Button.setEnabled(false);
-            deleteGuest_Button.setEnabled(false);
+            removeGuest_Button.setEnabled(false);
         }
     }
 
@@ -144,7 +145,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         } else {
             guestMax = Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"));
         }
-        deleteGuest_Button.setEnabled(false);
+        removeGuest_Button.setEnabled(false);
 
         if (guests_Table.getModel().getRowCount() >= guestMax) {
             addGuest_Button.setEnabled(false);
@@ -157,7 +158,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         DefaultTableModel dtm = TableTool.createEmptyGuestTableModel();
         guests_Table.setModel(dtm);
 
-        deleteGuest_Button.setEnabled(false);
+        removeGuest_Button.setEnabled(false);
         addGuest_Button.setEnabled(true);
         enroll_Button.setText("Indskriv");
         info_Label.setText("INFO");
@@ -168,7 +169,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         DefaultTableModel dtm = TableTool.createEmptyGuestTableModel();
         guests_Table.setModel(dtm);
 
-        deleteGuest_Button.setEnabled(false);
+        removeGuest_Button.setEnabled(false);
         addGuest_Button.setEnabled(false);
     }
 
@@ -190,7 +191,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         addGuest_Button = new javax.swing.JButton();
         picture_PicturePane = new view.image.PicturePane();
         info_Label = new javax.swing.JLabel();
-        deleteGuest_Button = new javax.swing.JButton();
+        removeGuest_Button = new javax.swing.JButton();
         tools_Pane = new javax.swing.JPanel();
         close_Button = new javax.swing.JButton();
         enroll_Button = new javax.swing.JButton();
@@ -280,12 +281,12 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         info_Label.setForeground(new java.awt.Color(51, 153, 0));
         info_Label.setText("INFO");
 
-        deleteGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        deleteGuest_Button.setText("Slet gæst");
-        deleteGuest_Button.setEnabled(false);
-        deleteGuest_Button.addActionListener(new java.awt.event.ActionListener() {
+        removeGuest_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        removeGuest_Button.setText("Fjern gæst");
+        removeGuest_Button.setEnabled(false);
+        removeGuest_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteGuest_ButtonActionPerformed(evt);
+                removeGuest_ButtonActionPerformed(evt);
             }
         });
 
@@ -299,7 +300,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                     .addGroup(fields_PaneLayout.createSequentialGroup()
                         .addComponent(addGuest_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteGuest_Button)
+                        .addComponent(removeGuest_Button)
                         .addGap(20, 20, 20)
                         .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(26, 26, 26))
@@ -321,7 +322,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
                                 .addComponent(addGuest_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(info_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteGuest_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(removeGuest_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(picture_PicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -420,7 +421,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
         setButtons();
     }//GEN-LAST:event_addGuest_ButtonActionPerformed
 
-    private void deleteGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteGuest_ButtonActionPerformed
+    private void removeGuest_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeGuest_ButtonActionPerformed
         int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil slette denne gæst?", "Sikker?");
         if (n == 0) {
             enH.removeGuest(selectedPerson.getIdPerson(), selectedGuest);
@@ -428,7 +429,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
             setPerson(selectedPerson);
             setButtons();
         }
-    }//GEN-LAST:event_deleteGuest_ButtonActionPerformed
+    }//GEN-LAST:event_removeGuest_ButtonActionPerformed
 
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
         if (enH.isEnrolled(selectedPerson.getIdPerson())) {
@@ -448,7 +449,6 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addGuest_Button;
     private javax.swing.JButton close_Button;
-    private javax.swing.JButton deleteGuest_Button;
     private javax.swing.JButton enroll_Button;
     private javax.swing.JPanel fields_Pane;
     private javax.swing.JTable guests_Table;
@@ -457,6 +457,7 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_Pane;
     private view.image.PicturePane picture_PicturePane;
+    private javax.swing.JButton removeGuest_Button;
     private javax.swing.JPanel title_Pane;
     private javax.swing.JPanel tools_Pane;
     // End of variables declaration//GEN-END:variables
