@@ -4,6 +4,7 @@
  */
 package control;
 
+import configuration.PropertiesTool;
 import static control.HismHandlerIF.BIRTHDAY_FORMAT_ERROR;
 import static control.HismHandlerIF.PICTUREPATH_EMPTY_ERROR;
 import entity.Enrollment;
@@ -140,7 +141,7 @@ public class EnrollmentHandler implements HismHandlerIF {
 
             // Check number of guests allowed
             if (p.isHoene()) {
-                if (en.getGuests().size() < 5) {
+                if (en.getGuests().size() < Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"))) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
                     
@@ -163,7 +164,7 @@ public class EnrollmentHandler implements HismHandlerIF {
                     return TOO_MANY_GUESTS;
                 }
             } else {
-                if (en.getGuests().size() < 3) {
+                if (en.getGuests().size() < Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_persons"))) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
 
