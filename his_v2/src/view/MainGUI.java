@@ -589,7 +589,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         editProfile_Button.setBackground(new java.awt.Color(51, 51, 51));
         editProfile_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        editProfile_Button.setText("Rediger profil");
+        editProfile_Button.setText("Rediger din bruger");
         editProfile_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editProfile_ButtonActionPerformed(evt);
@@ -630,7 +630,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enrolled_Label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 666, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 636, Short.MAX_VALUE)
                 .addComponent(editProfile_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoff_Button)
