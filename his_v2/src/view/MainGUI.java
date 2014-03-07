@@ -838,9 +838,14 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_logoff_ButtonActionPerformed
 
     private void editProfile_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfile_ButtonActionPerformed
-        editProfileDIA.setUser(loggedIn);
-        editProfileDIA.setVisible(true);
-        setloggedInUser();
+
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            editProfileDIA.setUser(loggedIn);
+            editProfileDIA.setVisible(true);
+            setloggedInUser();
+        }
     }//GEN-LAST:event_editProfile_ButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
