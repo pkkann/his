@@ -911,8 +911,13 @@ public class MainGUI extends javax.swing.JFrame {
     private void editPerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_ButtonActionPerformed
         if (selectedPerson != -1) {
             if (!enH.isEnrolled(selectedPerson)) {
-                editPersonDIA.setSelectedPerson(selectedPerson);
-                editPersonDIA.setVisible(true);
+                int returnCode = loH.requestLoginOnlyPass("Bekræft redigering", "Rediger", this);
+
+                if (returnCode == 1) {
+                    editPersonDIA.setSelectedPerson(selectedPerson);
+                    editPersonDIA.setVisible(true);
+                }
+
             } else {
                 DialogMessage.showMessage(this, HismHandlerIF.ENROLLED_ERROR);
             }
