@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -34,16 +35,16 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
     private Person selectedPerson;
     private EnrollmentHandler enH;
     private CreateGuestDIA createGuestDIA;
-    private AddGuestDIA addGuestDIA;
     private int selectedGuest = -1;
+    private LoginHandler loH;
 
-    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA, AddGuestDIA addGuestDIA) {
+    public EnrollPersonDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH, CreateGuestDIA createGuestDIA, LoginHandler loH) {
         super(parent, modal);
         initComponents();
         initTableListener();
         this.enH = enH;
         this.createGuestDIA = createGuestDIA;
-        this.addGuestDIA = addGuestDIA;
+        this.loH = loH;
     }
 
     private void initTableListener() {
@@ -447,12 +448,13 @@ public class EnrollPersonDIA extends javax.swing.JDialog {
 
     private void enroll_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enroll_ButtonActionPerformed
         if (enH.isEnrolled(selectedPerson.getIdPerson())) {
-            int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette indskrivningen?\nDette anses ikke for en normal handling, og bør undgås på en vagt!", "Sikker?");
+            int n = DialogMessage.showQuestionMessage(this, "Er du sikker på du vil slette indskrivningen?\nDette ses ikke for en normal handling, og bør undgås på en vagt!", "Sikker?");
             if (n == 0) {
                 enroll_Button.setText("Indskriv");
                 enH.removeEnrollment(selectedPerson.getIdPerson());
                 cleanGuests();
             }
+
         } else {
             enroll_Button.setText("Slet indskrivning");
             enH.createEnrollment(selectedPerson.getIdPerson(), LoginHandler.loggedIn.getIduser());

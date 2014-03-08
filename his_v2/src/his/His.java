@@ -104,7 +104,7 @@ public class His {
         settingsDIA = new SettingsDIA(mainGUI, false);
         editProfileDIA = new EditProfileDIA(mainGUI, true, usH);
         addGuestDIA = new AddGuestDIA(mainGUI, true, createGuestDIA);
-        enrollPersonDIA = new EnrollPersonDIA(mainGUI, false, enH, createGuestDIA, addGuestDIA);
+        enrollPersonDIA = new EnrollPersonDIA(mainGUI, false, enH, createGuestDIA, loH);
         createGuestDIA.setEnrollPersonDIA(enrollPersonDIA);
         aboutDIA = new AboutDIA(mainGUI, true);
         renewPersonDIA = new RenewPersonDIA(mainGUI, true, peH);

@@ -40,23 +40,23 @@ import view.message.DialogMessage;
 public class MainGUI extends javax.swing.JFrame {
 
     // Control
-    private PersonHandler peH;
-    private EnrollmentHandler enH;
-    private QuarantineHandler quH;
+    private final PersonHandler peH;
+    private final EnrollmentHandler enH;
+    private final QuarantineHandler quH;
     private LoginHandler loH;
-    private ReportHandler reH;
+    private final ReportHandler reH;
     // View
-    private CreatePersonDIA createPersonDIA;
-    private EditPersonDIA editPersonDIA;
-    private QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
-    private RemoveUserDIA removeUserDIA;
-    private EditUserDIA editUserDIA;
-    private CreateUserDIA createUserDIA;
-    private SettingsDIA settingsDIA;
-    private EditProfileDIA editProfileDIA;
-    private EnrollPersonDIA enrollPersonDIA;
-    private AboutDIA aboutDIA;
-    private RenewPersonDIA renewPersonDIA;
+    private final CreatePersonDIA createPersonDIA;
+    private final EditPersonDIA editPersonDIA;
+    private final QuarantinePersonManagementDIA quarantinePersonManagemenDIA;
+    private final RemoveUserDIA removeUserDIA;
+    private final EditUserDIA editUserDIA;
+    private final CreateUserDIA createUserDIA;
+    private final SettingsDIA settingsDIA;
+    private final EditProfileDIA editProfileDIA;
+    private final EnrollPersonDIA enrollPersonDIA;
+    private final AboutDIA aboutDIA;
+    private final RenewPersonDIA renewPersonDIA;
 
     // Model
     private int selectedPerson = -1;
@@ -796,19 +796,34 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUser_MenuItemActionPerformed
-        createUserDIA.setVisible(true);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            createUserDIA.setVisible(true);
+        }
+        
     }//GEN-LAST:event_createUser_MenuItemActionPerformed
 
     private void editUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUser_MenuItemActionPerformed
-        editUserDIA.setVisible(true);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            editUserDIA.setVisible(true);
+        }
+        
     }//GEN-LAST:event_editUser_MenuItemActionPerformed
 
     private void deleteUser_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUser_MenuItemActionPerformed
-        removeUserDIA.setVisible(true);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            removeUserDIA.setVisible(true);
+        }
+        
     }//GEN-LAST:event_deleteUser_MenuItemActionPerformed
 
     private void search_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusGained
-        if (search_TextField.getText().equals("Søg på en persons navn/fødselsdag/adresse")) {
+        if (search_TextField.getText().equals("Søg på en persons ID/navn/fødselsdag/adresse")) {
             search_TextField.setText("");
             search_TextField.setForeground(Color.black);
         }
@@ -816,7 +831,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void search_TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_TextFieldFocusLost
         if (search_TextField.getText().isEmpty()) {
-            search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+            search_TextField.setText("Søg på en persons ID/navn/fødselsdag/adresse");
             search_TextField.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_search_TextFieldFocusLost
@@ -826,7 +841,12 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     private void indstillinger_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indstillinger_MenuItemActionPerformed
-        settingsDIA.setVisible(true);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            settingsDIA.setVisible(true);
+        }
+
     }//GEN-LAST:event_indstillinger_MenuItemActionPerformed
 
     private void logoff_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoff_ButtonActionPerformed
@@ -949,26 +969,40 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deletePerson_ButtonActionPerformed
 
     private void administrateQuarantines_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrateQuarantines_MenuItemActionPerformed
-        cleanSelectedPerson();
-        cleanTable();
-        cleanSearch();
-        quarantinePersonManagemenDIA.setVisible(true);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            cleanSelectedPerson();
+            cleanTable();
+            cleanSearch();
+            quarantinePersonManagemenDIA.setVisible(true);
+        }
+
     }//GEN-LAST:event_administrateQuarantines_MenuItemActionPerformed
 
     private void kick_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kick_ButtonActionPerformed
-        int n = DialogMessage.showQuestionMessage(new JFrame(), "Er du sikker på du vil smide denne person ud?", "Sikker?");
-        if (n == 0) {
-            int errorCode = enH.kickEnrollment(selectedPerson);
-            DialogMessage.showMessage(this, errorCode);
-            setPerson(selectedPerson);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
+
+        if (returnCode == 1) {
+            int n = DialogMessage.showQuestionMessage(new JFrame(), "Er du sikker på du vil smide denne person ud?", "Sikker?");
+            if (n == 0) {
+                int errorCode = enH.kickEnrollment(selectedPerson);
+                DialogMessage.showMessage(this, errorCode);
+                setPerson(selectedPerson);
+            }
         }
+
     }//GEN-LAST:event_kick_ButtonActionPerformed
 
     private void renew_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renew_ButtonActionPerformed
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
 
-        renewPersonDIA.setPerson(selectedPerson);
-        renewPersonDIA.setVisible(true);
-        setPerson(selectedPerson);
+        if (returnCode == 1) {
+            renewPersonDIA.setPerson(selectedPerson);
+            renewPersonDIA.setVisible(true);
+            setPerson(selectedPerson);
+        }
+
     }//GEN-LAST:event_renew_ButtonActionPerformed
 
     private void gemRapportIndskrevne_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gemRapportIndskrevne_MenuItemActionPerformed
