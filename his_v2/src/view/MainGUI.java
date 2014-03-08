@@ -875,26 +875,31 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_search_TextFieldActionPerformed
 
     private void nulstil_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nulstil_MenuItemActionPerformed
-        int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Nulstille?");
-        if (n == 0) {
-            try {
-                reH.writeTotalEnrolledReport();
-                DialogMessage.showCustomMessage(this, "En rapport med alle indskrevne blev gemt", "Rapport gemt", JOptionPane.INFORMATION_MESSAGE);
-            } catch (DocumentException | FileNotFoundException ex) {
-                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            int errorCode = enH.removeAllEnrollments();
-            DialogMessage.showMessage(this, errorCode);
+        int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
 
-            if (errorCode == 0) {
-                DialogMessage.showMessage(this, HismHandlerIF.LOGOUT_NOTIFICATION);
-                dispose();
-                cleanSearch();
-                cleanSelectedPerson();
-                cleanTable();
-                loH.requestLogin();
+        if (returnCode == 1) {
+            int n = DialogMessage.showQuestionMessage(new JDialog(), "Er du sikker på du vil udføre daglig nulstilling?", "Nulstille?");
+            if (n == 0) {
+                try {
+                    reH.writeTotalEnrolledReport();
+                    DialogMessage.showCustomMessage(this, "En rapport med alle indskrevne blev gemt", "Rapport gemt", JOptionPane.INFORMATION_MESSAGE);
+                } catch (DocumentException | FileNotFoundException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int errorCode = enH.removeAllEnrollments();
+                DialogMessage.showMessage(this, errorCode);
+
+                if (errorCode == 0) {
+                    DialogMessage.showMessage(this, HismHandlerIF.LOGOUT_NOTIFICATION);
+                    dispose();
+                    cleanSearch();
+                    cleanSelectedPerson();
+                    cleanTable();
+                    loH.requestLogin();
+                }
             }
         }
+
     }//GEN-LAST:event_nulstil_MenuItemActionPerformed
 
     private void about_MenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_MenuItemActionPerformed
@@ -911,7 +916,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void editPerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPerson_ButtonActionPerformed
         if (selectedPerson != -1) {
             if (!enH.isEnrolled(selectedPerson)) {
-                int returnCode = loH.requestLoginOnlyPass("Bekræft redigering", "Rediger", this);
+                int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
 
                 if (returnCode == 1) {
                     editPersonDIA.setSelectedPerson(selectedPerson);
@@ -929,7 +934,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void deletePerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePerson_ButtonActionPerformed
         if (selectedPerson != -1) {
             if (!enH.isEnrolled(selectedPerson)) {
-                int returnCode = loH.requestLoginOnlyPass("Bekræft sletning", "Slet", this);
+                int returnCode = loH.requestLoginOnlyPass("Bekræft at du er dig", "Bekræft", this);
 
                 if (returnCode == 1) {
                     peH.removePerson(selectedPerson);
