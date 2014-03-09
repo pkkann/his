@@ -252,14 +252,14 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     private void cleanSearch() {
-        search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+        search_TextField.setText("Søg på en persons ID/navn/fødselsdag/adresse");
         search_TextField.setForeground(new Color(153, 153, 153));
     }
 
     public void search() {
         cleanSelectedPerson();
         String searchString = search_TextField.getText();
-        if (searchString.equals("Søg på en persons navn/fødselsdag/adresse")) {
+        if (searchString.equals("Søg på en persons ID/navn/fødselsdag/adresse")) {
             searchString = "";
         }
         ArrayList<Person> data = peH.searchPerson(searchString, enrolled_CheckBox.isSelected());
@@ -295,11 +295,6 @@ public class MainGUI extends javax.swing.JFrame {
         editPerson_Button = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
         deletePerson_Button = new javax.swing.JButton();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
-        taskPerson_Button = new javax.swing.JButton();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
         bottom_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -324,6 +319,7 @@ public class MainGUI extends javax.swing.JFrame {
         editUser_MenuItem = new javax.swing.JMenuItem();
         deleteUser_MenuItem = new javax.swing.JMenuItem();
         administrateQuarantines_MenuItem = new javax.swing.JMenuItem();
+        administratePersonTasks_MenuItem = new javax.swing.JMenuItem();
         indstillinger_MenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         about_MenuItem = new javax.swing.JMenuItem();
@@ -351,7 +347,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         search_TextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search_TextField.setForeground(new java.awt.Color(153, 153, 153));
-        search_TextField.setText("Søg på en persons navn/fødselsdag/adresse");
+        search_TextField.setText("Søg på en persons ID/navn/fødselsdag/adresse");
         search_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_TextFieldActionPerformed(evt);
@@ -555,25 +551,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(deletePerson_Button);
-        jToolBar1.add(filler3);
-        jToolBar1.add(jSeparator3);
-        jToolBar1.add(filler4);
-
-        taskPerson_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        taskPerson_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/personTasks.png"))); // NOI18N
-        taskPerson_Button.setText("Opgaver");
-        taskPerson_Button.setToolTipText("Funktion er under opbygning...");
-        taskPerson_Button.setEnabled(false);
-        taskPerson_Button.setFocusable(false);
-        taskPerson_Button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        taskPerson_Button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        taskPerson_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                taskPerson_ButtonActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(taskPerson_Button);
-        jToolBar1.add(filler5);
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
@@ -779,6 +756,12 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         filer_Menu.add(administrateQuarantines_MenuItem);
+
+        administratePersonTasks_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/personTasks.png"))); // NOI18N
+        administratePersonTasks_MenuItem.setText("Administrer person opgaver");
+        administratePersonTasks_MenuItem.setToolTipText("Funktion er under udvikling...");
+        administratePersonTasks_MenuItem.setEnabled(false);
+        filer_Menu.add(administratePersonTasks_MenuItem);
 
         indstillinger_MenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/settings.png"))); // NOI18N
         indstillinger_MenuItem.setText("Indstillinger");
@@ -1084,16 +1067,9 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void taskPerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskPerson_ButtonActionPerformed
-        if (selectedPerson != -1) {
-            
-        } else {
-            DialogMessage.showCustomMessage(this, "Du skal vælge en person for at administrere opgaverne", "Vælg en person først", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_taskPerson_ButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;
+    private javax.swing.JMenuItem administratePersonTasks_MenuItem;
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
     private javax.swing.JPanel bottom_Pane;
     private javax.swing.JMenu brugere_Menu;
@@ -1111,9 +1087,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu filer_Menu;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
-    private javax.swing.Box.Filler filler5;
     private javax.swing.JMenuItem gemKarantæner_MenuItem;
     private javax.swing.JMenuItem gemRapportBrugere_MenuItem;
     private javax.swing.JMenuItem gemRapportIndskrevne_MenuItem;
@@ -1125,7 +1098,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton kick_Button;
     private javax.swing.JButton logoff_Button;
@@ -1141,7 +1113,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel status_Label;
     private javax.swing.JPanel status_Pane;
-    private javax.swing.JButton taskPerson_Button;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu vagtAfslutning_Menu;
     // End of variables declaration//GEN-END:variables
