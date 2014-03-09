@@ -30,7 +30,7 @@ public class His {
 
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "2.0 RC3";
+    public static final String version = "2.0 RC4";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
     public static final String reportEnrolledDir = reportDir + "/enrolled";

@@ -27,7 +27,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private int idEnrollment = -1;
     private int idPerson = -1;
     private EnrollmentHandler enH;
-    private String picturePath = "";
+    private String picturePath = "N";
     private EnrollPersonDIA enrollPersonDIA;
 
     public CreateGuestDIA(java.awt.Frame parent, boolean modal, EnrollmentHandler enH) {
@@ -74,13 +74,13 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         birthday_year_TextField.setText("");
         idEnrollment = -1;
         idPerson = -1;
-        capturePicture_Button.setEnabled(true);
-        choosePicture_Button.setEnabled(true);
+        //capturePicture_Button.setEnabled(true);
+        //choosePicture_Button.setEnabled(true);
     }
 
     private void cleanPicture() {
-        picturePane_PicturePane.setPicture(null, true);
-        noPicture_CheckBox.setSelected(false);
+        //picturePane_PicturePane.setPicture(null, true);
+        //noPicture_CheckBox.setSelected(false);
         picturePath = "";
     }
 
@@ -121,7 +121,6 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         tools_Pane = new javax.swing.JPanel();
         createGuest_Button = new javax.swing.JButton();
         cancel_Button = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -247,7 +246,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                         .addComponent(birthday_year_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jLabel6)))
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fields_PaneLayout.setVerticalGroup(
             fields_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,6 +274,10 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        picture_Pane.setToolTipText("Billed for gæster er midlertidigt fjernet");
+
+        picturePane_PicturePane.setToolTipText("Billed for gæster er midlertidigt fjernet");
+
         javax.swing.GroupLayout picturePane_PicturePaneLayout = new javax.swing.GroupLayout(picturePane_PicturePane);
         picturePane_PicturePane.setLayout(picturePane_PicturePaneLayout);
         picturePane_PicturePaneLayout.setHorizontalGroup(
@@ -288,6 +291,8 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
         choosePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         choosePicture_Button.setText("Vælg billed");
+        choosePicture_Button.setToolTipText("Billed for gæster er midlertidigt fjernet");
+        choosePicture_Button.setEnabled(false);
         choosePicture_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choosePicture_ButtonActionPerformed(evt);
@@ -296,6 +301,8 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
         capturePicture_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capturePicture_Button.setText("Tag billed");
+        capturePicture_Button.setToolTipText("Billed for gæster er midlertidigt fjernet");
+        capturePicture_Button.setEnabled(false);
         capturePicture_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 capturePicture_ButtonActionPerformed(evt);
@@ -303,7 +310,10 @@ public class CreateGuestDIA extends javax.swing.JDialog {
         });
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        noPicture_CheckBox.setSelected(true);
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.setToolTipText("Billed for gæster er midlertidigt fjernet");
+        noPicture_CheckBox.setEnabled(false);
         noPicture_CheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noPicture_CheckBoxActionPerformed(evt);
@@ -312,6 +322,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("For bedst resultat, skal billedet være 250x250");
+        jLabel7.setToolTipText("Billed for gæster er midlertidigt fjernet");
 
         jLabel12.setText("*");
 
@@ -334,7 +345,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                         .addGroup(picture_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(noPicture_CheckBox)
                             .addComponent(jLabel7))
-                        .addGap(0, 203, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         picture_PaneLayout.setVerticalGroup(
@@ -372,17 +383,12 @@ public class CreateGuestDIA extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText("Nå du har udfyldt navn og fødselsdag, kan du trykke opret for at se om gæsten findes i forvejen");
-
         javax.swing.GroupLayout tools_PaneLayout = new javax.swing.GroupLayout(tools_Pane);
         tools_Pane.setLayout(tools_PaneLayout);
         tools_PaneLayout.setHorizontalGroup(
             tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tools_PaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(547, Short.MAX_VALUE)
                 .addComponent(cancel_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createGuest_Button)
@@ -394,8 +400,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(tools_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createGuest_Button)
-                    .addComponent(cancel_Button)
-                    .addComponent(jLabel8))
+                    .addComponent(cancel_Button))
                 .addContainerGap())
         );
 
@@ -453,7 +458,6 @@ public class CreateGuestDIA extends javax.swing.JDialog {
 
             int idGuest = enH.searchGuestLon(idPerson, firstname, middlename, lastname, birthday);
             if (idGuest != -1) {
-                DialogMessage.showCustomMessage(this, "Den angivne gæst findes allerede i systemet og vil derfor blive brugt istedet", "Gæst fundet", JOptionPane.INFORMATION_MESSAGE);
                 int errorCode = enH.addGuest(idPerson, idGuest);
                 
                 DialogMessage.showMessage(this, errorCode);
@@ -569,7 +573,6 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField lastname_TextField;
     private javax.swing.JPanel main_Pane;
     private javax.swing.JTextField middlename_TextField;
