@@ -295,6 +295,11 @@ public class MainGUI extends javax.swing.JFrame {
         editPerson_Button = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
         deletePerson_Button = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
+        taskPerson_Button = new javax.swing.JButton();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 32767));
         bottom_Pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         date_Label = new javax.swing.JLabel();
@@ -499,7 +504,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(enroll_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(status_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(kick_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(renew_Button))
@@ -511,6 +516,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         createPerson_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/createPerson.png"))); // NOI18N
+        createPerson_Button.setText("Opret");
         createPerson_Button.setToolTipText("Opret en person");
         createPerson_Button.setFocusable(false);
         createPerson_Button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -524,6 +530,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(filler1);
 
         editPerson_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/editPerson.png"))); // NOI18N
+        editPerson_Button.setText("Rediger");
         editPerson_Button.setToolTipText("Rediger personer");
         editPerson_Button.setFocusable(false);
         editPerson_Button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -537,6 +544,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(filler2);
 
         deletePerson_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/deletePerson.png"))); // NOI18N
+        deletePerson_Button.setText("Slet");
         deletePerson_Button.setToolTipText("Slet personer");
         deletePerson_Button.setFocusable(false);
         deletePerson_Button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -547,6 +555,25 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(deletePerson_Button);
+        jToolBar1.add(filler3);
+        jToolBar1.add(jSeparator3);
+        jToolBar1.add(filler4);
+
+        taskPerson_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        taskPerson_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/personTasks.png"))); // NOI18N
+        taskPerson_Button.setText("Opgaver");
+        taskPerson_Button.setToolTipText("Funktion er under opbygning...");
+        taskPerson_Button.setEnabled(false);
+        taskPerson_Button.setFocusable(false);
+        taskPerson_Button.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        taskPerson_Button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        taskPerson_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taskPerson_ButtonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(taskPerson_Button);
+        jToolBar1.add(filler5);
 
         javax.swing.GroupLayout main_PaneLayout = new javax.swing.GroupLayout(main_Pane);
         main_Pane.setLayout(main_PaneLayout);
@@ -661,9 +688,9 @@ public class MainGUI extends javax.swing.JFrame {
         filer_Menu.setText("FILER");
 
         rapport_Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/report.png"))); // NOI18N
-        rapport_Menu.setText("Rapport");
+        rapport_Menu.setText("Gem rapport");
 
-        gemRapportIndskrevne_MenuItem.setText("Gem rapport med alle indskrevne");
+        gemRapportIndskrevne_MenuItem.setText("Med alle indskrevne");
         gemRapportIndskrevne_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gemRapportIndskrevne_MenuItemActionPerformed(evt);
@@ -671,7 +698,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         rapport_Menu.add(gemRapportIndskrevne_MenuItem);
 
-        gemRapportPersoner_MenuItem.setText("Gem rapport med alle personer");
+        gemRapportPersoner_MenuItem.setText("Med alle personer");
         gemRapportPersoner_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gemRapportPersoner_MenuItemActionPerformed(evt);
@@ -679,7 +706,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         rapport_Menu.add(gemRapportPersoner_MenuItem);
 
-        gemRapportBrugere_MenuItem.setText("Gem rapport med alle brugere");
+        gemRapportBrugere_MenuItem.setText("Med alle brugere");
         gemRapportBrugere_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gemRapportBrugere_MenuItemActionPerformed(evt);
@@ -687,7 +714,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         rapport_Menu.add(gemRapportBrugere_MenuItem);
 
-        gemKarantæner_MenuItem.setText("Gem rapport med alle karantæner");
+        gemKarantæner_MenuItem.setText("Med alle karantæner");
         gemKarantæner_MenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gemKarantæner_MenuItemActionPerformed(evt);
@@ -1057,6 +1084,14 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void taskPerson_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskPerson_ButtonActionPerformed
+        if (selectedPerson != -1) {
+            
+        } else {
+            DialogMessage.showCustomMessage(this, "Du skal vælge en person for at administrere opgaverne", "Vælg en person først", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_taskPerson_ButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem about_MenuItem;
     private javax.swing.JMenuItem administrateQuarantines_MenuItem;
@@ -1076,6 +1111,9 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu filer_Menu;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     private javax.swing.JMenuItem gemKarantæner_MenuItem;
     private javax.swing.JMenuItem gemRapportBrugere_MenuItem;
     private javax.swing.JMenuItem gemRapportIndskrevne_MenuItem;
@@ -1087,6 +1125,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton kick_Button;
     private javax.swing.JButton logoff_Button;
@@ -1102,6 +1141,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JLabel status_Label;
     private javax.swing.JPanel status_Pane;
+    private javax.swing.JButton taskPerson_Button;
     private javax.swing.JLabel user_Label;
     private javax.swing.JMenu vagtAfslutning_Menu;
     // End of variables declaration//GEN-END:variables

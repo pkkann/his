@@ -8,6 +8,11 @@ package view;
 
 import control.HismHandlerIF;
 import control.LoginHandler;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import view.message.DialogMessage;
 
 /**
@@ -28,6 +33,17 @@ public class LoginUserPassOnlyDIA extends javax.swing.JDialog {
         this.loH = loH;
         title_Label.setText(title);
         confirm_Button.setText(confirmButton);
+        setTitleIcon();
+    }
+    
+    private void setTitleIcon() {
+        Image icon = null;
+        try {
+            icon = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("res/authentication.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        picturePane1.setPicture(icon, false);
     }
     
     public int getReturnCode() {
