@@ -13,5 +13,6 @@
     <mapping class="entity.Guest"/>
     <mapping class="entity.Person"/>
     <mapping class="entity.Quarantine"/>
+    <mapping class="entity.PersonTask"/>
   </session-factory>
 </hibernate-configuration>

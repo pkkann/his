@@ -30,6 +30,7 @@ public class PersonRegister {
      * Registers a person
      *
      * @param p
+     * @return 
      */
     public Serializable registerPerson(Person p) {
         System.out.println("Registering person...");
