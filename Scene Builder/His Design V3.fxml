@@ -43,7 +43,7 @@
 <right><AnchorPane prefHeight="461.0" prefWidth="250.0" BorderPane.alignment="CENTER">
 <children><ImageView fitHeight="150.0" fitWidth="220.0" layoutX="15.0" pickOnBounds="true" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
 <image>
-<Image url="@../Pictures/d26dbb9044b6f45bcb8eee9f88b6cccb5c80828faecb69be05f3642e8bed0689-2780840441.jpeg" />
+<Image url="@../../../../Pictures/d26dbb9044b6f45bcb8eee9f88b6cccb5c80828faecb69be05f3642e8bed0689-2780840441.jpeg" />
 </image>
 <effect>
 <DropShadow blurType="ONE_PASS_BOX" color="#434343" height="13.0" radius="4.0" width="5.0" />

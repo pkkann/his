@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisV3", "HisV3\HisV3.csproj", "{006f1a5f-9a6e-40d1-8588-fcf20667ab65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{006F1A5F-9A6E-40D1-8588-FCF20667AB65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006F1A5F-9A6E-40D1-8588-FCF20667AB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006F1A5F-9A6E-40D1-8588-FCF20667AB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006F1A5F-9A6E-40D1-8588-FCF20667AB65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
