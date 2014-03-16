@@ -81,7 +81,7 @@ public class CreateGuestDIA extends javax.swing.JDialog {
     private void cleanPicture() {
         //picturePane_PicturePane.setPicture(null, true);
         //noPicture_CheckBox.setSelected(false);
-        picturePath = "";
+        picturePath = "N";
     }
 
     /**
