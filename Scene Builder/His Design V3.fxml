@@ -20,11 +20,11 @@
 </TableView>
 </center>
 <top><AnchorPane prefHeight="99.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-<children><TextField layoutX="14.0" layoutY="60.0" prefHeight="31.0" prefWidth="676.0" promptText="Søg" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="210.0" /><ToolBar layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="778.0" style="-fx-background-color: transparrent;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+<children><TextField layoutX="14.0" layoutY="60.0" prefHeight="31.0" prefWidth="718.0" promptText="Søg" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="168.0" /><ToolBar layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="778.0" style="-fx-background-color: transparrent;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
   <items>
-    <Button mnemonicParsing="false" text="Opret person" /><Button mnemonicParsing="false" text="Rediger person" /><Button mnemonicParsing="false" text="Slet person" /><Separator prefHeight="25.0" prefWidth="15.0" /><Button mnemonicParsing="false" text="Scan" /><Separator prefHeight="25.0" prefWidth="15.0" /><Button mnemonicParsing="false" text="Administration" />
+    <Button mnemonicParsing="false" text="Opret person F2" /><Button mnemonicParsing="false" text="Rediger person F3" /><Button mnemonicParsing="false" text="Slet person F4" /><Separator prefHeight="25.0" prefWidth="15.0" /><Button mnemonicParsing="false" text="Scan F5" /><Separator prefHeight="25.0" prefWidth="15.0" /><Button mnemonicParsing="false" text="Administration" />
   </items>
-</ToolBar><CheckBox layoutX="706.0" layoutY="64.0" mnemonicParsing="false" text="Indskrevne" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="64.0" /><CheckBox layoutX="798.0" layoutY="64.0" mnemonicParsing="false" text="Høner" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0" />
+</ToolBar><CheckBox layoutX="746.0" layoutY="55.0" mnemonicParsing="false" text="Indskrevne" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="55.0" /><CheckBox layoutX="798.0" layoutY="64.0" mnemonicParsing="false" text="Høner" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0" />
 </children></AnchorPane>
 </top>
 <bottom><AnchorPane prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER">
@@ -37,7 +37,7 @@
 </font></Label><Label layoutX="164.0048828125" layoutY="11.5" text="USER" textFill="#99cc00" AnchorPane.bottomAnchor="11.5" AnchorPane.leftAnchor="164.0048828125" AnchorPane.topAnchor="11.5" /><Label layoutX="211.0048828125" layoutY="11.5" text="Antal indskrevne:" textFill="WHITE" AnchorPane.bottomAnchor="11.5" AnchorPane.leftAnchor="211.0048828125" AnchorPane.topAnchor="11.5">
 <font>
 <Font name="System Bold" size="12.0" />
-</font></Label><Label layoutX="316.0048828125" layoutY="11.5" text="ENROLLED" textFill="#99cc00" AnchorPane.bottomAnchor="11.5" AnchorPane.leftAnchor="316.0048828125" AnchorPane.topAnchor="11.5" /><Button layoutX="837.0" layoutY="8.0" mnemonicParsing="false" text="Log af" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0" /><Button layoutX="669.0" layoutY="8.0" mnemonicParsing="false" text="Rediger din bruger" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="8.0" />
+</font></Label><Label layoutX="316.0048828125" layoutY="11.5" text="ENROLLED" textFill="#99cc00" AnchorPane.bottomAnchor="11.5" AnchorPane.leftAnchor="316.0048828125" AnchorPane.topAnchor="11.5" /><Button layoutX="837.0" layoutY="8.0" mnemonicParsing="false" text="Log af" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0" /><Button layoutX="669.0" layoutY="8.0" mnemonicParsing="false" text="Rediger din bruger" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="8.0" />
 </children></AnchorPane>
 </bottom>
 <right><AnchorPane prefHeight="461.0" prefWidth="250.0" BorderPane.alignment="CENTER">
@@ -49,8 +49,8 @@
 <DropShadow blurType="ONE_PASS_BOX" color="#434343" height="13.0" radius="4.0" width="5.0" />
 </effect></ImageView><AnchorPane layoutX="24.0" layoutY="160.0" prefHeight="28.0" prefWidth="222.0" style="-fx-background-color: #333333;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="160.0">
 <children><Label alignment="CENTER" contentDisplay="CENTER" layoutX="97.0048828125" layoutY="6.0" prefHeight="17.0" prefWidth="222.0" text="Ingen person valgt" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-</children></AnchorPane><Button layoutX="14.0" layoutY="197.0" mnemonicParsing="false" text="Administrer indskrivning" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="195.0" /><Button layoutX="14.0" layoutY="236.0" mnemonicParsing="false" text="Forny" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-<Button layoutX="14.0" layoutY="278.0" mnemonicParsing="false" text="Smid ud" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+</children></AnchorPane><Button layoutX="14.0" layoutY="197.0" mnemonicParsing="false" text="Administrer indskrivning" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="195.0" /><Button layoutX="14.0" layoutY="236.0" mnemonicParsing="false" text="Forny" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="225.0" />
+<Button layoutX="14.0" layoutY="278.0" mnemonicParsing="false" text="Smid ud" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="256.0" />
 </children></AnchorPane>
 </right></BorderPane>
 </children></AnchorPane>
