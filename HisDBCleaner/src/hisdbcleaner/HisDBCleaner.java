@@ -7,6 +7,8 @@
 package hisdbcleaner;
 
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -16,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class HisDBCleaner {
     
-    private final Handler handler;
+    private Handler handler;
     
     private final MainGUI mainGUI;
     
@@ -25,7 +27,13 @@ public class HisDBCleaner {
         
         handler = new Handler();
         
-        mainGUI = new MainGUI(handler);
+        mainGUI = new MainGUI(this);
+    }
+    
+    public void cleanDB() {
+        
+        
+        handler.runTasks();
     }
     
     private void setLookAndFeel() {

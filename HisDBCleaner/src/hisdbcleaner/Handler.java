@@ -6,21 +6,36 @@
 
 package hisdbcleaner;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author patrick
+ * @author Patrick
  */
 public class Handler {
     
-    public void cleanDB() {
-        //Check if any enrolled
-        
-        //Clean users
-        
-        //Clean persons
-        
-        //Clean guests
-        
+    private LinkedList<Task> tasks;
+    
+    public Handler() {
+        tasks = new LinkedList<>();
+    }
+    
+    public void createTask(String name, Runnable task) {
+        Task t = new Task(name, task);
+        tasks.add(t);
+    }
+    
+    public void runTasks() {
+        while(tasks.size() != 0) {
+            try {
+                tasks.pop().runTask();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
