@@ -6,7 +6,6 @@
 
 package hisdbcleaner;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,11 +14,11 @@ import java.util.logging.Logger;
  *
  * @author Patrick
  */
-public class Handler {
+public class TaskHandler {
     
-    private LinkedList<Task> tasks;
+    private final LinkedList<Task> tasks;
     
-    public Handler() {
+    public TaskHandler() {
         tasks = new LinkedList<>();
     }
     
@@ -28,12 +27,16 @@ public class Handler {
         tasks.add(t);
     }
     
+    public int getTaskCount() {
+        return tasks.size();
+    }
+    
     public void runTasks() {
         while(tasks.size() != 0) {
             try {
                 tasks.pop().runTask();
             } catch (InterruptedException ex) {
-                Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TaskHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

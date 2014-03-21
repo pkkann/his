@@ -18,14 +18,14 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class HisDBCleaner {
     
-    private Handler handler;
+    private TaskHandler handler;
     
     private final MainGUI mainGUI;
     
     public HisDBCleaner() {
         setLookAndFeel();
         
-        handler = new Handler();
+        handler = new TaskHandler();
         
         mainGUI = new MainGUI(this);
     }
