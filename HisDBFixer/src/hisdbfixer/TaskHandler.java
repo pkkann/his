@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package hisdbcleaner;
+package hisdbfixer;
 
 import java.util.LinkedList;
 import java.util.logging.Level;

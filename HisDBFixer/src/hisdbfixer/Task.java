@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package hisdbcleaner;
+package hisdbfixer;
 
 /**
  *
@@ -24,7 +24,7 @@ public class Task {
         System.out.println("## Running task: " + name);
         t.start();
         t.join();
-        System.out.println("finish");
+        System.out.println("--------------------------");
     }
     
 }
