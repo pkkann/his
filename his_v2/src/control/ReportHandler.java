@@ -12,7 +12,6 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.FontSelector;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,9 +23,7 @@ import entity.User;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -82,15 +79,15 @@ public class ReportHandler implements HismHandlerIF {
 
         PdfPCell tablePnameCell = new PdfPCell(new Phrase("Navn", columnFont));
         tablePnameCell.setBackgroundColor(BaseColor.BLACK);
-        PdfPCell tablePbirthCell = new PdfPCell(new Phrase("Fødselsdag", columnFont));
-        tablePbirthCell.setBackgroundColor(BaseColor.BLACK);
+        PdfPCell tablePaddressCell = new PdfPCell(new Phrase("Adresse", columnFont));
+        tablePaddressCell.setBackgroundColor(BaseColor.BLACK);
         PdfPCell tablePenrollerCell = new PdfPCell(new Phrase("Indskriver", columnFont));
         tablePenrollerCell.setBackgroundColor(BaseColor.BLACK);
         PdfPCell tablePtotalGuestsCell = new PdfPCell(new Phrase("Total gæster", columnFont));
         tablePtotalGuestsCell.setBackgroundColor(BaseColor.BLACK);
 
         tableP.addCell(tablePnameCell);
-        tableP.addCell(tablePbirthCell);
+        tableP.addCell(tablePaddressCell);
         tableP.addCell(tablePenrollerCell);
         tableP.addCell(tablePtotalGuestsCell);
 
@@ -108,7 +105,7 @@ public class ReportHandler implements HismHandlerIF {
                 totalCounter_NoHoene++;
             }
             String nameP = enP.getFirstname() + " " + enP.getMiddlename() + " " + enP.getLastname();
-            String birthP = enP.getBirthdayDate();
+            String addressP = enP.getAddress();
 
             User enU = en.getEnrolledByUser();
             String nameU = enU.getFirstname() + " " + enU.getMiddlename() + " " + enU.getLastname();
@@ -119,7 +116,7 @@ public class ReportHandler implements HismHandlerIF {
             totalCounter_NoHoene += enGs.size();
 
             PdfPCell namePCell = new PdfPCell(new Phrase(nameP));
-            PdfPCell birthPCell = new PdfPCell(new Phrase(birthP));
+            PdfPCell birthPCell = new PdfPCell(new Phrase(addressP));
 
             PdfPCell nameUCell = new PdfPCell(new Phrase(nameU));
 
