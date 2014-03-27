@@ -136,6 +136,14 @@ public class PersonHandler implements HismHandlerIF {
         } catch (NumberFormatException ex) {
             return PHONE_FORMAT_ERROR;
         }
+        
+        // Remove spaces
+        firstname = firstname.replaceAll(" ", "");
+        middlename = middlename.replaceAll(" ", "");
+        lastname = lastname.replaceAll(" ", "");
+        address = address.replaceAll(" ", "");
+        phone = phone.replaceAll(" ", "");
+        email = email.replaceAll(" ", "");
 
         // Create person
         Person p = new Person(firstname, middlename, lastname, address, email, phone, birthdayDate, expirationDate, creationDate, hoene, reserve, oneOne, picturePath);
@@ -245,6 +253,14 @@ public class PersonHandler implements HismHandlerIF {
         } catch (NumberFormatException ex) {
             return PHONE_FORMAT_ERROR;
         }
+        
+        // Remove spaces
+        firstname = firstname.replaceAll(" ", "");
+        middlename = middlename.replaceAll(" ", "");
+        lastname = lastname.replaceAll(" ", "");
+        address = address.replaceAll(" ", "");
+        phone = phone.replaceAll(" ", "");
+        email = email.replaceAll(" ", "");
 
         // Set person
         Person p = peR.getPerson(personID);
@@ -361,6 +377,14 @@ public class PersonHandler implements HismHandlerIF {
         } catch (NumberFormatException ex) {
             return PHONE_FORMAT_ERROR;
         }
+        
+        // Remove spaces
+        firstname = firstname.replaceAll(" ", "");
+        middlename = middlename.replaceAll(" ", "");
+        lastname = lastname.replaceAll(" ", "");
+        address = address.replaceAll(" ", "");
+        phone = phone.replaceAll(" ", "");
+        email = email.replaceAll(" ", "");
 
         // Set person
         Person p = peR.getPerson(personID);

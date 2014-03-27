@@ -67,22 +67,22 @@ public class EnrollmentHandler implements HismHandlerIF {
 
         return NO_ERROR;
     }
-    
+
     public int addGuest(int idPerson, int idGuest) {
         //Get guest
         Guest g = guR.getGuest(idGuest);
-        if(g == null) {
+        if (g == null) {
             return GET_ERROR;
         }
-        
+
         //Get enrollment
         Enrollment en = enR.getEnrollment(idPerson);
-        if(en == null) {
+        if (en == null) {
             return GET_ERROR;
         }
-        
+
         en.getGuests().add(g);
-        
+
         return NO_ERROR;
     }
 
@@ -112,13 +112,18 @@ public class EnrollmentHandler implements HismHandlerIF {
                 return FIELDS_NOT_FILLED_ERROR;
             }
 
+            // Remove spaces
+            firstname = firstname.replaceAll(" ", "");
+            middlename = middlename.replaceAll(" ", "");
+            lastname = lastname.replaceAll(" ", "");
+
             // Check birthday is written correctly
             try {
                 try {
-                int i = Integer.valueOf(BIRTHDAY_FORMAT_ERROR);
-            } catch (NumberFormatException ex) {
-                return BIRTHDAY_FORMAT_ERROR;
-            }
+                    int i = Integer.valueOf(BIRTHDAY_FORMAT_ERROR);
+                } catch (NumberFormatException ex) {
+                    return BIRTHDAY_FORMAT_ERROR;
+                }
                 String[] birth_Split = birthdayDate.split("/");
                 String birth_Day = birth_Split[0];
                 String birth_Month = birth_Split[1];
@@ -144,11 +149,11 @@ public class EnrollmentHandler implements HismHandlerIF {
                 if (en.getGuests().size() < Integer.valueOf(PropertiesTool.getInstance().getProperty("maxguests_hoene"))) {
                     // Create guest
                     Guest g = new Guest(firstname, middlename, lastname, birthdayDate, creationDate, picturePath);
-                    
+
                     // Register guest
                     Serializable si = guR.registerGuest(g);
-                    g.setIdGuest((Integer)si);
-                    
+                    g.setIdGuest((Integer) si);
+
                     // Add guest
                     enR.addGuest(en, g);
 
@@ -170,8 +175,8 @@ public class EnrollmentHandler implements HismHandlerIF {
 
                     // Register guest
                     Serializable si = guR.registerGuest(g);
-                    g.setIdGuest((Integer)si);
-                    
+                    g.setIdGuest((Integer) si);
+
                     // Add guest
                     enR.addGuest(en, g);
 
@@ -217,21 +222,22 @@ public class EnrollmentHandler implements HismHandlerIF {
 
         return NO_ERROR;
     }
-    
+
     /**
      * Return a guest
+     *
      * @param idPerson
      * @param idGuest
      * @return g : Guest
      */
     public Guest getGuest(int idPerson, int idGuest) {
-        
+
         // Get enrollment
         Enrollment en = enR.getEnrollment(idPerson);
-        
+
         // Get guest
         Guest g = enR.getGuest(en, idGuest);
-        
+
         return g;
     }
 
@@ -280,49 +286,51 @@ public class EnrollmentHandler implements HismHandlerIF {
             return true;
         }
     }
-    
+
     /**
      * Removes all enrollments
+     *
      * @return Error code : Integer
      */
     public int removeAllEnrollments() {
         enR.removeAllEnrollments();
         return NO_ERROR;
     }
-    
+
     /**
      * Kicks an enrollment (really kicks a person)
+     *
      * @param idPerson
      * @return Error code : Integer
      */
     public int kickEnrollment(int idPerson) {
         Enrollment en = enR.getEnrollment(idPerson);
-        if(en == null) {
+        if (en == null) {
             return GET_ERROR;
         }
-        
+
         en.setKicked(true);
-        
+
         enR.saveEnrollment(en);
         return NO_ERROR;
     }
-    
+
     /**
-     * 
+     *
      * @param idPerson
      * @param firstname
      * @param middlename
      * @param lastname
      * @param birthdayDate
-     * @return 
+     * @return
      */
     public int searchGuestLon(int idPerson, String firstname, String middlename, String lastname, String birthdayDate) {
         // Make full name
         String name = firstname + " " + middlename + " " + lastname;
 
         // Make iterator
-       Set<Guest> guests = guR.getGuests();
-       Iterator<Guest> i = guests.iterator();
+        Set<Guest> guests = guR.getGuests();
+        Iterator<Guest> i = guests.iterator();
 
         // Loop through and search
         while (i.hasNext()) {
@@ -333,6 +341,6 @@ public class EnrollmentHandler implements HismHandlerIF {
         }
 
         return -1;
-        
+
     }
 }
