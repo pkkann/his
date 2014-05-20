@@ -79,9 +79,9 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }
 
     private void cleanPicture() {
-        picturePane_PicturePane.setPicture(null, true);
-        noPicture_CheckBox.setSelected(false);
-        picturePath = "";
+//        picturePane_PicturePane.setPicture(null, true);
+//        noPicture_CheckBox.setSelected(false);
+//        picturePath = "";
     }
 
     public boolean shouldExpireDateBeEnabled() {
@@ -425,6 +425,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         choose_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         choose_Button.setText("Vælg billed");
+        choose_Button.setEnabled(false);
         choose_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choose_ButtonActionPerformed(evt);
@@ -432,7 +433,9 @@ public class CreatePersonDIA extends javax.swing.JDialog {
         });
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        noPicture_CheckBox.setSelected(true);
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.setEnabled(false);
         noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 noPicture_CheckBoxItemStateChanged(evt);
@@ -449,6 +452,7 @@ public class CreatePersonDIA extends javax.swing.JDialog {
 
         capture_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capture_Button.setText("Tag billed");
+        capture_Button.setEnabled(false);
         capture_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 capture_ButtonActionPerformed(evt);
@@ -667,16 +671,16 @@ public class CreatePersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_choose_ButtonActionPerformed
 
     private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
-        if (noPicture_CheckBox.isSelected()) {
-            picturePath = "N";
-            picturePane_PicturePane.setPicture(null, true);
-            choose_Button.setEnabled(false);
-            capture_Button.setEnabled(false);
-        } else {
-            picturePath = "";
-            choose_Button.setEnabled(true);
-            capture_Button.setEnabled(true);
-        }
+//        if (noPicture_CheckBox.isSelected()) {
+//            picturePath = "N";
+//            picturePane_PicturePane.setPicture(null, true);
+//            choose_Button.setEnabled(false);
+//            capture_Button.setEnabled(false);
+//        } else {
+//            picturePath = "";
+//            choose_Button.setEnabled(true);
+//            capture_Button.setEnabled(true);
+//        }
     }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
 
     private void noPicture_CheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxItemStateChanged

@@ -72,7 +72,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
                 firstname_TextField.setText(p.getFirstname());
                 middlename_TextField.setText(p.getMiddlename());
                 lastname_TextField.setText(p.getLastname());
-                address_TextField.setText(p.getAddress());        
+                address_TextField.setText(p.getAddress());
                 email_TextField.setText(p.getEmail());
                 phone_TextField.setText(p.getPhone());
                 hoene_CheckBox.setSelected(p.isHoene());
@@ -92,13 +92,13 @@ public class EditPersonDIA extends javax.swing.JDialog {
                     expiration_year_TextField.setEnabled(true);
                 }
 
-                noPicture_CheckBox.setEnabled(true);
+//                noPicture_CheckBox.setEnabled(true);
                 if (p.getPicturePath().equals("N")) {
-                    noPicture_CheckBox.setSelected(true);
+//                    noPicture_CheckBox.setSelected(true);
                     choosePic_Button.setEnabled(false);
                     capturePic_Button.setEnabled(false);
                 } else {
-                    noPicture_CheckBox.setSelected(false);
+//                    noPicture_CheckBox.setSelected(false);
                     choosePic_Button.setEnabled(true);
                     capturePic_Button.setEnabled(true);
                     try {
@@ -150,10 +150,10 @@ public class EditPersonDIA extends javax.swing.JDialog {
         expiration_month_TextField.setText("");
         expiration_year_TextField.setText("");
 
-        noPicture_CheckBox.setSelected(false);
-        picturePane_PicturePane.setPicture(null, true);
-        choosePic_Button.setEnabled(true);
-        capturePic_Button.setEnabled(true);
+//        noPicture_CheckBox.setSelected(false);
+//        picturePane_PicturePane.setPicture(null, true);
+//        choosePic_Button.setEnabled(true);
+//        capturePic_Button.setEnabled(true);
         
         pictureChanged = false;
 
@@ -309,6 +309,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         choosePic_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         choosePic_Button.setText("Vælg nyt billed");
+        choosePic_Button.setEnabled(false);
         choosePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choosePic_ButtonActionPerformed(evt);
@@ -317,6 +318,7 @@ public class EditPersonDIA extends javax.swing.JDialog {
 
         capturePic_Button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         capturePic_Button.setText("Tag nyt billed");
+        capturePic_Button.setEnabled(false);
         capturePic_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 capturePic_ButtonActionPerformed(evt);
@@ -324,7 +326,9 @@ public class EditPersonDIA extends javax.swing.JDialog {
         });
 
         noPicture_CheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        noPicture_CheckBox.setSelected(true);
         noPicture_CheckBox.setText("Intet billed");
+        noPicture_CheckBox.setEnabled(false);
         noPicture_CheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 noPicture_CheckBoxItemStateChanged(evt);
@@ -732,19 +736,19 @@ public class EditPersonDIA extends javax.swing.JDialog {
     }//GEN-LAST:event_capturePic_ButtonActionPerformed
 
     private void noPicture_CheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPicture_CheckBoxActionPerformed
-        System.out.println("CHANGING");
-        if (noPicture_CheckBox.isSelected()) {
-            choosePic_Button.setEnabled(false);
-            capturePic_Button.setEnabled(false);
-            picturePane_PicturePane.setPicture(null, true);
-            newPicturePath = "N";
-            pictureChanged = true;
-        } else {
-            choosePic_Button.setEnabled(true);
-            capturePic_Button.setEnabled(true);
-            newPicturePath = "";
-            pictureChanged = true;
-        }
+//        System.out.println("CHANGING");
+//        if (noPicture_CheckBox.isSelected()) {
+//            choosePic_Button.setEnabled(false);
+//            capturePic_Button.setEnabled(false);
+//            picturePane_PicturePane.setPicture(null, true);
+//            newPicturePath = "N";
+//            pictureChanged = true;
+//        } else {
+//            choosePic_Button.setEnabled(true);
+//            capturePic_Button.setEnabled(true);
+//            newPicturePath = "";
+//            pictureChanged = true;
+//        }
     }//GEN-LAST:event_noPicture_CheckBoxActionPerformed
 
     private void expiration_month_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_expiration_month_TextFieldKeyReleased

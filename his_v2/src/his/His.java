@@ -20,7 +20,6 @@ import control.DateHandler;
 import java.io.FileNotFoundException;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import listener.MyMouseListener;
 
 /**
  *
@@ -30,7 +29,7 @@ public class His {
 
     // Settings
     public static final String title = "Den Våde Høne - Indskrivnings system";
-    public static final String version = "2.4.3";
+    public static final String version = "2.4.5";
     public static final String picDir = "pictures";
     public static final String reportDir = "reports";
     public static final String reportEnrolledDir = reportDir + "/enrolled";
