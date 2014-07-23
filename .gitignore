@@ -1,38 +1,40 @@
-/ISM/nbproject/private/
-/ISM/build/
-/ISM/dist/
-/hism/nbproject/private/
-/hism/dist/
-/hism/build/
-/hism_v2/nbproject/private/
-/hism_v2/build/
-/hism_v2/dist/
-/HibernateTest/nbproject/private/
-/HibernateTest/build/
-/HibernateTest/dist/
-/Hibernate_CarStoreTest/nbproject/private/
-/hism_v1/nbproject/private/
-/hism_v1/build/
-/hism_v1/dist/
-/WebcamTest/nbproject/private/
-/WebcamTest/build/
-/TableTest/nbproject/private/
-/TableTest/build/
-/his_v1/nbproject/private/
-/his_v2/nbproject/private/
-/his_v2/build/
-/his_v1/build/
-/his_v2/dist/
-/his_v1/dist/
-/HismTilHis/nbproject/private/
-/HismTilHis/build/
-/HismTilHis/dist/
-/JavaFXEample/nbproject/private/
-/HisDBCleaner/nbproject/private/
-/MouseCounterExample/nbproject/private/
-/MouseCounterExample/build/
-/HisDBCleaner/dist/
-/HisDBCleaner/build/
-/HisDBFixer/nbproject/private/
-/HisDBFixer/build/
-/his_v3/nbproject/private/
+#ant specific
+his_v2/dist/
+his_v2/build/
+his_v1/dist/
+his_v1/build/
+ 
+#netbeans specific
+his_v2/core
+his_v2/nbproject/*
+!his_v2/nbproject/project.properties
+!his_v2/nbproject/project.xml
+his_v1/core
+his_v1/nbproject/*
+!his_v1/nbproject/project.properties
+!his_v1/nbproject/project.xml
+ 
+#java specific
+*.class
+ 
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
